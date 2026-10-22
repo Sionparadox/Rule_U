@@ -264,6 +264,8 @@ def create_app(settings: Settings | None = None, provider=None, retriever=None, 
                 ]
                 context = {
                     "game": {"id": game.id, "name": game.name_ko,
+                             "name_original": game.name_original,
+                             "external_source": game.external_source, "external_id": game.external_id,
                              "description": game.description, "players": [game.min_players, game.max_players],
                              "minutes": [game.min_minutes, game.max_minutes]},
                     "edition": {"id": edition.id, "label": edition.label, "language": edition.language},
@@ -284,7 +286,8 @@ def create_app(settings: Settings | None = None, provider=None, retriever=None, 
                     "verdict": "unavailable", "citations": []}
             else:
                 answer = await asyncio.wait_for(answer_question(
-                    settings, sessions, context, provider, retriever, stage), settings.api_timeout_seconds)
+                    settings, sessions, context, provider, retriever, stage),
+                    settings.api_timeout_seconds * 2 + settings.bgg_timeout_seconds)
             with sessions.begin() as db:
                 row = db.get(Request, rid)
                 message = Message(
@@ -396,7 +399,8 @@ def create_app(settings: Settings | None = None, provider=None, retriever=None, 
             return citation_out(citation, db)
         evidence = {"number": citation.evidence_snapshot.get("number") or 1,
                     "excerpt": citation.excerpt, "title": citation.title_snapshot,
-                    "edition": citation.edition_snapshot, "page_start": citation.page_start}
+                    "edition": citation.edition_snapshot, "page_start": citation.page_start,
+                    "source_type": citation.evidence_snapshot.get("source_type", "")}
         answer = message.content
         question = db.scalar(select(Message.content).where(
             Message.conversation_id == message.conversation_id, Message.role == "user",

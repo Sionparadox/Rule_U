@@ -26,6 +26,9 @@ class Settings(BaseSettings):
     embedding_api_key: SecretStr = SecretStr("")
     embedding_dimensions: int = Field(default=8, ge=1)
     api_timeout_seconds: float = Field(default=30, gt=0, le=120)
+    bgg_enabled: bool = True
+    bgg_api_token: SecretStr = SecretStr("")
+    bgg_timeout_seconds: float = Field(default=45, ge=5, le=90)
     chunk_size: int = Field(default=1000, gt=0)
     chunk_overlap: int = Field(default=200, ge=0)
     external_top_k: int = Field(default=5, gt=0)

@@ -67,9 +67,11 @@ export function SourceModal({ source }: { source: Schema["SourceOut"] }) {
         </h2>
         <div className="mt-5 rounded-2xl border border-line bg-[#f5faf8] p-4">
           <p className="mb-2 text-xs font-semibold text-felt">
-            {detail.source_review === "official_verified"
-              ? "공식 출처 확인됨"
-              : "공식 출처 확인이 필요한 자료"}
+            {detail.source_type === "bgg_community"
+              ? "BGG 커뮤니티 토론 · 공식 룰북 아님"
+              : detail.source_review === "official_verified"
+                ? "공식 출처 확인됨"
+                : "공식 출처 확인이 필요한 자료"}
           </p>
           <h3 className="font-bold">{detail.title}</h3>
           <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-xs text-ink/65">
@@ -118,7 +120,9 @@ export function SourceModal({ source }: { source: Schema["SourceOut"] }) {
                 id="rule-summary"
                 className="mb-2 text-sm font-extrabold text-felt"
               >
-                룰북의 관련 규칙
+                {detail.source_type === "bgg_community"
+                  ? "토론에서 참고한 내용"
+                  : "룰북의 관련 규칙"}
               </h3>
               <p className="text-[15px] leading-7 whitespace-pre-wrap break-words">
                 {detail.explanation.rule_summary}
@@ -139,8 +143,9 @@ export function SourceModal({ source }: { source: Schema["SourceOut"] }) {
               </p>
             </section>
             <p className="text-xs leading-5 text-ink/55">
-              룰북의 해당 부분을 이해하기 쉽게 풀어 쓴 설명이에요. 정확한 표현은
-              원문에서도 확인할 수 있어요.
+              {detail.source_type === "bgg_community"
+                ? "일반 사용자들의 규칙 토론을 요약했어요. 판본과 확장에 따라 다를 수 있으니 공식 룰북도 확인해 주세요."
+                : "룰북의 해당 부분을 이해하기 쉽게 풀어 쓴 설명이에요. 정확한 표현은 원문에서도 확인할 수 있어요."}
             </p>
           </div>
         )}

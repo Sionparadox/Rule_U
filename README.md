@@ -1,10 +1,10 @@
 # Rule_U
 
-3단계 백엔드 RAG·인용 저장·재색인 버전 전환을 구현했다. 자동 테스트 41개와 코드네임 실제 GMS 질문 5개의 초기 검증을 통과했다. [3단계 결과](reports/stage3-progress.md)를 참고한다. 전체 게임의 답변 품질 검증은 후속 범위다.
+게임 선택 → 질문·상황 판정 → 출처 설명 모달까지 연결된 로컬 보드게임 규칙 도우미입니다. Next.js·FastAPI·SQLite·ChromaDB를 사용합니다. 전체 게임의 답변 품질 검증은 후속 범위입니다.
 
-업데이트 후 API 폴더에서 `uv sync`와 `uv run alembic upgrade head`를 실행한다. 질문 API는 확보된 근거를 검색하고 답변과 인용을 저장한다. `GET /api/v1/sources/{citation_id}`는 동일 세션에서 인용 시점의 근거를 조회한다. 화면 근거 패널은 4단계 범위다. 색인 CLI는 동시에 여러 프로세스로 실행하지 않는다.
+업데이트 후 API 폴더에서 `uv sync`와 `uv run alembic upgrade head`를 실행합니다. 질문 API는 확보된 근거를 검색하고 답변과 인용을 저장합니다. 출처는 동일 세션에서만 조회할 수 있습니다. 색인 CLI는 동시에 여러 프로세스로 실행하지 않습니다.
 
-보드게임 규칙 탐색·상황 판정 서비스의 로컬 모노레포입니다. 현재 **2단계 수집·색인 진행 중**입니다. 로컬 메타데이터 적재와 PDF·FAQ 추출, ChromaDB 테스트 색인을 구현했습니다. 실제 규칙 검색·판정은 아직 연결하지 않았습니다.
+RAG 근거가 부족하면 BGG의 최근 Rules 토론을 추가 조회합니다. 저장소 루트 `.env`에 `BGG_API_TOKEN=승인된_앱_토큰`을 설정하고 API 서버를 재시작하세요. [BGG 앱 등록](https://boardgamegeek.com/applications)·승인이 필요하며 토큰은 채팅이나 Git에 올리지 않습니다. `BGG_ENABLED=false`로 끌 수 있고, 채팅 mock 모드에서는 외부 조회하지 않습니다. BGG 토론은 공식 룰북과 구분하여 표시합니다. [동작·설정·검증 한계](reports/bgg-fallback.md)를 참고하세요.
 
 Next.js App Router + TypeScript / FastAPI / SQLite + SQLAlchemy + Alembic. Windows에서 Docker 없이 실행합니다. 계획과 명세서는 [docs/개발계획.md](docs/개발계획.md), [docs/기능명세서.md](docs/기능명세서.md)에 있습니다.
 

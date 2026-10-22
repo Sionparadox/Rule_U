@@ -165,6 +165,32 @@ test("game lobby first, setup focus and visible thinking skeleton", async ({page
   await expect(page.getByRole("region", {name:"규칙 대화",exact:true})).toHaveCount(0);
 });
 
+test("BGG source is distinguished from an official rulebook", async ({page}) => {
+  await page.goto("/"); await choose(page);
+  await send(page,"턴이 끝났어요");
+  await expect(page.getByRole("button", {name:"근거 1 보기"})).toBeVisible();
+  await page.route("**/api/v1/conversations/*", async route => {
+    if(route.request().method()!=="GET")return route.continue();
+    const response=await route.fetch();
+    const body=await response.json();
+    for(const message of body.messages??[])for(const source of message.citations??[]){
+      source.source_type="bgg_community";
+      source.original_available=false;
+      source.url="https://boardgamegeek.com/thread/123";
+    }
+    await route.fulfill({response,json:body});
+  });
+  await page.reload();
+  await page.getByRole("button",{name:/이전 대화 이어하기/}).click();
+  await page.getByRole("button",{name:"근거 1 보기"}).click();
+  const modal=page.getByRole("dialog",{name:"왜 이렇게 답변했나요?"});
+  await expect(modal.getByText("BGG 커뮤니티 토론 · 공식 룰북 아님")).toBeVisible();
+  await expect(modal.getByRole("heading",{name:"토론에서 참고한 내용"})).toBeVisible();
+  await expect(modal.getByRole("heading",{name:"룰북의 관련 규칙"})).toHaveCount(0);
+  await expect(modal.getByRole("link",{name:"원문 다운로드"})).toHaveCount(0);
+  await expect(modal.getByText("자신의 턴 이후에만 사용합니다.",{exact:true})).toHaveCount(0);
+});
+
 test("legacy source explanation retries in modal and restores focus", async ({page},info) => {
   await page.goto("/"); await choose(page);
   await send(page,"턴이 끝났어요");

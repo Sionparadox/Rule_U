@@ -8,6 +8,7 @@ import { useStore } from "@/lib/store";
 const stageLabel: Record<string, string> = {
   queued: "질문 접수됨",
   retrieve: "규칙 근거를 찾고 있어요",
+  bgg: "BGG에서 추가 근거를 확인하고 있어요",
   generate: "답변을 정리하고 있어요",
   completed: "답변 완료",
   failed: "답변 중단",
