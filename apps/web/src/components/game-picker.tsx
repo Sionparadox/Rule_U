@@ -75,37 +75,27 @@ export function GamePicker() {
   }
   return (
     <section aria-label="게임 탐색">
-      <div className="mb-7 flex items-center justify-between gap-3 sm:mb-9">
-        <div>
-          <p className="mb-2 text-sm font-semibold text-felt">
-            반가워요, 플레이어!
-          </p>
-          <h1 className="text-[28px] leading-tight font-extrabold tracking-tight sm:text-4xl">
-            어떤 게임을 할까요?
-          </h1>
-          <p className="mt-3 text-sm leading-6 text-ink/65">
-            게임을 고르면, 규칙 이야기가 시작돼요.
-          </p>
-        </div>
-        <div aria-hidden className="hidden w-44 shrink-0 rotate-6 sm:block">
-          <GameArt variant={5} />
-        </div>
+      <div className="pt-7 pb-5 sm:pt-10 sm:pb-6">
+        <h1 className="text-2xl leading-tight font-bold tracking-tight sm:text-[30px]">
+          어떤 게임을 할까요?
+        </h1>
+        <p className="mt-2 text-sm leading-6 text-ink/65">
+          궁금한 규칙이 있는 게임을 찾아보세요.
+        </p>
       </div>
       {s.conversation && (
         <button
-          className="mb-5 flex w-full items-center justify-between gap-3 rounded-2xl border border-white bg-white/80 p-4 text-left shadow-[0_3px_0_#d3eae4]"
+          className="mb-5 flex min-h-14 w-full items-center justify-between gap-3 border-l-2 border-felt py-1 pr-1 pl-3 text-left"
           onClick={() => useStore.setState({ view: "chat" })}
         >
           <span>
-            <span className="block text-xs text-ink/60">
-              지난 플레이를 이어갈까요?
-            </span>
+            <span className="block text-xs text-ink/60">최근 대화</span>
             <strong className="mt-1 block text-sm">
               {s.chatDetail?.name_ko ?? "저장된 게임"}
             </strong>
           </span>
-          <span className="shrink-0 rounded-full bg-[#fff0c9] px-3 py-2 text-xs font-bold">
-            이전 대화 이어하기 <span aria-hidden>↗</span>
+          <span className="shrink-0 py-3 text-xs font-semibold text-felt underline-offset-4 hover:underline">
+            이전 대화 이어하기
           </span>
         </button>
       )}
@@ -117,7 +107,7 @@ export function GamePicker() {
         }}
         className="mb-7"
       >
-        <div className="flex items-center gap-2 rounded-2xl border-2 border-white bg-white p-2 shadow-[0_4px_0_#d3eae4]">
+        <div className="flex items-center gap-2 rounded-xl border border-ink/20 bg-white p-1.5 focus-within:border-felt">
           <svg
             aria-hidden
             viewBox="0 0 24 24"
@@ -138,22 +128,30 @@ export function GamePicker() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               maxLength={1000}
-              placeholder={
-                semantic ? "4명이 함께 할 게임" : "플레이할 게임을 검색하세요"
-              }
+              placeholder={semantic ? "4명이 함께 할 게임" : "게임 이름 검색"}
             />
           </label>
           <button
             aria-label="게임 찾기"
-            className="btn-primary shrink-0 px-4"
+            className="min-h-11 shrink-0 rounded-lg bg-felt px-5 text-sm font-semibold text-white hover:bg-[#087b6d] disabled:opacity-50"
             disabled={busy}
           >
             {busy ? <span className="spinner" aria-hidden /> : "검색"}
           </button>
         </div>
-        <details className="mt-4 rounded-2xl bg-white/65 px-4 open:pb-4">
-          <summary className="flex min-h-11 cursor-pointer items-center justify-between text-xs font-semibold">
-            인원·시간으로 더 찾아보기 <span aria-hidden>＋</span>
+        <details className="group mt-2 border-b border-ink/10 open:pb-4">
+          <summary className="flex min-h-11 cursor-pointer items-center justify-between text-xs font-medium text-ink/70">
+            인원·시간으로 더 찾아보기
+            <svg
+              aria-hidden
+              viewBox="0 0 16 16"
+              fill="none"
+              className="size-4 group-open:rotate-180"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            >
+              <path d="m4 6 4 4 4-4" />
+            </svg>
           </summary>
           <div className="grid grid-cols-2 gap-3 pt-2 sm:grid-cols-3">
             <label className="label">

@@ -29,13 +29,13 @@ export default function Home() {
       <main
         className={`app-shell mx-auto px-4 pb-6 sm:px-7 ${view === "games" ? "max-w-[1040px]" : "max-w-[1160px]"}`}
       >
-        <header className="flex h-20 items-center justify-between gap-3 sm:h-24">
+        <header className="flex h-[72px] items-center justify-between gap-3 border-b border-ink/10 sm:h-20">
           <button
             aria-label="Rule_U 게임 선택으로"
             onClick={() => useStore.setState({ view: "games" })}
-            className="flex min-h-11 items-center gap-2 text-xl font-black tracking-tight"
+            className="flex min-h-11 items-center gap-2.5 text-xl font-extrabold tracking-tight"
           >
-            <span className="flex size-10 rotate-[-8deg] items-center justify-center rounded-[13px] bg-felt text-2xl text-white shadow-[0_3px_0_#087b6d]">
+            <span className="flex size-8 items-center justify-center rounded-lg bg-felt text-xl text-white">
               <Dice value={4} />
             </span>
             Rule<span className="-ml-2 text-felt">_U</span>
@@ -46,12 +46,6 @@ export default function Home() {
                 className={`size-1.5 rounded-full ${connected ? "bg-felt" : "bg-token"}`}
               />
               {connected ? "서비스 연결됨" : "서비스 연결 대기"}
-            </span>
-            <span
-              aria-hidden
-              className="flex size-9 items-center justify-center rounded-full border-2 border-white bg-[#ffdf96] text-lg text-[#796024]"
-            >
-              ✦
             </span>
           </div>
         </header>
