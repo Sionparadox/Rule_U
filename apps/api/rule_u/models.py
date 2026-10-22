@@ -211,6 +211,7 @@ class Citation(Base):
     page_start: Mapped[int | None] = mapped_column(Integer)
     page_end: Mapped[int | None] = mapped_column(Integer)
     excerpt: Mapped[str] = mapped_column(Text)
+    evidence_snapshot: Mapped[dict] = mapped_column(JSON, default=dict)
 
 
 class Request(Base):

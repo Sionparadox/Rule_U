@@ -11,6 +11,7 @@ from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from rule_u.config import Settings
 from rule_u.db import make_engine, make_sessions
 from rule_u.models import (
+    Citation,
     Conversation,
     Edition,
     Expansion,
@@ -21,6 +22,7 @@ from rule_u.models import (
     expansion_editions,
 )
 from rule_u.providers import ProviderError, chat_provider
+from rule_u.rag import answer_question
 from rule_u.schemas import (
     AnswerOut,
     ConversationCreated,
@@ -39,7 +41,7 @@ from rule_u.schemas import (
 COOKIE = "rule_u_session"
 
 
-def create_app(settings: Settings | None = None, provider=None):
+def create_app(settings: Settings | None = None, provider=None, retriever=None):
     settings = settings or Settings()
     engine = make_engine(settings)
     sessions = make_sessions(engine)
@@ -134,9 +136,7 @@ def create_app(settings: Settings | None = None, provider=None):
         edition = db.get(Edition, body.edition_id)
         if edition is None or edition.game_id != body.game_id:
             raise HTTPException(422, "invalid_edition")
-        # Stage 1 accepts unsupported editions only for the mock storage demonstration.
-        if settings.chat_provider != "mock" and not edition.supported:
-            raise HTTPException(409, "rules_not_ready")
+        # An unverified edition may be queried, but absent evidence produces a refusal.
         ids = set(body.expansion_ids)
         compatible = set(
             db.scalars(
@@ -195,7 +195,10 @@ def create_app(settings: Settings | None = None, provider=None):
         try:
             with sessions.begin() as db:
                 row = db.get(Request, rid)
-                row.status, row.stage = "running", "generate"
+                row.status, row.stage = "running", "retrieve"
+                conversation = db.get(Conversation, row.conversation_id)
+                game = db.get(Game, conversation.game_id)
+                edition = db.get(Edition, conversation.edition_id)
                 messages = [
                     {"role": m.role, "content": m.content}
                     for m in db.scalars(
@@ -204,23 +207,51 @@ def create_app(settings: Settings | None = None, provider=None):
                         .order_by(Message.created_at, Message.id)
                     )
                 ]
+                context = {
+                    "game": {"id": game.id, "name": game.name_ko,
+                             "description": game.description, "players": [game.min_players, game.max_players],
+                             "minutes": [game.min_minutes, game.max_minutes]},
+                    "edition": {"id": edition.id, "label": edition.label, "language": edition.language},
+                    "expansion_ids": list(db.scalars(select(conversation_expansions.c.expansion_id)
+                        .where(conversation_expansions.c.conversation_id == conversation.id))),
+                    "messages": messages[-12:],
+                    "mode": db.scalar(select(Message.mode).where(Message.conversation_id == conversation.id,
+                        Message.role == "user").order_by(Message.created_at.desc(), Message.id.desc()).limit(1)),
+                }
             # Never hold a DB transaction across external calls.
-            if settings.chat_provider != "mock":
-                raise ProviderError("rules_not_ready")
-            answer = await asyncio.wait_for(
-                (provider or chat_provider(settings)).generate(messages),
-                settings.api_timeout_seconds,
-            )
+            def stage(value):
+                with sessions.begin() as db:
+                    db.get(Request, rid).stage = value
+
+            if settings.chat_provider == "mock" and context["game"]["id"] == "demo-game" and retriever is None:
+                answer = {"answer": await asyncio.wait_for(
+                    (provider or chat_provider(settings)).generate(messages), settings.api_timeout_seconds),
+                    "verdict": "unavailable", "citations": []}
+            else:
+                answer = await asyncio.wait_for(answer_question(
+                    settings, sessions, context, provider, retriever, stage), settings.api_timeout_seconds)
             with sessions.begin() as db:
                 row = db.get(Request, rid)
                 message = Message(
                     conversation_id=row.conversation_id,
                     role="assistant",
-                    content=answer,
-                    verdict="unavailable",
+                    content=answer["answer"],
+                    verdict=answer["verdict"],
+                    mode=context["mode"],
                 )
                 db.add(message)
                 db.flush()
+                citations = []
+                for evidence in answer["citations"]:
+                    citation = Citation(message_id=message.id, **{k: evidence[k] for k in (
+                        "document_id", "chunk_id", "source_version", "title_snapshot",
+                        "source_url_snapshot", "edition_snapshot", "page_start", "page_end", "excerpt")},
+                        evidence_snapshot={k: evidence.get(k, "") for k in (
+                            "number", "source_type", "language", "extraction_method", "review_note")})
+                    db.add(citation)
+                    db.flush()
+                    citations.append(citation.id)
+                message.cited_source_ids = citations
                 row.result_message_id = message.id
                 row.status, row.stage = "completed", "completed"
         except Exception as exc:
@@ -279,7 +310,25 @@ def create_app(settings: Settings | None = None, provider=None):
             status=row.status,
             stage=row.stage,
             error_code=row.error_code,
-            result=AnswerOut(answer=result.content, verdict=result.verdict) if result else None,
+            result=AnswerOut(answer=result.content, verdict=result.verdict,
+                citations=[citation_out(c) for c in db.scalars(select(Citation).where(
+                    Citation.message_id == result.id))],
+                citation_notice="" if result.cited_source_ids else "이 답변에 인용된 근거가 없습니다.") if result else None,
         )
+
+    def citation_out(c):
+        return {"id": c.id, "document_id": c.document_id, "title": c.title_snapshot,
+                "edition": c.edition_snapshot, "url": c.source_url_snapshot,
+                "page_start": c.page_start, "page_end": c.page_end, "excerpt": c.excerpt,
+                "source_version": c.source_version, **c.evidence_snapshot}
+
+    @app.get("/api/v1/sources/{source_id}")
+    def get_source(source_id: str, sid=Depends(session_id), db=Depends(get_db)):
+        citation = db.get(Citation, source_id)
+        if citation is None:
+            raise HTTPException(404, "source_not_found")
+        message = db.get(Message, citation.message_id)
+        owned(db, message.conversation_id, sid)
+        return citation_out(citation)
 
     return app

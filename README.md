@@ -1,5 +1,9 @@
 # Rule_U
 
+3단계 백엔드 RAG·인용 저장·재색인 버전 전환을 구현했다. 자동 테스트 41개와 코드네임 실제 GMS 질문 5개의 초기 검증을 통과했다. [3단계 결과](reports/stage3-progress.md)를 참고한다. 전체 게임의 답변 품질 검증은 후속 범위다.
+
+업데이트 후 API 폴더에서 `uv sync`와 `uv run alembic upgrade head`를 실행한다. 질문 API는 확보된 근거를 검색하고 답변과 인용을 저장한다. `GET /api/v1/sources/{citation_id}`는 동일 세션에서 인용 시점의 근거를 조회한다. 화면 근거 패널은 4단계 범위다. 색인 CLI는 동시에 여러 프로세스로 실행하지 않는다.
+
 보드게임 규칙 탐색·상황 판정 서비스의 로컬 모노레포입니다. 현재 **2단계 수집·색인 진행 중**입니다. 로컬 메타데이터 적재와 PDF·FAQ 추출, ChromaDB 테스트 색인을 구현했습니다. 실제 규칙 검색·판정은 아직 연결하지 않았습니다.
 
 Next.js App Router + TypeScript / FastAPI / SQLite + SQLAlchemy + Alembic. Windows에서 Docker 없이 실행합니다. 계획과 명세서는 [docs/개발계획.md](docs/개발계획.md), [docs/기능명세서.md](docs/기능명세서.md)에 있습니다.
