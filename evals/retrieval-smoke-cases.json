@@ -1,0 +1,75 @@
+[
+  {
+    "game_id": "codenames",
+    "edition_id": "codenames-official-ko-rulebook",
+    "document_id": "cef94b2076aa24705c3b1b56d6b430b2a4fbbf377fb85fdaf9d752eb4e31c56a",
+    "question": "힌트 숫자가 3이면 최대 몇 번 추리할 수 있나요?",
+    "pages": [
+      5
+    ]
+  },
+  {
+    "game_id": "codenames",
+    "edition_id": "codenames-official-ko-rulebook",
+    "document_id": "cef94b2076aa24705c3b1b56d6b430b2a4fbbf377fb85fdaf9d752eb4e31c56a",
+    "question": "암살자 카드를 고르면 어떻게 되나요?",
+    "pages": [
+      5
+    ]
+  },
+  {
+    "game_id": "codenames",
+    "edition_id": "codenames-official-ko-rulebook",
+    "document_id": "cef94b2076aa24705c3b1b56d6b430b2a4fbbf377fb85fdaf9d752eb4e31c56a",
+    "question": "힌트 숫자로 0을 말하면 무엇이 달라지나요?",
+    "pages": [
+      7
+    ]
+  },
+  {
+    "game_id": "catan",
+    "edition_id": "catan-user-748610c946df",
+    "document_id": "748610c946df74e86db7d5538afabd551579296b13456c644c5e528747e6df56",
+    "question": "차례가 아닌 사람들끼리 자원을 거래해도 되나요?",
+    "pages": [
+      2
+    ]
+  },
+  {
+    "game_id": "catan",
+    "edition_id": "catan-user-748610c946df",
+    "document_id": "748610c946df74e86db7d5538afabd551579296b13456c644c5e528747e6df56",
+    "question": "도로 건설 진보 카드는 어떤 효과인가요?",
+    "pages": [
+      1,
+      3
+    ]
+  },
+  {
+    "game_id": "coup",
+    "edition_id": "coup-official-ko-rulebook",
+    "document_id": "a173e336a07034d3c35d2d81423665c328cb5194dc85ddbb53a41effc20c8351",
+    "question": "돈을 10개 이상 가진 경우 반드시 쿠데타를 해야 하나요?",
+    "pages": [
+      1
+    ]
+  },
+  {
+    "game_id": "6-nimmt",
+    "edition_id": "6-nimmt-official-ko-rulebook",
+    "document_id": "5ebc3aedcb42dba1d504bea6b782fa5de436d83a88142212f09a427bf1f54c5e",
+    "question": "게임을 시작할 때 각자 카드를 몇 장 받나요?",
+    "pages": [
+      1
+    ]
+  },
+  {
+    "game_id": "7-wonders-architects",
+    "edition_id": "7-wonders-architects-additional-ko-20261021",
+    "document_id": "e442d5f77b21c30749dafe61d269a8655e0991105e857ebf4eb70a92c3eb1dc9",
+    "question": "불가사의를 완성하면 게임은 언제 끝나나요?",
+    "pages": [
+      3
+    ]
+  }
+]

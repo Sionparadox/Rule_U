@@ -1,0 +1,23 @@
+{
+  "30408ec1947fb803c7adc4faa29017fb042693f2f42de6168159a16d58288684": {
+    "sha256": "cef94b2076aa24705c3b1b56d6b430b2a4fbbf377fb85fdaf9d752eb4e31c56a",
+    "status": "official_verified",
+    "edition_review": "Korean PDF at publisher URL; exact print revision unconfirmed",
+    "evidence": "2026-10-22 publisher game page and Korean 8-page PDF checked: https://www.czechgames.com/games/codenames ; https://filemanager.czechgames.com/storage/files/codenames/rules/codenames-rules-ko.pdf",
+    "license_note": "Publisher provides rule PDF; all rights reserved. No blanket redistribution/embedding licence confirmed."
+  },
+  "ed8cd292d91aa0aca16a2fb10e43fce46dd94cd291e597dd01ac14c457ad1053": {
+    "sha256": "5ebc3aedcb42dba1d504bea6b782fa5de436d83a88142212f09a427bf1f54c5e",
+    "status": "official_verified",
+    "edition_review": "Publisher Korean rules link verified; print revision unconfirmed",
+    "evidence": "2026-10-22 https://blog.amigo-spiele.de/content/ws/plenty.php?id=4910&select=downloads Manual Korean link matches registered download URL; PDF fetch timed out.",
+    "license_note": "Public rule download confirmed; redistribution licence unconfirmed."
+  },
+  "e770ffc96af0dca3ec754ba0867217f42907ac19159b758e0b86aaa5d57677f9": {
+    "sha256": "e442d5f77b21c30749dafe61d269a8655e0991105e857ebf4eb70a92c3eb1dc9",
+    "status": "official_verified",
+    "edition_review": "Publisher Korean rules link verified; print revision unconfirmed",
+    "evidence": "2026-10-22 https://www.rprod.com/en/games/7-wonders-architects KR rules link matches registered download URL; web PDF size limit.",
+    "license_note": "Public rule download confirmed; redistribution licence unconfirmed."
+  }
+}
