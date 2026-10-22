@@ -1,7 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import { useReducedMotion } from "motion/react";
+import {
+  AnimatePresence,
+  motion,
+  stagger,
+  useReducedMotion,
+} from "motion/react";
+import { exitQuick, playful, quick, rise, settle } from "@/lib/motion";
 import { api, ApiError, errorText, type Schema } from "@/lib/api";
 import { useStore } from "@/lib/store";
 import { BrandMark, RollingDice } from "./marks";
@@ -139,6 +145,16 @@ export function Chat() {
   }
   const game =
     s.chatDetail && c && s.chatDetail.id === c.game_id ? s.chatDetail : null;
+  // 화면을 열 때 이미 있던 메시지는 움직이지 않고, 새로 도착한 메시지만 등장 효과를 준다.
+  const [seen, setSeen] = useState<{ id?: string; messages: Set<string> }>({
+    messages: new Set(),
+  });
+  if (c && seen.id !== c.id)
+    setSeen({ id: c.id, messages: new Set(c.messages.map((m) => m.id)) });
+  const fresh = (id: string) => seen.id === c?.id && !seen.messages.has(id);
+  const stage =
+    stageLabel[s.sending ? "queued" : (s.request?.stage ?? "queued")] ??
+    "답변을 생각하고 있어요";
   return (
     <section
       className="flex h-[calc(100dvh-5rem)] min-h-[480px] flex-col overflow-hidden rounded-[28px] bg-surface shadow-[0_4px_0_var(--color-edge)] sm:h-[calc(100dvh-6rem)]"
@@ -196,11 +212,19 @@ export function Chat() {
               <button
                 key={value}
                 disabled={processing}
-                className={`font-game min-h-11 rounded-xl text-base transition-colors ${s.mode === value ? "bg-surface text-blue shadow-[0_3px_0_var(--color-edge)]" : "text-muted"}`}
+                className={`font-game relative min-h-11 rounded-xl text-base transition-colors ${s.mode === value ? "text-blue" : "text-muted"}`}
                 aria-pressed={s.mode === value}
                 onClick={() => useStore.setState({ mode: value })}
               >
-                {label}
+                {s.mode === value && (
+                  // 선택 표시가 고른 쪽으로 미끄러져 간다.
+                  <motion.span
+                    layoutId="mode-pill"
+                    transition={settle}
+                    className="absolute inset-0 rounded-xl bg-surface shadow-[0_3px_0_var(--color-edge)]"
+                  />
+                )}
+                <span className="relative">{label}</span>
               </button>
             ))}
           </div>
@@ -228,8 +252,14 @@ export function Chat() {
         )}
         {c?.messages.map((m) =>
           m.role === "user" ? (
-            <article
+            <motion.article
               key={m.id}
+              initial={
+                fresh(m.id) ? { opacity: 0, x: 16, y: 8, scale: 0.96 } : false
+              }
+              animate={{ opacity: 1, x: 0, y: 0, scale: 1 }}
+              transition={quick}
+              style={{ transformOrigin: "bottom right" }}
               className="ml-auto w-fit max-w-[85%] rounded-3xl rounded-br-lg bg-blue px-4 py-3 text-white"
             >
               <p className="text-xs font-semibold text-white/85">
@@ -238,21 +268,40 @@ export function Chat() {
               <p className="text-[15px] leading-7 break-words whitespace-pre-wrap">
                 {m.content}
               </p>
-            </article>
+            </motion.article>
           ) : (
-            <article
+            <motion.article
               key={m.id}
+              initial={fresh(m.id) ? { opacity: 0, y: 14 } : false}
+              animate={{ opacity: 1, y: 0 }}
+              transition={quick}
               className="mr-auto w-full max-w-[96%] overflow-hidden rounded-3xl bg-surface shadow-[0_4px_0_var(--color-edge)]"
             >
               {m.verdict ? (
                 <div
-                  className={`pop flex items-center gap-3 px-4 py-3 text-ink ${verdicts[m.verdict]?.card ?? "bg-surface-soft"}`}
+                  className={`flex items-center gap-3 px-4 py-3 text-ink ${verdicts[m.verdict]?.card ?? "bg-surface-soft"}`}
                 >
-                  <Token symbol={verdicts[m.verdict]?.symbol ?? "dash"} />
-                  <p className="font-game text-[22px] leading-tight">
+                  {/* 판정 토큰이 테이블에 놓이듯 튀며 내려앉는다. 답변마다 한 번뿐인 순간. */}
+                  <motion.span
+                    initial={
+                      fresh(m.id)
+                        ? { scale: 0.4, rotate: -24, opacity: 0 }
+                        : false
+                    }
+                    animate={{ scale: 1, rotate: 0, opacity: 1 }}
+                    transition={{ ...playful, delay: 0.1 }}
+                  >
+                    <Token symbol={verdicts[m.verdict]?.symbol ?? "dash"} />
+                  </motion.span>
+                  <motion.p
+                    initial={fresh(m.id) ? { opacity: 0, x: -6 } : false}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ ...quick, delay: 0.14 }}
+                    className="font-game text-[22px] leading-tight"
+                  >
                     <span className="sr-only">Rule_U 판정: </span>
                     {verdicts[m.verdict]?.label ?? m.verdict}
-                  </p>
+                  </motion.p>
                 </div>
               ) : (
                 <p className="flex items-center gap-2 px-4 pt-3 text-xs font-semibold text-blue">
@@ -281,53 +330,86 @@ export function Chat() {
                 })}
               </p>
               {m.citations?.length ? (
-                <div className="flex flex-wrap gap-2 px-4 pt-1 pb-4">
+                <motion.div
+                  initial={fresh(m.id) ? "hidden" : false}
+                  animate="shown"
+                  variants={{
+                    hidden: {},
+                    shown: {
+                      transition: {
+                        delayChildren: stagger(0.05, { startDelay: 0.22 }),
+                      },
+                    },
+                  }}
+                  className="flex flex-wrap gap-2 px-4 pt-1 pb-4"
+                >
                   {m.citations.map((source) => (
-                    <button
+                    <motion.div
                       key={source.id}
-                      className="chunky flex min-h-11 max-w-full items-center gap-2 rounded-2xl border-[1.5px] border-edge bg-surface py-1.5 pr-3 pl-1.5 text-left text-sm [--depth:3px]"
-                      aria-label={`출처 ${source.number} 자세히`}
-                      onClick={() => showSource(source)}
+                      variants={rise}
+                      className="max-w-full"
                     >
-                      <span className="font-game flex size-7 shrink-0 items-center justify-center rounded-lg bg-blue text-white">
-                        {source.number}
-                      </span>
-                      <span className="min-w-0 truncate font-semibold">
-                        {source.title}
-                      </span>
-                      <span className="shrink-0 text-xs text-muted">
-                        {pageText(source)}
-                      </span>
-                    </button>
+                      <button
+                        className="chunky flex min-h-11 max-w-full items-center gap-2 rounded-2xl border-[1.5px] border-edge bg-surface py-1.5 pr-3 pl-1.5 text-left text-sm [--depth:3px]"
+                        aria-label={`출처 ${source.number} 자세히`}
+                        onClick={() => showSource(source)}
+                      >
+                        <span className="font-game flex size-7 shrink-0 items-center justify-center rounded-lg bg-blue text-white">
+                          {source.number}
+                        </span>
+                        <span className="min-w-0 truncate font-semibold">
+                          {source.title}
+                        </span>
+                        <span className="shrink-0 text-xs text-muted">
+                          {pageText(source)}
+                        </span>
+                      </button>
+                    </motion.div>
                   ))}
-                </div>
+                </motion.div>
               ) : (
                 <p className="px-4 pb-4 text-xs text-muted">
                   이 답변에 인용된 근거가 없습니다.
                 </p>
               )}
-            </article>
+            </motion.article>
           ),
         )}
-        {processing && (
-          <div
-            role="status"
-            aria-label="답변을 생각하고 있어요"
-            className="mr-auto w-[85%] max-w-sm rounded-3xl bg-surface p-4 shadow-[0_4px_0_var(--color-edge)]"
-          >
-            <div className="font-game mb-4 flex items-center gap-3 text-lg text-blue">
-              <RollingDice />
-              {stageLabel[
-                s.sending ? "queued" : (s.request?.stage ?? "queued")
-              ] ?? "답변을 생각하고 있어요"}
-            </div>
-            <div aria-hidden className="space-y-2.5">
-              <div className="skeleton-line w-full" />
-              <div className="skeleton-line w-4/5" />
-              <div className="skeleton-line w-2/5" />
-            </div>
-          </div>
-        )}
+        <AnimatePresence>
+          {processing && (
+            <motion.div
+              key="thinking"
+              role="status"
+              aria-label="답변을 생각하고 있어요"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.96, transition: exitQuick }}
+              transition={quick}
+              className="mr-auto w-[85%] max-w-sm rounded-3xl bg-surface p-4 shadow-[0_4px_0_var(--color-edge)]"
+            >
+              <div className="font-game mb-4 flex items-center gap-3 text-lg text-blue">
+                <RollingDice />
+                {/* 단계가 바뀌면 문구가 위로 밀려나며 바뀐다. */}
+                <AnimatePresence mode="popLayout" initial={false}>
+                  <motion.span
+                    key={stage}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8, transition: exitQuick }}
+                    transition={quick}
+                  >
+                    {stage}
+                  </motion.span>
+                </AnimatePresence>
+              </div>
+              <div aria-hidden className="space-y-2.5">
+                <div className="skeleton-line w-full" />
+                <div className="skeleton-line w-4/5" />
+                <div className="skeleton-line w-2/5" />
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
         {s.request?.status === "failed" && !unresolved && (
           <div role="alert" className="rounded-3xl bg-red/15 p-4 text-sm">
             <p className="font-semibold">

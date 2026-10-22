@@ -5,7 +5,7 @@ import {
   AnimatePresence,
   motion,
   MotionConfig,
-  useReducedMotion,
+  type Variants,
 } from "motion/react";
 import { GamePicker } from "@/components/game-picker";
 import { Chat } from "@/components/conversation";
@@ -13,11 +13,23 @@ import { SourceModal } from "@/components/source-modal";
 import { BrandMark, RollingDice } from "@/components/marks";
 import { useStore } from "@/lib/store";
 import { api, API_MOCK, type Schema } from "@/lib/api";
+import { exitQuick, playful, quick } from "@/lib/motion";
+
+type View = "games" | "chat";
+// 대화는 오른쪽에서 들어오고, 로비로 돌아갈 때는 왼쪽에서 들어온다 (공간 방향을 일관되게).
+const screens: Variants = {
+  enter: (to: View) => ({ opacity: 0, x: to === "chat" ? 24 : -24 }),
+  center: { opacity: 1, x: 0, transition: quick },
+  leave: (to: View) => ({
+    opacity: 0,
+    x: to === "chat" ? -24 : 24,
+    transition: exitQuick,
+  }),
+};
 
 export default function Home() {
   const { hydrated, view, sourcesOpen, source } = useStore();
   const [connected, setConnected] = useState(false);
-  const reduced = useReducedMotion();
   useEffect(() => {
     void useStore.getState().init();
     api<Schema["HealthOut"]>("/health")
@@ -49,8 +61,12 @@ export default function Home() {
               </span>
             )}
             <span className="flex items-center gap-1.5 rounded-full bg-surface px-3 py-1.5 text-ink shadow-[0_2px_0_var(--color-edge)]">
-              <span
+              <motion.span
                 aria-hidden
+                key={String(connected)}
+                initial={{ scale: connected ? 1.8 : 1 }}
+                animate={{ scale: 1 }}
+                transition={playful}
                 className={`size-2 rounded-full ${connected ? "bg-green" : "bg-edge"}`}
               />
               {connected ? "서비스 연결됨" : "서비스 연결 대기"}
@@ -66,13 +82,14 @@ export default function Home() {
             게임 목록을 불러오고 있어요…
           </div>
         ) : (
-          <AnimatePresence mode="wait" initial={false}>
+          <AnimatePresence mode="wait" initial={false} custom={view}>
             <motion.div
               key={view}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: reduced ? 0 : 0.12 }}
+              custom={view}
+              variants={screens}
+              initial="enter"
+              animate="center"
+              exit="leave"
             >
               {view === "games" ? (
                 <GamePicker />

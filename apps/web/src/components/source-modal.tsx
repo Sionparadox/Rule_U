@@ -1,7 +1,10 @@
 ﻿"use client";
 
 import { useEffect, useRef, useState } from "react";
+import { motion } from "motion/react";
 import { api, type Schema } from "@/lib/api";
+import { quick } from "@/lib/motion";
+import { DragSheet } from "./drag-sheet";
 import { useStore } from "@/lib/store";
 
 export function SourceModal({ source }: { source: Schema["SourceOut"] }) {
@@ -48,34 +51,38 @@ export function SourceModal({ source }: { source: Schema["SourceOut"] }) {
         if (e.target === e.currentTarget) dialog.current?.close();
       }}
     >
-      <div data-testid="source-body">
-        <div className="flex items-center justify-between gap-4 bg-blue px-5 py-3.5 text-white">
-          <p className="font-game flex items-center gap-2.5 text-lg">
-            <span className="flex size-9 items-center justify-center rounded-xl bg-surface text-xl text-blue">
-              {detail.number}
-            </span>
-            답변의 출처
-          </p>
-          <button
-            autoFocus
-            className="icon-round [--depth-color:var(--color-blue-deep)]"
-            aria-label="출처 설명 닫기"
-            onClick={() => dialog.current?.close()}
-          >
-            <svg
-              aria-hidden
-              viewBox="0 0 16 16"
-              className="size-4"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="round"
+      <DragSheet
+        onDismiss={() => dialog.current?.close()}
+        handle={
+          <div className="flex items-center justify-between gap-4 bg-blue px-5 py-3.5 text-white">
+            <p className="font-game flex items-center gap-2.5 text-lg">
+              <span className="flex size-9 items-center justify-center rounded-xl bg-surface text-xl text-blue">
+                {detail.number}
+              </span>
+              답변의 출처
+            </p>
+            <button
+              autoFocus
+              className="icon-round [--depth-color:var(--color-blue-deep)]"
+              aria-label="출처 설명 닫기"
+              onClick={() => dialog.current?.close()}
             >
-              <path d="m4 4 8 8m0-8-8 8" />
-            </svg>
-          </button>
-        </div>
-        <div className="p-5 sm:p-6">
+              <svg
+                aria-hidden
+                viewBox="0 0 16 16"
+                className="size-4"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+              >
+                <path d="m4 4 8 8m0-8-8 8" />
+              </svg>
+            </button>
+          </div>
+        }
+      >
+        <div className="p-5 sm:p-6" data-testid="source-body">
           <h2 id="source-title" className="font-game text-[26px] leading-tight">
             왜 이렇게 답변했나요?
           </h2>
@@ -132,7 +139,12 @@ export function SourceModal({ source }: { source: Schema["SourceOut"] }) {
               </button>
             </div>
           ) : (
-            <div className="mt-6 space-y-5">
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={quick}
+              className="mt-6 space-y-5"
+            >
               <section aria-labelledby="rule-summary">
                 <h3 id="rule-summary" className="font-game mb-1 text-lg">
                   {community ? "토론에서 참고한 내용" : "룰북의 관련 규칙"}
@@ -157,7 +169,7 @@ export function SourceModal({ source }: { source: Schema["SourceOut"] }) {
                   ? "일반 사용자들의 규칙 토론을 요약했어요. 판본과 확장에 따라 다를 수 있으니 공식 룰북도 확인해 주세요."
                   : "룰북의 해당 부분을 이해하기 쉽게 풀어 쓴 설명이에요. 정확한 표현은 원문에서도 확인할 수 있어요."}
               </p>
-            </div>
+            </motion.div>
           )}
           {(/^https?:\/\//i.test(detail.url) || detail.original_available) && (
             <div className="mt-6 flex flex-wrap gap-3">
@@ -182,7 +194,7 @@ export function SourceModal({ source }: { source: Schema["SourceOut"] }) {
             </div>
           )}
         </div>
-      </div>
+      </DragSheet>
     </dialog>
   );
 }

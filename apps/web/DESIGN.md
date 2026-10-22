@@ -62,10 +62,16 @@ depth:
   tile: "0 4px 0 {colors.edge}"
   sheet: "0 -8px 32px -12px ink/30%" # 떠 있는 시트만
 
-motion:
-  press: "translateY(3px), 두께 1px, 90ms ease-out"
-  enter: "opacity + scale(0.96→1), 200ms cubic-bezier(0.23,1,0.32,1)"
-  dice: "답변을 기다리는 동안 주사위 눈이 바뀐다. reduced-motion에서는 멈춘다"
+motion: # 구현: src/lib/motion.ts (motion/react). UI 모션은 300ms 이하, 나갈 때는 더 빠르게.
+  press: "CSS. translateY(3px), 두께 1px, 90ms ease-out. 두께 있는 요소에는 motion transform을 걸지 않고 바깥 래퍼에 건다"
+  quick: "등장 220ms / 퇴장 120ms, cubic-bezier(0.23,1,0.32,1)"
+  settle: "spring 0.32s bounce 0.12. 모드 전환 알약(layoutId), 시트 복귀, 개수 배지"
+  playful: "spring 0.45s bounce 0.45. 판정 토큰이 내려앉는 순간에만"
+  screens: "대화는 오른쪽에서, 로비는 왼쪽에서 24px 들어온다"
+  list: "타일·출처 칩 40–50ms 간격 stagger, 새로 도착한 메시지만 등장 효과"
+  sheet: "모바일 바텀 시트는 머리를 아래로 120px 끌거나 빠르게 튕기면 닫힌다"
+  dice: "답변을 기다리는 동안 주사위가 구른다"
+  reduced: "MotionConfig reducedMotion=user: 이동·확대는 빼고 투명도만 남긴다"
 ---
 
 ## Overview

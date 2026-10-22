@@ -1,9 +1,19 @@
 ﻿"use client";
 
 import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion, type Variants } from "motion/react";
 import { api, errorText, type Schema } from "@/lib/api";
+import { list, quick, rise, settle } from "@/lib/motion";
 import { useStore } from "@/lib/store";
+import { DragSheet } from "./drag-sheet";
 import { GameArt, motifFor, tileColor } from "./game-art";
+
+// 마우스를 올리면 그림 속 구성물이 살짝 떠오른다 (터치에서는 hover가 일어나지 않는다).
+const artLift: Variants = {
+  hidden: { y: 0 },
+  shown: { y: 0 },
+  hover: { y: -4, transition: settle },
+};
 
 const verified = (game: Pick<Schema["GameOut"], "source_review">) =>
   game.source_review === "official_verified";
@@ -124,25 +134,32 @@ export function GamePicker() {
         </p>
       </div>
       {s.conversation && (
-        <button
-          className="chunky mb-6 flex w-full items-center gap-4 rounded-3xl bg-blue p-3 pr-4 text-left text-white [--depth-color:var(--color-blue-deep)]"
-          onClick={() => useStore.setState({ view: "chat" })}
+        <motion.div
+          className="mb-6"
+          initial={{ opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={settle}
         >
-          <span className="flex size-20 shrink-0 items-center justify-center rounded-2xl bg-surface p-1.5">
-            {recent && <GameArt motif={motifFor(recent)} />}
-          </span>
-          <span className="min-w-0 flex-1">
-            <span className="block text-xs font-semibold text-white/85">
-              최근 대화
+          <button
+            className="chunky flex w-full items-center gap-4 rounded-3xl bg-blue p-3 pr-4 text-left text-white [--depth-color:var(--color-blue-deep)]"
+            onClick={() => useStore.setState({ view: "chat" })}
+          >
+            <span className="flex size-20 shrink-0 items-center justify-center rounded-2xl bg-surface p-1.5">
+              {recent && <GameArt motif={motifFor(recent)} />}
             </span>
-            <span className="font-game mt-0.5 block truncate text-[22px]">
-              {recent?.name_ko ?? "저장된 게임"}
+            <span className="min-w-0 flex-1">
+              <span className="block text-xs font-semibold text-white/85">
+                최근 대화
+              </span>
+              <span className="font-game mt-0.5 block truncate text-[22px]">
+                {recent?.name_ko ?? "저장된 게임"}
+              </span>
             </span>
-          </span>
-          <span className="font-game shrink-0 rounded-full bg-yellow px-4 py-2.5 text-[15px] whitespace-nowrap text-ink shadow-[0_3px_0_var(--color-yellow-deep)]">
-            이전 대화 이어하기
-          </span>
-        </button>
+            <span className="font-game shrink-0 rounded-full bg-yellow px-4 py-2.5 text-[15px] whitespace-nowrap text-ink shadow-[0_3px_0_var(--color-yellow-deep)]">
+              이전 대화 이어하기
+            </span>
+          </button>
+        </motion.div>
       )}
       <form
         ref={form}
@@ -256,21 +273,37 @@ export function GamePicker() {
           </div>
         </details>
       </form>
-      {(error || s.error) && (
-        <p
-          role="alert"
-          className="mb-4 rounded-2xl bg-red/15 p-4 text-sm font-semibold text-ink"
-        >
-          {error || s.error}
-        </p>
-      )}
+      <AnimatePresence>
+        {(error || s.error) && (
+          <motion.p
+            initial={{ opacity: 0, y: -4 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, transition: { duration: 0.12 } }}
+            transition={quick}
+            role="alert"
+            className="mb-4 rounded-2xl bg-red/15 p-4 text-sm font-semibold text-ink"
+          >
+            {error || s.error}
+          </motion.p>
+        )}
+      </AnimatePresence>
       <div className="mb-4 flex items-center justify-between">
         <h2 className="font-game text-2xl">게임 선택</h2>
-        <span className="rounded-full bg-surface px-3 py-1 text-sm font-semibold text-muted">
+        <motion.span
+          key={result?.total ?? "loading"}
+          initial={{ scale: 1.12 }}
+          animate={{ scale: 1 }}
+          transition={settle}
+          className="rounded-full bg-surface px-3 py-1 text-sm font-semibold text-muted"
+        >
           {result ? `${result.total}개의 게임` : "게임을 불러오는 중…"}
-        </span>
+        </motion.span>
       </div>
-      <div
+      <motion.div
+        key={busy ? "loading" : (result?.items.map((g) => g.id).join() ?? "")}
+        variants={list}
+        initial="hidden"
+        animate="shown"
         className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4"
         aria-busy={busy}
       >
@@ -289,37 +322,50 @@ export function GamePicker() {
               </div>
             ))
           : result?.items.map((g, i) => (
-              <button
+              <motion.div
                 key={g.id}
-                aria-label={`${g.name_ko} 선택`}
-                disabled={s.loading}
-                onClick={() => void choose(g.id)}
-                className="chunky flex flex-col overflow-hidden rounded-3xl border-[1.5px] border-edge bg-surface text-left"
+                variants={rise}
+                whileHover="hover"
+                className="flex"
               >
-                <span className={`block h-28 w-full p-2 ${tileColor(i)}`}>
-                  <GameArt motif={motifFor(g)} />
-                </span>
-                <span className="flex flex-1 flex-col p-3">
-                  <strong className="font-game text-lg leading-snug break-keep">
-                    {g.name_ko}
-                  </strong>
-                  <span className="mt-0.5 text-xs text-muted">
-                    {playMeta(g)}
+                <button
+                  aria-label={`${g.name_ko} 선택`}
+                  disabled={s.loading}
+                  onClick={() => void choose(g.id)}
+                  className="chunky flex w-full flex-col overflow-hidden rounded-3xl border-[1.5px] border-edge bg-surface text-left"
+                >
+                  <span className={`block h-28 w-full p-2 ${tileColor(i)}`}>
+                    <motion.span variants={artLift} className="block h-full">
+                      <GameArt motif={motifFor(g)} />
+                    </motion.span>
                   </span>
-                  <span className="mt-auto pt-2">
-                    <SourceBadge ok={verified(g)} />
+                  <span className="flex flex-1 flex-col p-3">
+                    <strong className="font-game text-lg leading-snug break-keep">
+                      {g.name_ko}
+                    </strong>
+                    <span className="mt-0.5 text-xs text-muted">
+                      {playMeta(g)}
+                    </span>
+                    <span className="mt-auto pt-2">
+                      <SourceBadge ok={verified(g)} />
+                    </span>
                   </span>
-                </span>
-              </button>
+                </button>
+              </motion.div>
             ))}
-      </div>
+      </motion.div>
       {!busy && result?.items.length === 0 && (
-        <div className="rounded-3xl bg-surface p-8 text-center shadow-[0_4px_0_var(--color-edge)]">
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={quick}
+          className="rounded-3xl bg-surface p-8 text-center shadow-[0_4px_0_var(--color-edge)]"
+        >
           <p className="font-game text-xl">조건에 맞는 게임이 없어요.</p>
           <p className="mt-2 text-sm text-muted">
             게임 이름이나 인원·시간 조건을 바꿔보세요.
           </p>
-        </div>
+        </motion.div>
       )}
       {result && result.total > result.page_size && (
         <nav
@@ -354,28 +400,32 @@ export function GamePicker() {
         }}
       >
         {s.detail && (
-          <div>
-            <div className={`relative h-36 p-4 ${colorOf(s.detail.id)}`}>
-              <GameArt motif={motifFor(s.detail)} />
-              <button
-                autoFocus
-                className="icon-round absolute top-3 right-3"
-                aria-label="판본 선택 닫기"
-                onClick={() => dialog.current?.close()}
-              >
-                <svg
-                  aria-hidden
-                  viewBox="0 0 16 16"
-                  className="size-4"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
+          <DragSheet
+            onDismiss={() => dialog.current?.close()}
+            handle={
+              <div className={`relative h-36 p-4 ${colorOf(s.detail.id)}`}>
+                <GameArt motif={motifFor(s.detail)} />
+                <button
+                  autoFocus
+                  className="icon-round absolute top-3 right-3"
+                  aria-label="판본 선택 닫기"
+                  onClick={() => dialog.current?.close()}
                 >
-                  <path d="m4 4 8 8m0-8-8 8" />
-                </svg>
-              </button>
-            </div>
+                  <svg
+                    aria-hidden
+                    viewBox="0 0 16 16"
+                    className="size-4"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                  >
+                    <path d="m4 4 8 8m0-8-8 8" />
+                  </svg>
+                </button>
+              </div>
+            }
+          >
             <div className="p-5 sm:p-6">
               <h2
                 id="setup-title"
@@ -474,7 +524,7 @@ export function GamePicker() {
                 )}
               </button>
             </div>
-          </div>
+          </DragSheet>
         )}
       </dialog>
     </section>
