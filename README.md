@@ -180,5 +180,28 @@ uv run python -m rule_u.cli index --catalog ../../../data/games --games dive --m
 구현 참고: [Next.js 설치](https://nextjs.org/docs/app/getting-started/installation), [SQLAlchemy SQLite](https://docs.sqlalchemy.org/en/20/dialects/sqlite.html), [FastAPI 앱 구조](https://fastapi.tiangolo.com/tutorial/bigger-applications/).
 # 현재 데이터·검색 상태 (2026-10-22)
 
+## 4단계 화면 사용
+
+답변의 출처 번호를 누르면 **왜 이렇게 답변했나요?** 모달에서 해당 규칙과 적용 이유를 확인할 수 있습니다. 원문 청크 대신 이해하기 쉬운 설명과 룰북 페이지를 표시합니다. 예전 답변의 설명은 처음 열 때 생성하므로 잠시 기다릴 수 있으며 이후에는 저장된 설명을 사용합니다. 이 기능을 반영하려면 기존 API 서버를 종료한 뒤 다시 실행하세요.
+
+최신 UI는 모바일 게임 런처 형태입니다. 앱을 열거나 새로고침하면 검색창과 파스텔 카드형 게임 선택 화면이 먼저 표시됩니다. 게임 카드 → 판본·확장 선택 팝업 → 채팅 순서로 이동합니다. 저장된 대화는 첫 화면의 **이전 대화 이어하기**로 재개합니다. 답변 대기 중에는 말풍선에 스피너와 스켈레톤이 표시됩니다. [새 화면 캡처](reports/mobile-game-ui.md).
+
+게임 이름이나 자연어로 검색하고 인원·최대 시간·장르 필터를 지정합니다. 게임 카드를 선택한 뒤 판본과 호환 확장을 고르고 **이 게임으로 대화하기**를 누릅니다. **규칙 질문 / 상황 판정** 모드에서 질문하고 답변의 `[1]` 같은 번호를 눌러 근거를 확인합니다. 작은 화면에서는 근거 패널이 접혀 있으며 번호를 누르면 열립니다.
+
+대화는 익명 세션 쿠키와 연결됩니다. 같은 브라우저에서 게임을 전환하거나 새로고침해도 게임·판본·확장 조합별 대화를 복원합니다. 쿠키를 삭제하면 이전 대화에 접근할 수 없습니다. 질문 접수 여부가 불명확할 때는 **전송 다시 확인**, 확정 실패 시에는 **질문 다시 시도**를 사용합니다.
+
+화면은 Next.js·TypeScript·Tailwind CSS·Zustand·Motion으로 구성하고 Pretendard를 로컬 제공합니다. 개발 서버 실행 절차는 기존과 같으며 추가 검사 명령은 다음과 같습니다.
+
+```powershell
+corepack pnpm lint
+corepack pnpm format:check
+corepack pnpm typecheck
+corepack pnpm test:e2e
+```
+
+API 변경 시 `apps/api`에서 `uv run python -m rule_u.cli export-openapi`, 저장소 루트에서 `corepack pnpm types:api`를 순서대로 실행합니다. 구현·검증 상세는 [4단계 결과](reports/stage4-progress.md)에 있습니다.
+
+아래의 1·2단계 기록 중 테스트 전용 화면·웹 미연결 설명은 당시 상태입니다. 현재 화면은 기존 RAG·인용·상황 판정 API에 연결되며 자연어 게임 탐색 API도 제공합니다. 새로운 실서비스 모델 질문 평가는 이번 단계의 자동 테스트와 구분합니다.
+
 2단계 기본 구현과 초기 검증 완료: 실제 GMS 인덱스 110게임·2,541청크, 질문 8개의 근거 페이지 Hit@5 100%. 전체 공식 출처 인증이나 답변 생성 완료를 의미하지 않는다. 출처 목록·후보 선별·캐시·실행 명령은 [2단계 결과](reports/stage2-completion.md)를 참고한다.
 

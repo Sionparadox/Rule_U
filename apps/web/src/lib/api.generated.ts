@@ -38,6 +38,40 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/game-categories": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Categories */
+        get: operations["categories_api_v1_game_categories_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/games/search": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Search Games */
+        post: operations["search_games_api_v1_games_search_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/games/{game_id}": {
         parameters: {
             query?: never;
@@ -123,6 +157,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/sources/{source_id}/explanation": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Source Explanation */
+        post: operations["source_explanation_api_v1_sources__source_id__explanation_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/sources/{source_id}": {
         parameters: {
             query?: never;
@@ -132,6 +183,23 @@ export interface paths {
         };
         /** Get Source */
         get: operations["get_source_api_v1_sources__source_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/documents/{document_id}/original": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Original */
+        get: operations["original_api_v1_documents__document_id__original_get"];
         put?: never;
         post?: never;
         delete?: never;
@@ -151,9 +219,7 @@ export interface components {
             /** Verdict */
             verdict: string | null;
             /** Citations */
-            citations?: {
-                [key: string]: unknown;
-            }[];
+            citations?: components["schemas"]["SourceOut"][];
             /**
              * Citation Notice
              * @default 이 답변에 인용된 근거가 없습니다.
@@ -186,6 +252,12 @@ export interface components {
             expansion_ids: string[];
             /** Messages */
             messages: components["schemas"]["MessageOut"][];
+            /** Active Request Id */
+            active_request_id?: string | null;
+            /** Latest Request Id */
+            latest_request_id?: string | null;
+            /** Latest Client Request Id */
+            latest_client_request_id?: string | null;
         };
         /** EditionOut */
         EditionOut: {
@@ -206,6 +278,8 @@ export interface components {
             name: string;
             /** Supported */
             supported: boolean;
+            /** Edition Ids */
+            edition_ids?: string[];
         };
         /** GameDetail */
         GameDetail: {
@@ -224,6 +298,23 @@ export interface components {
              * @default false
              */
             rules_supported: boolean;
+            /**
+             * Min Minutes
+             * @default 0
+             */
+            min_minutes: number;
+            /**
+             * Max Minutes
+             * @default 0
+             */
+            max_minutes: number;
+            /** Categories */
+            categories?: string[];
+            /**
+             * Source Review
+             * @default unverified
+             */
+            source_review: string;
             /** Editions */
             editions: components["schemas"]["EditionOut"][];
             /** Expansions */
@@ -257,6 +348,50 @@ export interface components {
              * @default false
              */
             rules_supported: boolean;
+            /**
+             * Min Minutes
+             * @default 0
+             */
+            min_minutes: number;
+            /**
+             * Max Minutes
+             * @default 0
+             */
+            max_minutes: number;
+            /** Categories */
+            categories?: string[];
+            /**
+             * Source Review
+             * @default unverified
+             */
+            source_review: string;
+        };
+        /** GameSearchIn */
+        GameSearchIn: {
+            /**
+             * Query
+             * @default
+             */
+            query: string;
+            /** Players */
+            players?: number | null;
+            /** Max Minutes */
+            max_minutes?: number | null;
+            /**
+             * Category
+             * @default
+             */
+            category: string;
+            /**
+             * Page
+             * @default 1
+             */
+            page: number;
+            /**
+             * Page Size
+             * @default 12
+             */
+            page_size: number;
         };
         /** HTTPValidationError */
         HTTPValidationError: {
@@ -314,6 +449,13 @@ export interface components {
             created_at: string;
             /** Cited Source Ids */
             cited_source_ids?: string[];
+            /**
+             * Mode
+             * @default qa
+             */
+            mode: string;
+            /** Citations */
+            citations?: components["schemas"]["SourceOut"][];
         };
         /** RequestAccepted */
         RequestAccepted: {
@@ -333,6 +475,70 @@ export interface components {
             /** Error Code */
             error_code: string | null;
             result: components["schemas"]["AnswerOut"] | null;
+        };
+        /** SourceExplanationOut */
+        SourceExplanationOut: {
+            /** Rule Summary */
+            rule_summary: string;
+            /** Application */
+            application: string;
+        };
+        /** SourceOut */
+        SourceOut: {
+            /** Id */
+            id: string;
+            /** Document Id */
+            document_id: string;
+            /**
+             * Number
+             * @default 0
+             */
+            number: number;
+            /** Title */
+            title: string;
+            /** Edition */
+            edition: string;
+            /** Url */
+            url: string;
+            /** Page Start */
+            page_start?: number | null;
+            /** Page End */
+            page_end?: number | null;
+            /** Excerpt */
+            excerpt: string;
+            /** Source Version */
+            source_version: string;
+            /**
+             * Source Type
+             * @default unverified
+             */
+            source_type: string;
+            /**
+             * Language
+             * @default
+             */
+            language: string;
+            /**
+             * Extraction Method
+             * @default
+             */
+            extraction_method: string;
+            /**
+             * Review Note
+             * @default
+             */
+            review_note: string;
+            /**
+             * Original Available
+             * @default false
+             */
+            original_available: boolean;
+            explanation?: components["schemas"]["SourceExplanationOut"] | null;
+            /**
+             * Source Review
+             * @default unverified
+             */
+            source_review: string;
         };
         /** ValidationError */
         ValidationError: {
@@ -382,12 +588,68 @@ export interface operations {
                 query?: string;
                 page?: number;
                 page_size?: number;
+                players?: number | null;
+                max_minutes?: number | null;
+                category?: string;
             };
             header?: never;
             path?: never;
             cookie?: never;
         };
         requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GameList"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    categories_api_v1_game_categories_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string[];
+                };
+            };
+        };
+    };
+    search_games_api_v1_games_search_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["GameSearchIn"];
+            };
+        };
         responses: {
             /** @description Successful Response */
             200: {
@@ -570,12 +832,74 @@ export interface operations {
             };
         };
     };
+    source_explanation_api_v1_sources__source_id__explanation_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                source_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SourceOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     get_source_api_v1_sources__source_id__get: {
         parameters: {
             query?: never;
             header?: never;
             path: {
                 source_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SourceOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    original_api_v1_documents__document_id__original_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                document_id: string;
             };
             cookie?: never;
         };

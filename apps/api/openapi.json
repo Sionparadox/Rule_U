@@ -57,11 +57,117 @@
               "type": "integer",
               "maximum": 100,
               "minimum": 1,
-              "default": 20,
+              "default": 12,
               "title": "Page Size"
+            }
+          },
+          {
+            "name": "players",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "maximum": 100,
+                  "minimum": 1
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Players"
+            }
+          },
+          {
+            "name": "max_minutes",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "maximum": 1440,
+                  "minimum": 1
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Max Minutes"
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "",
+              "title": "Category"
             }
           }
         ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameList"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/game-categories": {
+      "get": {
+        "summary": "Categories",
+        "operationId": "categories_api_v1_game_categories_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array",
+                  "title": "Response Categories Api V1 Game Categories Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/games/search": {
+      "post": {
+        "summary": "Search Games",
+        "operationId": "search_games_api_v1_games_search_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GameSearchIn"
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -290,6 +396,45 @@
         }
       }
     },
+    "/api/v1/sources/{source_id}/explanation": {
+      "post": {
+        "summary": "Source Explanation",
+        "operationId": "source_explanation_api_v1_sources__source_id__explanation_post",
+        "parameters": [
+          {
+            "name": "source_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Source Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SourceOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/sources/{source_id}": {
       "get": {
         "summary": "Get Source",
@@ -302,6 +447,45 @@
             "schema": {
               "type": "string",
               "title": "Source Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SourceOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/documents/{document_id}/original": {
+      "get": {
+        "summary": "Original",
+        "operationId": "original_api_v1_documents__document_id__original_get",
+        "parameters": [
+          {
+            "name": "document_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Document Id"
             }
           }
         ],
@@ -349,8 +533,7 @@
           },
           "citations": {
             "items": {
-              "additionalProperties": true,
-              "type": "object"
+              "$ref": "#/components/schemas/SourceOut"
             },
             "type": "array",
             "title": "Citations"
@@ -434,6 +617,39 @@
             },
             "type": "array",
             "title": "Messages"
+          },
+          "active_request_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Active Request Id"
+          },
+          "latest_request_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latest Request Id"
+          },
+          "latest_client_request_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latest Client Request Id"
           }
         },
         "type": "object",
@@ -487,6 +703,13 @@
           "supported": {
             "type": "boolean",
             "title": "Supported"
+          },
+          "edition_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Edition Ids"
           }
         },
         "type": "object",
@@ -523,6 +746,28 @@
             "type": "boolean",
             "title": "Rules Supported",
             "default": false
+          },
+          "min_minutes": {
+            "type": "integer",
+            "title": "Min Minutes",
+            "default": 0
+          },
+          "max_minutes": {
+            "type": "integer",
+            "title": "Max Minutes",
+            "default": 0
+          },
+          "categories": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Categories"
+          },
+          "source_review": {
+            "type": "string",
+            "title": "Source Review",
+            "default": "unverified"
           },
           "editions": {
             "items": {
@@ -608,6 +853,28 @@
             "type": "boolean",
             "title": "Rules Supported",
             "default": false
+          },
+          "min_minutes": {
+            "type": "integer",
+            "title": "Min Minutes",
+            "default": 0
+          },
+          "max_minutes": {
+            "type": "integer",
+            "title": "Max Minutes",
+            "default": 0
+          },
+          "categories": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Categories"
+          },
+          "source_review": {
+            "type": "string",
+            "title": "Source Review",
+            "default": "unverified"
           }
         },
         "type": "object",
@@ -619,6 +886,63 @@
           "max_players"
         ],
         "title": "GameOut"
+      },
+      "GameSearchIn": {
+        "properties": {
+          "query": {
+            "type": "string",
+            "maxLength": 1000,
+            "title": "Query",
+            "default": ""
+          },
+          "players": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 100.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Players"
+          },
+          "max_minutes": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 1440.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Max Minutes"
+          },
+          "category": {
+            "type": "string",
+            "maxLength": 100,
+            "title": "Category",
+            "default": ""
+          },
+          "page": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Page",
+            "default": 1
+          },
+          "page_size": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 1.0,
+            "title": "Page Size",
+            "default": 12
+          }
+        },
+        "type": "object",
+        "title": "GameSearchIn"
       },
       "HTTPValidationError": {
         "properties": {
@@ -738,6 +1062,18 @@
             },
             "type": "array",
             "title": "Cited Source Ids"
+          },
+          "mode": {
+            "type": "string",
+            "title": "Mode",
+            "default": "qa"
+          },
+          "citations": {
+            "items": {
+              "$ref": "#/components/schemas/SourceOut"
+            },
+            "type": "array",
+            "title": "Citations"
           }
         },
         "type": "object",
@@ -813,6 +1149,134 @@
           "result"
         ],
         "title": "RequestOut"
+      },
+      "SourceExplanationOut": {
+        "properties": {
+          "rule_summary": {
+            "type": "string",
+            "title": "Rule Summary"
+          },
+          "application": {
+            "type": "string",
+            "title": "Application"
+          }
+        },
+        "type": "object",
+        "required": [
+          "rule_summary",
+          "application"
+        ],
+        "title": "SourceExplanationOut"
+      },
+      "SourceOut": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "document_id": {
+            "type": "string",
+            "title": "Document Id"
+          },
+          "number": {
+            "type": "integer",
+            "title": "Number",
+            "default": 0
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "edition": {
+            "type": "string",
+            "title": "Edition"
+          },
+          "url": {
+            "type": "string",
+            "title": "Url"
+          },
+          "page_start": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Page Start"
+          },
+          "page_end": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Page End"
+          },
+          "excerpt": {
+            "type": "string",
+            "title": "Excerpt"
+          },
+          "source_version": {
+            "type": "string",
+            "title": "Source Version"
+          },
+          "source_type": {
+            "type": "string",
+            "title": "Source Type",
+            "default": "unverified"
+          },
+          "language": {
+            "type": "string",
+            "title": "Language",
+            "default": ""
+          },
+          "extraction_method": {
+            "type": "string",
+            "title": "Extraction Method",
+            "default": ""
+          },
+          "review_note": {
+            "type": "string",
+            "title": "Review Note",
+            "default": ""
+          },
+          "original_available": {
+            "type": "boolean",
+            "title": "Original Available",
+            "default": false
+          },
+          "explanation": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SourceExplanationOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "source_review": {
+            "type": "string",
+            "title": "Source Review",
+            "default": "unverified"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "document_id",
+          "title",
+          "edition",
+          "url",
+          "excerpt",
+          "source_version"
+        ],
+        "title": "SourceOut"
       },
       "ValidationError": {
         "properties": {

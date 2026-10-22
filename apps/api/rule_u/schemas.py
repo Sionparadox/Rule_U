@@ -15,6 +15,10 @@ class GameOut(ORMModel):
     min_players: int
     max_players: int
     rules_supported: bool = False
+    min_minutes: int = 0
+    max_minutes: int = 0
+    categories: list[str] = Field(default_factory=list)
+    source_review: str = "unverified"
 
 
 class GameList(BaseModel):
@@ -35,6 +39,41 @@ class ExpansionOut(ORMModel):
     id: str
     name: str
     supported: bool
+    edition_ids: list[str] = Field(default_factory=list)
+
+
+class GameSearchIn(BaseModel):
+    query: str = Field(default="", max_length=1000)
+    players: int | None = Field(default=None, ge=1, le=100)
+    max_minutes: int | None = Field(default=None, ge=1, le=1440)
+    category: str = Field(default="", max_length=100)
+    page: int = Field(default=1, ge=1)
+    page_size: int = Field(default=12, ge=1, le=100)
+
+
+class SourceExplanationOut(BaseModel):
+    rule_summary: str
+    application: str
+
+
+class SourceOut(BaseModel):
+    id: str
+    document_id: str
+    number: int = 0
+    title: str
+    edition: str
+    url: str
+    page_start: int | None = None
+    page_end: int | None = None
+    excerpt: str
+    source_version: str
+    source_type: str = "unverified"
+    language: str = ""
+    extraction_method: str = ""
+    review_note: str = ""
+    original_available: bool = False
+    explanation: SourceExplanationOut | None = None
+    source_review: str = "unverified"
 
 
 class GameDetail(GameOut):
@@ -59,6 +98,8 @@ class MessageOut(ORMModel):
     verdict: str | None
     created_at: datetime
     cited_source_ids: list[str] = Field(default_factory=list)
+    mode: str = "qa"
+    citations: list[SourceOut] = Field(default_factory=list)
 
 
 class ConversationOut(BaseModel):
@@ -67,6 +108,9 @@ class ConversationOut(BaseModel):
     edition_id: str
     expansion_ids: list[str]
     messages: list[MessageOut]
+    active_request_id: str | None = None
+    latest_request_id: str | None = None
+    latest_client_request_id: str | None = None
 
 
 class MessageIn(BaseModel):
@@ -84,7 +128,7 @@ class RequestAccepted(BaseModel):
 class AnswerOut(BaseModel):
     answer: str
     verdict: str | None
-    citations: list[dict] = Field(default_factory=list)
+    citations: list[SourceOut] = Field(default_factory=list)
     citation_notice: str = "이 답변에 인용된 근거가 없습니다."
 
 

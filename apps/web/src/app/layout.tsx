@@ -6,6 +6,12 @@ export const metadata: Metadata = {
   description: "게임의 규칙을 묻고, 근거를 확인하는 공간",
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="ko"><body>{children}</body></html>;
+export default function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
+  return (
+    <html lang="ko">
+      <body>{children}</body>
+    </html>
+  );
 }

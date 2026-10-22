@@ -1,12 +1,36 @@
 {
-  "name": "@rule-u/web", "version": "0.1.0", "private": true,
+  "name": "@rule-u/web",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
     "dev": "next dev --hostname 127.0.0.1",
     "build": "next build",
     "start": "next start --hostname 127.0.0.1",
     "typecheck": "tsc --noEmit",
-    "types:api": "openapi-typescript ../api/openapi.json -o src/lib/api.generated.ts"
+    "types:api": "openapi-typescript ../api/openapi.json -o src/lib/api.generated.ts",
+    "lint": "eslint . --max-warnings 0",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
-  "dependencies": {"next": "^16.4.2", "react": "^19.2.0", "react-dom": "^19.2.0"},
-  "devDependencies": {"typescript": "^5.9.3", "@types/node": "^24.0.0", "@types/react": "^19.2.0", "@types/react-dom": "^19.2.0", "openapi-typescript": "^7.10.1"}
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "motion": "^14.5.0",
+    "next": "^16.4.2",
+    "pretendard": "^1.3.9",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "tailwindcss": "^4.3.3",
+    "zustand": "^5.0.16"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.4.2",
+    "eslint-config-prettier": "^10.1.8",
+    "openapi-typescript": "^7.10.1",
+    "prettier": "^3.9.10",
+    "typescript": "^5.9.3"
+  }
 }

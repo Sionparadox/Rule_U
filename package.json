@@ -7,7 +7,9 @@
     "build": "corepack pnpm --filter @rule-u/web build",
     "typecheck": "corepack pnpm --filter @rule-u/web typecheck",
     "types:api": "corepack pnpm --filter @rule-u/web types:api",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "lint": "corepack pnpm --filter @rule-u/web lint",
+    "format:check": "corepack pnpm --filter @rule-u/web format:check"
   },
   "devDependencies": {
     "@playwright/test": "^1.64.1"
