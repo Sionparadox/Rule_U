@@ -1,14 +1,50 @@
 ﻿"use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion, useReducedMotion } from "motion/react";
 import { api, errorText, type Schema } from "@/lib/api";
 import { useStore } from "@/lib/store";
-import { GameArt, gameVariant, cardColors } from "./game-art";
+import { GameArt, motifFor, tileColor } from "./game-art";
+
+const verified = (game: Pick<Schema["GameOut"], "source_review">) =>
+  game.source_review === "official_verified";
+
+function playMeta(game: Schema["GameOut"]) {
+  const players =
+    game.min_players === game.max_players
+      ? `${game.min_players}명`
+      : `${game.min_players}–${game.max_players}명`;
+  const minutes = game.max_minutes
+    ? game.min_minutes === game.max_minutes
+      ? `${game.max_minutes}분`
+      : `${game.min_minutes}–${game.max_minutes}분`
+    : "시간 미등록";
+  return `${players}, ${minutes}`;
+}
+
+function SourceBadge({ ok }: { ok: boolean }) {
+  return (
+    <span
+      className={`inline-flex items-center gap-1 text-xs font-semibold ${ok ? "text-green-text" : "text-muted"}`}
+    >
+      <svg
+        aria-hidden
+        viewBox="0 0 16 16"
+        className="size-3.5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.25"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        {ok ? <path d="m3.5 8.5 3 3 6-7" /> : <circle cx="8" cy="8" r="5.5" />}
+      </svg>
+      {ok ? "공식 출처 확인" : "출처 확인 필요"}
+    </span>
+  );
+}
 
 export function GamePicker() {
   const s = useStore();
-  const reduced = useReducedMotion();
   const [query, setQuery] = useState("");
   const [semantic, setSemantic] = useState(false);
   const [players, setPlayers] = useState("");
@@ -73,28 +109,37 @@ export function GamePicker() {
     const state = useStore.getState();
     if (state.detail?.id === id && !state.error) dialog.current?.showModal();
   }
+  // 시트의 그림 띠는 로비 타일과 같은 색을 쓴다.
+  const colorOf = (id: string) =>
+    tileColor(Math.max(0, result?.items.findIndex((g) => g.id === id) ?? 0));
+  const recent = s.chatDetail;
   return (
     <section aria-label="게임 탐색">
-      <div className="pt-7 pb-5 sm:pt-10 sm:pb-6">
-        <h1 className="text-2xl leading-tight font-bold tracking-tight sm:text-[30px]">
+      <div className="pt-4 pb-6 sm:pt-8">
+        <h1 className="font-game text-[32px] leading-tight sm:text-[40px]">
           어떤 게임을 할까요?
         </h1>
-        <p className="mt-2 text-sm leading-6 text-ink/65">
-          궁금한 규칙이 있는 게임을 찾아보세요.
+        <p className="mt-1.5 text-[15px] text-muted">
+          게임을 고르면 규칙서 근거와 함께 판정해 드려요.
         </p>
       </div>
       {s.conversation && (
         <button
-          className="mb-5 flex min-h-14 w-full items-center justify-between gap-3 border-l-2 border-felt py-1 pr-1 pl-3 text-left"
+          className="chunky mb-6 flex w-full items-center gap-4 rounded-3xl bg-blue p-3 pr-4 text-left text-white [--depth-color:var(--color-blue-deep)]"
           onClick={() => useStore.setState({ view: "chat" })}
         >
-          <span>
-            <span className="block text-xs text-ink/60">최근 대화</span>
-            <strong className="mt-1 block text-sm">
-              {s.chatDetail?.name_ko ?? "저장된 게임"}
-            </strong>
+          <span className="flex size-20 shrink-0 items-center justify-center rounded-2xl bg-surface p-1.5">
+            {recent && <GameArt motif={motifFor(recent)} />}
           </span>
-          <span className="shrink-0 py-3 text-xs font-semibold text-felt underline-offset-4 hover:underline">
+          <span className="min-w-0 flex-1">
+            <span className="block text-xs font-semibold text-white/85">
+              최근 대화
+            </span>
+            <span className="font-game mt-0.5 block truncate text-[22px]">
+              {recent?.name_ko ?? "저장된 게임"}
+            </span>
+          </span>
+          <span className="font-game shrink-0 rounded-full bg-yellow px-4 py-2.5 text-[15px] whitespace-nowrap text-ink shadow-[0_3px_0_var(--color-yellow-deep)]">
             이전 대화 이어하기
           </span>
         </button>
@@ -105,16 +150,16 @@ export function GamePicker() {
           e.preventDefault();
           void search();
         }}
-        className="mb-7"
+        className="mb-8"
       >
-        <div className="flex items-center gap-2 rounded-xl border border-ink/20 bg-white p-1.5 focus-within:border-felt">
+        <div className="chunky flex items-center gap-2 rounded-full border-[1.5px] border-edge bg-surface p-1.5 pl-4 focus-within:border-blue">
           <svg
             aria-hidden
             viewBox="0 0 24 24"
-            className="ml-2 size-5 shrink-0 text-felt"
+            className="size-5 shrink-0 text-muted"
             fill="none"
             stroke="currentColor"
-            strokeWidth="2"
+            strokeWidth="2.25"
           >
             <circle cx="10.5" cy="10.5" r="6.5" />
             <path d="m16 16 5 5" />
@@ -124,98 +169,109 @@ export function GamePicker() {
               {semantic ? "자연어 조건" : "게임 이름"}
             </span>
             <input
-              className="w-full border-0 bg-transparent px-1 shadow-none"
+              className="w-full border-0 bg-transparent px-1 focus-visible:outline-0"
+              name="q"
+              autoComplete="off"
+              enterKeyHint="search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               maxLength={1000}
-              placeholder={semantic ? "4명이 함께 할 게임" : "게임 이름 검색"}
+              placeholder={
+                semantic ? "4명이 함께 할 전략 게임…" : "게임 이름 검색…"
+              }
             />
           </label>
           <button
             aria-label="게임 찾기"
-            className="min-h-11 shrink-0 rounded-lg bg-felt px-5 text-sm font-semibold text-white hover:bg-[#087b6d] disabled:opacity-50"
+            className="btn-primary min-h-11 shrink-0 rounded-full px-5 [--depth:3px]"
             disabled={busy}
           >
             {busy ? <span className="spinner" aria-hidden /> : "검색"}
           </button>
         </div>
-        <details className="group mt-2 border-b border-ink/10 open:pb-4">
-          <summary className="flex min-h-11 cursor-pointer items-center justify-between text-xs font-medium text-ink/70">
+        <details className="group mt-3">
+          <summary className="inline-flex min-h-11 cursor-pointer items-center gap-1.5 rounded-full px-1 text-sm font-semibold text-muted">
             인원·시간으로 더 찾아보기
             <svg
               aria-hidden
               viewBox="0 0 16 16"
               fill="none"
-              className="size-4 group-open:rotate-180"
+              className="size-4 transition-transform duration-200 group-open:rotate-180"
               stroke="currentColor"
-              strokeWidth="1.5"
+              strokeWidth="2"
             >
               <path d="m4 6 4 4 4-4" />
             </svg>
           </summary>
-          <div className="grid grid-cols-2 gap-3 pt-2 sm:grid-cols-3">
-            <label className="label">
-              플레이 인원
+          <div className="mt-2 rounded-3xl bg-surface p-4 shadow-[0_4px_0_var(--color-edge)]">
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+              <label className="label">
+                플레이 인원
+                <input
+                  type="number"
+                  name="players"
+                  inputMode="numeric"
+                  min={1}
+                  max={100}
+                  value={players}
+                  onChange={(e) => setPlayers(e.target.value)}
+                  placeholder="제한 없음"
+                />
+              </label>
+              <label className="label">
+                최대 시간 (분)
+                <input
+                  type="number"
+                  name="max_minutes"
+                  inputMode="numeric"
+                  min={1}
+                  max={1440}
+                  value={minutes}
+                  onChange={(e) => setMinutes(e.target.value)}
+                  placeholder="제한 없음"
+                />
+              </label>
+              <label className="label col-span-2 sm:col-span-1">
+                장르
+                <select
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value)}
+                >
+                  <option value="">모든 장르</option>
+                  {categories.map((c) => (
+                    <option key={c}>{c}</option>
+                  ))}
+                </select>
+              </label>
+            </div>
+            <label className="mt-3 flex min-h-11 items-center gap-2 text-sm font-semibold">
               <input
-                type="number"
-                min={1}
-                max={100}
-                value={players}
-                onChange={(e) => setPlayers(e.target.value)}
-                placeholder="제한 없음"
+                type="checkbox"
+                className="size-5 accent-blue"
+                checked={semantic}
+                onChange={(e) => setSemantic(e.target.checked)}
               />
-            </label>
-            <label className="label">
-              최대 시간 (분)
-              <input
-                type="number"
-                min={1}
-                max={1440}
-                value={minutes}
-                onChange={(e) => setMinutes(e.target.value)}
-                placeholder="제한 없음"
-              />
-            </label>
-            <label className="label col-span-2 sm:col-span-1">
-              장르
-              <select
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-              >
-                <option value="">모든 장르</option>
-                {categories.map((c) => (
-                  <option key={c}>{c}</option>
-                ))}
-              </select>
+              자연어로 찾기
             </label>
           </div>
-          <label className="mt-2 flex min-h-11 items-center gap-2 text-sm">
-            <input
-              type="checkbox"
-              className="size-4 accent-felt"
-              checked={semantic}
-              onChange={(e) => setSemantic(e.target.checked)}
-            />
-            자연어로 찾기
-          </label>
         </details>
       </form>
       {(error || s.error) && (
         <p
           role="alert"
-          className="mb-4 rounded-xl bg-white p-3 text-sm text-red-800"
+          className="mb-4 rounded-2xl bg-red/15 p-4 text-sm font-semibold text-ink"
         >
           {error || s.error}
         </p>
       )}
       <div className="mb-4 flex items-center justify-between">
-        <h2 className="text-lg font-extrabold">게임 선택</h2>
-        <span className="text-xs font-medium text-ink/60">
-          {result ? `${result.total}개의 게임` : "게임을 불러오는 중"}
+        <h2 className="font-game text-2xl">게임 선택</h2>
+        <span className="rounded-full bg-surface px-3 py-1 text-sm font-semibold text-muted">
+          {result ? `${result.total}개의 게임` : "게임을 불러오는 중…"}
         </span>
       </div>
       <div
-        className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4"
+        className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4"
         aria-busy={busy}
       >
         {busy
@@ -223,52 +279,44 @@ export function GamePicker() {
               <div
                 key={i}
                 aria-hidden
-                className="h-48 animate-pulse rounded-[22px] bg-white/80 motion-reduce:animate-none"
+                className="overflow-hidden rounded-3xl bg-surface shadow-[0_4px_0_var(--color-edge)]"
               >
-                <div className="m-4 h-4 w-20 rounded bg-line" />
-                <div className="mx-4 h-3 w-12 rounded bg-line" />
-                <div className="m-4 mt-8 h-16 rounded-xl bg-line/50" />
+                <div className="h-28 bg-surface-soft" />
+                <div className="space-y-2 p-3">
+                  <div className="skeleton-line w-3/4" />
+                  <div className="skeleton-line w-1/2" />
+                </div>
               </div>
             ))
-          : result?.items.map((g) => {
-              const variant = gameVariant(g.id);
-              return (
-                <motion.button
-                  whileTap={reduced ? undefined : { scale: 0.97 }}
-                  key={g.id}
-                  aria-label={`${g.name_ko} 선택`}
-                  disabled={s.loading}
-                  onClick={() => void choose(g.id)}
-                  className="game-card group relative flex min-h-[190px] flex-col overflow-hidden rounded-[22px] border-2 border-white/80 p-4 text-left sm:min-h-[218px]"
-                  style={{ backgroundColor: cardColors[variant] }}
-                >
-                  <strong className="z-10 pr-3 text-[15px] leading-5 font-extrabold break-keep sm:text-base">
+          : result?.items.map((g, i) => (
+              <button
+                key={g.id}
+                aria-label={`${g.name_ko} 선택`}
+                disabled={s.loading}
+                onClick={() => void choose(g.id)}
+                className="chunky flex flex-col overflow-hidden rounded-3xl border-[1.5px] border-edge bg-surface text-left"
+              >
+                <span className={`block h-28 w-full p-2 ${tileColor(i)}`}>
+                  <GameArt motif={motifFor(g)} />
+                </span>
+                <span className="flex flex-1 flex-col p-3">
+                  <strong className="font-game text-lg leading-snug break-keep">
                     {g.name_ko}
                   </strong>
-                  <span className="mt-1.5 text-[11px] font-medium text-ink/70">
-                    {g.min_players}–{g.max_players}명{" "}
-                    <span className="px-1 opacity-40">|</span>{" "}
-                    {g.max_minutes
-                      ? `${g.min_minutes}–${g.max_minutes}분`
-                      : "시간 미등록"}
+                  <span className="mt-0.5 text-xs text-muted">
+                    {playMeta(g)}
                   </span>
-                  <div className="pointer-events-none -mx-4 mt-auto h-28 translate-y-3 transition-transform group-hover:translate-y-1 motion-reduce:transition-none sm:h-32">
-                    <GameArt variant={variant} />
-                  </div>
-                  <span
-                    aria-hidden
-                    className="absolute right-3 bottom-3 flex size-7 items-center justify-center rounded-full bg-white/85 text-lg font-bold text-felt"
-                  >
-                    ↗
+                  <span className="mt-auto pt-2">
+                    <SourceBadge ok={verified(g)} />
                   </span>
-                </motion.button>
-              );
-            })}
+                </span>
+              </button>
+            ))}
       </div>
       {!busy && result?.items.length === 0 && (
-        <div className="rounded-3xl bg-white p-8 text-center">
-          <p className="font-bold">조건에 맞는 게임이 없어요.</p>
-          <p className="mt-2 text-sm text-ink/60">
+        <div className="rounded-3xl bg-surface p-8 text-center shadow-[0_4px_0_var(--color-edge)]">
+          <p className="font-game text-xl">조건에 맞는 게임이 없어요.</p>
+          <p className="mt-2 text-sm text-muted">
             게임 이름이나 인원·시간 조건을 바꿔보세요.
           </p>
         </div>
@@ -276,20 +324,20 @@ export function GamePicker() {
       {result && result.total > result.page_size && (
         <nav
           aria-label="게임 페이지"
-          className="mt-6 flex items-center justify-center gap-5"
+          className="mt-8 flex items-center justify-center gap-4"
         >
           <button
-            className="btn"
+            className="btn-soft"
             disabled={busy || result.page === 1}
             onClick={() => void search(result.page - 1)}
           >
             이전
           </button>
-          <span className="text-sm font-semibold">
+          <span className="font-game text-lg">
             {result.page} / {Math.ceil(result.total / result.page_size)}
           </span>
           <button
-            className="btn"
+            className="btn-soft"
             disabled={busy || result.page * result.page_size >= result.total}
             onClick={() => void search(result.page + 1)}
           >
@@ -297,116 +345,135 @@ export function GamePicker() {
           </button>
         </nav>
       )}
-      <p className="mt-6 text-center text-[11px] text-ink/50">
-        카드 그림은 게임 선택을 돕는 장식용 이미지예요.
-      </p>
       <dialog
         ref={dialog}
         aria-labelledby="setup-title"
-        className="game-dialog w-[calc(100%-2rem)] max-w-md rounded-[28px] border-0 bg-[#f5fcfa] p-0 text-ink shadow-xl backdrop:bg-[#103c36]/40"
+        className="sheet w-[calc(100%-2rem)] max-w-md overflow-hidden overscroll-contain rounded-[28px] border-0 bg-surface p-0 text-ink shadow-sheet"
         onClick={(e) => {
           if (e.target === e.currentTarget) dialog.current?.close();
         }}
       >
         {s.detail && (
-          <div className="p-6">
-            <div className="mb-4 flex items-center justify-between">
-              <p className="text-xs font-bold text-felt">플레이 준비</p>
+          <div>
+            <div className={`relative h-36 p-4 ${colorOf(s.detail.id)}`}>
+              <GameArt motif={motifFor(s.detail)} />
               <button
                 autoFocus
-                className="btn size-11 rounded-full p-0 text-xl"
+                className="icon-round absolute top-3 right-3"
                 aria-label="판본 선택 닫기"
                 onClick={() => dialog.current?.close()}
               >
-                ×
+                <svg
+                  aria-hidden
+                  viewBox="0 0 16 16"
+                  className="size-4"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                >
+                  <path d="m4 4 8 8m0-8-8 8" />
+                </svg>
               </button>
             </div>
-            <div className="mx-auto mb-3 h-28 w-52">
-              <GameArt variant={gameVariant(s.detail.id)} />
-            </div>
-            <h2
-              id="setup-title"
-              className="mb-2 text-center text-2xl font-extrabold"
-            >
-              {s.detail.name_ko}
-            </h2>
-            <p className="mb-6 text-center text-xs text-ink/60">
-              {s.detail.rules_supported ? "규칙 지원" : "규칙 지원 확인 필요"} /{" "}
-              {s.detail.source_review === "official_verified"
-                ? "공식 출처 확인"
-                : "출처 확인 필요"}
-            </p>
-            <label className="label">
-              사용할 판본
-              <select
-                value={s.edition}
-                disabled={s.loading}
-                onChange={(e) =>
-                  useStore.setState({ edition: e.target.value, expansions: [] })
-                }
+            <div className="p-5 sm:p-6">
+              <h2
+                id="setup-title"
+                className="font-game text-[28px] leading-tight"
               >
-                {s.detail.editions.map((e) => (
-                  <option key={e.id} value={e.id}>
-                    {e.label} ({e.language})
-                  </option>
-                ))}
-              </select>
-            </label>
-            <fieldset className="mt-4">
-              <legend className="text-xs font-semibold text-ink/65">
-                함께 쓰는 확장
-              </legend>
-              {s.detail.expansions
-                .filter((e) => e.edition_ids?.includes(s.edition))
-                .map((e) => (
-                  <label
-                    key={e.id}
-                    className="flex min-h-11 items-center gap-2 text-sm"
-                  >
-                    <input
-                      type="checkbox"
-                      className="accent-felt"
-                      disabled={!e.supported || s.loading}
-                      checked={s.expansions.includes(e.id)}
-                      onChange={(event) =>
-                        useStore.setState({
-                          expansions: event.target.checked
-                            ? [...s.expansions, e.id]
-                            : s.expansions.filter((id) => id !== e.id),
-                        })
-                      }
-                    />
-                    {e.name}
-                    {!e.supported && " (준비 중)"}
-                  </label>
-                ))}
-              {!s.detail.expansions.some((e) =>
-                e.edition_ids?.includes(s.edition),
-              ) && (
-                <p className="mt-2 text-sm text-ink/60">
-                  기본판으로 진행합니다.
+                {s.detail.name_ko}
+              </h2>
+              <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1">
+                <span className="text-sm text-muted">{playMeta(s.detail)}</span>
+                <SourceBadge ok={verified(s.detail)} />
+              </div>
+              {s.detail.description && (
+                <p className="mt-3 text-[15px] leading-6">
+                  {s.detail.description}
                 </p>
               )}
-            </fieldset>
-            {s.error && (
-              <p role="alert" className="mt-3 text-sm text-red-800">
-                {s.error}
-              </p>
-            )}
-            <button
-              className="btn-play mt-6 w-full"
-              disabled={!s.edition || s.loading}
-              onClick={() => void s.start()}
-            >
-              {s.loading ? (
-                <>
-                  <span className="spinner" />
-                  대화 준비 중…
-                </>
-              ) : (
-                "이 게임으로 대화하기"
+              <div className="mt-5 space-y-4">
+                <label className="label">
+                  사용할 판본
+                  <select
+                    value={s.edition}
+                    disabled={s.loading}
+                    onChange={(e) =>
+                      useStore.setState({
+                        edition: e.target.value,
+                        expansions: [],
+                      })
+                    }
+                  >
+                    {s.detail.editions.map((e) => (
+                      <option key={e.id} value={e.id}>
+                        {e.label} ({e.language})
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <fieldset>
+                  <legend className="mb-2 text-sm font-semibold">
+                    함께 쓰는 확장
+                  </legend>
+                  <div className="flex flex-wrap gap-2">
+                    {s.detail.expansions
+                      .filter((e) => e.edition_ids?.includes(s.edition))
+                      .map((e) => (
+                        <label
+                          key={e.id}
+                          className="flex min-h-11 items-center gap-2 rounded-2xl border-[1.5px] border-edge bg-surface px-3 text-sm font-semibold has-checked:border-blue has-checked:bg-blue/10 has-disabled:text-muted"
+                        >
+                          <input
+                            type="checkbox"
+                            className="size-4 accent-blue"
+                            disabled={!e.supported || s.loading}
+                            checked={s.expansions.includes(e.id)}
+                            onChange={(event) =>
+                              useStore.setState({
+                                expansions: event.target.checked
+                                  ? [...s.expansions, e.id]
+                                  : s.expansions.filter((id) => id !== e.id),
+                              })
+                            }
+                          />
+                          {e.name}
+                          {!e.supported && (
+                            <span className="text-xs font-medium">준비 중</span>
+                          )}
+                        </label>
+                      ))}
+                  </div>
+                  {!s.detail.expansions.some((e) =>
+                    e.edition_ids?.includes(s.edition),
+                  ) && (
+                    <p className="text-sm text-muted">기본판으로 진행합니다.</p>
+                  )}
+                </fieldset>
+              </div>
+              {s.error && (
+                <p
+                  role="alert"
+                  className="mt-4 rounded-2xl bg-red/15 p-3 text-sm font-semibold"
+                >
+                  {s.error}
+                </p>
               )}
-            </button>
+              <button
+                className="btn-play mt-6 w-full text-lg"
+                disabled={!s.edition || s.loading}
+                onClick={() => void s.start()}
+              >
+                {s.loading ? (
+                  <>
+                    <span className="spinner" />
+                    대화 준비 중…
+                  </>
+                ) : (
+                  "이 게임으로 대화하기"
+                )}
+              </button>
+            </div>
           </div>
         )}
       </dialog>
