@@ -58,6 +58,7 @@ class MessageOut(ORMModel):
     content: str
     verdict: str | None
     created_at: datetime
+    cited_source_ids: list[str] = Field(default_factory=list)
 
 
 class ConversationOut(BaseModel):

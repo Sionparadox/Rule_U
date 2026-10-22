@@ -6,6 +6,7 @@ import json
 import logging
 import re
 from pathlib import Path
+from uuid import uuid4
 
 from pypdf import PdfReader
 from pypdf.errors import DependencyError, PyPdfError
@@ -322,7 +323,7 @@ def ingest_documents(settings, rows, bundle_root, pdf_extractor="pypdf", reviewe
     return report
 
 
-def vector_collections(settings):
+def vector_collections(settings, rule_name=None):
     import chromadb
     from chromadb.config import Settings as ChromaSettings
 
@@ -340,9 +341,12 @@ def vector_collections(settings):
         path=str(settings.data_dir / "chroma" / fingerprint),
         settings=ChromaSettings(anonymized_telemetry=False),
     )
+    pointer = settings.data_dir / "index-active" / f"{fingerprint}.json"
+    if rule_name is None:
+        rule_name = json.loads(pointer.read_text())["collection"] if pointer.exists() else "rule_docs"
     return fingerprint, {
-        name: client.get_or_create_collection(name, embedding_function=None)
-        for name in ("game_meta", "rule_docs")
+        "game_meta": client.get_or_create_collection("game_meta", embedding_function=None),
+        "rule_docs": client.get_or_create_collection(rule_name, embedding_function=None),
     }
 
 
@@ -429,12 +433,34 @@ async def index_bundle(settings, rows):
                         },
                     }
                 )
-        await upsert(collections["rule_docs"], records)
-        # Remove stale chunks only after the replacement data is ready.
-        old = collections["rule_docs"].get(where={"game_id": row["slug"]}, include=[])["ids"]
-        stale = sorted(set(old) - {r["id"] for r in records})
+        active = collections["rule_docs"]
+        existing = active.get(where={"game_id": row["slug"]}, include=["metadatas"])
+        hashes = {i: m.get("record_hash") for i, m in
+                  zip(existing["ids"], existing["metadatas"], strict=True)}
+        expected = {r["id"]: digest(json.dumps(r, sort_keys=True).encode()) for r in records}
+        if hashes == expected:
+            totals["cached"] += len(records)
+            continue
+        # Copy-on-write: readers retain their collection snapshot. Only the atomic pointer
+        # replacement publishes a complete generation; failed staging remains invisible.
+        name = "rule_docs_" + uuid4().hex
+        _, staging = vector_collections(settings, rule_name=name)
+        target = staging["rule_docs"]
+        for offset in range(0, active.count(), 256):
+            batch = active.get(limit=256, offset=offset,
+                               include=["embeddings", "documents", "metadatas"])
+            if batch["ids"]:
+                target.upsert(ids=batch["ids"], embeddings=batch["embeddings"],
+                              documents=batch["documents"], metadatas=batch["metadatas"])
+        await upsert(target, records)
+        stale = sorted(set(existing["ids"]) - set(expected))
         if stale:
-            collections["rule_docs"].delete(ids=stale)
+            target.delete(ids=stale)
+        actual = target.get(where={"game_id": row["slug"]}, include=[])["ids"]
+        if set(actual) != set(expected):
+            raise ValueError("index_generation_incomplete")
+        save_json(settings.data_dir / "index-active" / f"{fingerprint}.json", {"collection": name})
+        collections["rule_docs"] = target
     totals["counts"] = {k: c.count() for k, c in collections.items()}
     save_json(settings.data_dir / "index-reports" / f"{fingerprint}.json", totals)
     return totals
@@ -453,6 +479,7 @@ async def index_catalog(settings, rows, progress=None):
         except (ValueError, ProviderError, OSError) as exc:
             result.update(status="failed", error=str(exc))
         report["games"].append(result)
+        _, collections = vector_collections(settings)
         report["counts"] = {name: collection.count() for name, collection in collections.items()}
         report["indexed_games"] = sum(r["status"] == "indexed" for r in report["games"])
         report["failed_games"] = len(report["games"]) - report["indexed_games"]
