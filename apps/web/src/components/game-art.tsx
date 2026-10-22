@@ -1,222 +1,215 @@
-﻿export function Dice({ value = 5 }: { value?: number }) {
-  const positions = [
-    [4],
-    [0, 8],
-    [0, 4, 8],
-    [0, 2, 6, 8],
-    [0, 2, 4, 6, 8],
-    [0, 2, 3, 5, 6, 8],
-  ][value - 1];
+﻿import type { Schema } from "@/lib/api";
+
+/** 게임 타일 위쪽에 그리는 구성물 모티프. 실제 게임 이미지가 아니라 장르를 보여주는 그림이다. */
+export type Motif = "hex" | "gems" | "words" | "cards" | "meeples" | "dice";
+
+const motifRules: [RegExp, Motif][] = [
+  [/카탄|정착|타일|영토|문명|협상/, "hex"],
+  [/보석|스플렌더|경제|자원/, "gems"],
+  [/단어|파티|추리|코드네임/, "words"],
+  [/카드|덱/, "cards"],
+  [/협력|가족|일꾼|배치/, "meeples"],
+];
+// 장르를 특정하지 않는 모티프만 남겨, 맞지 않는 게임에 육각 타일 같은 그림이 붙지 않게 한다.
+const fallback: Motif[] = ["dice", "meeples", "cards"];
+
+const hash = (text: string) =>
+  [...text].reduce((sum, ch) => (sum * 31 + ch.charCodeAt(0)) >>> 0, 7);
+
+export function motifFor(
+  game: Pick<Schema["GameOut"], "id" | "name_ko" | "categories">,
+) {
+  const text = [game.name_ko, ...(game.categories ?? [])].join(" ");
   return (
-    <svg
-      aria-hidden
-      viewBox="0 0 24 24"
-      className="h-[1em] w-[1em]"
-      fill="none"
-    >
-      <rect
-        x="1.5"
-        y="1.5"
-        width="21"
-        height="21"
-        rx="6"
-        stroke="currentColor"
-        strokeWidth="1.7"
-      />
-      {positions.map((p) => (
-        <circle
-          key={p}
-          cx={6 + (p % 3) * 6}
-          cy={6 + Math.floor(p / 3) * 6}
-          r="1.6"
-          fill="currentColor"
-        />
-      ))}
-    </svg>
+    motifRules.find(([pattern]) => pattern.test(text))?.[1] ??
+    fallback[hash(game.id) % fallback.length]
   );
 }
 
-export function gameVariant(id: string) {
-  return [...id].reduce((n, c) => n + c.charCodeAt(0), 0) % 6;
-}
-export const cardColors = [
-  "#b9ead7",
-  "#bce4f5",
-  "#f8dcaf",
-  "#d9d1f3",
-  "#f5cbd0",
-  "#bbe9e5",
-];
+/** 말 색 네 가지를 돌려 쓴다. 목록 순서로 고르면 이웃한 타일의 색이 겹치지 않는다. */
+export const tileColors = [
+  "bg-blue",
+  "bg-red",
+  "bg-green",
+  "bg-yellow",
+] as const;
+export const tileColor = (index: number) =>
+  tileColors[index % tileColors.length];
 
-// Decorative game pieces, not depictions of a game's actual components or box art.
-export function GameArt({ variant = 0 }: { variant?: number }) {
+const piece = "stroke-ink [stroke-width:2.5] [stroke-linejoin:round]";
+
+function hexPath(cx: number, cy: number, r: number) {
+  const points = Array.from({ length: 6 }, (_, i) => {
+    const a = (Math.PI / 3) * i + Math.PI / 6;
+    return `${(cx + r * Math.cos(a)).toFixed(1)},${(cy + r * Math.sin(a)).toFixed(1)}`;
+  });
+  return `M${points.join("L")}Z`;
+}
+
+const meeple =
+  "M15 2a6 6 0 0 1 6 6c0 1.6-.6 3-1.7 4l8.2 3.6c2.4 1 2.2 4.4-.4 4.8l-4.6.7 3.9 7.9H18.6L15 22.6 11.4 29H3.6l3.9-7.9-4.6-.7c-2.6-.4-2.8-3.8-.4-4.8L10.7 12A6 6 0 0 1 15 2Z";
+
+export function MeeplePath({ className }: { className?: string }) {
+  return <path d={meeple} className={className} />;
+}
+
+export function GameArt({ motif }: { motif: Motif }) {
   return (
     <svg
       aria-hidden
-      viewBox="0 0 240 130"
+      viewBox="0 0 160 100"
       className="h-full w-full"
-      fill="none"
+      preserveAspectRatio="xMidYMid meet"
     >
-      <ellipse cx="126" cy="118" rx="82" ry="9" fill="#163c38" opacity=".09" />
-      {variant === 0 && (
-        <g transform="translate(48 12) rotate(-8 72 50)">
-          <rect width="148" height="101" rx="15" fill="#0f8776" />
-          {Array.from({ length: 20 }, (_, i) => (
+      {motif === "hex" &&
+        [
+          [80, 50, "fill-surface"],
+          [51, 50, "fill-yellow"],
+          [109, 50, "fill-green"],
+          [65.5, 25, "fill-surface"],
+          [94.5, 25, "fill-red"],
+          [65.5, 75, "fill-blue"],
+          [94.5, 75, "fill-surface"],
+        ].map(([x, y, fill]) => (
+          <path
+            key={`${x}-${y}`}
+            d={hexPath(x as number, y as number, 16)}
+            className={`${fill} ${piece}`}
+          />
+        ))}
+      {motif === "gems" &&
+        [
+          [44, 34, "fill-red"],
+          [80, 28, "fill-surface"],
+          [116, 34, "fill-green"],
+          [60, 68, "fill-yellow"],
+          [100, 68, "fill-blue"],
+        ].map(([x, y, fill]) => (
+          <g key={`${x}-${y}`}>
+            <circle
+              cx={x as number}
+              cy={y as number}
+              r="15"
+              className={`${fill} ${piece}`}
+            />
+            <path
+              d={`M${x} ${(y as number) - 7}l6 6-6 8-6-8Z`}
+              className={`fill-surface ${piece} [stroke-width:2]`}
+            />
+          </g>
+        ))}
+      {motif === "words" &&
+        Array.from({ length: 9 }, (_, i) => {
+          const x = 24 + (i % 3) * 38;
+          const y = 10 + Math.floor(i / 3) * 28;
+          const fill =
+            i === 1
+              ? "fill-red"
+              : i === 5
+                ? "fill-blue"
+                : i === 6
+                  ? "fill-yellow"
+                  : "fill-surface";
+          return (
             <g key={i}>
-              <circle
-                cx={19 + (i % 5) * 27}
-                cy={18 + Math.floor(i / 5) * 22}
-                r="8"
-                fill={
-                  i % 4 === 0 ? "#ffcb76" : i % 3 === 0 ? "#f7fffc" : "#43bda4"
-                }
+              <rect
+                x={x}
+                y={y}
+                width="34"
+                height="22"
+                rx="5"
+                className={`${fill} ${piece}`}
               />
-              <circle
-                cx={17 + (i % 5) * 27}
-                cy={16 + Math.floor(i / 5) * 22}
-                r="3"
-                fill="white"
-                opacity=".3"
+              <path
+                d={`M${x + 8} ${y + 11}h18`}
+                className="stroke-ink [stroke-linecap:round] [stroke-width:2.5]"
               />
             </g>
-          ))}
-        </g>
-      )}
-      {variant === 1 && (
-        <g transform="translate(40 8)">
-          <rect
-            x="15"
-            y="15"
-            width="115"
-            height="90"
-            rx="13"
-            fill="#fff"
-            transform="rotate(-13 70 60)"
-          />
-          <rect
-            x="65"
-            y="2"
-            width="95"
-            height="112"
-            rx="13"
-            fill="#108d7d"
-            transform="rotate(12 110 60)"
-          />
-          <path d="M112 27 137 56 112 85 87 56Z" fill="#ffd58a" />
-          <circle cx="112" cy="56" r="9" fill="#fff4dc" />
-          <circle cx="26" cy="50" r="8" fill="#ffb766" />
-          <path d="m37 80 10-16 10 16Z" fill="#d5d0f0" />
-        </g>
-      )}
-      {variant === 2 && (
-        <g>
-          <path d="M39 106 70 40h99l31 66Z" fill="#faf9e9" />
-          <path
-            d="M63 104 82 41m13 65 7-65m22 65-1-65m31 65-12-65m-93 45h138M59 65h117"
-            stroke="#329a87"
-            strokeWidth="10"
-          />
-          <ellipse
-            cx="99"
-            cy="107"
-            rx="22"
-            ry="6"
-            fill="#114c43"
-            opacity=".2"
-          />
-          <path d="m82 93 7-32-6-14 10-14h17l9 14-7 14 7 32Z" fill="#17715f" />
-          <circle cx="101" cy="27" r="12" fill="#198975" />
-          <rect x="78" y="91" width="46" height="13" rx="6" fill="#125849" />
-          <circle cx="161" cy="76" r="17" fill="#ffbd6e" />
-          <ellipse cx="157" cy="70" rx="6" ry="4" fill="#ffe2b5" />
-        </g>
-      )}
-      {variant === 3 && (
-        <g transform="translate(50 15) rotate(8 72 50)">
-          <rect width="138" height="100" rx="16" fill="#fcfaff" />
-          <path
-            d="M46 12v76m46-76v76M12 33h114M12 67h114"
-            stroke="#c9bce7"
-            strokeWidth="3"
-          />
-          <path
-            d="m17 12 14 14m0-14L17 26m88 49 14 14m0-14-14 14m-59-37 14 14m0-14L59 60"
-            stroke="#188e80"
-            strokeWidth="6"
-            strokeLinecap="round"
-          />
-          <circle cx="69" cy="18" r="10" stroke="#eea65f" strokeWidth="6" />
-          <circle cx="23" cy="82" r="10" stroke="#eea65f" strokeWidth="6" />
-          <circle cx="115" cy="50" r="10" stroke="#eea65f" strokeWidth="6" />
-        </g>
-      )}
-      {variant === 4 && (
-        <g>
-          <path d="m36 101 39-70 139 22-34 65Z" fill="#fff0e9" />
-          <path
-            d="m55 105 39-71m-10 76 37-71m-6 77 34-72m-2 76 30-70M54 70l140 23M65 50l140 23"
-            stroke="#eba8a3"
-            strokeWidth="10"
-          />
-          {[
-            [85, 57],
-            [130, 89],
-            [165, 65],
-          ].map(([x, y], i) => (
-            <g key={i}>
-              <ellipse cx={x} cy={y + 6} rx="19" ry="8" fill="#126a5b" />
-              <ellipse cx={x} cy={y} rx="19" ry="8" fill="#1ca88e" />
-              <ellipse
+          );
+        })}
+      {motif === "cards" &&
+        [-16, 0, 16].map((angle, i) => (
+          <g key={angle} transform={`rotate(${angle} 80 96)`}>
+            <rect
+              x="60"
+              y="16"
+              width="40"
+              height="58"
+              rx="7"
+              className={`${i === 1 ? "fill-surface" : i === 0 ? "fill-yellow" : "fill-red"} ${piece}`}
+            />
+            <path
+              d="M80 36l7 9-7 9-7-9Z"
+              className={`${i === 1 ? "fill-blue" : "fill-surface"} ${piece} [stroke-width:2]`}
+            />
+          </g>
+        ))}
+      {motif === "meeples" &&
+        [
+          [30, 26, "fill-surface", 1.7],
+          [72, 18, "fill-yellow", 2.1],
+          [114, 30, "fill-red", 1.6],
+        ].map(([x, y, fill, scale]) => (
+          <g
+            key={x as number}
+            transform={`translate(${x} ${y}) scale(${scale})`}
+          >
+            <path
+              d={meeple}
+              className={`${fill} stroke-ink [stroke-linejoin:round] [stroke-width:1.4]`}
+            />
+          </g>
+        ))}
+      {motif === "dice" && (
+        <>
+          <g transform="rotate(-12 58 52)">
+            <rect
+              x="34"
+              y="28"
+              width="48"
+              height="48"
+              rx="10"
+              className={`fill-surface ${piece}`}
+            />
+            {[
+              [46, 40],
+              [70, 40],
+              [58, 52],
+              [46, 64],
+              [70, 64],
+            ].map(([x, y]) => (
+              <circle
+                key={`${x}-${y}`}
                 cx={x}
-                cy={y - 2}
-                rx="12"
-                ry="4"
-                stroke="#6ad3b9"
-                strokeWidth="2"
+                cy={y}
+                r="4.5"
+                className="fill-ink"
               />
-            </g>
-          ))}
-          <ellipse cx="79" cy="99" rx="20" ry="9" fill="#ffbd6e" />
-        </g>
-      )}
-      {variant === 5 && (
-        <g>
-          <rect
-            x="48"
-            y="30"
-            width="79"
-            height="79"
-            rx="18"
-            fill="#128f7b"
-            transform="rotate(-14 87 69)"
-          />
-          <rect
-            x="121"
-            y="12"
-            width="73"
-            height="73"
-            rx="17"
-            fill="#fffdf2"
-            transform="rotate(15 157 48)"
-          />
-          {[
-            [69, 51],
-            [103, 83],
-            [86, 67],
-          ].map(([x, y]) => (
-            <circle key={x} cx={x} cy={y} r="6" fill="#fff7e5" />
-          ))}
-          {[
-            [144, 34],
-            [174, 43],
-            [137, 62],
-            [166, 71],
-          ].map(([x, y]) => (
-            <circle key={x} cx={x} cy={y} r="5.5" fill="#e4a24d" />
-          ))}
-          <circle cx="178" cy="108" r="12" fill="#f2b461" />
-          <circle cx="35" cy="91" r="8" fill="#72cfb6" />
-        </g>
+            ))}
+          </g>
+          <g transform="rotate(14 106 50)">
+            <rect
+              x="84"
+              y="26"
+              width="44"
+              height="44"
+              rx="10"
+              className={`fill-yellow ${piece}`}
+            />
+            {[
+              [96, 38],
+              [116, 58],
+            ].map(([x, y]) => (
+              <circle
+                key={`${x}-${y}`}
+                cx={x}
+                cy={y}
+                r="4.5"
+                className="fill-ink"
+              />
+            ))}
+          </g>
+        </>
       )}
     </svg>
   );
