@@ -11,10 +11,10 @@ from rule_u.main import create_app
 
 @pytest.fixture
 def configured(tmp_path, monkeypatch):
-    monkeypatch.setenv("RULE_U_DATA_DIR", str(tmp_path))
-    monkeypatch.setenv("RULE_U_DATABASE_URL", f"sqlite:///{(tmp_path / 'app.db').as_posix()}")
-    monkeypatch.setenv("RULE_U_CHAT_PROVIDER", "mock")
-    monkeypatch.setenv("RULE_U_EMBEDDING_PROVIDER", "mock")
+    monkeypatch.setenv("DATA_DIR", str(tmp_path))
+    monkeypatch.setenv("DATABASE_URL", f"sqlite:///{(tmp_path / 'app.db').as_posix()}")
+    monkeypatch.setenv("CHAT_PROVIDER", "mock")
+    monkeypatch.setenv("EMBEDDING_PROVIDER", "mock")
     config = Config(str(Path(__file__).resolve().parents[1] / "alembic.ini"))
     command.upgrade(config, "head")
     settings = Settings(_env_file=None)

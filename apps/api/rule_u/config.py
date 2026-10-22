@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parents[3]
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
-        env_prefix="RULE_U_", env_file=ROOT / ".env", extra="ignore", populate_by_name=True
+        env_prefix="", env_file=ROOT / ".env", extra="ignore", populate_by_name=True
     )
     data_dir: Path = ROOT / "data"
     database_url: str | None = None
@@ -18,7 +18,7 @@ class Settings(BaseSettings):
     chat_model: str = "gpt-5.4-nano"
     chat_api_key: SecretStr = Field(
         default=SecretStr(""),
-        validation_alias=AliasChoices("RULE_U_CHAT_API_KEY", "GMS_KEY", "chat_api_key"),
+        validation_alias=AliasChoices("CHAT_API_KEY", "GMS_KEY", "chat_api_key"),
     )
     embedding_provider: Literal["mock", "compatible"] = "mock"
     embedding_base_url: str = ""

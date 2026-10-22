@@ -47,7 +47,7 @@ API는 **단일 프로세스**로 실행합니다. 여러 worker를 지정하지
 
 ## 설정과 실제 연결 검증
 
-루트 `.env`를 사용하며 상대 `RULE_U_DATA_DIR`은 실행 위치와 관계없이 저장소 루트 기준입니다. 기본 데이터는 `data/app.db`, `data/chroma`, `data/originals`, `data/extracted`에 저장됩니다. ChromaDB 색인 구현은 2단계입니다. 실제 데이터와 `.env`는 Git에서 제외합니다.
+루트 `.env`를 사용하며 상대 `DATA_DIR`은 실행 위치와 관계없이 저장소 루트 기준입니다. 기본 데이터는 `data/app.db`, `data/chroma`, `data/originals`, `data/extracted`에 저장됩니다. ChromaDB 색인 구현은 2단계입니다. 실제 데이터와 `.env`는 Git에서 제외합니다.
 
 `../streamlit_lab/step6_context.py`에서 확인한 호출 규격:
 
@@ -61,21 +61,21 @@ API는 **단일 프로세스**로 실행합니다. 여러 worker를 지정하지
 기본값은 외부 호출 없는 `mock`입니다. 실제 채팅 연결을 확인하려면 루트 `.env`에서 다음 값을 설정합니다:
 
 ```dotenv
-RULE_U_CHAT_PROVIDER=compatible
-RULE_U_CHAT_API_KEY=발급받은_키
-# RULE_U_CHAT_API_KEY 대신 GMS_KEY도 사용 가능
+CHAT_PROVIDER=compatible
+CHAT_API_KEY=발급받은_키
+# CHAT_API_KEY 대신 GMS_KEY도 사용 가능
 ```
 
-`RULE_U_CHAT_API_KEY`가 설정되어 있으면 `GMS_KEY`보다 우선합니다. `GMS_KEY`를 쓸 때는 빈 `RULE_U_CHAT_API_KEY` 줄을 삭제하세요. 서버는 다른 프로젝트의 `.env`를 자동으로 읽지 않습니다.
+`CHAT_API_KEY`가 설정되어 있으면 `GMS_KEY`보다 우선합니다. `GMS_KEY`를 쓸 때는 빈 `CHAT_API_KEY` 줄을 삭제하세요. 서버는 다른 프로젝트의 `.env`를 자동으로 읽지 않습니다.
 
-임베딩은 별도 제공업체·키·모델을 설정합니다. 제공업체에서 지원하는 모델 ID와 실제 차원을 확인한 후 아래 값을 입력합니다. GMS의 임베딩 지원 여부는 아직 확인되지 않았습니다.
+임베딩은 별도 제공업체·키·모델을 설정합니다. 2026-10-22 GMS의 `text-embedding-3-large`를 실제 호출하여 입력 2개에 대한 3,072차원 벡터를 검증했습니다. 로컬 `.env`에는 기존 GMS 키로 다음 설정을 반영했습니다. 키 값은 문서나 설정 예제에 포함하지 않습니다.
 
 ```dotenv
-RULE_U_EMBEDDING_PROVIDER=compatible
-RULE_U_EMBEDDING_BASE_URL=확인한_API_주소
-RULE_U_EMBEDDING_MODEL=확인한_모델_ID
-RULE_U_EMBEDDING_API_KEY=발급받은_키
-RULE_U_EMBEDDING_DIMENSIONS=확인한_차원수
+EMBEDDING_PROVIDER=compatible
+EMBEDDING_BASE_URL=https://gms.ssafy.io/gmsapi/api.openai.com/v1/
+EMBEDDING_MODEL=text-embedding-3-large
+EMBEDDING_API_KEY=발급받은_키
+EMBEDDING_DIMENSIONS=3072
 ```
 
 `POST embeddings` 호환 요청을 사용합니다. 응답 개수·인덱스·유한 숫자·차원 수를 검증합니다. 다른 규격의 제공업체는 `rule_u/providers.py`의 별도 어댑터로 추가하세요. 모델·차원을 바꾸면 기존 색인을 재생성해야 합니다.

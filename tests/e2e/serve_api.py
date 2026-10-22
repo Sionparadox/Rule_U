@@ -12,10 +12,10 @@ from rule_u.config import ROOT, Settings
 from rule_u.main import create_app
 
 with TemporaryDirectory(prefix="rule-u-e2e-") as folder:
-    os.environ["RULE_U_DATA_DIR"] = folder
-    os.environ["RULE_U_DATABASE_URL"] = f"sqlite:///{Path(folder).as_posix()}/app.db"
-    os.environ["RULE_U_CHAT_PROVIDER"] = "mock"
-    os.environ["RULE_U_EMBEDDING_PROVIDER"] = "mock"
+    os.environ["DATA_DIR"] = folder
+    os.environ["DATABASE_URL"] = f"sqlite:///{Path(folder).as_posix()}/app.db"
+    os.environ["CHAT_PROVIDER"] = "mock"
+    os.environ["EMBEDDING_PROVIDER"] = "mock"
     command.upgrade(Config(str(ROOT / "apps/api/alembic.ini")), "head")
     settings = Settings(_env_file=None)
     seed(settings)
