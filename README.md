@@ -1,6 +1,6 @@
 # Rule_U
 
-보드게임 규칙 탐색·상황 판정 서비스의 로컬 모노레포입니다. 현재 **1단계 기반 구현**까지 진행했습니다. 실제 규칙 수집·검색·판정은 2~3단계에서 연결합니다.
+보드게임 규칙 탐색·상황 판정 서비스의 로컬 모노레포입니다. 현재 **2단계 수집·색인 진행 중**입니다. 로컬 메타데이터 적재와 PDF·FAQ 추출, ChromaDB 테스트 색인을 구현했습니다. 실제 규칙 검색·판정은 아직 연결하지 않았습니다.
 
 Next.js App Router + TypeScript / FastAPI / SQLite + SQLAlchemy + Alembic. Windows에서 Docker 없이 실행합니다. 계획과 명세서는 [docs/개발계획.md](docs/개발계획.md), [docs/기능명세서.md](docs/기능명세서.md)에 있습니다.
 
@@ -47,7 +47,7 @@ API는 **단일 프로세스**로 실행합니다. 여러 worker를 지정하지
 
 ## 설정과 실제 연결 검증
 
-루트 `.env`를 사용하며 상대 `DATA_DIR`은 실행 위치와 관계없이 저장소 루트 기준입니다. 기본 데이터는 `data/app.db`, `data/chroma`, `data/originals`, `data/extracted`에 저장됩니다. ChromaDB 색인 구현은 2단계입니다. 실제 데이터와 `.env`는 Git에서 제외합니다.
+루트 `.env`를 사용하며 상대 `DATA_DIR`은 실행 위치와 관계없이 저장소 루트 기준입니다. 기본 데이터는 `data/app.db`, `data/chroma`, `data/originals`, `data/extracted`에 저장됩니다. 실제 데이터와 `.env`는 Git에서 제외합니다.
 
 `../streamlit_lab/step6_context.py`에서 확인한 호출 규격:
 
@@ -118,12 +118,63 @@ Rule_U/
   apps/api/migrations/ Alembic 버전 고정 스키마
   apps/api/tests/      저장·접근·요청·연결부 테스트
   tests/e2e/           브라우저 통합 검증
-  docs/                기능명세서·개발계획
+  docs/                개발계획·개발기록·기능명세서
+  reports/             작업 결과 보고서·출처 현황 목록
+  config/              출처 검토 입력
+  evals/               검색 평가 입력
   data/                로컬 DB·원문·추출문·색인 (Git 제외)
 ```
 
 게임·판본·확장·문서·적용 범위·수집 상태·대화·메시지·인용·요청과 판본/확장 연결 테이블을 저장합니다. 판본과 게임 일치, 확장 호환, 외부 게임 ID 중복, 기본판 문서 범위 중복, 요청 중복, 대화당 진행 중 요청 1개를 DB 제약으로 검증합니다. 인용 제목·출처·판본·페이지·문서 버전은 스냅샷으로 보존합니다.
 
-현재 API: health, games 목록/상세, conversations 생성/조회, messages 제출(202), requests 조회. 자연어 게임 검색·실제 근거 조회·RAG·수집·색인은 후속 단계입니다. 아직 공식 규칙을 확보하지 않았으므로 모든 게임의 규칙 지원 상태는 false입니다.
+현재 API: health, games 목록/상세, conversations 생성/조회, messages 제출(202), requests 조회. 자연어 게임 검색·실제 근거 조회·RAG는 후속 단계입니다. 로컬 수집·색인 CLI는 아래와 같습니다. 추출·색인만으로 규칙 지원을 인정하지 않으므로 판본의 지원 상태는 자동으로 true가 되지 않습니다.
+
+## 2단계 로컬 데이터 적재·추출·색인
+
+`apps/api`에서 실행합니다. 아래 경로는 기존 `Core2/data` 묶음을 사용하며 입력 원문과 JSON을 변경하지 않습니다.
+
+```powershell
+uv sync --frozen
+uv run alembic upgrade head
+uv run python -m rule_u.cli import-metadata --catalog ../../../data/games
+uv run python -m rule_u.cli ingest --catalog ../../../data/games --bundle-root ../../.. --games codenames abluxxen catan
+uv run python -m rule_u.cli index --catalog ../../../data/games --games codenames abluxxen catan --mock
+uv run python -m rule_u.cli data-status
+```
+
+전체 등록 게임을 처리하려면 `--games`를 생략합니다. 실제 임베딩은 설정된 GMS로 전체 메타데이터·청크를 전송합니다. `--continue-on-error`는 실패한 게임을 기록하고 다음 게임을 계속 처리합니다. 일부 실패가 있으면 모든 게임을 시도한 뒤 종료 코드 1을 반환합니다.
+
+```powershell
+uv run python -m rule_u.cli ingest --catalog ../../../data/games --bundle-root ../../..
+uv run python -m rule_u.cli index --catalog ../../../data/games --continue-on-error
+```
+
+추출 결과는 게임마다 `data/manifests/<slug>.json`, 전체 색인 결과는 `data/index-reports/<모델 지문>-catalog.json`에 저장합니다. 추출 실패·누락 문서가 있는 게임은 규칙 색인을 보류하지만 메타데이터는 색인합니다. 수정 후 같은 명령을 재실행하면 저장된 벡터를 재사용합니다. PDF 글꼴 해석에 `fonttools`를 사용하며, 추출기가 내용 생략을 경고한 문서는 검토 필요로 처리합니다.
+
+전체 실행 결과(2026-10-22): 이미지 복원과 재시도를 반영해 실제 GMS 인덱스에 110게임·2,541청크를 저장했습니다. [2단계 결과](reports/stage2-completion.md)에서 검증 결과와 남은 출처 확인 사항을 확인할 수 있습니다.
+
+기본 PDF 추출기는 `pypdf`입니다. 다이브는 내용 생략 경고가 발생해 `pymupdf`로 복구했습니다. 다음처럼 추출기를 명시해 재현할 수 있으며, 추출기별 결과는 별도 캐시로 보존됩니다. 두 방식 모두 페이지별 20자 미만 검사를 유지하고 OCR은 수행하지 않습니다. 전체를 기본 추출기로 다시 적재했다면 다이브에 아래 명령을 다시 적용하세요.
+
+실패했던 49게임·50문서의 복구 과정은 [이미지 복원 보고서](reports/visual-recovery-report.md)에 있습니다. 자동 진단은 `apps/api`에서 `uv run python -m rule_u.retry_diagnostics --catalog ../../../data/games --bundle-root ../../..`로 실행합니다. 원문·색인을 수정하거나 외부 API를 호출하지 않으며, 진단 JSON과 보고서는 `data/retry-reports/`에 저장합니다.
+
+```powershell
+uv run python -m rule_u.cli ingest --catalog ../../../data/games --bundle-root ../../.. --games dive --pdf-extractor pymupdf
+uv run python -m rule_u.cli index --catalog ../../../data/games --games dive --mock
+```
+
+- `--catalog`: 게임별 JSON 디렉터리, JSON 객체/배열 파일 또는 CSV. CSV의 `players`, `play_time_minutes`, `aliases`, `categories`, `editions`는 같은 스키마의 JSON 문자열 셀입니다. 필수 항목은 `id`, `slug`, `name_ko`, `players.min/max`, `play_time_minutes.min/max`, `editions`입니다. 판본은 `id`, `name`, `language`를 포함합니다.
+- `--games`: 처리할 slug 목록. 생략하면 전체를 처리합니다. 입력의 정수 ID는 외부 ID로, slug는 앱의 게임 ID로 보존합니다.
+- 문서는 `status=downloaded`, `local_path`, `sha256`이 필요합니다. 파일은 `--bundle-root` 내부로 제한하며 해시가 다르면 실패 처리합니다. FAQ는 `type=faq`와 `[{"question":"...","answer":"..."}]` JSON 파일을 사용하고 질문·답변 단위로 보존합니다.
+- 원문은 `data/originals`, 페이지·청크·문자 오프셋은 `data/extracted`, 원래 메타데이터 전체는 `data/catalog`, 게임별 결과는 `data/manifests`에 보존합니다. 출처 유형이 없으면 `unverified`, 이용 조건이 없으면 미확인으로 기록합니다.
+- 기본 청크는 1,000자·중복 200자이며 가능한 줄 경계에서 나눕니다. 페이지를 넘는 규칙·예외 결합과 다단 편집 순서의 품질 검토는 후속 작업입니다. 텍스트가 20자 미만인 페이지는 검토 필요로 처리하며 OCR은 수행하지 않습니다.
+- `--mock`은 외부 호출 없는 구조 검증용입니다. 실제 의미 검색 품질을 검증하지 않습니다. 생략하면 `.env`의 임베딩 제공업체로 메타데이터와 추출 청크가 전송됩니다. 실제 전송 전에 문서 전송 범위와 제공업체를 확인하세요.
+- 임베딩 제공업체·주소·모델·차원별로 Chroma 저장 폴더를 분리하고 `game_meta`, `rule_docs` 컬렉션을 생성합니다. 고정 ID와 내용 해시로 같은 입력의 임베딩 호출을 생략합니다. 추출 설정 변경 시 청크를 다시 만들며 새 청크 저장 후 오래된 청크를 제거합니다.
+- 일부 문서가 실패한 게임은 규칙 색인을 거부합니다. 여러 게임의 실행 전체가 원자적이지는 않으며, 새 색인 버전의 활성 전환과 RAG 노출 제어는 3단계 범위입니다. 현재 색인은 웹 답변에 사용하지 않습니다.
+
+2026-10-22 검증: 110개 게임·117개 판본 적재. 코드네임·링코·카탄 13페이지·27청크 추출. 사용자 승인 후 GMS 실제 임베딩으로 메타데이터 3건·규칙 청크 27건을 색인했습니다. 전체 30건의 3,072차원·유한 숫자를 확인했고 재실행 시 추가 임베딩 0건·캐시 30건을 확인했습니다. 저장 벡터를 이용한 자기 검색과 게임 범위 필터도 확인했습니다. 자연어 질문의 검색 품질 평가는 별도이며 공식 출처·이용 조건 검토, 등록 출처 후보 검색·검색어 캐시는 남아 있습니다.
 
 구현 참고: [Next.js 설치](https://nextjs.org/docs/app/getting-started/installation), [SQLAlchemy SQLite](https://docs.sqlalchemy.org/en/20/dialects/sqlite.html), [FastAPI 앱 구조](https://fastapi.tiangolo.com/tutorial/bigger-applications/).
+# 현재 데이터·검색 상태 (2026-10-22)
+
+2단계 기본 구현과 초기 검증 완료: 실제 GMS 인덱스 110게임·2,541청크, 질문 8개의 근거 페이지 Hit@5 100%. 전체 공식 출처 인증이나 답변 생성 완료를 의미하지 않는다. 출처 목록·후보 선별·캐시·실행 명령은 [2단계 결과](reports/stage2-completion.md)를 참고한다.
+
