@@ -4,7 +4,7 @@ import json
 import sys
 from pathlib import Path
 
-from rule_u.config import Settings
+from rule_u.config import ROOT, Settings
 from rule_u.db import make_engine, make_sessions
 from rule_u.models import Edition, Game
 from rule_u.providers import ProviderError, chat_provider, embedding_provider
@@ -160,7 +160,9 @@ def main():
         from rule_u.main import create_app
 
         app = create_app(settings)
-        Path("openapi.json").write_text(json.dumps(app.openapi(), indent=2), encoding="utf-8")
+        (ROOT / "apps/api/openapi.json").write_text(
+            json.dumps(app.openapi(), indent=2), encoding="utf-8"
+        )
         app.state.engine.dispose()
 
 

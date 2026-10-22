@@ -49,6 +49,22 @@ corepack pnpm dev:web
 
 API는 **단일 프로세스**로 실행합니다. 여러 worker를 지정하지 마세요. 시작 시 이전 실행의 미완료 요청을 실패로 복구합니다. Next.js는 `/api/v1`을 FastAPI로 프록시합니다. API 포트 변경 시 웹 실행/빌드 전에 `API_ORIGIN`을 지정하세요. 운영 빌드에서는 빌드 시 프록시 주소가 고정되므로 변경 후 재빌드해야 합니다.
 
+### 프론트엔드 단독 실행 (목 데이터)
+
+API·Python 없이 화면만 개발할 때는 저장소 루트에서 실행합니다:
+
+```powershell
+corepack pnpm dev:mock
+```
+
+`NEXT_PUBLIC_API_MOCK=1`로 실행되어 모든 `/api/v1` 호출이 [apps/web/src/lib/mock](apps/web/src/lib/mock)의 브라우저 내 목 API로 처리됩니다. 헤더에 `MOCK DATA` 표시가 나타납니다.
+
+- 게임·판본·확장·답변 시나리오는 [data.ts](apps/web/src/lib/mock/data.ts)에서 수정합니다. 질문에 `도둑`(가능+인용 2개), `교역`(조건부), `건설`(불가), `카드`(되묻기), `실패`(생성 실패)가 포함되면 해당 응답을, 그 외에는 근거 부족 응답을 반환합니다.
+- 카탄의 `도시와 기사` 확장은 규칙 미준비(`rules_not_ready`) 오류를 확인하는 용도입니다. 자연어 검색은 목에서 이름 검색으로 대체되고, 근거 원문 링크는 표시하지 않습니다.
+- 응답 지연, 답변 단계 전환 간격, 근거 설명 생성 시간은 [handlers.ts](apps/web/src/lib/mock/handlers.ts) 상단 상수로 조절합니다.
+- 목 대화는 localStorage `rule-u-mock-db`에 저장되어 새로고침 후에도 복원됩니다. 초기화하려면 브라우저 저장소에서 해당 키를 삭제합니다.
+- API 호출은 [api.ts](apps/web/src/lib/api.ts)의 `api()`를 사용해야 목 전환이 적용됩니다.
+
 ## 설정과 실제 연결 검증
 
 루트 `.env`를 사용하며 상대 `DATA_DIR`은 실행 위치와 관계없이 저장소 루트 기준입니다. 기본 데이터는 `data/app.db`, `data/chroma`, `data/originals`, `data/extracted`에 저장됩니다. 실제 데이터와 `.env`는 Git에서 제외합니다.
@@ -101,15 +117,18 @@ Set-Location apps/api
 uv run pytest -q
 uv run ruff check rule_u tests migrations
 uv run alembic check
-uv run python -m rule_u.cli export-openapi
 Set-Location ../..
-corepack pnpm types:api
+corepack pnpm check:api
 corepack pnpm typecheck
 corepack pnpm build
 corepack pnpm test:e2e
 ```
 
-E2E는 설치된 Microsoft Edge를 headless로 사용합니다. 8100·3100 포트에서 임시 DB와 웹 서버를 띄우고 종료합니다. 실제 `data/app.db`는 사용하지 않습니다. 데스크톱·모바일 크기에서 게임 선택, 질문 저장, 새로고침 후 복원과 가로 넘침을 확인합니다. 화면 캡처는 Git에서 제외되는 `test-results/`에 생성됩니다. E2E 후 기본 API 포트로 production 실행하려면 `corepack pnpm build`를 다시 실행하세요.
+API 스키마를 바꾼 뒤에는 `corepack pnpm sync:api`로 `openapi.json` 내보내기와 프론트 타입 생성을 한 번에 실행하고 두 파일을 함께 커밋합니다. `check:api`는 동기화 후 두 파일에 변경이 생기면 실패합니다. 갱신을 빠뜨리면 pytest의 `test_committed_openapi_is_current`도 실패합니다.
+
+GitHub Actions([ci.yml](.github/workflows/ci.yml))가 push·PR마다 API 검사(ruff·alembic·pytest), 웹 검사(타입 생성 일치·typecheck·build), E2E를 실행합니다.
+
+E2E는 로컬에서 설치된 Microsoft Edge를 headless로 사용하고, CI(`CI` 환경변수)에서는 Playwright Chromium을 사용합니다. API 서버는 `uv run --project apps/api`로 실행하므로 `uv`가 PATH에 있어야 합니다. 8100·3100 포트에서 임시 DB와 웹 서버를 띄우고 종료합니다. 실제 `data/app.db`는 사용하지 않습니다. 데스크톱·모바일 크기에서 게임 선택, 질문 저장, 새로고침 후 복원과 가로 넘침을 확인합니다. 화면 캡처는 Git에서 제외되는 `test-results/`에 생성됩니다. E2E 후 기본 API 포트로 production 실행하려면 `corepack pnpm build`를 다시 실행하세요.
 
 검증 결과와 미완료 사항은 [개발계획](docs/개발계획.md)의 단계 1 기록에서 관리합니다.
 

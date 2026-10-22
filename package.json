@@ -4,9 +4,12 @@
   "packageManager": "pnpm@10.18.3",
   "scripts": {
     "dev:web": "corepack pnpm --filter @rule-u/web dev",
+    "dev:mock": "corepack pnpm --filter @rule-u/web dev:mock",
     "build": "corepack pnpm --filter @rule-u/web build",
     "typecheck": "corepack pnpm --filter @rule-u/web typecheck",
     "types:api": "corepack pnpm --filter @rule-u/web types:api",
+    "sync:api": "uv run --project apps/api python -m rule_u.cli export-openapi && corepack pnpm types:api",
+    "check:api": "corepack pnpm sync:api && git diff --exit-code -- apps/api/openapi.json apps/web/src/lib/api.generated.ts",
     "test:e2e": "playwright test",
     "lint": "corepack pnpm --filter @rule-u/web lint",
     "format:check": "corepack pnpm --filter @rule-u/web format:check"

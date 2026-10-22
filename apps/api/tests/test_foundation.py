@@ -299,3 +299,8 @@ def test_relative_data_path_is_root_relative(monkeypatch, tmp_path):
     monkeypatch.chdir(tmp_path)
     settings = Settings(_env_file=None, data_dir="data")
     assert settings.data_dir == ROOT / "data"
+
+
+def test_committed_openapi_is_current(app):
+    committed = json.loads((ROOT / "apps/api/openapi.json").read_text(encoding="utf-8"))
+    assert app.openapi() == committed, "run `corepack pnpm sync:api` and commit the result"

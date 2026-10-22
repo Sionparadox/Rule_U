@@ -1,6 +1,8 @@
 import type { components } from "./api.generated";
 
 export type Schema = components["schemas"];
+/** NEXT_PUBLIC_API_MOCK=1이면 FastAPI 대신 브라우저 내 목 API를 사용합니다. */
+export const API_MOCK = process.env.NEXT_PUBLIC_API_MOCK === "1";
 export class ApiError extends Error {
   constructor(
     public code: string,
@@ -15,6 +17,10 @@ export async function api<T>(
   signal?: AbortSignal,
   timeoutMs = 15000,
 ): Promise<T> {
+  if (API_MOCK) {
+    const { mockFetch } = await import("./mock/handlers");
+    return mockFetch<T>(path, body, signal);
+  }
   const response = await fetch(`/api/v1${path}`, {
     method: body === undefined ? "GET" : "POST",
     cache: "no-store",

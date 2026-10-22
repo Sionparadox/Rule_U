@@ -12,7 +12,7 @@ import { Chat } from "@/components/conversation";
 import { SourceModal } from "@/components/source-modal";
 import { Dice } from "@/components/game-art";
 import { useStore } from "@/lib/store";
-import { api, type Schema } from "@/lib/api";
+import { api, API_MOCK, type Schema } from "@/lib/api";
 
 export default function Home() {
   const { hydrated, view, sourcesOpen, source } = useStore();
@@ -47,6 +47,11 @@ export default function Home() {
               />
               {connected ? "서비스 연결됨" : "서비스 연결 대기"}
             </span>
+            {API_MOCK && (
+              <span className="rounded-full bg-token/15 px-2 py-0.5 text-[11px] font-bold text-ink/70">
+                MOCK DATA
+              </span>
+            )}
           </div>
         </header>
         {!hydrated ? (
