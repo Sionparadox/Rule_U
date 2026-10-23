@@ -337,7 +337,9 @@ def partial_answer(raw):
 
 async def streamed(model, messages, on_draft, interval=0.3):
     """Collect a streamed reply, reporting the answer text at most every `interval` seconds."""
-    raw, last, sent = "", 0.0, ""
+    # loop.time() is a monotonic clock that can start near zero (e.g. a fresh CI runner),
+    # so begin at -inf to always send the first draft right away.
+    raw, last, sent = "", float("-inf"), ""
     loop = asyncio.get_running_loop()
     async for delta in model.stream(messages):
         raw += delta
