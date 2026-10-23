@@ -1,17 +1,42 @@
-﻿import type { Schema } from "@/lib/api";
+import type { Schema } from "@/lib/api";
 
 /** 게임 타일 위쪽에 그리는 구성물 모티프. 실제 게임 이미지가 아니라 장르를 보여주는 그림이다. */
-export type Motif = "hex" | "gems" | "words" | "cards" | "meeples" | "dice";
+export type Motif =
+  | "hex"
+  | "gems"
+  | "words"
+  | "cards"
+  | "meeples"
+  | "dice"
+  | "coins"
+  | "cubes"
+  | "timer"
+  | "pawns";
 
+// 이름과 분류(한국어·BGG 영문)를 함께 본다. 앞의 규칙이 먼저 맞으므로 흔한 분류(카드)는 뒤에 둔다.
 const motifRules: [RegExp, Motif][] = [
-  [/카탄|정착|타일|영토|문명|협상/, "hex"],
-  [/보석|스플렌더|경제|자원/, "gems"],
-  [/단어|파티|추리|코드네임/, "words"],
-  [/카드|덱/, "cards"],
-  [/협력|가족|일꾼|배치/, "meeples"],
+  [
+    /단어|파티|추리|코드네임|word|party|trivia|humor|deduction|bluff|mystery|spies/i,
+    "words",
+  ],
+  [/실시간|스피드|순발력|real-time|dexterity|memory/i, "timer"],
+  [/주사위|숫자|dice|number/i, "dice"],
+  [
+    /카탄|정착|타일|영토|문명|협상|territory|civilization|city building|negotiation|exploration/i,
+    "hex",
+  ],
+  [/경제|경매|거래|투자|economic|industry|nautical|travel/i, "coins"],
+  [/보석|스플렌더|자원|fantasy|mythology|renaissance|arabian/i, "gems"],
+  [/레이스|경주|추상|abstract|racing|maze|sports|fighting|children/i, "pawns"],
+  [/퍼즐|건설|생산|puzzle|environmental|science fiction|space/i, "cubes"],
+  [
+    /협력|가족|일꾼|배치|농장|동물|farming|animals|medieval|adventure|ancient/i,
+    "meeples",
+  ],
+  [/카드|덱|card/i, "cards"],
 ];
 // 장르를 특정하지 않는 모티프만 남겨, 맞지 않는 게임에 육각 타일 같은 그림이 붙지 않게 한다.
-const fallback: Motif[] = ["dice", "meeples", "cards"];
+const fallback: Motif[] = ["dice", "meeples", "cards", "pawns", "cubes"];
 
 const hash = (text: string) =>
   [...text].reduce((sum, ch) => (sum * 31 + ch.charCodeAt(0)) >>> 0, 7);
@@ -53,6 +78,14 @@ export function MeeplePath({ className }: { className?: string }) {
   return <path d={meeple} className={className} />;
 }
 
+type CubeColor = "red" | "blue" | "green";
+// 클래스 이름을 문자열 조합으로 만들면 Tailwind가 찾지 못하므로 그대로 적어 둔다.
+const cubeFace: Record<CubeColor, [string, string]> = {
+  red: ["fill-red", "fill-red-deep"],
+  blue: ["fill-blue", "fill-blue-deep"],
+  green: ["fill-green", "fill-green-deep"],
+};
+
 export function GameArt({ motif }: { motif: Motif }) {
   return (
     <svg
@@ -79,11 +112,11 @@ export function GameArt({ motif }: { motif: Motif }) {
         ))}
       {motif === "gems" &&
         [
-          [44, 34, "fill-red"],
-          [80, 28, "fill-surface"],
-          [116, 34, "fill-green"],
-          [60, 68, "fill-yellow"],
-          [100, 68, "fill-blue"],
+          [44, 36, "fill-red"],
+          [80, 30, "fill-surface"],
+          [116, 36, "fill-green"],
+          [60, 70, "fill-yellow"],
+          [100, 70, "fill-blue"],
         ].map(([x, y, fill]) => (
           <g key={`${x}-${y}`}>
             <circle
@@ -100,8 +133,8 @@ export function GameArt({ motif }: { motif: Motif }) {
         ))}
       {motif === "words" &&
         Array.from({ length: 9 }, (_, i) => {
-          const x = 24 + (i % 3) * 38;
-          const y = 10 + Math.floor(i / 3) * 28;
+          const x = 25 + (i % 3) * 38;
+          const y = 11 + Math.floor(i / 3) * 28;
           const fill =
             i === 1
               ? "fill-red"
@@ -129,7 +162,8 @@ export function GameArt({ motif }: { motif: Motif }) {
         })}
       {motif === "cards" &&
         [-16, 0, 16].map((angle, i) => (
-          <g key={angle} transform={`rotate(${angle} 80 96)`}>
+          // 부채꼴로 펼친 묶음의 위아래 중심이 그림 중앙에 오도록 살짝 내린다.
+          <g key={angle} transform={`translate(0 3) rotate(${angle} 80 96)`}>
             <rect
               x="60"
               y="16"
@@ -145,10 +179,11 @@ export function GameArt({ motif }: { motif: Motif }) {
           </g>
         ))}
       {motif === "meeples" &&
+        // 양옆 말을 먼저 그리고 가운데 큰 말을 위에 겹친다 (말 하나의 중심은 15, 15.5).
         [
-          [30, 26, "fill-surface", 1.7],
-          [72, 18, "fill-yellow", 2.1],
-          [114, 30, "fill-red", 1.6],
+          [14, 29.2, "fill-surface", 1.6],
+          [98, 29.2, "fill-red", 1.6],
+          [48.5, 17.5, "fill-yellow", 2.1],
         ].map(([x, y, fill, scale]) => (
           <g
             key={x as number}
@@ -161,7 +196,7 @@ export function GameArt({ motif }: { motif: Motif }) {
           </g>
         ))}
       {motif === "dice" && (
-        <>
+        <g transform="translate(-1 -1)">
           <g transform="rotate(-12 58 52)">
             <rect
               x="34"
@@ -209,8 +244,107 @@ export function GameArt({ motif }: { motif: Motif }) {
               />
             ))}
           </g>
+        </g>
+      )}
+      {motif === "coins" &&
+        [
+          [56, 59, "fill-yellow"],
+          [104, 59, "fill-yellow"],
+          [80, 41, "fill-surface"],
+        ].map(([x, y, fill]) => (
+          <g key={`${x}-${y}`}>
+            <circle
+              cx={x as number}
+              cy={y as number}
+              r="22"
+              className={`${fill} ${piece}`}
+            />
+            <circle
+              cx={x as number}
+              cy={y as number}
+              r="14"
+              className={`fill-none ${piece} [stroke-width:2]`}
+            />
+            <path
+              d={`M${x} ${(y as number) - 7}v14`}
+              className="stroke-ink [stroke-linecap:round] [stroke-width:3]"
+            />
+          </g>
+        ))}
+      {motif === "cubes" &&
+        // 아래 두 개 위에 하나를 얹은 나무 큐브 더미. 윗면은 밝게, 오른쪽 면은 진하게 칠한다.
+        [
+          [60, 60, "red"],
+          [100, 60, "blue"],
+          [80, 38, "green"],
+        ].map(([x, y, color]) => {
+          const cx = x as number;
+          const cy = y as number;
+          return (
+            <g key={color}>
+              <path
+                d={`M${cx - 20} ${cy - 10}L${cx} ${cy}V${cy + 22}L${cx - 20} ${cy + 12}Z`}
+                className={`${cubeFace[color as CubeColor][0]} ${piece}`}
+              />
+              <path
+                d={`M${cx} ${cy}L${cx + 20} ${cy - 10}V${cy + 12}L${cx} ${cy + 22}Z`}
+                className={`${cubeFace[color as CubeColor][1]} ${piece}`}
+              />
+              <path
+                d={`M${cx} ${cy - 20}L${cx + 20} ${cy - 10}L${cx} ${cy}L${cx - 20} ${cy - 10}Z`}
+                className={`fill-surface ${piece}`}
+              />
+            </g>
+          );
+        })}
+      {motif === "timer" && (
+        <>
+          <path
+            d="M62 22h36c0 16-12 22-12 28s12 12 12 28H62c0-16 12-22 12-28s-12-12-12-28Z"
+            className={`fill-surface ${piece}`}
+          />
+          <path
+            d="M67 28h26c-1 7-7 11-13 15-6-4-12-8-13-15Z"
+            className="fill-yellow"
+          />
+          <path
+            d="M66 76c1-9 8-13 14-15 6 2 13 6 14 15Z"
+            className="fill-yellow"
+          />
+          <path
+            d="M80 46v14"
+            className="stroke-yellow-deep [stroke-linecap:round] [stroke-width:2.5]"
+          />
+          {[14, 78].map((y) => (
+            <rect
+              key={y}
+              x="54"
+              y={y}
+              width="52"
+              height="8"
+              rx="4"
+              className={`fill-blue ${piece}`}
+            />
+          ))}
         </>
       )}
+      {motif === "pawns" &&
+        // 양옆 말을 먼저 그리고 가운데 큰 말을 위에 겹친다. 말의 원점은 받침 밑면 가운데다.
+        [
+          [44, 80, 1, "fill-green"],
+          [116, 80, 1, "fill-blue"],
+          [80, 80.5, 1.3, "fill-surface"],
+        ].map(([x, y, scale, fill]) => (
+          <g
+            key={x as number}
+            transform={`translate(${x} ${y}) scale(${scale})`}
+            className={`${fill} stroke-ink [stroke-linejoin:round] [stroke-width:2]`}
+          >
+            <path d="M-6 -29c0 8-8 16-8 22h28c0-6-8-14-8-22Z" />
+            <circle cy="-37" r="9" />
+            <rect x="-18" y="-8" width="36" height="8" rx="3" />
+          </g>
+        ))}
     </svg>
   );
 }

@@ -55,8 +55,10 @@
   input,
   select,
   textarea,
-  summary {
-    @apply outline-offset-2 focus-visible:outline-3 focus-visible:outline-blue;
+  summary,
+  dialog {
+    /* 포커스 링은 쓰지 않는다. 입력 칸은 테두리 색으로 포커스를 알린다. */
+    outline: none;
   }
   button {
     @apply cursor-pointer disabled:cursor-not-allowed disabled:opacity-50;
@@ -64,7 +66,7 @@
   input,
   select,
   textarea {
-    @apply min-w-0 rounded-2xl border-[1.5px] border-edge bg-surface px-4 py-3 text-base text-ink disabled:bg-surface-soft disabled:text-muted;
+    @apply min-w-0 rounded-2xl border-[1.5px] border-edge bg-surface px-4 py-3 text-base text-ink transition-colors focus:border-blue disabled:bg-surface-soft disabled:text-muted;
   }
   input::placeholder,
   textarea::placeholder {
@@ -246,6 +248,18 @@
   }
   dialog.sheet:open {
     animation: sheet-up 240ms var(--ease-out);
+  }
+  /* 끌어 내리는 시트는 배경을 시트 자신이 갖는다. 대화상자가 배경을 가지면 시트가 내려간 자리에 흰 판이 남는다. */
+  dialog.sheet:has(> .drag-sheet) {
+    background: transparent;
+    box-shadow: none;
+    padding-bottom: 0;
+  }
+  .drag-sheet {
+    overflow: hidden;
+    border-radius: 28px 28px 0 0;
+    background: var(--color-surface);
+    padding-bottom: env(safe-area-inset-bottom);
   }
 }
 @media (prefers-reduced-motion: reduce) {

@@ -29,6 +29,7 @@ export function DragSheet({
   }, []);
   return (
     <motion.div
+      className="drag-sheet"
       drag={mobile ? "y" : false}
       dragListener={false}
       dragControls={controls}

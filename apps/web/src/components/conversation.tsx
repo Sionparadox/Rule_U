@@ -244,7 +244,7 @@ export function Chat() {
     "답변을 생각하고 있어요";
   return (
     <section
-      className="flex h-[calc(100dvh-5rem)] min-h-[480px] flex-col overflow-hidden rounded-[28px] bg-surface shadow-[0_4px_0_var(--color-edge)] sm:h-[calc(100dvh-6rem)]"
+      className="-mx-4 flex h-[calc(100dvh-4rem)] min-h-[480px] flex-col overflow-hidden border-t-[1.5px] border-edge bg-surface sm:mx-0 sm:h-[calc(100dvh-6rem)] sm:rounded-[28px] sm:border-t-0 sm:shadow-[0_4px_0_var(--color-edge)]"
       aria-label="규칙 대화"
     >
       <div className="px-3 pt-3 pb-3 sm:px-4">
@@ -390,11 +390,8 @@ export function Chat() {
                 onPick={(text) => {
                   useStore.setState({ mode: "qa" });
                   setDraft(text);
-                  document
-                    .querySelector<HTMLTextAreaElement>(
-                      "textarea[name=question]",
-                    )
-                    ?.focus();
+                  // 예시는 고르는 즉시 보낸다. 보낼 수 없는 상태면 초안만 채워 둔다.
+                  if (!processing && !unresolved) void s.send();
                 }}
               />
             )}

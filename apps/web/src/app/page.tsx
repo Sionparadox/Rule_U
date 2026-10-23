@@ -44,7 +44,11 @@ export default function Home() {
       >
         본문으로 건너뛰기
       </a>
-      <main id="main" className="mx-auto max-w-[960px] px-4 pb-10 sm:px-6">
+      <main
+        id="main"
+        // 모바일 대화 화면은 카드 테두리 없이 화면 끝까지 채우므로 아래 여백도 없앤다.
+        className={`mx-auto max-w-[960px] px-4 sm:px-6 sm:pb-10 ${view === "chat" ? "pb-0" : "pb-10"}`}
+      >
         <header className="flex h-16 items-center justify-between gap-3 sm:h-[72px]">
           <button
             aria-label="Rule_U 게임 선택으로"

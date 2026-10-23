@@ -19,12 +19,10 @@ test("question starters, source badge, feedback and saved rules", async ({
   await choose(page);
   const starters = page.getByRole("group", { name: "질문 예시" });
   await starters.getByRole("button", { name: "처음 세팅" }).click();
-  // 예시는 초안만 채우고 바로 보내지 않는다.
-  await expect(question(page)).toHaveValue(
-    "테이블 탐험 처음 세팅은 어떻게 하나요?",
-  );
-  await expect(page.locator("article")).toHaveCount(0);
-  await sendButton(page).click();
+  // 예시는 고르는 즉시 질문으로 보낸다.
+  await expect(
+    page.locator("article").getByText("테이블 탐험 처음 세팅은 어떻게 하나요?"),
+  ).toBeVisible();
   const source = page.getByRole("button", { name: "출처 1 자세히" });
   await expect(source).toBeVisible();
   await expect(source.getByText("출처 미확인")).toBeVisible();
