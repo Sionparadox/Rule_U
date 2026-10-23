@@ -1,0 +1,1168 @@
+[
+  {
+    "game_id": "codenames",
+    "edition_id": "codenames-official-ko-rulebook",
+    "document_id": "cef94b2076aa24705c3b1b56d6b430b2a4fbbf377fb85fdaf9d752eb4e31c56a",
+    "question": "힌트 숫자가 3이면 최대 몇 번 추리할 수 있나요?",
+    "pages": [
+      5
+    ],
+    "origin": "stage2_smoke"
+  },
+  {
+    "game_id": "codenames",
+    "edition_id": "codenames-official-ko-rulebook",
+    "document_id": "cef94b2076aa24705c3b1b56d6b430b2a4fbbf377fb85fdaf9d752eb4e31c56a",
+    "question": "암살자 카드를 고르면 어떻게 되나요?",
+    "pages": [
+      5
+    ],
+    "origin": "stage2_smoke"
+  },
+  {
+    "game_id": "codenames",
+    "edition_id": "codenames-official-ko-rulebook",
+    "document_id": "cef94b2076aa24705c3b1b56d6b430b2a4fbbf377fb85fdaf9d752eb4e31c56a",
+    "question": "힌트 숫자로 0을 말하면 무엇이 달라지나요?",
+    "pages": [
+      7
+    ],
+    "origin": "stage2_smoke"
+  },
+  {
+    "game_id": "catan",
+    "edition_id": "catan-user-748610c946df",
+    "document_id": "748610c946df74e86db7d5538afabd551579296b13456c644c5e528747e6df56",
+    "question": "차례가 아닌 사람들끼리 자원을 거래해도 되나요?",
+    "pages": [
+      2
+    ],
+    "origin": "stage2_smoke"
+  },
+  {
+    "game_id": "catan",
+    "edition_id": "catan-user-748610c946df",
+    "document_id": "748610c946df74e86db7d5538afabd551579296b13456c644c5e528747e6df56",
+    "question": "도로 건설 진보 카드는 어떤 효과인가요?",
+    "pages": [
+      1,
+      3
+    ],
+    "origin": "stage2_smoke"
+  },
+  {
+    "game_id": "coup",
+    "edition_id": "coup-official-ko-rulebook",
+    "document_id": "a173e336a07034d3c35d2d81423665c328cb5194dc85ddbb53a41effc20c8351",
+    "question": "돈을 10개 이상 가진 경우 반드시 쿠데타를 해야 하나요?",
+    "pages": [
+      1
+    ],
+    "origin": "stage2_smoke"
+  },
+  {
+    "game_id": "6-nimmt",
+    "edition_id": "6-nimmt-official-ko-rulebook",
+    "document_id": "5ebc3aedcb42dba1d504bea6b782fa5de436d83a88142212f09a427bf1f54c5e",
+    "question": "게임을 시작할 때 각자 카드를 몇 장 받나요?",
+    "pages": [
+      1
+    ],
+    "origin": "stage2_smoke"
+  },
+  {
+    "game_id": "7-wonders-architects",
+    "edition_id": "7-wonders-architects-additional-ko-20261021",
+    "document_id": "e442d5f77b21c30749dafe61d269a8655e0991105e857ebf4eb70a92c3eb1dc9",
+    "question": "불가사의를 완성하면 게임은 언제 끝나나요?",
+    "pages": [
+      3
+    ],
+    "origin": "stage2_smoke"
+  },
+  {
+    "game_id": "5-second-rule",
+    "edition_id": "5-second-rule-user-95e97aea0f6e",
+    "document_id": "95e97aea0f6e4aaf7e07c9c311f1bc7486abf6512cd003c6c9890d0a1e42e5d8",
+    "question": "문제를 내는 사람은 타이머를 언제 뒤집어야 하나요?",
+    "pages": [
+      2
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "6-nimmt",
+    "edition_id": "6-nimmt-official-ko-rulebook",
+    "document_id": "5ebc3aedcb42dba1d504bea6b782fa5de436d83a88142212f09a427bf1f54c5e",
+    "question": "낸 카드가 어느 줄에도 놓을 수 없을 만큼 작으면 어떻게 하나요?",
+    "pages": [
+      2
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "7-wonders-architects",
+    "edition_id": "7-wonders-architects-additional-ko-20261021",
+    "document_id": "e442d5f77b21c30749dafe61d269a8655e0991105e857ebf4eb70a92c3eb1dc9",
+    "question": "불가사의 단계를 지을 자원이 충분하면 건설을 다음으로 미룰 수 있나요?",
+    "pages": [
+      2
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "7-wonders-duel",
+    "edition_id": "7-wonders-duel-boardlife-1583",
+    "document_id": "fc98f45183b7a6b5c41a14a8d15ed1f44844fedc2b73fcc47be0282b7cb4f6e8",
+    "question": "시대를 시작할 때 카드 20장은 모두 앞면으로 배치하나요?",
+    "pages": [
+      10
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "7-wonders-duel",
+    "edition_id": "7-wonders-duel-additional-ko-20261021",
+    "document_id": "064d76e5e1fa358bc1009825f8b8d58fb8427541388c7d18c3f59e7ef34f07cd",
+    "question": "과학이나 군사로 이기면 3시대가 끝나기 전에도 게임이 끝나나요?",
+    "pages": [
+      10
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "abluxxen",
+    "edition_id": "abluxxen-official-ko-rulebook",
+    "document_id": "1609864a6fc3ef04808981f914aac3005f95a4c84a0e819208ac316fc61f9f0f",
+    "question": "한 턴에 같은 플레이어의 카드를 두 번 가로챌 수 있나요?",
+    "pages": [
+      1
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "abracawhat",
+    "edition_id": "abracawhat-user-b2c0ba31d515",
+    "document_id": "b2c0ba31d5154f10497545199c08af493c6fbeeca256656d44d5e5bf5f868007",
+    "question": "2인 게임에서는 시작 전에 돌을 몇 개 게임판에 미리 채우나요?",
+    "pages": [
+      2
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "agricola",
+    "edition_id": "agricola-user-f005e1d2391a",
+    "document_id": "f005e1d2391abeb047e1977b279c96689130f478a42185ebc2a5cd5a8824906b",
+    "question": "다른 사람이 이번 라운드에 이미 사용한 행동 칸에 내 가족을 놓을 수 있나요?",
+    "pages": [
+      6
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "amazonia-park",
+    "edition_id": "amazonia-park-user-654d4750c73c",
+    "document_id": "654d4750c73ccda0f4851fc0b6a2213f75d8435cf2246765dd45f00711bfdd6b",
+    "question": "사진 찍기 행동에서 동물 타일을 놓은 뒤 사진은 어떻게 받나요?",
+    "pages": [
+      3
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "anomia",
+    "edition_id": "anomia-user-ko-rulebook",
+    "document_id": "1e81d6dff62d5a9f5aadcca78360626da687b02fb1d3b44b8ce4364e175f993b",
+    "question": "두 사람이 공개한 카드의 무늬가 같아지면 무엇을 하나요?",
+    "pages": [
+      4,
+      5
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "ark-nova",
+    "edition_id": "ark-nova-user-a124dbbf7364",
+    "document_id": "a124dbbf73647e15e29878d14b77655689b93d72c183607d5c34934beaf0a014",
+    "question": "행동으로 아무것도 하지 않는 것을 선택할 수 있나요?",
+    "pages": [
+      8
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "at-the-gates-of-loyang",
+    "edition_id": "at-the-gates-of-loyang-user-bea98b38adeb",
+    "document_id": "bea98b38adebd9299f716304b52b6c57adda2897038fff3b10e8fbb7bebbfb31",
+    "question": "손에 있는 카드 두 장만 골라서 사용할 수 있나요?",
+    "pages": [
+      3,
+      4
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "azul",
+    "edition_id": "azul-boardlife-3993",
+    "document_id": "3e28591776be7254c62b4b12e36923932fae21935ce02d66efe6b152b6363710",
+    "question": "벽에 이미 같은 색 타일이 있는 줄의 패턴 라인에 그 색 타일을 놓을 수 있나요?",
+    "pages": [
+      4
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "barrage",
+    "edition_id": "barrage-user-1f5722d738cb",
+    "document_id": "1f5722d738cb339e0d51eaa5d01a7720b01de761af6c18d0c7b214cedd1137f2",
+    "question": "엔지니어 3명 칸을 쓰려면 추가로 무엇을 내야 하나요?",
+    "pages": [
+      12
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "bohnanza",
+    "edition_id": "bohnanza-retailer-ko-rulebook",
+    "document_id": "2c72965aa91ce047cc7787959b8f8d1501042aa5749bcde75e51b8a0fd2f67bf",
+    "question": "차례가 아닌 두 플레이어끼리 콩 카드를 거래할 수 있나요?",
+    "pages": [
+      2
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "bohnanza",
+    "edition_id": "bohnanza-user-a2010187719a",
+    "document_id": "a2010187719a536c87c3c7ef29718b7671273ee49dd0ba7d43ffc04b22f22024",
+    "question": "3명 게임에서 아미고콩 금화를 빼앗으려면 콩값 합계가 얼마 이상이어야 하나요?",
+    "pages": [
+      14
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "bomb-busters",
+    "edition_id": "bomb-busters-user-838e8f7f0a1f",
+    "document_id": "838e8f7f0a1f62929897e7ce6f7ad1b42a29b31923e46472779a8a468866068e",
+    "question": "장비 카드는 언제부터 사용할 수 있나요?",
+    "pages": [
+      6
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "cant-stop",
+    "edition_id": "cant-stop-official-ko-rulebook",
+    "document_id": "73cd690ba2648517131914b0e28382fbc09468e9693c92df59b918263b37d812",
+    "question": "등반 도중 다른 플레이어의 베이스캠프가 있는 칸에 도착하면 어떻게 하나요?",
+    "pages": [
+      1
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "carcassonne",
+    "edition_id": "carcassonne-additional-ko-20261021",
+    "document_id": "01df0c22ab936fd1fb4b67604fa5501b9be9d2169bf0d07358526b3a63cedb04",
+    "question": "게임 종료 시 농장은 완성된 성 하나당 몇 점을 받나요?",
+    "pages": [
+      4
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "carnegie",
+    "edition_id": "carnegie-user-16e635f2ae85",
+    "document_id": "16e635f2ae850fcde0e5009ad2e427674b353ac713b84ff0b92570385c51302f",
+    "question": "회사의 인사 부서는 어떤 일을 하나요?",
+    "pages": [
+      6
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "cascadia",
+    "edition_id": "cascadia-boardlife-7608",
+    "document_id": "82b6d5c06295dff808271b98a41dde11602819cf9aa4cecd8b018b2fbb56313d",
+    "question": "같은 야생동물 토큰 3개가 나왔을 때 교체는 한 차례에 몇 번 할 수 있나요?",
+    "pages": [
+      6
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "cascadia",
+    "edition_id": "cascadia-user-3460dcb5f83f",
+    "document_id": "3460dcb5f83f0f9b3125e5cd85d8ade984805ca12b8f94e9227e88424077fc01",
+    "question": "2명 게임에서 광역 지형 크기가 같으면 상위권 점수는 어떻게 나누나요?",
+    "pages": [
+      9
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "castle-combo",
+    "edition_id": "castle-combo-boardlife-10501",
+    "document_id": "dbdd677667ad4eaf641db59062504423cdfbc4e274ffc5d60002d3daf472133c",
+    "question": "지갑에 넣지 못한 금은 점수가 되나요?",
+    "pages": [
+      10
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "caverna",
+    "edition_id": "caverna-user-9d08fb4615a9",
+    "document_id": "9d08fb4615a97a9ddc207c43ffe1d0a435d0691a459a8c0fe72e57a38dd567b3",
+    "question": "수확 단계의 첫 번째 소단계에서는 무엇을 하나요?",
+    "pages": [
+      9
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "celestia",
+    "edition_id": "celestia-official-ko-rulebook",
+    "document_id": "3ad021bb981774202e6464bc9b93722919065229ee5ad3903b1e545e6902e655",
+    "question": "크리스마스트리 도시를 쓸 때 선장 주사위가 모두 빈 면이면 어떻게 되나요?",
+    "pages": [
+      12
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "chronicles-of-crime-1400",
+    "edition_id": "chronicles-of-crime-1400-user-5066fee06dd0",
+    "document_id": "5066fee06dd0d96afd246d24ef323cf55af2e2dd2c314b1f1dcb060a4998433e",
+    "question": "자택 판의 가족들은 언제 찾아가서 대화할 수 있나요?",
+    "pages": [
+      5
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "citadels",
+    "edition_id": "citadels-user-ac1c806d37c7",
+    "document_id": "ac1c806d37c75da47f3c85588264978ce257de7c861a3c6cff22dc5e011c5d57",
+    "question": "골조를 파괴해서 지은 건물을 치안판사가 몰수할 수 있나요?",
+    "pages": [
+      15
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "clank-catacombs",
+    "edition_id": "clank-catacombs-user-251719837cc5",
+    "document_id": "251719837cc5e56401b997b680f142458ed55f20c51faf61ea4c1c8f3ceba16b",
+    "question": "차례를 마칠 때 손에 든 카드를 남겨 둘 수 있나요?",
+    "pages": [
+      6
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "cockroach-poker",
+    "edition_id": "cockroach-poker-boardlife-6359",
+    "document_id": "ca6c2e17a525089190f3925ccdfd6b6f68cfdfc5a9ac8d38dc0fe4801017c9b6",
+    "question": "카드를 넘길 때 반드시 옆 사람에게 넘겨야 하나요?",
+    "pages": [
+      2
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "codenames-pictures",
+    "edition_id": "codenames-pictures-official-ko-rulebook",
+    "document_id": "f1ca9cff8fbd41f4e92032a0906c2dcf13aaa7b8a9d3d9ba5e43a5f6e69997f3",
+    "question": "팀장이 준 힌트 숫자보다 한 번 더 추리할 수 있나요?",
+    "pages": [
+      5
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "coffee-rush",
+    "edition_id": "coffee-rush-user-30a77c8d8106",
+    "document_id": "30a77c8d8106cb94eb8638c31b6d937338a9880580f212de31b936dbaa5cc7e2",
+    "question": "업그레이드를 활성화하려면 처리된 주문카드가 몇 장 필요한가요?",
+    "pages": [
+      3
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "darwins-journey",
+    "edition_id": "darwins-journey-user-1c01b6eb8ea4",
+    "document_id": "1c01b6eb8ea458017eb8deba009082a4ce10134f5341bab5cfec67c789a4ebf9",
+    "question": "탐사대 카드를 달성하려면 밀랍 봉인을 어떻게 갖고 있어야 하나요?",
+    "pages": [
+      22
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "decrypto",
+    "edition_id": "decrypto-user-ko-rulebook",
+    "document_id": "4c4899160c83cbd436b7bbd3467eb28433e245fa711a06d7b83566f648ab7bf0",
+    "question": "단어의 글자 수나 첫 자음을 힌트로 줘도 되나요?",
+    "pages": [
+      6
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "dive",
+    "edition_id": "dive-user-cd805c7a4636",
+    "document_id": "cd805c7a4636799d78d61e1ff9ac2567a2e6e0c78b5342c83c95298cb886e6de",
+    "question": "바다동물 능력은 몇 번 쓸 수 있고 사용한 뒤에는 어떻게 되나요?",
+    "pages": [
+      9
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "dominion",
+    "edition_id": "dominion-user-7ffb9798e40d",
+    "document_id": "7ffb9798e40deb1e066f94140c1954ca84bbe930b7d9faa8e4fc7946eafcc856",
+    "question": "+구입 1번 효과를 받으면 추가 구입을 꼭 해야 하나요?",
+    "pages": [
+      7
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "dream-home",
+    "edition_id": "dream-home-user-8698a0aae6be",
+    "document_id": "8698a0aae6be3917102645f7b0422fe777ba11384ff6c51349569a48a7f12493",
+    "question": "인테리어 디자이너 카드가 있으면 장식품을 놓은 방도 넓힐 수 있나요?",
+    "pages": [
+      13
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "expedition",
+    "edition_id": "expedition-user-bcd7d93cc408",
+    "document_id": "bcd7d93cc408bfb98fbdfbe1324b86284e5f005f27d39834945a86df7338ba20",
+    "question": "차례를 끝낼 때 손패는 몇 장이 되도록 채우나요?",
+    "pages": [
+      7
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "exploding-kittens",
+    "edition_id": "exploding-kittens-official-ko-rulebook",
+    "document_id": "dd9e09a672da714333c425b4789b40c71694fee0becce871847198e2df43ff6a",
+    "question": "해체 카드를 쓴 뒤 폭발하는 고양이 카드는 어디에 넣나요?",
+    "pages": [
+      2
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "exploding-kittens",
+    "edition_id": "exploding-kittens-user-a82cfeeeb00e",
+    "document_id": "a82cfeeeb00e2461b7188346a718407a2d7c02751a586eceb4df66ba41ec6842",
+    "question": "공격 카드를 받은 상태에서 다시 공격 카드를 내면 다음 사람은 차례를 몇 번 가지나요?",
+    "pages": [
+      2
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "farmers-market",
+    "edition_id": "farmers-market-user-ko-rulebook",
+    "document_id": "691b98849af65e81645f9492d876f767bbbabf0077f9b24d41b288be48b5b68f",
+    "question": "최고 점수가 같으면 승자를 어떻게 정하나요?",
+    "pages": [
+      5
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "flip-7",
+    "edition_id": "flip-7-boardlife-10885",
+    "document_id": "1d9cf4ec01c6b9aecce500847317fe860dc033e8d61f313e2fc163080839f50e",
+    "question": "스테이는 언제 선언할 수 있나요?",
+    "pages": [
+      5
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "fold-it",
+    "edition_id": "fold-it-user-ko-rulebook",
+    "document_id": "9e1432b5eb56c4eefca625e8d62dc8c4f3d66da9b2cd501c0780d92d7a5a450d",
+    "question": "손수건을 접을 때 음식 그림 가운데를 접어도 되나요?",
+    "pages": [
+      2
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "forbidden-island",
+    "edition_id": "forbidden-island-official-en-rulebook",
+    "document_id": "b007c6b6a9385f4e27e74499f5e4623f3360ab7f8301853a4a3df01c6fa71c39",
+    "question": "내 말을 대각선 방향 타일로 이동할 수 있나요?",
+    "pages": [
+      4
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "forest-whispers",
+    "edition_id": "forest-whispers-user-33ea5a8b6b24",
+    "document_id": "33ea5a8b6b24b58633273e7384862012ace80417cc6c77ed18548f92123dcf0d",
+    "question": "차례를 마무리할 때 주머니에서 뽑은 타일과 같은 색 타일은 어떻게 하나요?",
+    "pages": [
+      13
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "galpang-jilpang",
+    "edition_id": "galpang-jilpang-user-7df0a5f70f5d",
+    "document_id": "7df0a5f70f5d948b76db4da6160b2df9d37b398d5bcac88958c51e8aacee2ceb",
+    "question": "탐정들은 한 라운드에 카드를 몇 장까지 제거할 수 있나요?",
+    "pages": [
+      2
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "gizmos",
+    "edition_id": "gizmos-user-bb3910c6351d",
+    "document_id": "bb3910c6351d369d66a0e48dd8985f053fdf114b65ea5f507f85bd06f230ddb0",
+    "question": "같은 기즈모를 한 차례에 두 번 발동할 수 있나요?",
+    "pages": [
+      4
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "grand-austria-hotel",
+    "edition_id": "grand-austria-hotel-user-8c738ee78475",
+    "document_id": "8c738ee78475ef453829491d687f110f7e763e338a1c64b9b6f2c9d0a7f0b714",
+    "question": "한 사람이 차례를 마친 뒤 다음 차례는 누구에게 가나요?",
+    "pages": [
+      10
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "great-western-trail",
+    "edition_id": "great-western-trail-user-c43a16efc291",
+    "document_id": "c43a16efc291d3b2f4ee8c46a96dcde599d30cfa08397f60b22ecadcb30315fc",
+    "question": "건물 타일의 장소 행동은 표시된 순서대로 해야 하나요?",
+    "pages": [
+      7
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "hanamikoji",
+    "edition_id": "hanamikoji-boardlife-4344",
+    "document_id": "bfad3bfdba7cc69d575c0885e7b63116872dd751d4edd709290b660c6fbaccf3",
+    "question": "라운드를 시작할 때 도구 카드 한 장을 빼는 건 어떻게 하나요?",
+    "pages": [
+      2
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "heat-pedal-to-the-metal",
+    "edition_id": "heat-pedal-to-the-metal-user-1f0d33a9f10c",
+    "document_id": "1f0d33a9f10c9d545fbefdfc3f069b581439bda4c81be4f8e4464ab4c6c32753",
+    "question": "열 카드가 너무 많아 기어 단수만큼 카드를 낼 수 없으면 어떻게 되나요?",
+    "pages": [
+      7
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "high-society",
+    "edition_id": "high-society-official-ko-rulebook",
+    "document_id": "56ee3de75cb5ab29ef449790289177fcd3ad6d47c4397e07195bdb4a78c2e9bf",
+    "question": "게임 준비 때 각 플레이어는 돈 카드를 몇 장 받나요?",
+    "pages": [
+      1
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "hitster",
+    "edition_id": "hitster-user-db25fc84b8e8",
+    "document_id": "db25fc84b8e826121d06c62a5686c68f8f48d636b304feae07a3d89e7f23415e",
+    "question": "다른 사람이 이미 토큰을 놓은 위치에 도전할 수 있나요?",
+    "pages": [
+      2
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "hive",
+    "edition_id": "hive-official-ko-rulebook",
+    "document_id": "30bcd19f5462108184d12a106c635f990cfbfa5b60aed995ddccbe7c5432dcb6",
+    "question": "여왕벌은 늦어도 몇 번째 차례까지 놓아야 하나요?",
+    "pages": [
+      3
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "kanban-ev",
+    "edition_id": "kanban-ev-user-b589b1e4ef5e",
+    "document_id": "b589b1e4ef5e0df6093e0a65a1098e5c974b9bb59a1abcec6ccc6bfcdba19b75",
+    "question": "회의 중 업무 목표 카드를 내려놓는 행동은 몇 번 해야 하나요?",
+    "pages": [
+      20
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "kingdomino",
+    "edition_id": "kingdomino-user-ko-rulebook",
+    "document_id": "b6bf4763dfb965eb5e5a921d3e82b41694a99f71c2c68dfe72c3b421f1119d91",
+    "question": "영토 점수는 어떻게 계산하나요?",
+    "pages": [
+      3
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "le-havre",
+    "edition_id": "le-havre-user-391e9d259f64",
+    "document_id": "391e9d259f64d88336d081bcf087aacd554794754b5f880e1e6a42192721f1a2",
+    "question": "대출 카드를 가진 플레이어는 이자를 얼마나 내나요?",
+    "pages": [
+      4
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "lorenzo-il-magnifico",
+    "edition_id": "lorenzo-il-magnifico-user-e18b19181587",
+    "document_id": "e18b19181587b1f43b3c2e5b6b94b124aa7fd3eb9077592cbff2c08bef456e71",
+    "question": "사업 카드 비용을 군사 점수로 낼 때 미리 갖고 있어야 하는 점수가 있나요?",
+    "pages": [
+      7
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "lucky-numbers",
+    "edition_id": "lucky-numbers-official-ko-rulebook",
+    "document_id": "813713c22574068d748fc14944dfbcc2992341803ff69200eb78e0f6699c91d3",
+    "question": "중앙에 앞면 타일이 하나도 없을 때도 그 타일을 가져오는 행동을 할 수 있나요?",
+    "pages": [
+      2
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "machi-koro-2",
+    "edition_id": "machi-koro-2-user-ko-rulebook",
+    "document_id": "dc3ea076116a4d0297713435798f4fa66bce2d91ead9cfa32a6a43b036e0fbb2",
+    "question": "게임 준비 때 공급처에는 더미마다 몇 종류의 카드를 공개하나요?",
+    "pages": [
+      2
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "machi-koro",
+    "edition_id": "machi-koro-boardlife-586",
+    "document_id": "f7a814cf9d8b8a413119743a570447545a4d9c5ddaefb08ec041f1064286cd08",
+    "question": "보라색 건물은 같은 종류를 두 개 지을 수 있나요?",
+    "pages": [
+      7
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "mage-knight",
+    "edition_id": "mage-knight-user-2c78b515f82e",
+    "document_id": "2c78b515f82eb604236d2a5b359d195163110dcf5a6523947b78ae1349087264",
+    "question": "차례를 포기하면 내가 있는 장소의 혜택을 쓸 수 있나요?",
+    "pages": [
+      6
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "marco-polo-ii",
+    "edition_id": "marco-polo-ii-user-16c7ae68cff1",
+    "document_id": "16c7ae68cff1c1ddef781c03bcbedc8d3f6a2365da7829195a491bb923374369",
+    "question": "여행 도착지가 내 교역소가 없는 도시이면 무엇을 해야 하나요?",
+    "pages": [
+      5
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "mighty",
+    "edition_id": "mighty-user-b28b7baf2bee",
+    "document_id": "b28b7baf2beee55ab403272fa079137890a244befe6ca26f5e4e7f95370d2fb2",
+    "question": "딜미스를 외치면 점수에 어떤 불이익이 있나요?",
+    "pages": [
+      14
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "nemesis",
+    "edition_id": "nemesis-user-570f161877ef",
+    "document_id": "570f161877efcde1d928f497401cd692c754f18bdb9dd7cb6f6e62905130d979",
+    "question": "불 마커가 있는 방에서 경상은 언제 입나요?",
+    "pages": [
+      17
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "new-york-zoo",
+    "edition_id": "new-york-zoo-boardlife-7172",
+    "document_id": "5e3c1ed9d4492ae3213344bedb3fb99cd655bcba0cae68e996d9931f90129fcd",
+    "question": "한 울타리 타일에 서로 다른 종의 동물을 함께 둘 수 있나요?",
+    "pages": [
+      6
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "ninety-nine",
+    "edition_id": "ninety-nine-user-22d57641ab2b",
+    "document_id": "22d57641ab2bebce16a330d5cf3e107164e64187906aef6db0065d91a86eb41f",
+    "question": "카드를 내고 보충을 깜빡했는데 다음 사람이 이미 보충했다면 나중에 보충할 수 있나요?",
+    "pages": [
+      4
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "no-thanks",
+    "edition_id": "no-thanks-user-d339f5fbbeef",
+    "document_id": "d339f5fbbeefc773e61398cc42f911d7ede918417334f19044d8ecab77b8fe7f",
+    "question": "연속된 숫자 카드를 갖고 있으면 벌점은 어떻게 계산하나요?",
+    "pages": [
+      1
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "nunchi-kochi-drawing",
+    "edition_id": "nunchi-kochi-drawing-user-5d9173a67360",
+    "document_id": "5d9173a6736006783b9eb80ae1e68b6ddb46d24778a287aa3efe2800c2cff240",
+    "question": "화가는 그림을 그리는 동안 명사를 말해도 되나요?",
+    "pages": [
+      3
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "one-night-ultimate-werewolf",
+    "edition_id": "one-night-ultimate-werewolf-boardlife-465",
+    "document_id": "6b41f5e0866560b004970d883d12c43aa0bccec17a600528bf04732b46d873f9",
+    "question": "도플갱어가 부하를 복제하면 어느 팀이 되나요?",
+    "pages": [
+      5
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "onitama",
+    "edition_id": "onitama-boardlife-2270",
+    "document_id": "4d84843ba50e91c9bc1b0f3a5413f4283d23587ea66f172c2477b9dcb3d1cd19",
+    "question": "같은 색 말이 있는 칸으로 이동할 수 있나요?",
+    "pages": [
+      1
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "orleans",
+    "edition_id": "orleans-user-d680de24f442",
+    "document_id": "d680de24f442b16f09068a0f8edcb798173e0de22801f36f05b0352adac83bb7",
+    "question": "추종자 타일이 다 떨어지면 그 타일을 주는 행동을 할 수 있나요?",
+    "pages": [
+      12
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "pandemic",
+    "edition_id": "pandemic-boardlife-668",
+    "document_id": "88678d2352044688c77942c7cdf639b86b6fa9e54f1013b13ccf840f612cf6d6",
+    "question": "사건 카드를 쓰면 액션 하나를 소모하나요?",
+    "pages": [
+      7
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "penguin-party",
+    "edition_id": "penguin-party-boardlife-4226",
+    "document_id": "2a5a18ded57ca1265f17388c891c1053603105ae8019c835aa7b39cbf657767f",
+    "question": "낼 수 있는 카드가 없을 때 벌점은 얼마나 받나요?",
+    "pages": [
+      2
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "pick-picnic",
+    "edition_id": "pick-picnic-boardlife-6316",
+    "document_id": "59fc4559cb1ecbfd6481e71c5179f37fc9ad1a8de367a11b6429286c101320f9",
+    "question": "가금류가 없는 마당에 여우가 들어가면 어떻게 되나요?",
+    "pages": [
+      2
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "potion-explosion",
+    "edition_id": "potion-explosion-user-1ae7781b526b",
+    "document_id": "1ae7781b526b334c3493205399083f72f39e53ca870c3d0188bfe5a08e918f6e",
+    "question": "내 차례에 분배기에서 재료를 가져오지 않아도 되나요?",
+    "pages": [
+      5
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "puerto-rico-1897",
+    "edition_id": "puerto-rico-1897-user-176bef006ad2",
+    "document_id": "176bef006ad2bb239cab37c12bd89542f8154b98c1c76220bea480da22ae8723",
+    "question": "상업 건물의 기능은 사람이 배치되지 않아도 사용할 수 있나요?",
+    "pages": [
+      9
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "quoridor",
+    "edition_id": "quoridor-additional-ko-20261021",
+    "document_id": "dc9726a3469ad0faa909363c49e31f24cde1219fd324ec5a7f5a9e3d37d82e05",
+    "question": "2인용 게임에서 각 플레이어는 장애물을 몇 개 가지고 시작하나요?",
+    "pages": [
+      17
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "ricochet-robots",
+    "edition_id": "ricochet-robots-user-ko-rulebook",
+    "document_id": "ff9c08498d24fdc283a46111f65d5db5e0159a7ccbba5c56b2d78c47783aea37",
+    "question": "이미 외친 이동 횟수보다 큰 숫자로 바꿔 말할 수 있나요?",
+    "pages": [
+      2
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "rummikub",
+    "edition_id": "rummikub-official-ko-rulebook",
+    "document_id": "55a33646840ed3d699a5056df837d89f9ea4e87bb0586c47ea22c9e86d7cb3a9",
+    "question": "차례마다 주어지는 제한 시간은 얼마이며 넘기면 어떻게 되나요?",
+    "pages": [
+      4
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "saboteur",
+    "edition_id": "saboteur-official-ko-rulebook",
+    "document_id": "fd144b738dd322e2bac735e05a855beb8016a316119f225e1524825f60d90802",
+    "question": "굴 통로가 목적지 카드에 닿으면 무엇을 하나요?",
+    "pages": [
+      4
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "santorini",
+    "edition_id": "santorini-user-1562c33b60d8",
+    "document_id": "1562c33b60d8dac3a2934a4bd39672f067d3f49116d2ff3dc2b14501248544a2",
+    "question": "아프로디테 능력이 있을 때 근처에서 차례를 시작한 상대 일꾼은 어디서 멈춰야 하나요?",
+    "pages": [
+      4
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "schotten-totten",
+    "edition_id": "schotten-totten-boardlife-2982",
+    "document_id": "989a6e7fadb36ae41c63eadd5ef9478fc96a1cfbb7cea6f4155d34a643df1e1f",
+    "question": "전술 변형 규칙에서는 부족 카드를 처음에 몇 장 받나요?",
+    "pages": [
+      11
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "scythe",
+    "edition_id": "scythe-user-90381687d016",
+    "document_id": "90381687d016c7439346ba56898e6f14cfe8a082da14334e015659df1b5902e6",
+    "question": "전투에서 전투력 총합이 같으면 누가 이기나요?",
+    "pages": [
+      5,
+      23,
+      31
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "sea-divers-of-jeju",
+    "edition_id": "sea-divers-of-jeju-user-ko-rulebook",
+    "document_id": "022616206d1d3a9c8e006cab9f0c7610e72f6c134ad6da2ee7ab76f3ccfe14d2",
+    "question": "바다거북의 부탁 확장에서 0구역에 해녀가 혼자 있으면 거북알을 몇 개 받나요?",
+    "pages": [
+      10
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "sheriff-of-nottingham",
+    "edition_id": "sheriff-of-nottingham-user-8d8f522a73da",
+    "document_id": "8d8f522a73da186af5e422796da474f4f4f3a365fd9f012240af6501f4eba7c5",
+    "question": "지방관이 정직하게 신고한 상인의 주머니를 조사하면 어떻게 되나요?",
+    "pages": [
+      9
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "sky-team",
+    "edition_id": "sky-team-boardlife-9318",
+    "document_id": "c6220422074891edabe0f43c7f7c769b5617d673e69ca13fd101fe7ad20778f8",
+    "question": "마지막 착륙 라운드에서 엔진 주사위 합은 무엇과 비교하나요?",
+    "pages": [
+      10
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "spicy",
+    "edition_id": "spicy-user-f56ef3adc9ea",
+    "document_id": "f56ef3adc9ea5f7e1ba152abbfe9bcf63a4b30267dc8c7ba7c315420b9b97ab3",
+    "question": "더미의 첫 카드를 낼 때 말할 수 있는 숫자 범위는 어떻게 되나요?",
+    "pages": [
+      3
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "split",
+    "edition_id": "split-user-8a103b40fec1",
+    "document_id": "8a103b40fec1b3dd18a2f8c428f152e945bcc768d588ef3eec850dd946c0bd87",
+    "question": "협력 모드에서 누군가 초기화를 해야 하는 상황이 되면 어떻게 되나요?",
+    "pages": [
+      2
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "star-wishes",
+    "edition_id": "star-wishes-user-9af4521760f2",
+    "document_id": "9af4521760f23bc12cfba607e4e490a5d6a545fdfd97ba433e57d1bfcd70b2ca",
+    "question": "별빛을 잃게 되는 경우는 무엇인가요?",
+    "pages": [
+      13
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "sushi-go-party",
+    "edition_id": "sushi-go-party-official-en-rulebook",
+    "document_id": "5c252689af1a27d0839874af133a11d98c06e65fae71ac23b2fd8e3e97b49628",
+    "question": "젓가락이나 숟가락 카드는 낸 그 턴에 바로 효과를 쓸 수 있나요?",
+    "pages": [
+      4,
+      7
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "sushi-go-party",
+    "edition_id": "sushi-go-party-boardlife-2371",
+    "document_id": "dcb2f179f2c8e597d4c023175811e45a1efe332d6feaf643f1a545b5d97e08d2",
+    "question": "숟가락 카드는 몇 인용 게임에서 사용하나요?",
+    "pages": [
+      7
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "teotihuacan",
+    "edition_id": "teotihuacan-user-fe72221a11e1",
+    "document_id": "fe72221a11e1de800e304fc530c73e1a39f2cfe5ff3419a91dbd0199d2d79456",
+    "question": "내 턴에 고를 수 있는 두 가지 선택지는 무엇인가요?",
+    "pages": [
+      9
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "terraforming-mars",
+    "edition_id": "terraforming-mars-user-7ef53b7c7eaa",
+    "document_id": "7ef53b7c7eaa14c3e3045477a2e2991e25c466bab3951751f0b73a5c1d10548a",
+    "question": "한 차례에 같은 행동을 두 번 해도 되나요?",
+    "pages": [
+      9
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "the-gallerist",
+    "edition_id": "the-gallerist-user-eca3e6e1ebf4",
+    "document_id": "eca3e6e1ebf49566984e763c685a728f4dad53d6126e7b6bf091756149ac05c4",
+    "question": "갤러리스트 말이 이동할 때 원래 칸에 조수를 두고 올 수 있나요?",
+    "pages": [
+      5
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "the-game",
+    "edition_id": "the-game-official-ko-rulebook",
+    "document_id": "7b47b712e4478b91e2a7173f1f04104526af40e0496ecbda04573401969af5e7",
+    "question": "오름차순 더미에 현재 숫자보다 낮은 카드를 낼 수 있는 예외가 있나요?",
+    "pages": [
+      2
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "the-isle-of-cats",
+    "edition_id": "the-isle-of-cats-user-a919d08eb985",
+    "document_id": "a919d08eb985390b76f030da6a450602edc5bf589d7e1205b289c36135eab940",
+    "question": "1인용 바구니 카드가 제거하라는 번호의 타일이 없으면 어떻게 하나요?",
+    "pages": [
+      21
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "the-mind",
+    "edition_id": "the-mind-official-ko-rulebook",
+    "document_id": "00490bb82246c83d8a1ebf8a7d6c35d4991e14ae3727fc2582a9db4048bef980",
+    "question": "더 높은 카드가 먼저 나와 실수하면 레벨을 처음부터 다시 하나요?",
+    "pages": [
+      2
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "the-quest-for-el-dorado",
+    "edition_id": "the-quest-for-el-dorado-user-6e2887dd481d",
+    "document_id": "6e2887dd481dea4d1cdbf2b3a9c353fe7d7ceb79cbb9472b96b01e175985a2d0",
+    "question": "동굴 토큰 변형 규칙에서 동굴 토큰 더미는 어떻게 준비하나요?",
+    "pages": [
+      11
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "the-search-for-planet-x",
+    "edition_id": "the-search-for-planet-x-user-d4510c0cedd1",
+    "document_id": "d4510c0cedd1358cc8c2349f4be1fc4794129c1c1e2c42ba901f28afa75115fc",
+    "question": "다음 차례를 진행할 플레이어는 어떻게 정하나요?",
+    "pages": [
+      8
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "top-ten-tv",
+    "edition_id": "top-ten-tv-user-ko-rulebook",
+    "document_id": "2b2a97eb5296af5258dfc41edc93b8b0f729fc9306a974f28b60049d271f5089",
+    "question": "PD가 추측하는 동안 다른 사람이 힌트를 줘도 되나요?",
+    "pages": [
+      3
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "tornado-6",
+    "edition_id": "tornado-6-user-4b2ff468ffe1",
+    "document_id": "4b2ff468ffe11135912b4d4a20a33912acaa815297dcd8383d642346ea347923",
+    "question": "첫 카드와 같은 색 카드가 손에 없으면 무엇을 낼 수 있나요?",
+    "pages": [
+      1
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "troyes",
+    "edition_id": "troyes-user-71d764a584d3",
+    "document_id": "71d764a584d314456e3527286e5c42b92dbd97de3144664574f4704a13dca143",
+    "question": "약탈 사건을 퇴치하면 누가 사건 카드를 가져가나요?",
+    "pages": [
+      6
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "vegetable-stock",
+    "edition_id": "vegetable-stock-user-2b17996136b7",
+    "document_id": "2b17996136b75e3b54fc0fa94753e24ca37b79daec95be1861d82a21aae4fa49",
+    "question": "게임은 몇 라운드 동안 진행하나요?",
+    "pages": [
+      2
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "watergate",
+    "edition_id": "watergate-user-bb69583f73f5",
+    "document_id": "bb69583f73f55ee48c56892803eaf4611d838a87f52f974d990026ec17781afa",
+    "question": "벤 브래들리 카드로 닉슨의 공모자 카드를 저지하면 그 카드는 어떻게 되나요?",
+    "pages": [
+      7
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "whitehall-mystery",
+    "edition_id": "whitehall-mystery-user-45e650db2f66",
+    "document_id": "45e650db2f6609ada31e3f190a297549a80175bc75b49e53f9a7b30813a0ac25",
+    "question": "조사자가 단서를 찾은 뒤 같은 차례에 다른 동그라미를 더 조사할 수 있나요?",
+    "pages": [
+      11
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "wingspan",
+    "edition_id": "wingspan-user-f1b33a73c290",
+    "document_id": "f1b33a73c29043f7936fb832a31bf2f962858b0f4a8cca0d21eaae1d4712347f",
+    "question": "내 차례에는 몇 가지 행동 중 몇 개를 수행하나요?",
+    "pages": [
+      4
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "wyatt-earp",
+    "edition_id": "wyatt-earp-user-70a60fa37c4b",
+    "document_id": "70a60fa37c4b6bf28e14eb99fbcfa612e74f2e1174f088fbfbf1dad101b081dc",
+    "question": "이미 은신처 카드가 놓인 무법자에게 은신처 카드를 또 쓸 수 있나요?",
+    "pages": [
+      13
+    ],
+    "origin": "stage5_grounding"
+  },
+  {
+    "game_id": "zombie-dice",
+    "edition_id": "zombie-dice-boardlife-9471",
+    "document_id": "2dbb7620e5738099e8d24da521dae5fb5a4df9d2371b33f33a9e8baf9c79cbe7",
+    "question": "샷건 면이 3개 이상 나오면 어떻게 되나요?",
+    "pages": [
+      1
+    ],
+    "origin": "stage5_grounding"
+  }
+]

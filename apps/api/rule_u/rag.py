@@ -13,6 +13,7 @@ from rule_u.discovery import normalize
 from rule_u.ingestion import digest, save_json, vector_collections
 from rule_u.models import Document, DocumentScope
 from rule_u.providers import chat_provider, embedding_provider
+from rule_u.search import search
 
 
 class EvidenceExplanation(BaseModel):
@@ -121,6 +122,29 @@ def validate_answer(answer, evidence):
             "citations": [{**allowed[i], "explanation": explanations.get(i)} for i in ids]}
 
 
+SUPPLEMENT_TYPES = {"faq", "errata"}
+
+
+def document_relations(settings):
+    path = settings.document_relations_path
+    return json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
+
+
+def admitted_supplements(docs, types, relations, edition_id):
+    """FAQ/errata join only with a verified relation to a rulebook in this same scope."""
+    rulebooks = {d for d in docs if types.get(d) not in SUPPLEMENT_TYPES}
+    admitted = {}
+    for did in docs:
+        if types.get(did) not in SUPPLEMENT_TYPES:
+            continue
+        relation = relations.get(did, {})
+        if (relation.get("status") == "verified" and relation.get("type") == types[did]
+                and relation.get("edition_id") == edition_id
+                and relation.get("amends_document_id") in rulebooks):
+            admitted[did] = relation
+    return rulebooks, admitted
+
+
 async def retrieve(settings, sessions, context):
     fingerprint, collections = vector_collections(settings)
     with sessions() as db:
@@ -142,20 +166,32 @@ async def retrieve(settings, sessions, context):
                          "edition_snapshot": context["edition"]["label"]}
     if not docs:
         return []
+    rules = collections["rule_docs"]
+    types = {}
+    for did in docs:
+        sample = rules.get(where={"document_id": did}, limit=1, include=["metadatas"])["metadatas"]
+        types[did] = sample[0].get("document_type", "unknown") if sample else "unknown"
+    rulebooks, supplements = admitted_supplements(
+        docs, types, document_relations(settings), context["edition"]["id"])
+    for did, relation in supplements.items():
+        docs[did]["supplement_type"] = relation["type"]
+        docs[did]["amends_document_id"] = relation["amends_document_id"]
+    allowed = sorted(rulebooks | set(supplements))
+    if not allowed:
+        return []
     query = "\n".join(m["content"] for m in context["messages"][-6:] if m["role"] == "user")
     path = settings.data_dir / "query-cache" / f"{digest((fingerprint + normalize(query)).encode())}.json"
     vector = json.loads(path.read_text()) if path.exists() else (
         await embedding_provider(settings).embed([query]))[0]
     if not path.exists():
         save_json(path, vector)
-    found = collections["rule_docs"].query(query_embeddings=[vector],
-        n_results=settings.candidate_k,
-        where={"$and": [{"game_id": context["game"]["id"]},
-                        {"edition_id": context["edition"]["id"]},
-                        {"document_id": {"$in": list(docs)}}]},
-        include=["documents", "metadatas"])
+    where = {"$and": [{"game_id": context["game"]["id"]},
+                      {"edition_id": context["edition"]["id"]},
+                      {"document_id": {"$in": allowed}}]}
+    found = search(rules, vector, query, where, settings.search_mode,
+                   settings.external_top_k, settings.candidate_k)
     result, seen = [], set()
-    for metadata, text in zip(found["metadatas"][0], found["documents"][0], strict=True):
+    for metadata, text in found:
         key = (metadata["document_id"], metadata["chunk_id"])
         if key in seen:
             continue
@@ -174,6 +210,8 @@ PROMPT += '''
 source_type=bgg_community 자료는 일반 사용자의 규칙 토론이며 공식 룰북이 아니다.
 게임 소개나 질문 자체를 규칙 근거로 쓰지 않는다. 토론의 답글에 실제로 명시된 내용만 사용한다.
 선택 판본·확장과의 호환성이 불명확하거나 답글이 충돌하거나 질문과 관련 없으면 insufficient_evidence로 보류한다.
+supplement_type=errata|faq 근거는 amends_document_id 규칙서를 수정·보충하는 검증된 공식 자료다.
+같은 항목에서 규칙서와 다르면 정오표·FAQ를 우선하고 수정 사실을 답변에 밝힌다.
 커뮤니티 자료는 검증된 공식 규칙을 덮어쓰지 않는다. 커뮤니티 인용 답변은 conditional로 표시하고
 공식 판정이 아니라는 점을 밝힌다. 설명에서도 룰북이나 출판사 답변이라고 부르지 않는다.
 '''

@@ -5,6 +5,7 @@ import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import select
 from test_ingestion import bundle
+from test_stage5 import rule_bundle
 
 from rule_u.db import make_engine, make_sessions
 from rule_u.ingestion import import_metadata, index_bundle, ingest_documents, vector_collections
@@ -97,7 +98,7 @@ def test_invalid_model_json_is_bounded(configured):
 
 def test_scoped_retrieval_and_expansion_exclusion(configured, tmp_path):
     settings, _ = configured
-    rows = bundle(tmp_path)
+    rows = rule_bundle(tmp_path)
     import_metadata(settings, rows)
     ingest_documents(settings, rows, tmp_path)
     asyncio.run(index_bundle(settings, rows))
@@ -106,7 +107,8 @@ def test_scoped_retrieval_and_expansion_exclusion(configured, tmp_path):
     context = {"game": {"id": "test-game"}, "edition": {"id": "test-edition", "label": "Test"},
                "expansion_ids": [], "messages": [{"role": "user", "content": "When?"}]}
     result = asyncio.run(retrieve(settings, sessions, context))
-    assert result and all(e["page_start"] == 1 for e in result)
+    # The FAQ has no verified relation, so only rulebook pages are returned.
+    assert result and all(e["source_type"] == "publisher" for e in result)
     context["edition"]["id"] = "demo-edition"
     assert asyncio.run(retrieve(settings, sessions, context)) == []
     context["edition"]["id"] = "test-edition"
@@ -115,8 +117,8 @@ def test_scoped_retrieval_and_expansion_exclusion(configured, tmp_path):
         db.flush()
         db.execute(expansion_editions.insert().values(
             expansion_id="exp", edition_id="test-edition", game_id="test-game"))
-        scope = db.scalar(select(DocumentScope).where(DocumentScope.game_id == "test-game"))
-        scope.expansion_id = "exp"
+        for scope in db.scalars(select(DocumentScope).where(DocumentScope.game_id == "test-game")):
+            scope.expansion_id = "exp"
     assert asyncio.run(retrieve(settings, sessions, context)) == []
     context["expansion_ids"] = ["exp"]
     assert asyncio.run(retrieve(settings, sessions, context))

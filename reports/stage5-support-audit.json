@@ -1,0 +1,2118 @@
+{
+  "fingerprint": "bab910f9b2a3551e",
+  "mode": "similarity",
+  "applied": true,
+  "games": 110,
+  "supported_games": 102,
+  "editions": 117,
+  "supported_editions": 107,
+  "unsupported_games": [
+    "camel-up",
+    "forest-whispers",
+    "gajigaksa",
+    "le-havre",
+    "love-letter",
+    "potion-explosion",
+    "six-fireworks",
+    "the-gallerist"
+  ],
+  "items": [
+    {
+      "game_id": "5-second-rule",
+      "edition_id": "5-second-rule-user-95e97aea0f6e",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "95e97aea0f6e4aaf7e07c9c311f1bc7486abf6512cd003c6c9890d0a1e42e5d8",
+          "source_type": "user_provided",
+          "chunks": 7,
+          "indexed": 7,
+          "unreadable_pages": [],
+          "pages": 6,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "6-nimmt",
+      "edition_id": "6-nimmt-official-ko-rulebook",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "5ebc3aedcb42dba1d504bea6b782fa5de436d83a88142212f09a427bf1f54c5e",
+          "source_type": "unverified",
+          "chunks": 3,
+          "indexed": 3,
+          "unreadable_pages": [],
+          "pages": 2,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "7-wonders-architects",
+      "edition_id": "7-wonders-architects-additional-ko-20261021",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "e442d5f77b21c30749dafe61d269a8655e0991105e857ebf4eb70a92c3eb1dc9",
+          "source_type": "publisher",
+          "chunks": 5,
+          "indexed": 5,
+          "unreadable_pages": [],
+          "pages": 3,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "7-wonders-duel",
+      "edition_id": "7-wonders-duel-boardlife-1583",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "fc98f45183b7a6b5c41a14a8d15ed1f44844fedc2b73fcc47be0282b7cb4f6e8",
+          "source_type": "community_translation",
+          "chunks": 28,
+          "indexed": 28,
+          "unreadable_pages": [],
+          "pages": 20,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "7-wonders-duel",
+      "edition_id": "7-wonders-duel-additional-ko-20261021",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "064d76e5e1fa358bc1009825f8b8d58fb8427541388c7d18c3f59e7ef34f07cd",
+          "source_type": "publisher",
+          "chunks": 28,
+          "indexed": 28,
+          "unreadable_pages": [],
+          "pages": 20,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "abluxxen",
+      "edition_id": "abluxxen-official-ko-rulebook",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "1609864a6fc3ef04808981f914aac3005f95a4c84a0e819208ac316fc61f9f0f",
+          "source_type": "unverified",
+          "chunks": 6,
+          "indexed": 6,
+          "unreadable_pages": [],
+          "pages": 2,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "abracawhat",
+      "edition_id": "abracawhat-user-b2c0ba31d515",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "b2c0ba31d5154f10497545199c08af493c6fbeeca256656d44d5e5bf5f868007",
+          "source_type": "user_provided",
+          "chunks": 4,
+          "indexed": 4,
+          "unreadable_pages": [],
+          "pages": 2,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "agricola",
+      "edition_id": "agricola-user-f005e1d2391a",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "f005e1d2391abeb047e1977b279c96689130f478a42185ebc2a5cd5a8824906b",
+          "source_type": "user_provided",
+          "chunks": 32,
+          "indexed": 32,
+          "unreadable_pages": [],
+          "pages": 12,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "amazonia-park",
+      "edition_id": "amazonia-park-user-654d4750c73c",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "654d4750c73ccda0f4851fc0b6a2213f75d8435cf2246765dd45f00711bfdd6b",
+          "source_type": "user_provided",
+          "chunks": 6,
+          "indexed": 6,
+          "unreadable_pages": [],
+          "pages": 4,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "anomia",
+      "edition_id": "anomia-user-ko-rulebook",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "1e81d6dff62d5a9f5aadcca78360626da687b02fb1d3b44b8ce4364e175f993b",
+          "source_type": "user_provided",
+          "chunks": 9,
+          "indexed": 9,
+          "unreadable_pages": [
+            6
+          ],
+          "pages": 10,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "ark-nova",
+      "edition_id": "ark-nova-user-a124dbbf7364",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "a124dbbf73647e15e29878d14b77655689b93d72c183607d5c34934beaf0a014",
+          "source_type": "user_provided",
+          "chunks": 73,
+          "indexed": 73,
+          "unreadable_pages": [
+            1
+          ],
+          "pages": 20,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "at-the-gates-of-loyang",
+      "edition_id": "at-the-gates-of-loyang-user-bea98b38adeb",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "bea98b38adebd9299f716304b52b6c57adda2897038fff3b10e8fbb7bebbfb31",
+          "source_type": "user_provided",
+          "chunks": 43,
+          "indexed": 43,
+          "unreadable_pages": [],
+          "pages": 12,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "azul",
+      "edition_id": "azul-boardlife-3993",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "3e28591776be7254c62b4b12e36923932fae21935ce02d66efe6b152b6363710",
+          "source_type": "community_translation",
+          "chunks": 9,
+          "indexed": 9,
+          "unreadable_pages": [
+            1
+          ],
+          "pages": 6,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "barrage",
+      "edition_id": "barrage-user-1f5722d738cb",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "1f5722d738cb339e0d51eaa5d01a7720b01de761af6c18d0c7b214cedd1137f2",
+          "source_type": "user_provided",
+          "chunks": 48,
+          "indexed": 48,
+          "unreadable_pages": [],
+          "pages": 28,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "bohnanza",
+      "edition_id": "bohnanza-retailer-ko-rulebook",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "2c72965aa91ce047cc7787959b8f8d1501042aa5749bcde75e51b8a0fd2f67bf",
+          "source_type": "unverified",
+          "chunks": 3,
+          "indexed": 3,
+          "unreadable_pages": [],
+          "pages": 3,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "bohnanza",
+      "edition_id": "bohnanza-user-a2010187719a",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "a2010187719a536c87c3c7ef29718b7671273ee49dd0ba7d43ffc04b22f22024",
+          "source_type": "user_provided",
+          "chunks": 17,
+          "indexed": 17,
+          "unreadable_pages": [
+            1
+          ],
+          "pages": 16,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "bomb-busters",
+      "edition_id": "bomb-busters-user-838e8f7f0a1f",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "838e8f7f0a1f62929897e7ce6f7ad1b42a29b31923e46472779a8a468866068e",
+          "source_type": "user_provided",
+          "chunks": 18,
+          "indexed": 18,
+          "unreadable_pages": [],
+          "pages": 8,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "camel-up",
+      "edition_id": "camel-up-boardlife-680",
+      "supported": false,
+      "reasons": [
+        "garbled_text",
+        "grounding_question_missing"
+      ],
+      "documents": [
+        {
+          "document_id": "e7a61c18ba1b28a1921e745ed7c78d924ec5742defd41260ac6150c9a39ff0f8",
+          "source_type": "community_translation",
+          "chunks": 13,
+          "indexed": 13,
+          "unreadable_pages": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "pages": 4,
+          "status": "garbled"
+        }
+      ]
+    },
+    {
+      "game_id": "camel-up",
+      "edition_id": "camel-up-user-a12f739f3423",
+      "supported": false,
+      "reasons": [
+        "garbled_text",
+        "grounding_question_missing"
+      ],
+      "documents": [
+        {
+          "document_id": "a12f739f3423a27e48022bb3b5e98f5d0821ea3235be1b9652e27b7e039d301d",
+          "source_type": "user_provided",
+          "chunks": 6,
+          "indexed": 6,
+          "unreadable_pages": [
+            2,
+            3,
+            4
+          ],
+          "pages": 6,
+          "status": "garbled"
+        }
+      ]
+    },
+    {
+      "game_id": "cant-stop",
+      "edition_id": "cant-stop-official-ko-rulebook",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "73cd690ba2648517131914b0e28382fbc09468e9693c92df59b918263b37d812",
+          "source_type": "unverified",
+          "chunks": 6,
+          "indexed": 6,
+          "unreadable_pages": [],
+          "pages": 2,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "carcassonne",
+      "edition_id": "carcassonne-additional-ko-20261021",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "01df0c22ab936fd1fb4b67604fa5501b9be9d2169bf0d07358526b3a63cedb04",
+          "source_type": "community_upload",
+          "chunks": 4,
+          "indexed": 4,
+          "unreadable_pages": [],
+          "pages": 4,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "carnegie",
+      "edition_id": "carnegie-user-16e635f2ae85",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "16e635f2ae850fcde0e5009ad2e427674b353ac713b84ff0b92570385c51302f",
+          "source_type": "user_provided",
+          "chunks": 40,
+          "indexed": 40,
+          "unreadable_pages": [
+            1
+          ],
+          "pages": 20,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "cascadia",
+      "edition_id": "cascadia-boardlife-7608",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "82b6d5c06295dff808271b98a41dde11602819cf9aa4cecd8b018b2fbb56313d",
+          "source_type": "community_translation",
+          "chunks": 36,
+          "indexed": 36,
+          "unreadable_pages": [],
+          "pages": 16,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "cascadia",
+      "edition_id": "cascadia-user-3460dcb5f83f",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "3460dcb5f83f0f9b3125e5cd85d8ade984805ca12b8f94e9227e88424077fc01",
+          "source_type": "user_provided",
+          "chunks": 32,
+          "indexed": 32,
+          "unreadable_pages": [],
+          "pages": 16,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "castle-combo",
+      "edition_id": "castle-combo-boardlife-10501",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "dbdd677667ad4eaf641db59062504423cdfbc4e274ffc5d60002d3daf472133c",
+          "source_type": "community_translation",
+          "chunks": 14,
+          "indexed": 14,
+          "unreadable_pages": [],
+          "pages": 12,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "catan",
+      "edition_id": "catan-user-748610c946df",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "748610c946df74e86db7d5538afabd551579296b13456c644c5e528747e6df56",
+          "source_type": "user_provided",
+          "chunks": 9,
+          "indexed": 9,
+          "unreadable_pages": [],
+          "pages": 3,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "caverna",
+      "edition_id": "caverna-user-9d08fb4615a9",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "9d08fb4615a97a9ddc207c43ffe1d0a435d0691a459a8c0fe72e57a38dd567b3",
+          "source_type": "user_provided",
+          "chunks": 48,
+          "indexed": 48,
+          "unreadable_pages": [],
+          "pages": 24,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "celestia",
+      "edition_id": "celestia-official-ko-rulebook",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "3ad021bb981774202e6464bc9b93722919065229ee5ad3903b1e545e6902e655",
+          "source_type": "unverified",
+          "chunks": 12,
+          "indexed": 12,
+          "unreadable_pages": [],
+          "pages": 12,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "chronicles-of-crime-1400",
+      "edition_id": "chronicles-of-crime-1400-user-5066fee06dd0",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "5066fee06dd0d96afd246d24ef323cf55af2e2dd2c314b1f1dcb060a4998433e",
+          "source_type": "user_provided",
+          "chunks": 12,
+          "indexed": 12,
+          "unreadable_pages": [],
+          "pages": 8,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "citadels",
+      "edition_id": "citadels-user-ac1c806d37c7",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "ac1c806d37c75da47f3c85588264978ce257de7c861a3c6cff22dc5e011c5d57",
+          "source_type": "user_provided",
+          "chunks": 38,
+          "indexed": 38,
+          "unreadable_pages": [],
+          "pages": 16,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "clank-catacombs",
+      "edition_id": "clank-catacombs-user-251719837cc5",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "251719837cc5e56401b997b680f142458ed55f20c51faf61ea4c1c8f3ceba16b",
+          "source_type": "user_provided",
+          "chunks": 32,
+          "indexed": 32,
+          "unreadable_pages": [],
+          "pages": 16,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "cockroach-poker",
+      "edition_id": "cockroach-poker-boardlife-6359",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "ca6c2e17a525089190f3925ccdfd6b6f68cfdfc5a9ac8d38dc0fe4801017c9b6",
+          "source_type": "community_translation",
+          "chunks": 2,
+          "indexed": 2,
+          "unreadable_pages": [],
+          "pages": 2,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "codenames-pictures",
+      "edition_id": "codenames-pictures-official-ko-rulebook",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "f1ca9cff8fbd41f4e92032a0906c2dcf13aaa7b8a9d3d9ba5e43a5f6e69997f3",
+          "source_type": "unverified",
+          "chunks": 11,
+          "indexed": 11,
+          "unreadable_pages": [],
+          "pages": 8,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "codenames",
+      "edition_id": "codenames-official-ko-rulebook",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "cef94b2076aa24705c3b1b56d6b430b2a4fbbf377fb85fdaf9d752eb4e31c56a",
+          "source_type": "unverified",
+          "chunks": 12,
+          "indexed": 12,
+          "unreadable_pages": [],
+          "pages": 8,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "coffee-rush",
+      "edition_id": "coffee-rush-user-30a77c8d8106",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "30a77c8d8106cb94eb8638c31b6d937338a9880580f212de31b936dbaa5cc7e2",
+          "source_type": "user_provided",
+          "chunks": 10,
+          "indexed": 10,
+          "unreadable_pages": [],
+          "pages": 8,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "coup",
+      "edition_id": "coup-official-ko-rulebook",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "a173e336a07034d3c35d2d81423665c328cb5194dc85ddbb53a41effc20c8351",
+          "source_type": "unverified",
+          "chunks": 4,
+          "indexed": 4,
+          "unreadable_pages": [],
+          "pages": 1,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "darwins-journey",
+      "edition_id": "darwins-journey-user-1c01b6eb8ea4",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "1c01b6eb8ea458017eb8deba009082a4ce10134f5341bab5cfec67c789a4ebf9",
+          "source_type": "user_provided",
+          "chunks": 61,
+          "indexed": 61,
+          "unreadable_pages": [
+            1
+          ],
+          "pages": 36,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "decrypto",
+      "edition_id": "decrypto-user-ko-rulebook",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "4c4899160c83cbd436b7bbd3467eb28433e245fa711a06d7b83566f648ab7bf0",
+          "source_type": "user_provided",
+          "chunks": 12,
+          "indexed": 12,
+          "unreadable_pages": [],
+          "pages": 12,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "dive",
+      "edition_id": "dive-user-cd805c7a4636",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "cd805c7a4636799d78d61e1ff9ac2567a2e6e0c78b5342c83c95298cb886e6de",
+          "source_type": "user_provided",
+          "chunks": 23,
+          "indexed": 23,
+          "unreadable_pages": [],
+          "pages": 12,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "dominion",
+      "edition_id": "dominion-user-7ffb9798e40d",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "7ffb9798e40deb1e066f94140c1954ca84bbe930b7d9faa8e4fc7946eafcc856",
+          "source_type": "user_provided",
+          "chunks": 47,
+          "indexed": 47,
+          "unreadable_pages": [],
+          "pages": 16,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "dream-home",
+      "edition_id": "dream-home-user-8698a0aae6be",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "8698a0aae6be3917102645f7b0422fe777ba11384ff6c51349569a48a7f12493",
+          "source_type": "user_provided",
+          "chunks": 18,
+          "indexed": 18,
+          "unreadable_pages": [
+            1,
+            15
+          ],
+          "pages": 16,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "expedition",
+      "edition_id": "expedition-user-bcd7d93cc408",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "bcd7d93cc408bfb98fbdfbe1324b86284e5f005f27d39834945a86df7338ba20",
+          "source_type": "user_provided",
+          "chunks": 23,
+          "indexed": 23,
+          "unreadable_pages": [],
+          "pages": 8,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "exploding-kittens",
+      "edition_id": "exploding-kittens-official-ko-rulebook",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "dd9e09a672da714333c425b4789b40c71694fee0becce871847198e2df43ff6a",
+          "source_type": "unverified",
+          "chunks": 3,
+          "indexed": 3,
+          "unreadable_pages": [],
+          "pages": 2,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "exploding-kittens",
+      "edition_id": "exploding-kittens-user-a82cfeeeb00e",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "a82cfeeeb00e2461b7188346a718407a2d7c02751a586eceb4df66ba41ec6842",
+          "source_type": "user_provided",
+          "chunks": 7,
+          "indexed": 7,
+          "unreadable_pages": [],
+          "pages": 2,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "farmers-market",
+      "edition_id": "farmers-market-user-ko-rulebook",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "691b98849af65e81645f9492d876f767bbbabf0077f9b24d41b288be48b5b68f",
+          "source_type": "user_provided",
+          "chunks": 6,
+          "indexed": 6,
+          "unreadable_pages": [],
+          "pages": 6,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "flip-7",
+      "edition_id": "flip-7-boardlife-10885",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "1d9cf4ec01c6b9aecce500847317fe860dc033e8d61f313e2fc163080839f50e",
+          "source_type": "community_translation",
+          "chunks": 13,
+          "indexed": 13,
+          "unreadable_pages": [],
+          "pages": 13,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "fold-it",
+      "edition_id": "fold-it-user-ko-rulebook",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "9e1432b5eb56c4eefca625e8d62dc8c4f3d66da9b2cd501c0780d92d7a5a450d",
+          "source_type": "user_provided",
+          "chunks": 6,
+          "indexed": 6,
+          "unreadable_pages": [],
+          "pages": 6,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "forbidden-island",
+      "edition_id": "forbidden-island-official-en-rulebook",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "b007c6b6a9385f4e27e74499f5e4623f3360ab7f8301853a4a3df01c6fa71c39",
+          "source_type": "unverified",
+          "chunks": 19,
+          "indexed": 19,
+          "unreadable_pages": [],
+          "pages": 8,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "forbidden-island",
+      "edition_id": "forbidden-island-boardlife-499",
+      "supported": false,
+      "reasons": [
+        "garbled_text",
+        "grounding_question_missing"
+      ],
+      "documents": [
+        {
+          "document_id": "6e356c410496d0cc90211f871fe2d853832cb92495188c34f28cc3db7e6869c0",
+          "source_type": "community_translation",
+          "chunks": 12,
+          "indexed": 12,
+          "unreadable_pages": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "pages": 8,
+          "status": "garbled"
+        }
+      ]
+    },
+    {
+      "game_id": "forest-whispers",
+      "edition_id": "forest-whispers-user-33ea5a8b6b24",
+      "supported": false,
+      "reasons": [
+        "grounding_question_failed"
+      ],
+      "documents": [
+        {
+          "document_id": "33ea5a8b6b24b58633273e7384862012ace80417cc6c77ed18548f92123dcf0d",
+          "source_type": "user_provided",
+          "chunks": 19,
+          "indexed": 19,
+          "unreadable_pages": [],
+          "pages": 16,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "gajigaksa",
+      "edition_id": "gajigaksa-user-6a4946603df3",
+      "supported": false,
+      "reasons": [
+        "garbled_text",
+        "grounding_question_missing"
+      ],
+      "documents": [
+        {
+          "document_id": "6a4946603df38504eaff1e48dbdfebf53792fad9d5037b331007aecfca1310f5",
+          "source_type": "user_provided",
+          "chunks": 6,
+          "indexed": 6,
+          "unreadable_pages": [
+            1,
+            2
+          ],
+          "pages": 2,
+          "status": "garbled"
+        }
+      ]
+    },
+    {
+      "game_id": "galpang-jilpang",
+      "edition_id": "galpang-jilpang-user-7df0a5f70f5d",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "7df0a5f70f5d948b76db4da6160b2df9d37b398d5bcac88958c51e8aacee2ceb",
+          "source_type": "user_provided",
+          "chunks": 5,
+          "indexed": 5,
+          "unreadable_pages": [],
+          "pages": 4,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "gizmos",
+      "edition_id": "gizmos-user-bb3910c6351d",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "bb3910c6351d369d66a0e48dd8985f053fdf114b65ea5f507f85bd06f230ddb0",
+          "source_type": "user_provided",
+          "chunks": 13,
+          "indexed": 13,
+          "unreadable_pages": [],
+          "pages": 4,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "grand-austria-hotel",
+      "edition_id": "grand-austria-hotel-user-8c738ee78475",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "8c738ee78475ef453829491d687f110f7e763e338a1c64b9b6f2c9d0a7f0b714",
+          "source_type": "user_provided",
+          "chunks": 47,
+          "indexed": 47,
+          "unreadable_pages": [
+            1
+          ],
+          "pages": 20,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "great-western-trail",
+      "edition_id": "great-western-trail-user-c43a16efc291",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "c43a16efc291d3b2f4ee8c46a96dcde599d30cfa08397f60b22ecadcb30315fc",
+          "source_type": "user_provided",
+          "chunks": 50,
+          "indexed": 50,
+          "unreadable_pages": [
+            1
+          ],
+          "pages": 16,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "hanamikoji",
+      "edition_id": "hanamikoji-boardlife-4344",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "bfad3bfdba7cc69d575c0885e7b63116872dd751d4edd709290b660c6fbaccf3",
+          "source_type": "community_translation",
+          "chunks": 2,
+          "indexed": 2,
+          "unreadable_pages": [],
+          "pages": 2,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "heat-pedal-to-the-metal",
+      "edition_id": "heat-pedal-to-the-metal-user-1f0d33a9f10c",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "1f0d33a9f10c9d545fbefdfc3f069b581439bda4c81be4f8e4464ab4c6c32753",
+          "source_type": "user_provided",
+          "chunks": 17,
+          "indexed": 17,
+          "unreadable_pages": [],
+          "pages": 8,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "high-society",
+      "edition_id": "high-society-official-ko-rulebook",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "56ee3de75cb5ab29ef449790289177fcd3ad6d47c4397e07195bdb4a78c2e9bf",
+          "source_type": "unverified",
+          "chunks": 5,
+          "indexed": 5,
+          "unreadable_pages": [],
+          "pages": 2,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "hitster",
+      "edition_id": "hitster-user-db25fc84b8e8",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "db25fc84b8e826121d06c62a5686c68f8f48d636b304feae07a3d89e7f23415e",
+          "source_type": "user_provided",
+          "chunks": 6,
+          "indexed": 6,
+          "unreadable_pages": [],
+          "pages": 3,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "hive",
+      "edition_id": "hive-official-ko-rulebook",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "30bcd19f5462108184d12a106c635f990cfbfa5b60aed995ddccbe7c5432dcb6",
+          "source_type": "unverified",
+          "chunks": 11,
+          "indexed": 11,
+          "unreadable_pages": [],
+          "pages": 11,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "kanban-ev",
+      "edition_id": "kanban-ev-user-b589b1e4ef5e",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "b589b1e4ef5e0df6093e0a65a1098e5c974b9bb59a1abcec6ccc6bfcdba19b75",
+          "source_type": "user_provided",
+          "chunks": 59,
+          "indexed": 59,
+          "unreadable_pages": [],
+          "pages": 24,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "kingdomino",
+      "edition_id": "kingdomino-user-ko-rulebook",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "b6bf4763dfb965eb5e5a921d3e82b41694a99f71c2c68dfe72c3b421f1119d91",
+          "source_type": "user_provided",
+          "chunks": 4,
+          "indexed": 4,
+          "unreadable_pages": [],
+          "pages": 4,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "le-havre",
+      "edition_id": "le-havre-user-391e9d259f64",
+      "supported": false,
+      "reasons": [
+        "grounding_question_failed"
+      ],
+      "documents": [
+        {
+          "document_id": "391e9d259f64d88336d081bcf087aacd554794754b5f880e1e6a42192721f1a2",
+          "source_type": "user_provided",
+          "chunks": 61,
+          "indexed": 61,
+          "unreadable_pages": [],
+          "pages": 16,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "lorenzo-il-magnifico",
+      "edition_id": "lorenzo-il-magnifico-user-e18b19181587",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "e18b19181587b1f43b3c2e5b6b94b124aa7fd3eb9077592cbff2c08bef456e71",
+          "source_type": "user_provided",
+          "chunks": 58,
+          "indexed": 58,
+          "unreadable_pages": [],
+          "pages": 24,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "love-letter",
+      "edition_id": "love-letter-boardlife-10538",
+      "supported": false,
+      "reasons": [
+        "garbled_text",
+        "grounding_question_missing"
+      ],
+      "documents": [
+        {
+          "document_id": "a82c849fd4739361d6caf57f9011844e7d361ee1944f7077339865537fd7411f",
+          "source_type": "community_translation",
+          "chunks": 16,
+          "indexed": 16,
+          "unreadable_pages": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "pages": 4,
+          "status": "garbled"
+        }
+      ]
+    },
+    {
+      "game_id": "lucky-numbers",
+      "edition_id": "lucky-numbers-official-ko-rulebook",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "813713c22574068d748fc14944dfbcc2992341803ff69200eb78e0f6699c91d3",
+          "source_type": "unverified",
+          "chunks": 4,
+          "indexed": 4,
+          "unreadable_pages": [],
+          "pages": 4,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "machi-koro-2",
+      "edition_id": "machi-koro-2-user-ko-rulebook",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "dc3ea076116a4d0297713435798f4fa66bce2d91ead9cfa32a6a43b036e0fbb2",
+          "source_type": "user_provided",
+          "chunks": 11,
+          "indexed": 11,
+          "unreadable_pages": [],
+          "pages": 8,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "machi-koro",
+      "edition_id": "machi-koro-boardlife-586",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "f7a814cf9d8b8a413119743a570447545a4d9c5ddaefb08ec041f1064286cd08",
+          "source_type": "community_translation",
+          "chunks": 13,
+          "indexed": 13,
+          "unreadable_pages": [],
+          "pages": 8,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "mage-knight",
+      "edition_id": "mage-knight-user-2c78b515f82e",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "2c78b515f82eb604236d2a5b359d195163110dcf5a6523947b78ae1349087264",
+          "source_type": "user_provided",
+          "chunks": 122,
+          "indexed": 122,
+          "unreadable_pages": [],
+          "pages": 24,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "marco-polo-ii",
+      "edition_id": "marco-polo-ii-user-16c7ae68cff1",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "16c7ae68cff1c1ddef781c03bcbedc8d3f6a2365da7829195a491bb923374369",
+          "source_type": "user_provided",
+          "chunks": 28,
+          "indexed": 28,
+          "unreadable_pages": [
+            1
+          ],
+          "pages": 9,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "mighty",
+      "edition_id": "mighty-user-b28b7baf2bee",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "b28b7baf2beee55ab403272fa079137890a244befe6ca26f5e4e7f95370d2fb2",
+          "source_type": "user_provided",
+          "chunks": 18,
+          "indexed": 18,
+          "unreadable_pages": [
+            1
+          ],
+          "pages": 16,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "nemesis",
+      "edition_id": "nemesis-user-570f161877ef",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "570f161877efcde1d928f497401cd692c754f18bdb9dd7cb6f6e62905130d979",
+          "source_type": "user_provided",
+          "chunks": 107,
+          "indexed": 107,
+          "unreadable_pages": [],
+          "pages": 28,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "new-york-zoo",
+      "edition_id": "new-york-zoo-boardlife-7172",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "5e3c1ed9d4492ae3213344bedb3fb99cd655bcba0cae68e996d9931f90129fcd",
+          "source_type": "community_translation",
+          "chunks": 21,
+          "indexed": 21,
+          "unreadable_pages": [],
+          "pages": 8,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "ninety-nine",
+      "edition_id": "ninety-nine-user-22d57641ab2b",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "22d57641ab2bebce16a330d5cf3e107164e64187906aef6db0065d91a86eb41f",
+          "source_type": "user_provided",
+          "chunks": 6,
+          "indexed": 6,
+          "unreadable_pages": [],
+          "pages": 6,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "no-thanks",
+      "edition_id": "no-thanks-user-d339f5fbbeef",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "d339f5fbbeefc773e61398cc42f911d7ede918417334f19044d8ecab77b8fe7f",
+          "source_type": "user_provided",
+          "chunks": 4,
+          "indexed": 4,
+          "unreadable_pages": [],
+          "pages": 2,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "nunchi-kochi-drawing",
+      "edition_id": "nunchi-kochi-drawing-user-5d9173a67360",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "5d9173a6736006783b9eb80ae1e68b6ddb46d24778a287aa3efe2800c2cff240",
+          "source_type": "user_provided",
+          "chunks": 7,
+          "indexed": 7,
+          "unreadable_pages": [],
+          "pages": 4,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "one-night-ultimate-werewolf",
+      "edition_id": "one-night-ultimate-werewolf-boardlife-465",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "6b41f5e0866560b004970d883d12c43aa0bccec17a600528bf04732b46d873f9",
+          "source_type": "community_translation",
+          "chunks": 15,
+          "indexed": 15,
+          "unreadable_pages": [],
+          "pages": 8,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "onitama",
+      "edition_id": "onitama-boardlife-2270",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "4d84843ba50e91c9bc1b0f3a5413f4283d23587ea66f172c2477b9dcb3d1cd19",
+          "source_type": "community_translation",
+          "chunks": 2,
+          "indexed": 2,
+          "unreadable_pages": [],
+          "pages": 1,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "orleans",
+      "edition_id": "orleans-user-d680de24f442",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "d680de24f442b16f09068a0f8edcb798173e0de22801f36f05b0352adac83bb7",
+          "source_type": "user_provided",
+          "chunks": 20,
+          "indexed": 20,
+          "unreadable_pages": [],
+          "pages": 12,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "pandemic",
+      "edition_id": "pandemic-boardlife-668",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "88678d2352044688c77942c7cdf639b86b6fa9e54f1013b13ccf840f612cf6d6",
+          "source_type": "community_translation",
+          "chunks": 16,
+          "indexed": 16,
+          "unreadable_pages": [],
+          "pages": 8,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "penguin-party",
+      "edition_id": "penguin-party-boardlife-4226",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "2a5a18ded57ca1265f17388c891c1053603105ae8019c835aa7b39cbf657767f",
+          "source_type": "community_translation",
+          "chunks": 2,
+          "indexed": 2,
+          "unreadable_pages": [],
+          "pages": 2,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "pick-picnic",
+      "edition_id": "pick-picnic-boardlife-6316",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "59fc4559cb1ecbfd6481e71c5179f37fc9ad1a8de367a11b6429286c101320f9",
+          "source_type": "community_translation",
+          "chunks": 2,
+          "indexed": 2,
+          "unreadable_pages": [],
+          "pages": 2,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "potion-explosion",
+      "edition_id": "potion-explosion-user-1ae7781b526b",
+      "supported": false,
+      "reasons": [
+        "grounding_question_failed"
+      ],
+      "documents": [
+        {
+          "document_id": "1ae7781b526b334c3493205399083f72f39e53ca870c3d0188bfe5a08e918f6e",
+          "source_type": "user_provided",
+          "chunks": 19,
+          "indexed": 19,
+          "unreadable_pages": [
+            1
+          ],
+          "pages": 12,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "puerto-rico-1897",
+      "edition_id": "puerto-rico-1897-user-176bef006ad2",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "176bef006ad2bb239cab37c12bd89542f8154b98c1c76220bea480da22ae8723",
+          "source_type": "user_provided",
+          "chunks": 59,
+          "indexed": 59,
+          "unreadable_pages": [
+            22
+          ],
+          "pages": 24,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "quoridor",
+      "edition_id": "quoridor-additional-ko-20261021",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "dc9726a3469ad0faa909363c49e31f24cde1219fd324ec5a7f5a9e3d37d82e05",
+          "source_type": "publisher",
+          "chunks": 71,
+          "indexed": 71,
+          "unreadable_pages": [
+            13,
+            21,
+            31,
+            33,
+            35
+          ],
+          "pages": 36,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "ricochet-robots",
+      "edition_id": "ricochet-robots-user-ko-rulebook",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "ff9c08498d24fdc283a46111f65d5db5e0159a7ccbba5c56b2d78c47783aea37",
+          "source_type": "user_provided",
+          "chunks": 2,
+          "indexed": 2,
+          "unreadable_pages": [],
+          "pages": 2,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "rummikub",
+      "edition_id": "rummikub-official-ko-rulebook",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "55a33646840ed3d699a5056df837d89f9ea4e87bb0586c47ea22c9e86d7cb3a9",
+          "source_type": "unverified",
+          "chunks": 4,
+          "indexed": 4,
+          "unreadable_pages": [],
+          "pages": 4,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "saboteur",
+      "edition_id": "saboteur-official-ko-rulebook",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "fd144b738dd322e2bac735e05a855beb8016a316119f225e1524825f60d90802",
+          "source_type": "unverified",
+          "chunks": 11,
+          "indexed": 11,
+          "unreadable_pages": [],
+          "pages": 8,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "santorini",
+      "edition_id": "santorini-user-1562c33b60d8",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "1562c33b60d8dac3a2934a4bd39672f067d3f49116d2ff3dc2b14501248544a2",
+          "source_type": "user_provided",
+          "chunks": 14,
+          "indexed": 14,
+          "unreadable_pages": [],
+          "pages": 4,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "schotten-totten",
+      "edition_id": "schotten-totten-boardlife-2982",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "989a6e7fadb36ae41c63eadd5ef9478fc96a1cfbb7cea6f4155d34a643df1e1f",
+          "source_type": "community_translation",
+          "chunks": 16,
+          "indexed": 16,
+          "unreadable_pages": [],
+          "pages": 16,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "scythe",
+      "edition_id": "scythe-user-90381687d016",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "90381687d016c7439346ba56898e6f14cfe8a082da14334e015659df1b5902e6",
+          "source_type": "user_provided",
+          "chunks": 65,
+          "indexed": 65,
+          "unreadable_pages": [],
+          "pages": 32,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "sea-divers-of-jeju",
+      "edition_id": "sea-divers-of-jeju-user-ko-rulebook",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "022616206d1d3a9c8e006cab9f0c7610e72f6c134ad6da2ee7ab76f3ccfe14d2",
+          "source_type": "user_provided",
+          "chunks": 12,
+          "indexed": 12,
+          "unreadable_pages": [],
+          "pages": 12,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "sheriff-of-nottingham",
+      "edition_id": "sheriff-of-nottingham-user-8d8f522a73da",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "8d8f522a73da186af5e422796da474f4f4f3a365fd9f012240af6501f4eba7c5",
+          "source_type": "user_provided",
+          "chunks": 29,
+          "indexed": 29,
+          "unreadable_pages": [
+            1,
+            2
+          ],
+          "pages": 16,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "six-fireworks",
+      "edition_id": "six-fireworks-user-da20a523ed40",
+      "supported": false,
+      "reasons": [
+        "garbled_text",
+        "grounding_question_missing"
+      ],
+      "documents": [
+        {
+          "document_id": "da20a523ed40acc5bca5a905100deb0bc00b375ed17784b0a3e24a153f8b5739",
+          "source_type": "user_provided",
+          "chunks": 7,
+          "indexed": 7,
+          "unreadable_pages": [
+            1,
+            2
+          ],
+          "pages": 2,
+          "status": "garbled"
+        }
+      ]
+    },
+    {
+      "game_id": "sky-team",
+      "edition_id": "sky-team-boardlife-9318",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "c6220422074891edabe0f43c7f7c769b5617d673e69ca13fd101fe7ad20778f8",
+          "source_type": "community_translation",
+          "chunks": 12,
+          "indexed": 12,
+          "unreadable_pages": [],
+          "pages": 12,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "spicy",
+      "edition_id": "spicy-user-f56ef3adc9ea",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "f56ef3adc9ea5f7e1ba152abbfe9bcf63a4b30267dc8c7ba7c315420b9b97ab3",
+          "source_type": "user_provided",
+          "chunks": 9,
+          "indexed": 9,
+          "unreadable_pages": [],
+          "pages": 8,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "split",
+      "edition_id": "split-user-8a103b40fec1",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "8a103b40fec1b3dd18a2f8c428f152e945bcc768d588ef3eec850dd946c0bd87",
+          "source_type": "user_provided",
+          "chunks": 6,
+          "indexed": 6,
+          "unreadable_pages": [],
+          "pages": 2,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "star-wishes",
+      "edition_id": "star-wishes-user-9af4521760f2",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "9af4521760f23bc12cfba607e4e490a5d6a545fdfd97ba433e57d1bfcd70b2ca",
+          "source_type": "user_provided",
+          "chunks": 19,
+          "indexed": 19,
+          "unreadable_pages": [
+            1,
+            18
+          ],
+          "pages": 20,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "sushi-go-party",
+      "edition_id": "sushi-go-party-official-en-rulebook",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "5c252689af1a27d0839874af133a11d98c06e65fae71ac23b2fd8e3e97b49628",
+          "source_type": "unverified",
+          "chunks": 42,
+          "indexed": 42,
+          "unreadable_pages": [],
+          "pages": 9,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "sushi-go-party",
+      "edition_id": "sushi-go-party-boardlife-2371",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "dcb2f179f2c8e597d4c023175811e45a1efe332d6feaf643f1a545b5d97e08d2",
+          "source_type": "community_translation",
+          "chunks": 29,
+          "indexed": 29,
+          "unreadable_pages": [],
+          "pages": 9,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "teotihuacan",
+      "edition_id": "teotihuacan-user-fe72221a11e1",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "fe72221a11e1de800e304fc530c73e1a39f2cfe5ff3419a91dbd0199d2d79456",
+          "source_type": "user_provided",
+          "chunks": 43,
+          "indexed": 43,
+          "unreadable_pages": [
+            1
+          ],
+          "pages": 24,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "terraforming-mars",
+      "edition_id": "terraforming-mars-user-7ef53b7c7eaa",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "7ef53b7c7eaa14c3e3045477a2e2991e25c466bab3951751f0b73a5c1d10548a",
+          "source_type": "user_provided",
+          "chunks": 40,
+          "indexed": 40,
+          "unreadable_pages": [
+            1
+          ],
+          "pages": 16,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "the-gallerist",
+      "edition_id": "the-gallerist-user-eca3e6e1ebf4",
+      "supported": false,
+      "reasons": [
+        "grounding_question_failed"
+      ],
+      "documents": [
+        {
+          "document_id": "eca3e6e1ebf49566984e763c685a728f4dad53d6126e7b6bf091756149ac05c4",
+          "source_type": "user_provided",
+          "chunks": 56,
+          "indexed": 56,
+          "unreadable_pages": [],
+          "pages": 20,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "the-game",
+      "edition_id": "the-game-official-ko-rulebook",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "7b47b712e4478b91e2a7173f1f04104526af40e0496ecbda04573401969af5e7",
+          "source_type": "unverified",
+          "chunks": 2,
+          "indexed": 2,
+          "unreadable_pages": [],
+          "pages": 2,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "the-isle-of-cats",
+      "edition_id": "the-isle-of-cats-user-a919d08eb985",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "a919d08eb985390b76f030da6a450602edc5bf589d7e1205b289c36135eab940",
+          "source_type": "user_provided",
+          "chunks": 27,
+          "indexed": 27,
+          "unreadable_pages": [
+            1
+          ],
+          "pages": 24,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "the-mind",
+      "edition_id": "the-mind-official-ko-rulebook",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "00490bb82246c83d8a1ebf8a7d6c35d4991e14ae3727fc2582a9db4048bef980",
+          "source_type": "unverified",
+          "chunks": 2,
+          "indexed": 2,
+          "unreadable_pages": [],
+          "pages": 2,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "the-quest-for-el-dorado",
+      "edition_id": "the-quest-for-el-dorado-user-6e2887dd481d",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "6e2887dd481dea4d1cdbf2b3a9c353fe7d7ceb79cbb9472b96b01e175985a2d0",
+          "source_type": "user_provided",
+          "chunks": 24,
+          "indexed": 24,
+          "unreadable_pages": [
+            1
+          ],
+          "pages": 12,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "the-search-for-planet-x",
+      "edition_id": "the-search-for-planet-x-user-d4510c0cedd1",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "d4510c0cedd1358cc8c2349f4be1fc4794129c1c1e2c42ba901f28afa75115fc",
+          "source_type": "user_provided",
+          "chunks": 30,
+          "indexed": 30,
+          "unreadable_pages": [
+            1
+          ],
+          "pages": 20,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "top-ten-tv",
+      "edition_id": "top-ten-tv-user-ko-rulebook",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "2b2a97eb5296af5258dfc41edc93b8b0f729fc9306a974f28b60049d271f5089",
+          "source_type": "user_provided",
+          "chunks": 4,
+          "indexed": 4,
+          "unreadable_pages": [
+            5
+          ],
+          "pages": 5,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "tornado-6",
+      "edition_id": "tornado-6-user-4b2ff468ffe1",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "4b2ff468ffe11135912b4d4a20a33912acaa815297dcd8383d642346ea347923",
+          "source_type": "user_provided",
+          "chunks": 8,
+          "indexed": 8,
+          "unreadable_pages": [],
+          "pages": 2,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "troyes",
+      "edition_id": "troyes-user-71d764a584d3",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "71d764a584d314456e3527286e5c42b92dbd97de3144664574f4704a13dca143",
+          "source_type": "user_provided",
+          "chunks": 26,
+          "indexed": 26,
+          "unreadable_pages": [],
+          "pages": 8,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "vegetable-stock",
+      "edition_id": "vegetable-stock-user-2b17996136b7",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "2b17996136b75e3b54fc0fa94753e24ca37b79daec95be1861d82a21aae4fa49",
+          "source_type": "user_provided",
+          "chunks": 5,
+          "indexed": 5,
+          "unreadable_pages": [],
+          "pages": 2,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "watergate",
+      "edition_id": "watergate-user-bb69583f73f5",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "bb69583f73f55ee48c56892803eaf4611d838a87f52f974d990026ec17781afa",
+          "source_type": "user_provided",
+          "chunks": 64,
+          "indexed": 64,
+          "unreadable_pages": [
+            24
+          ],
+          "pages": 24,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "whitehall-mystery",
+      "edition_id": "whitehall-mystery-user-45e650db2f66",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "45e650db2f6609ada31e3f190a297549a80175bc75b49e53f9a7b30813a0ac25",
+          "source_type": "user_provided",
+          "chunks": 26,
+          "indexed": 26,
+          "unreadable_pages": [],
+          "pages": 16,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "wingspan",
+      "edition_id": "wingspan-user-f1b33a73c290",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "f1b33a73c29043f7936fb832a31bf2f962858b0f4a8cca0d21eaae1d4712347f",
+          "source_type": "user_provided",
+          "chunks": 25,
+          "indexed": 25,
+          "unreadable_pages": [],
+          "pages": 12,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "wyatt-earp",
+      "edition_id": "wyatt-earp-user-70a60fa37c4b",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "70a60fa37c4b6bf28e14eb99fbcfa612e74f2e1174f088fbfbf1dad101b081dc",
+          "source_type": "user_provided",
+          "chunks": 24,
+          "indexed": 24,
+          "unreadable_pages": [],
+          "pages": 16,
+          "status": "readable"
+        }
+      ]
+    },
+    {
+      "game_id": "zombie-dice",
+      "edition_id": "zombie-dice-boardlife-9471",
+      "supported": true,
+      "reasons": [],
+      "documents": [
+        {
+          "document_id": "2dbb7620e5738099e8d24da521dae5fb5a4df9d2371b33f33a9e8baf9c79cbe7",
+          "source_type": "community_translation",
+          "chunks": 2,
+          "indexed": 2,
+          "unreadable_pages": [],
+          "pages": 1,
+          "status": "readable"
+        }
+      ]
+    }
+  ]
+}

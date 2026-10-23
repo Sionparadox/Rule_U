@@ -199,6 +199,12 @@ uv run python -m rule_u.cli index --catalog ../../../data/games --games dive --m
 구현 참고: [Next.js 설치](https://nextjs.org/docs/app/getting-started/installation), [SQLAlchemy SQLite](https://docs.sqlalchemy.org/en/20/dialects/sqlite.html), [FastAPI 앱 구조](https://fastapi.tiangolo.com/tutorial/bigger-applications/).
 # 현재 데이터·검색 상태 (2026-10-22)
 
+## 5단계 검색 방식과 지원 게임
+
+- `.env`의 `SEARCH_MODE`로 규칙 검색 방식을 고릅니다. 기본은 `similarity`이고 `hybrid`(BM25+벡터 RRF), `mmr`(비교용)을 선택할 수 있습니다. 변경 후 API 서버를 재시작하세요.
+- 공식 FAQ·정오표(`type=faq|errata`)는 `config/document-relations.json`에 검증된 관계를 기록한 경우에만 검색에 포함됩니다. 형식: `{"<FAQ 문서 sha256>": {"type": "faq", "status": "verified", "edition_id": "...", "amends_document_id": "<규칙서 sha256>", "evidence": "..."}}`.
+- 지원 판본만 화면에서 선택할 수 있습니다. 현재 102게임·107판본이 지원됩니다. 판정 기준·검색 비교·재현 명령은 [5단계 결과](reports/stage5-search-comparison.md)를 참고하세요. 지원 상태 재계산은 `python -m rule_u.stage5 audit ... --apply`로 합니다.
+
 ## 4단계 화면 사용
 
 답변의 출처 번호를 누르면 **왜 이렇게 답변했나요?** 모달에서 해당 규칙과 적용 이유를 확인할 수 있습니다. 원문 청크 대신 이해하기 쉬운 설명과 룰북 페이지를 표시합니다. 예전 답변의 설명은 처음 열 때 생성하므로 잠시 기다릴 수 있으며 이후에는 저장된 설명을 사용합니다. 이 기능을 반영하려면 기존 API 서버를 종료한 뒤 다시 실행하세요.

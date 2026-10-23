@@ -34,6 +34,8 @@ class Settings(BaseSettings):
     external_top_k: int = Field(default=5, gt=0)
     candidate_k: int = Field(default=20, gt=0)
     search_mode: Literal["similarity", "hybrid", "mmr"] = "similarity"
+    # FAQ/errata enter retrieval only through a verified relation recorded here.
+    document_relations_path: Path = ROOT / "config" / "document-relations.json"
 
     @model_validator(mode="after")
     def resolve_paths(self):
