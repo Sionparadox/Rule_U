@@ -1,0 +1,84 @@
+providers.py
+45:         if not base_url or not key:
+46:             raise ProviderError("provider_not_configured")
+47:         self.base_url = base_url.rstrip("/") + "/"
+48:         self.key = key
+49:         self.timeout = timeout
+50:         self.transport = transport
+51: 
+52:     async def post(self, path, payload, attempts=2):
+53:         # One retry for transient failures only: latency on the gateway varies widely
+54:         # (the same request has taken 4s and >30s). Client errors are never retried.
+55:         for attempt in range(attempts):
+56:             try:
+57:                 async with httpx.AsyncClient(
+58:                     timeout=self.timeout,
+59:                     transport=self.transport,
+60:                     follow_redirects=False,
+61:                 ) as client:
+62:                     response = await client.post(
+63:                         self.base_url + path,
+64:                         headers={"Authorization": f"Bearer {self.key}"},
+65:                         json=payload,
+66:                     )
+67:                     response.raise_for_status()
+68:                     return response.json()
+69:             except (httpx.TimeoutException, httpx.TransportError) as exc:
+70:                 transient = True
+71:                 error = exc
+72:             except httpx.HTTPStatusError as exc:
+73:                 transient = exc.response.status_code >= 500 or exc.response.status_code == 429
+74:                 error = exc
+75:             except (httpx.HTTPError, ValueError):
+76:                 raise ProviderError("provider_call_failed") from None
+77:             if not transient or attempt == attempts - 1:
+78:                 raise ProviderError("provider_call_failed") from error
+79:             await asyncio.sleep(1)
+80: 
+
+bgg.py
+18: from rule_u.providers import ProviderError
+19: 
+20: # Identify the app to BGG (its XML API terms ask callers to be identifiable and to throttle).
+21: USER_AGENT = "Rule_U/0.1 (+https://github.com/Sionparadox/Rule_U)"
+22: 
+23: _gates = weakref.WeakKeyDictionary()
+24: 
+25: 
+26: class BggError(Exception):
+27:     pass
+28: 
+29: 
+30: class ThreadSelection(BaseModel):
+31:     model_config = ConfigDict(extra="forbid")
+32:     thread_ids: list[str] = Field(max_length=2)
+33: 
+34: 
+35: def plain(value):
+36:     return re.sub(r"\s+", " ", re.sub(r"<[^>]*>|\[[^\]]*\]", " ", unescape(value or ""))).strip()
+37: 
+38: 
+39: class BggClient:
+40:     def __init__(self, settings, transport=None):
+41:         self.settings = settings
+42:         self.transport = transport
+43: 
+44:     async def xml(self, endpoint, **params):
+45:         key = hashlib.sha256(json.dumps([endpoint, params], sort_keys=True).encode()).hexdigest()
+46:         path = self.settings.data_dir / "bgg-cache" / f"{key}.xml"
+47:         if path.exists() and time.time() - path.stat().st_mtime < 86400:
+48:             try:
+49:                 return ET.fromstring(path.read_bytes())
+50:             except ET.ParseError:
+51:                 pass
+52:         loop = asyncio.get_running_loop()
+53:         gate = _gates.setdefault(loop, {"lock": asyncio.Lock(), "next": 0.0})
+54:         async with gate["lock"]:
+55:             await asyncio.sleep(max(0, gate["next"] - time.monotonic()))
+56:             gate["next"] = time.monotonic() + 5
+57:             async with httpx.AsyncClient(timeout=8, transport=self.transport) as client:
+58:                 async with client.stream("GET", f"https://boardgamegeek.com/xmlapi2/{endpoint}",
+59:                                          params=params, headers={"User-Agent": USER_AGENT, "Authorization": "Bearer " +
+60:                                          self.settings.bgg_api_token.get_secret_value()}) as response:
+61:                     if response.status_code != 200:
+62:                         raise BggError("unauthorized" if response.status_code in {401, 403} else "unavailable")

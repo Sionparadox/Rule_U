@@ -1,0 +1,2243 @@
+{
+  "fingerprint": "bab910f9b2a3551e",
+  "count": 116,
+  "summary": {
+    "similarity": {
+      "hit_at_1": 0.646551724137931,
+      "hit_at_3": 0.9051724137931034,
+      "hit_at_5": 0.9655172413793104,
+      "mrr_at_5": 0.7785919540229884,
+      "mean_distinct_pages": 3.4310344827586206,
+      "mean_search_seconds": 0.014451724137931036
+    },
+    "hybrid": {
+      "hit_at_1": 0.7068965517241379,
+      "hit_at_3": 0.9827586206896551,
+      "hit_at_5": 1.0,
+      "mrr_at_5": 0.8429597701149425,
+      "mean_distinct_pages": 3.5,
+      "mean_search_seconds": 0.03176120689655172
+    },
+    "mmr": {
+      "hit_at_1": 0.646551724137931,
+      "hit_at_3": 0.8017241379310345,
+      "hit_at_5": 0.9051724137931034,
+      "mrr_at_5": 0.7349137931034483,
+      "mean_distinct_pages": 4.043103448275862,
+      "mean_search_seconds": 0.24873362068965518
+    }
+  },
+  "first_run_query_embedding_seconds_mean_uncached": 0.919,
+  "cases": [
+    {
+      "game_id": "codenames",
+      "edition_id": "codenames-official-ko-rulebook",
+      "question": "힌트 숫자가 3이면 최대 몇 번 추리할 수 있나요?",
+      "pages": [
+        5
+      ],
+      "origin": "stage2_smoke",
+      "ranks": {
+        "similarity": 4,
+        "hybrid": 3,
+        "mmr": 4
+      },
+      "distinct_pages": {
+        "similarity": 4,
+        "hybrid": 4,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "codenames",
+      "edition_id": "codenames-official-ko-rulebook",
+      "question": "암살자 카드를 고르면 어떻게 되나요?",
+      "pages": [
+        5
+      ],
+      "origin": "stage2_smoke",
+      "ranks": {
+        "similarity": 2,
+        "hybrid": 3,
+        "mmr": 3
+      },
+      "distinct_pages": {
+        "similarity": 4,
+        "hybrid": 5,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "codenames",
+      "edition_id": "codenames-official-ko-rulebook",
+      "question": "힌트 숫자로 0을 말하면 무엇이 달라지나요?",
+      "pages": [
+        7
+      ],
+      "origin": "stage2_smoke",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 3,
+        "hybrid": 3,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "catan",
+      "edition_id": "catan-user-748610c946df",
+      "question": "차례가 아닌 사람들끼리 자원을 거래해도 되나요?",
+      "pages": [
+        2
+      ],
+      "origin": "stage2_smoke",
+      "ranks": {
+        "similarity": 2,
+        "hybrid": 2,
+        "mmr": 3
+      },
+      "distinct_pages": {
+        "similarity": 3,
+        "hybrid": 3,
+        "mmr": 3
+      }
+    },
+    {
+      "game_id": "catan",
+      "edition_id": "catan-user-748610c946df",
+      "question": "도로 건설 진보 카드는 어떤 효과인가요?",
+      "pages": [
+        1,
+        3
+      ],
+      "origin": "stage2_smoke",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 2,
+        "hybrid": 3,
+        "mmr": 3
+      }
+    },
+    {
+      "game_id": "coup",
+      "edition_id": "coup-official-ko-rulebook",
+      "question": "돈을 10개 이상 가진 경우 반드시 쿠데타를 해야 하나요?",
+      "pages": [
+        1
+      ],
+      "origin": "stage2_smoke",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      }
+    },
+    {
+      "game_id": "6-nimmt",
+      "edition_id": "6-nimmt-official-ko-rulebook",
+      "question": "게임을 시작할 때 각자 카드를 몇 장 받나요?",
+      "pages": [
+        1
+      ],
+      "origin": "stage2_smoke",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 2,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 2,
+        "hybrid": 2,
+        "mmr": 2
+      }
+    },
+    {
+      "game_id": "7-wonders-architects",
+      "edition_id": "7-wonders-architects-additional-ko-20261021",
+      "question": "불가사의를 완성하면 게임은 언제 끝나나요?",
+      "pages": [
+        3
+      ],
+      "origin": "stage2_smoke",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 3,
+        "hybrid": 3,
+        "mmr": 3
+      }
+    },
+    {
+      "game_id": "5-second-rule",
+      "edition_id": "5-second-rule-user-95e97aea0f6e",
+      "question": "문제를 내는 사람은 타이머를 언제 뒤집어야 하나요?",
+      "pages": [
+        2
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 4,
+        "hybrid": 2,
+        "mmr": 2
+      },
+      "distinct_pages": {
+        "similarity": 5,
+        "hybrid": 4,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "6-nimmt",
+      "edition_id": "6-nimmt-official-ko-rulebook",
+      "question": "낸 카드가 어느 줄에도 놓을 수 없을 만큼 작으면 어떻게 하나요?",
+      "pages": [
+        2
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 2,
+        "hybrid": 2,
+        "mmr": 2
+      },
+      "distinct_pages": {
+        "similarity": 2,
+        "hybrid": 2,
+        "mmr": 2
+      }
+    },
+    {
+      "game_id": "7-wonders-architects",
+      "edition_id": "7-wonders-architects-additional-ko-20261021",
+      "question": "불가사의 단계를 지을 자원이 충분하면 건설을 다음으로 미룰 수 있나요?",
+      "pages": [
+        2
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 3,
+        "hybrid": 3,
+        "mmr": 3
+      }
+    },
+    {
+      "game_id": "7-wonders-duel",
+      "edition_id": "7-wonders-duel-boardlife-1583",
+      "question": "시대를 시작할 때 카드 20장은 모두 앞면으로 배치하나요?",
+      "pages": [
+        10
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 4,
+        "hybrid": 2,
+        "mmr": null
+      },
+      "distinct_pages": {
+        "similarity": 5,
+        "hybrid": 5,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "7-wonders-duel",
+      "edition_id": "7-wonders-duel-additional-ko-20261021",
+      "question": "과학이나 군사로 이기면 3시대가 끝나기 전에도 게임이 끝나나요?",
+      "pages": [
+        10
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 2,
+        "hybrid": 2,
+        "mmr": null
+      },
+      "distinct_pages": {
+        "similarity": 5,
+        "hybrid": 5,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "abluxxen",
+      "edition_id": "abluxxen-official-ko-rulebook",
+      "question": "한 턴에 같은 플레이어의 카드를 두 번 가로챌 수 있나요?",
+      "pages": [
+        1
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 2,
+        "hybrid": 2,
+        "mmr": 2
+      }
+    },
+    {
+      "game_id": "abracawhat",
+      "edition_id": "abracawhat-user-b2c0ba31d515",
+      "question": "2인 게임에서는 시작 전에 돌을 몇 개 게임판에 미리 채우나요?",
+      "pages": [
+        2
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 2,
+        "hybrid": 2,
+        "mmr": 2
+      }
+    },
+    {
+      "game_id": "agricola",
+      "edition_id": "agricola-user-f005e1d2391a",
+      "question": "다른 사람이 이번 라운드에 이미 사용한 행동 칸에 내 가족을 놓을 수 있나요?",
+      "pages": [
+        6
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 2,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 3,
+        "hybrid": 3,
+        "mmr": 4
+      }
+    },
+    {
+      "game_id": "amazonia-park",
+      "edition_id": "amazonia-park-user-654d4750c73c",
+      "question": "사진 찍기 행동에서 동물 타일을 놓은 뒤 사진은 어떻게 받나요?",
+      "pages": [
+        3
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 3,
+        "hybrid": 4,
+        "mmr": 4
+      }
+    },
+    {
+      "game_id": "anomia",
+      "edition_id": "anomia-user-ko-rulebook",
+      "question": "두 사람이 공개한 카드의 무늬가 같아지면 무엇을 하나요?",
+      "pages": [
+        4,
+        5
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 2,
+        "hybrid": 1,
+        "mmr": null
+      },
+      "distinct_pages": {
+        "similarity": 5,
+        "hybrid": 5,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "ark-nova",
+      "edition_id": "ark-nova-user-a124dbbf7364",
+      "question": "행동으로 아무것도 하지 않는 것을 선택할 수 있나요?",
+      "pages": [
+        8
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 2,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 3,
+        "hybrid": 4,
+        "mmr": 4
+      }
+    },
+    {
+      "game_id": "at-the-gates-of-loyang",
+      "edition_id": "at-the-gates-of-loyang-user-bea98b38adeb",
+      "question": "손에 있는 카드 두 장만 골라서 사용할 수 있나요?",
+      "pages": [
+        3,
+        4
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 3,
+        "hybrid": 1,
+        "mmr": 2
+      },
+      "distinct_pages": {
+        "similarity": 5,
+        "hybrid": 4,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "azul",
+      "edition_id": "azul-boardlife-3993",
+      "question": "벽에 이미 같은 색 타일이 있는 줄의 패턴 라인에 그 색 타일을 놓을 수 있나요?",
+      "pages": [
+        4
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 2,
+        "hybrid": 2,
+        "mmr": 4
+      },
+      "distinct_pages": {
+        "similarity": 3,
+        "hybrid": 4,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "barrage",
+      "edition_id": "barrage-user-1f5722d738cb",
+      "question": "엔지니어 3명 칸을 쓰려면 추가로 무엇을 내야 하나요?",
+      "pages": [
+        12
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 2,
+        "hybrid": 1,
+        "mmr": 5
+      },
+      "distinct_pages": {
+        "similarity": 5,
+        "hybrid": 4,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "bohnanza",
+      "edition_id": "bohnanza-retailer-ko-rulebook",
+      "question": "차례가 아닌 두 플레이어끼리 콩 카드를 거래할 수 있나요?",
+      "pages": [
+        2
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 3,
+        "hybrid": 3,
+        "mmr": 3
+      }
+    },
+    {
+      "game_id": "bohnanza",
+      "edition_id": "bohnanza-user-a2010187719a",
+      "question": "3명 게임에서 아미고콩 금화를 빼앗으려면 콩값 합계가 얼마 이상이어야 하나요?",
+      "pages": [
+        14
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 5,
+        "hybrid": 5,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "bomb-busters",
+      "edition_id": "bomb-busters-user-838e8f7f0a1f",
+      "question": "장비 카드는 언제부터 사용할 수 있나요?",
+      "pages": [
+        6
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 4,
+        "hybrid": 5,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "cant-stop",
+      "edition_id": "cant-stop-official-ko-rulebook",
+      "question": "등반 도중 다른 플레이어의 베이스캠프가 있는 칸에 도착하면 어떻게 하나요?",
+      "pages": [
+        1
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 3,
+        "hybrid": 1,
+        "mmr": 2
+      },
+      "distinct_pages": {
+        "similarity": 2,
+        "hybrid": 2,
+        "mmr": 2
+      }
+    },
+    {
+      "game_id": "carcassonne",
+      "edition_id": "carcassonne-additional-ko-20261021",
+      "question": "게임 종료 시 농장은 완성된 성 하나당 몇 점을 받나요?",
+      "pages": [
+        4
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 2,
+        "hybrid": 1,
+        "mmr": 3
+      },
+      "distinct_pages": {
+        "similarity": 4,
+        "hybrid": 4,
+        "mmr": 4
+      }
+    },
+    {
+      "game_id": "carnegie",
+      "edition_id": "carnegie-user-16e635f2ae85",
+      "question": "회사의 인사 부서는 어떤 일을 하나요?",
+      "pages": [
+        6
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 3,
+        "hybrid": 2,
+        "mmr": null
+      },
+      "distinct_pages": {
+        "similarity": 5,
+        "hybrid": 5,
+        "mmr": 4
+      }
+    },
+    {
+      "game_id": "cascadia",
+      "edition_id": "cascadia-boardlife-7608",
+      "question": "같은 야생동물 토큰 3개가 나왔을 때 교체는 한 차례에 몇 번 할 수 있나요?",
+      "pages": [
+        6
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 3,
+        "hybrid": 3,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "cascadia",
+      "edition_id": "cascadia-user-3460dcb5f83f",
+      "question": "2명 게임에서 광역 지형 크기가 같으면 상위권 점수는 어떻게 나누나요?",
+      "pages": [
+        9
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 3,
+        "hybrid": 2,
+        "mmr": 5
+      },
+      "distinct_pages": {
+        "similarity": 4,
+        "hybrid": 4,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "castle-combo",
+      "edition_id": "castle-combo-boardlife-10501",
+      "question": "지갑에 넣지 못한 금은 점수가 되나요?",
+      "pages": [
+        10
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 4,
+        "hybrid": 4,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "caverna",
+      "edition_id": "caverna-user-9d08fb4615a9",
+      "question": "수확 단계의 첫 번째 소단계에서는 무엇을 하나요?",
+      "pages": [
+        9
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 4,
+        "hybrid": 4,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "celestia",
+      "edition_id": "celestia-official-ko-rulebook",
+      "question": "크리스마스트리 도시를 쓸 때 선장 주사위가 모두 빈 면이면 어떻게 되나요?",
+      "pages": [
+        12
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 5,
+        "hybrid": 5,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "chronicles-of-crime-1400",
+      "edition_id": "chronicles-of-crime-1400-user-5066fee06dd0",
+      "question": "자택 판의 가족들은 언제 찾아가서 대화할 수 있나요?",
+      "pages": [
+        5
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 3,
+        "hybrid": 4,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "citadels",
+      "edition_id": "citadels-user-ac1c806d37c7",
+      "question": "골조를 파괴해서 지은 건물을 치안판사가 몰수할 수 있나요?",
+      "pages": [
+        15
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 4,
+        "hybrid": 4,
+        "mmr": 4
+      }
+    },
+    {
+      "game_id": "clank-catacombs",
+      "edition_id": "clank-catacombs-user-251719837cc5",
+      "question": "차례를 마칠 때 손에 든 카드를 남겨 둘 수 있나요?",
+      "pages": [
+        6
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 3,
+        "hybrid": 3,
+        "mmr": 4
+      }
+    },
+    {
+      "game_id": "cockroach-poker",
+      "edition_id": "cockroach-poker-boardlife-6359",
+      "question": "카드를 넘길 때 반드시 옆 사람에게 넘겨야 하나요?",
+      "pages": [
+        2
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 2,
+        "hybrid": 2,
+        "mmr": 2
+      }
+    },
+    {
+      "game_id": "codenames-pictures",
+      "edition_id": "codenames-pictures-official-ko-rulebook",
+      "question": "팀장이 준 힌트 숫자보다 한 번 더 추리할 수 있나요?",
+      "pages": [
+        5
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 4,
+        "hybrid": 2,
+        "mmr": null
+      },
+      "distinct_pages": {
+        "similarity": 5,
+        "hybrid": 5,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "coffee-rush",
+      "edition_id": "coffee-rush-user-30a77c8d8106",
+      "question": "업그레이드를 활성화하려면 처리된 주문카드가 몇 장 필요한가요?",
+      "pages": [
+        3
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 3,
+        "hybrid": 2,
+        "mmr": 3
+      },
+      "distinct_pages": {
+        "similarity": 4,
+        "hybrid": 5,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "darwins-journey",
+      "edition_id": "darwins-journey-user-1c01b6eb8ea4",
+      "question": "탐사대 카드를 달성하려면 밀랍 봉인을 어떻게 갖고 있어야 하나요?",
+      "pages": [
+        22
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 4,
+        "hybrid": 5,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "decrypto",
+      "edition_id": "decrypto-user-ko-rulebook",
+      "question": "단어의 글자 수나 첫 자음을 힌트로 줘도 되나요?",
+      "pages": [
+        6
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 5,
+        "hybrid": 5,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "dive",
+      "edition_id": "dive-user-cd805c7a4636",
+      "question": "바다동물 능력은 몇 번 쓸 수 있고 사용한 뒤에는 어떻게 되나요?",
+      "pages": [
+        9
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 3,
+        "hybrid": 4,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "dominion",
+      "edition_id": "dominion-user-7ffb9798e40d",
+      "question": "+구입 1번 효과를 받으면 추가 구입을 꼭 해야 하나요?",
+      "pages": [
+        7
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 5,
+        "hybrid": 2,
+        "mmr": null
+      },
+      "distinct_pages": {
+        "similarity": 3,
+        "hybrid": 3,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "dream-home",
+      "edition_id": "dream-home-user-8698a0aae6be",
+      "question": "인테리어 디자이너 카드가 있으면 장식품을 놓은 방도 넓힐 수 있나요?",
+      "pages": [
+        13
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 4,
+        "hybrid": 3,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "expedition",
+      "edition_id": "expedition-user-bcd7d93cc408",
+      "question": "차례를 끝낼 때 손패는 몇 장이 되도록 채우나요?",
+      "pages": [
+        7
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 2,
+        "hybrid": 1,
+        "mmr": 2
+      },
+      "distinct_pages": {
+        "similarity": 4,
+        "hybrid": 4,
+        "mmr": 4
+      }
+    },
+    {
+      "game_id": "exploding-kittens",
+      "edition_id": "exploding-kittens-official-ko-rulebook",
+      "question": "해체 카드를 쓴 뒤 폭발하는 고양이 카드는 어디에 넣나요?",
+      "pages": [
+        2
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 2,
+        "hybrid": 2,
+        "mmr": 2
+      },
+      "distinct_pages": {
+        "similarity": 2,
+        "hybrid": 2,
+        "mmr": 2
+      }
+    },
+    {
+      "game_id": "exploding-kittens",
+      "edition_id": "exploding-kittens-user-a82cfeeeb00e",
+      "question": "공격 카드를 받은 상태에서 다시 공격 카드를 내면 다음 사람은 차례를 몇 번 가지나요?",
+      "pages": [
+        2
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 2,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 2,
+        "hybrid": 2,
+        "mmr": 2
+      }
+    },
+    {
+      "game_id": "farmers-market",
+      "edition_id": "farmers-market-user-ko-rulebook",
+      "question": "최고 점수가 같으면 승자를 어떻게 정하나요?",
+      "pages": [
+        5
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 5,
+        "hybrid": 5,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "flip-7",
+      "edition_id": "flip-7-boardlife-10885",
+      "question": "스테이는 언제 선언할 수 있나요?",
+      "pages": [
+        5
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 2,
+        "hybrid": 2,
+        "mmr": 4
+      },
+      "distinct_pages": {
+        "similarity": 5,
+        "hybrid": 5,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "fold-it",
+      "edition_id": "fold-it-user-ko-rulebook",
+      "question": "손수건을 접을 때 음식 그림 가운데를 접어도 되나요?",
+      "pages": [
+        2
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 5,
+        "hybrid": 5,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "forbidden-island",
+      "edition_id": "forbidden-island-official-en-rulebook",
+      "question": "내 말을 대각선 방향 타일로 이동할 수 있나요?",
+      "pages": [
+        4
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 3,
+        "hybrid": 3,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "forest-whispers",
+      "edition_id": "forest-whispers-user-33ea5a8b6b24",
+      "question": "차례를 마무리할 때 주머니에서 뽑은 타일과 같은 색 타일은 어떻게 하나요?",
+      "pages": [
+        13
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": null,
+        "hybrid": 5,
+        "mmr": null
+      },
+      "distinct_pages": {
+        "similarity": 5,
+        "hybrid": 5,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "galpang-jilpang",
+      "edition_id": "galpang-jilpang-user-7df0a5f70f5d",
+      "question": "탐정들은 한 라운드에 카드를 몇 장까지 제거할 수 있나요?",
+      "pages": [
+        2
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 4,
+        "hybrid": 4,
+        "mmr": 4
+      }
+    },
+    {
+      "game_id": "gizmos",
+      "edition_id": "gizmos-user-bb3910c6351d",
+      "question": "같은 기즈모를 한 차례에 두 번 발동할 수 있나요?",
+      "pages": [
+        4
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 3,
+        "hybrid": 2,
+        "mmr": 3
+      }
+    },
+    {
+      "game_id": "grand-austria-hotel",
+      "edition_id": "grand-austria-hotel-user-8c738ee78475",
+      "question": "한 사람이 차례를 마친 뒤 다음 차례는 누구에게 가나요?",
+      "pages": [
+        10
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 2,
+        "hybrid": 3,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "great-western-trail",
+      "edition_id": "great-western-trail-user-c43a16efc291",
+      "question": "건물 타일의 장소 행동은 표시된 순서대로 해야 하나요?",
+      "pages": [
+        7
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 2,
+        "hybrid": 1,
+        "mmr": null
+      },
+      "distinct_pages": {
+        "similarity": 4,
+        "hybrid": 3,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "hanamikoji",
+      "edition_id": "hanamikoji-boardlife-4344",
+      "question": "라운드를 시작할 때 도구 카드 한 장을 빼는 건 어떻게 하나요?",
+      "pages": [
+        2
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 2,
+        "hybrid": 2,
+        "mmr": 2
+      }
+    },
+    {
+      "game_id": "heat-pedal-to-the-metal",
+      "edition_id": "heat-pedal-to-the-metal-user-1f0d33a9f10c",
+      "question": "열 카드가 너무 많아 기어 단수만큼 카드를 낼 수 없으면 어떻게 되나요?",
+      "pages": [
+        7
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 2,
+        "hybrid": 1,
+        "mmr": 3
+      },
+      "distinct_pages": {
+        "similarity": 3,
+        "hybrid": 4,
+        "mmr": 4
+      }
+    },
+    {
+      "game_id": "high-society",
+      "edition_id": "high-society-official-ko-rulebook",
+      "question": "게임 준비 때 각 플레이어는 돈 카드를 몇 장 받나요?",
+      "pages": [
+        1
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 2,
+        "hybrid": 2,
+        "mmr": 2
+      }
+    },
+    {
+      "game_id": "hitster",
+      "edition_id": "hitster-user-db25fc84b8e8",
+      "question": "다른 사람이 이미 토큰을 놓은 위치에 도전할 수 있나요?",
+      "pages": [
+        2
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 3,
+        "hybrid": 3,
+        "mmr": 3
+      }
+    },
+    {
+      "game_id": "hive",
+      "edition_id": "hive-official-ko-rulebook",
+      "question": "여왕벌은 늦어도 몇 번째 차례까지 놓아야 하나요?",
+      "pages": [
+        3
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 5,
+        "hybrid": 5,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "kanban-ev",
+      "edition_id": "kanban-ev-user-b589b1e4ef5e",
+      "question": "회의 중 업무 목표 카드를 내려놓는 행동은 몇 번 해야 하나요?",
+      "pages": [
+        20
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 3,
+        "hybrid": 3,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "kingdomino",
+      "edition_id": "kingdomino-user-ko-rulebook",
+      "question": "영토 점수는 어떻게 계산하나요?",
+      "pages": [
+        3
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 4,
+        "hybrid": 4,
+        "mmr": 4
+      }
+    },
+    {
+      "game_id": "le-havre",
+      "edition_id": "le-havre-user-391e9d259f64",
+      "question": "대출 카드를 가진 플레이어는 이자를 얼마나 내나요?",
+      "pages": [
+        4
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": null,
+        "hybrid": 3,
+        "mmr": null
+      },
+      "distinct_pages": {
+        "similarity": 3,
+        "hybrid": 4,
+        "mmr": 4
+      }
+    },
+    {
+      "game_id": "lorenzo-il-magnifico",
+      "edition_id": "lorenzo-il-magnifico-user-e18b19181587",
+      "question": "사업 카드 비용을 군사 점수로 낼 때 미리 갖고 있어야 하는 점수가 있나요?",
+      "pages": [
+        7
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 4,
+        "hybrid": 4,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "lucky-numbers",
+      "edition_id": "lucky-numbers-official-ko-rulebook",
+      "question": "중앙에 앞면 타일이 하나도 없을 때도 그 타일을 가져오는 행동을 할 수 있나요?",
+      "pages": [
+        2
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 2,
+        "hybrid": 1,
+        "mmr": 3
+      },
+      "distinct_pages": {
+        "similarity": 4,
+        "hybrid": 4,
+        "mmr": 4
+      }
+    },
+    {
+      "game_id": "machi-koro-2",
+      "edition_id": "machi-koro-2-user-ko-rulebook",
+      "question": "게임 준비 때 공급처에는 더미마다 몇 종류의 카드를 공개하나요?",
+      "pages": [
+        2
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 4,
+        "hybrid": 4,
+        "mmr": 4
+      }
+    },
+    {
+      "game_id": "machi-koro",
+      "edition_id": "machi-koro-boardlife-586",
+      "question": "보라색 건물은 같은 종류를 두 개 지을 수 있나요?",
+      "pages": [
+        7
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 5,
+        "hybrid": 5,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "mage-knight",
+      "edition_id": "mage-knight-user-2c78b515f82e",
+      "question": "차례를 포기하면 내가 있는 장소의 혜택을 쓸 수 있나요?",
+      "pages": [
+        6
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 2,
+        "hybrid": 1,
+        "mmr": 3
+      },
+      "distinct_pages": {
+        "similarity": 2,
+        "hybrid": 3,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "marco-polo-ii",
+      "edition_id": "marco-polo-ii-user-16c7ae68cff1",
+      "question": "여행 도착지가 내 교역소가 없는 도시이면 무엇을 해야 하나요?",
+      "pages": [
+        5
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 2,
+        "hybrid": 2,
+        "mmr": 4
+      }
+    },
+    {
+      "game_id": "mighty",
+      "edition_id": "mighty-user-b28b7baf2bee",
+      "question": "딜미스를 외치면 점수에 어떤 불이익이 있나요?",
+      "pages": [
+        14
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 2,
+        "hybrid": 2,
+        "mmr": null
+      },
+      "distinct_pages": {
+        "similarity": 5,
+        "hybrid": 5,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "nemesis",
+      "edition_id": "nemesis-user-570f161877ef",
+      "question": "불 마커가 있는 방에서 경상은 언제 입나요?",
+      "pages": [
+        17
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 4,
+        "hybrid": 4,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "new-york-zoo",
+      "edition_id": "new-york-zoo-boardlife-7172",
+      "question": "한 울타리 타일에 서로 다른 종의 동물을 함께 둘 수 있나요?",
+      "pages": [
+        6
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 2,
+        "hybrid": 2,
+        "mmr": 4
+      }
+    },
+    {
+      "game_id": "ninety-nine",
+      "edition_id": "ninety-nine-user-22d57641ab2b",
+      "question": "카드를 내고 보충을 깜빡했는데 다음 사람이 이미 보충했다면 나중에 보충할 수 있나요?",
+      "pages": [
+        4
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 5,
+        "hybrid": 5,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "no-thanks",
+      "edition_id": "no-thanks-user-d339f5fbbeef",
+      "question": "연속된 숫자 카드를 갖고 있으면 벌점은 어떻게 계산하나요?",
+      "pages": [
+        1
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 2,
+        "hybrid": 2,
+        "mmr": 2
+      },
+      "distinct_pages": {
+        "similarity": 2,
+        "hybrid": 2,
+        "mmr": 2
+      }
+    },
+    {
+      "game_id": "nunchi-kochi-drawing",
+      "edition_id": "nunchi-kochi-drawing-user-5d9173a67360",
+      "question": "화가는 그림을 그리는 동안 명사를 말해도 되나요?",
+      "pages": [
+        3
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 2,
+        "hybrid": 2,
+        "mmr": 5
+      },
+      "distinct_pages": {
+        "similarity": 3,
+        "hybrid": 4,
+        "mmr": 4
+      }
+    },
+    {
+      "game_id": "one-night-ultimate-werewolf",
+      "edition_id": "one-night-ultimate-werewolf-boardlife-465",
+      "question": "도플갱어가 부하를 복제하면 어느 팀이 되나요?",
+      "pages": [
+        5
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 2,
+        "hybrid": 2,
+        "mmr": 3
+      },
+      "distinct_pages": {
+        "similarity": 3,
+        "hybrid": 3,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "onitama",
+      "edition_id": "onitama-boardlife-2270",
+      "question": "같은 색 말이 있는 칸으로 이동할 수 있나요?",
+      "pages": [
+        1
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      }
+    },
+    {
+      "game_id": "orleans",
+      "edition_id": "orleans-user-d680de24f442",
+      "question": "추종자 타일이 다 떨어지면 그 타일을 주는 행동을 할 수 있나요?",
+      "pages": [
+        12
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 2,
+        "hybrid": 1,
+        "mmr": 5
+      },
+      "distinct_pages": {
+        "similarity": 4,
+        "hybrid": 4,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "pandemic",
+      "edition_id": "pandemic-boardlife-668",
+      "question": "사건 카드를 쓰면 액션 하나를 소모하나요?",
+      "pages": [
+        7
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 3,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 3,
+        "hybrid": 3,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "penguin-party",
+      "edition_id": "penguin-party-boardlife-4226",
+      "question": "낼 수 있는 카드가 없을 때 벌점은 얼마나 받나요?",
+      "pages": [
+        2
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 2,
+        "hybrid": 2,
+        "mmr": 2
+      }
+    },
+    {
+      "game_id": "pick-picnic",
+      "edition_id": "pick-picnic-boardlife-6316",
+      "question": "가금류가 없는 마당에 여우가 들어가면 어떻게 되나요?",
+      "pages": [
+        2
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 2,
+        "hybrid": 2,
+        "mmr": 2
+      }
+    },
+    {
+      "game_id": "potion-explosion",
+      "edition_id": "potion-explosion-user-1ae7781b526b",
+      "question": "내 차례에 분배기에서 재료를 가져오지 않아도 되나요?",
+      "pages": [
+        5
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": null,
+        "hybrid": 4,
+        "mmr": 4
+      },
+      "distinct_pages": {
+        "similarity": 3,
+        "hybrid": 4,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "puerto-rico-1897",
+      "edition_id": "puerto-rico-1897-user-176bef006ad2",
+      "question": "상업 건물의 기능은 사람이 배치되지 않아도 사용할 수 있나요?",
+      "pages": [
+        9
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 4,
+        "hybrid": 4,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "quoridor",
+      "edition_id": "quoridor-additional-ko-20261021",
+      "question": "2인용 게임에서 각 플레이어는 장애물을 몇 개 가지고 시작하나요?",
+      "pages": [
+        17
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 4,
+        "hybrid": 3,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "ricochet-robots",
+      "edition_id": "ricochet-robots-user-ko-rulebook",
+      "question": "이미 외친 이동 횟수보다 큰 숫자로 바꿔 말할 수 있나요?",
+      "pages": [
+        2
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 2,
+        "hybrid": 2,
+        "mmr": 2
+      }
+    },
+    {
+      "game_id": "rummikub",
+      "edition_id": "rummikub-official-ko-rulebook",
+      "question": "차례마다 주어지는 제한 시간은 얼마이며 넘기면 어떻게 되나요?",
+      "pages": [
+        4
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 4,
+        "hybrid": 4,
+        "mmr": 4
+      }
+    },
+    {
+      "game_id": "saboteur",
+      "edition_id": "saboteur-official-ko-rulebook",
+      "question": "굴 통로가 목적지 카드에 닿으면 무엇을 하나요?",
+      "pages": [
+        4
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 4,
+        "hybrid": 2,
+        "mmr": 4
+      },
+      "distinct_pages": {
+        "similarity": 5,
+        "hybrid": 5,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "santorini",
+      "edition_id": "santorini-user-1562c33b60d8",
+      "question": "아프로디테 능력이 있을 때 근처에서 차례를 시작한 상대 일꾼은 어디서 멈춰야 하나요?",
+      "pages": [
+        4
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 2,
+        "hybrid": 2,
+        "mmr": 3
+      }
+    },
+    {
+      "game_id": "schotten-totten",
+      "edition_id": "schotten-totten-boardlife-2982",
+      "question": "전술 변형 규칙에서는 부족 카드를 처음에 몇 장 받나요?",
+      "pages": [
+        11
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 5,
+        "hybrid": 5,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "scythe",
+      "edition_id": "scythe-user-90381687d016",
+      "question": "전투에서 전투력 총합이 같으면 누가 이기나요?",
+      "pages": [
+        5,
+        23,
+        31
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 2,
+        "hybrid": 4,
+        "mmr": 4
+      }
+    },
+    {
+      "game_id": "sea-divers-of-jeju",
+      "edition_id": "sea-divers-of-jeju-user-ko-rulebook",
+      "question": "바다거북의 부탁 확장에서 0구역에 해녀가 혼자 있으면 거북알을 몇 개 받나요?",
+      "pages": [
+        10
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 2,
+        "hybrid": 1,
+        "mmr": 2
+      },
+      "distinct_pages": {
+        "similarity": 5,
+        "hybrid": 5,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "sheriff-of-nottingham",
+      "edition_id": "sheriff-of-nottingham-user-8d8f522a73da",
+      "question": "지방관이 정직하게 신고한 상인의 주머니를 조사하면 어떻게 되나요?",
+      "pages": [
+        9
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 3,
+        "hybrid": 4,
+        "mmr": 4
+      }
+    },
+    {
+      "game_id": "sky-team",
+      "edition_id": "sky-team-boardlife-9318",
+      "question": "마지막 착륙 라운드에서 엔진 주사위 합은 무엇과 비교하나요?",
+      "pages": [
+        10
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 5,
+        "hybrid": 5,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "spicy",
+      "edition_id": "spicy-user-f56ef3adc9ea",
+      "question": "더미의 첫 카드를 낼 때 말할 수 있는 숫자 범위는 어떻게 되나요?",
+      "pages": [
+        3
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 3,
+        "hybrid": 2,
+        "mmr": 5
+      },
+      "distinct_pages": {
+        "similarity": 5,
+        "hybrid": 5,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "split",
+      "edition_id": "split-user-8a103b40fec1",
+      "question": "협력 모드에서 누군가 초기화를 해야 하는 상황이 되면 어떻게 되나요?",
+      "pages": [
+        2
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 2,
+        "hybrid": 2,
+        "mmr": 2
+      }
+    },
+    {
+      "game_id": "star-wishes",
+      "edition_id": "star-wishes-user-9af4521760f2",
+      "question": "별빛을 잃게 되는 경우는 무엇인가요?",
+      "pages": [
+        13
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 5,
+        "hybrid": 5,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "sushi-go-party",
+      "edition_id": "sushi-go-party-official-en-rulebook",
+      "question": "젓가락이나 숟가락 카드는 낸 그 턴에 바로 효과를 쓸 수 있나요?",
+      "pages": [
+        4,
+        7
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 2,
+        "hybrid": 2,
+        "mmr": 3
+      }
+    },
+    {
+      "game_id": "sushi-go-party",
+      "edition_id": "sushi-go-party-boardlife-2371",
+      "question": "숟가락 카드는 몇 인용 게임에서 사용하나요?",
+      "pages": [
+        7
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 3,
+        "hybrid": 3,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "teotihuacan",
+      "edition_id": "teotihuacan-user-fe72221a11e1",
+      "question": "내 턴에 고를 수 있는 두 가지 선택지는 무엇인가요?",
+      "pages": [
+        9
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 5,
+        "hybrid": 5,
+        "mmr": 4
+      }
+    },
+    {
+      "game_id": "terraforming-mars",
+      "edition_id": "terraforming-mars-user-7ef53b7c7eaa",
+      "question": "한 차례에 같은 행동을 두 번 해도 되나요?",
+      "pages": [
+        9
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 5,
+        "hybrid": 2,
+        "mmr": null
+      },
+      "distinct_pages": {
+        "similarity": 5,
+        "hybrid": 3,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "the-gallerist",
+      "edition_id": "the-gallerist-user-eca3e6e1ebf4",
+      "question": "갤러리스트 말이 이동할 때 원래 칸에 조수를 두고 올 수 있나요?",
+      "pages": [
+        5
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": null,
+        "hybrid": 1,
+        "mmr": 3
+      },
+      "distinct_pages": {
+        "similarity": 3,
+        "hybrid": 3,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "the-game",
+      "edition_id": "the-game-official-ko-rulebook",
+      "question": "오름차순 더미에 현재 숫자보다 낮은 카드를 낼 수 있는 예외가 있나요?",
+      "pages": [
+        2
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 2,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 2,
+        "hybrid": 2,
+        "mmr": 2
+      }
+    },
+    {
+      "game_id": "the-isle-of-cats",
+      "edition_id": "the-isle-of-cats-user-a919d08eb985",
+      "question": "1인용 바구니 카드가 제거하라는 번호의 타일이 없으면 어떻게 하나요?",
+      "pages": [
+        21
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 3,
+        "hybrid": 3,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "the-mind",
+      "edition_id": "the-mind-official-ko-rulebook",
+      "question": "더 높은 카드가 먼저 나와 실수하면 레벨을 처음부터 다시 하나요?",
+      "pages": [
+        2
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 2,
+        "hybrid": 2,
+        "mmr": 2
+      }
+    },
+    {
+      "game_id": "the-quest-for-el-dorado",
+      "edition_id": "the-quest-for-el-dorado-user-6e2887dd481d",
+      "question": "동굴 토큰 변형 규칙에서 동굴 토큰 더미는 어떻게 준비하나요?",
+      "pages": [
+        11
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 3,
+        "hybrid": 3,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "the-search-for-planet-x",
+      "edition_id": "the-search-for-planet-x-user-d4510c0cedd1",
+      "question": "다음 차례를 진행할 플레이어는 어떻게 정하나요?",
+      "pages": [
+        8
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 4,
+        "hybrid": 5,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "top-ten-tv",
+      "edition_id": "top-ten-tv-user-ko-rulebook",
+      "question": "PD가 추측하는 동안 다른 사람이 힌트를 줘도 되나요?",
+      "pages": [
+        3
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 4,
+        "hybrid": 4,
+        "mmr": 4
+      }
+    },
+    {
+      "game_id": "tornado-6",
+      "edition_id": "tornado-6-user-4b2ff468ffe1",
+      "question": "첫 카드와 같은 색 카드가 손에 없으면 무엇을 낼 수 있나요?",
+      "pages": [
+        1
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 2,
+        "hybrid": 2,
+        "mmr": 2
+      }
+    },
+    {
+      "game_id": "troyes",
+      "edition_id": "troyes-user-71d764a584d3",
+      "question": "약탈 사건을 퇴치하면 누가 사건 카드를 가져가나요?",
+      "pages": [
+        6
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 4,
+        "hybrid": 2,
+        "mmr": 4
+      }
+    },
+    {
+      "game_id": "vegetable-stock",
+      "edition_id": "vegetable-stock-user-2b17996136b7",
+      "question": "게임은 몇 라운드 동안 진행하나요?",
+      "pages": [
+        2
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 3,
+        "hybrid": 2,
+        "mmr": 2
+      },
+      "distinct_pages": {
+        "similarity": 2,
+        "hybrid": 2,
+        "mmr": 2
+      }
+    },
+    {
+      "game_id": "watergate",
+      "edition_id": "watergate-user-bb69583f73f5",
+      "question": "벤 브래들리 카드로 닉슨의 공모자 카드를 저지하면 그 카드는 어떻게 되나요?",
+      "pages": [
+        7
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 2,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 4,
+        "hybrid": 3,
+        "mmr": 4
+      }
+    },
+    {
+      "game_id": "whitehall-mystery",
+      "edition_id": "whitehall-mystery-user-45e650db2f66",
+      "question": "조사자가 단서를 찾은 뒤 같은 차례에 다른 동그라미를 더 조사할 수 있나요?",
+      "pages": [
+        11
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 2,
+        "hybrid": 2,
+        "mmr": 4
+      },
+      "distinct_pages": {
+        "similarity": 3,
+        "hybrid": 4,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "wingspan",
+      "edition_id": "wingspan-user-f1b33a73c290",
+      "question": "내 차례에는 몇 가지 행동 중 몇 개를 수행하나요?",
+      "pages": [
+        4
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 4,
+        "hybrid": 4,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "wyatt-earp",
+      "edition_id": "wyatt-earp-user-70a60fa37c4b",
+      "question": "이미 은신처 카드가 놓인 무법자에게 은신처 카드를 또 쓸 수 있나요?",
+      "pages": [
+        13
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 3,
+        "hybrid": 1,
+        "mmr": 4
+      },
+      "distinct_pages": {
+        "similarity": 4,
+        "hybrid": 3,
+        "mmr": 5
+      }
+    },
+    {
+      "game_id": "zombie-dice",
+      "edition_id": "zombie-dice-boardlife-9471",
+      "question": "샷건 면이 3개 이상 나오면 어떻게 되나요?",
+      "pages": [
+        1
+      ],
+      "origin": "stage5_grounding",
+      "ranks": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      },
+      "distinct_pages": {
+        "similarity": 1,
+        "hybrid": 1,
+        "mmr": 1
+      }
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+rag.py 발췌
+496: 
+497:     async def generation(state):
+498:         # The BGG fallback belongs to generation (local answer, then at most one external
+499:         # lookup and regeneration), so the graph keeps the two-node retrieve -> generate shape.
+500:         produced = await generate_once(state)
+501:         fallback = await external({**state, **produced})
+502:         return {"result": fallback.get("result", produced["result"])}
+503: 
+504:     graph = StateGraph(State)
+505:     graph.add_node("retrieve", retrieval)
+506:     graph.add_node("generate", generation)
+507:     graph.add_edge(START, "retrieve")
+508:     graph.add_edge("retrieve", "generate")
+509:     graph.add_edge("generate", END)
+510:     return (await graph.compile().ainvoke({"context": context}))["result"]

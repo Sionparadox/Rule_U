@@ -1,0 +1,672 @@
+{
+  "provider": "compatible",
+  "fingerprint": "bab910f9b2a3551e",
+  "games": [
+    {
+      "game_id": "5-second-rule",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 8
+    },
+    {
+      "game_id": "6-nimmt",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 4
+    },
+    {
+      "game_id": "7-wonders-architects",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 6
+    },
+    {
+      "game_id": "7-wonders-duel",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 57
+    },
+    {
+      "game_id": "abluxxen",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 7
+    },
+    {
+      "game_id": "abracawhat",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 5
+    },
+    {
+      "game_id": "agricola",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 33
+    },
+    {
+      "game_id": "amazonia-park",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 7
+    },
+    {
+      "game_id": "anomia",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 10
+    },
+    {
+      "game_id": "ark-nova",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 74
+    },
+    {
+      "game_id": "at-the-gates-of-loyang",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 44
+    },
+    {
+      "game_id": "azul",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 10
+    },
+    {
+      "game_id": "barrage",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 49
+    },
+    {
+      "game_id": "bohnanza",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 21
+    },
+    {
+      "game_id": "bomb-busters",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 19
+    },
+    {
+      "game_id": "camel-up",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 20
+    },
+    {
+      "game_id": "cant-stop",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 7
+    },
+    {
+      "game_id": "carcassonne",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 5
+    },
+    {
+      "game_id": "carnegie",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 41
+    },
+    {
+      "game_id": "cascadia",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 69
+    },
+    {
+      "game_id": "castle-combo",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 15
+    },
+    {
+      "game_id": "catan",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 10
+    },
+    {
+      "game_id": "caverna",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 49
+    },
+    {
+      "game_id": "celestia",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 13
+    },
+    {
+      "game_id": "chronicles-of-crime-1400",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 13
+    },
+    {
+      "game_id": "citadels",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 39
+    },
+    {
+      "game_id": "clank-catacombs",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 33
+    },
+    {
+      "game_id": "cockroach-poker",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 3
+    },
+    {
+      "game_id": "codenames-pictures",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 12
+    },
+    {
+      "game_id": "codenames",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 13
+    },
+    {
+      "game_id": "coffee-rush",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 11
+    },
+    {
+      "game_id": "coup",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 5
+    },
+    {
+      "game_id": "darwins-journey",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 62
+    },
+    {
+      "game_id": "decrypto",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 13
+    },
+    {
+      "game_id": "dive",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 24
+    },
+    {
+      "game_id": "dominion",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 48
+    },
+    {
+      "game_id": "dream-home",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 19
+    },
+    {
+      "game_id": "expedition",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 24
+    },
+    {
+      "game_id": "exploding-kittens",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 11
+    },
+    {
+      "game_id": "farmers-market",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 7
+    },
+    {
+      "game_id": "flip-7",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 14
+    },
+    {
+      "game_id": "fold-it",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 7
+    },
+    {
+      "game_id": "forbidden-island",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 32
+    },
+    {
+      "game_id": "forest-whispers",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 20
+    },
+    {
+      "game_id": "gajigaksa",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 7
+    },
+    {
+      "game_id": "galpang-jilpang",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 6
+    },
+    {
+      "game_id": "gizmos",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 14
+    },
+    {
+      "game_id": "grand-austria-hotel",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 48
+    },
+    {
+      "game_id": "great-western-trail",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 51
+    },
+    {
+      "game_id": "hanamikoji",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 3
+    },
+    {
+      "game_id": "heat-pedal-to-the-metal",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 18
+    },
+    {
+      "game_id": "high-society",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 6
+    },
+    {
+      "game_id": "hitster",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 7
+    },
+    {
+      "game_id": "hive",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 12
+    },
+    {
+      "game_id": "kanban-ev",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 60
+    },
+    {
+      "game_id": "kingdomino",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 5
+    },
+    {
+      "game_id": "le-havre",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 62
+    },
+    {
+      "game_id": "lorenzo-il-magnifico",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 59
+    },
+    {
+      "game_id": "love-letter",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 17
+    },
+    {
+      "game_id": "lucky-numbers",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 5
+    },
+    {
+      "game_id": "machi-koro-2",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 12
+    },
+    {
+      "game_id": "machi-koro",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 14
+    },
+    {
+      "game_id": "mage-knight",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 123
+    },
+    {
+      "game_id": "marco-polo-ii",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 29
+    },
+    {
+      "game_id": "mighty",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 19
+    },
+    {
+      "game_id": "nemesis",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 108
+    },
+    {
+      "game_id": "new-york-zoo",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 22
+    },
+    {
+      "game_id": "ninety-nine",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 7
+    },
+    {
+      "game_id": "no-thanks",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 5
+    },
+    {
+      "game_id": "nunchi-kochi-drawing",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 8
+    },
+    {
+      "game_id": "one-night-ultimate-werewolf",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 16
+    },
+    {
+      "game_id": "onitama",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 3
+    },
+    {
+      "game_id": "orleans",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 21
+    },
+    {
+      "game_id": "pandemic",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 17
+    },
+    {
+      "game_id": "penguin-party",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 3
+    },
+    {
+      "game_id": "pick-picnic",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 3
+    },
+    {
+      "game_id": "potion-explosion",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 20
+    },
+    {
+      "game_id": "puerto-rico-1897",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 60
+    },
+    {
+      "game_id": "quoridor",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 72
+    },
+    {
+      "game_id": "ricochet-robots",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 3
+    },
+    {
+      "game_id": "rummikub",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 5
+    },
+    {
+      "game_id": "saboteur",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 12
+    },
+    {
+      "game_id": "santorini",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 15
+    },
+    {
+      "game_id": "schotten-totten",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 17
+    },
+    {
+      "game_id": "scythe",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 66
+    },
+    {
+      "game_id": "sea-divers-of-jeju",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 13
+    },
+    {
+      "game_id": "sheriff-of-nottingham",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 30
+    },
+    {
+      "game_id": "six-fireworks",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 8
+    },
+    {
+      "game_id": "sky-team",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 13
+    },
+    {
+      "game_id": "spicy",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 10
+    },
+    {
+      "game_id": "split",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 7
+    },
+    {
+      "game_id": "star-wishes",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 20
+    },
+    {
+      "game_id": "sushi-go-party",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 72
+    },
+    {
+      "game_id": "teotihuacan",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 44
+    },
+    {
+      "game_id": "terraforming-mars",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 41
+    },
+    {
+      "game_id": "the-gallerist",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 57
+    },
+    {
+      "game_id": "the-game",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 3
+    },
+    {
+      "game_id": "the-isle-of-cats",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 28
+    },
+    {
+      "game_id": "the-mind",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 3
+    },
+    {
+      "game_id": "the-quest-for-el-dorado",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 25
+    },
+    {
+      "game_id": "the-search-for-planet-x",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 31
+    },
+    {
+      "game_id": "top-ten-tv",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 5
+    },
+    {
+      "game_id": "tornado-6",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 9
+    },
+    {
+      "game_id": "troyes",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 27
+    },
+    {
+      "game_id": "vegetable-stock",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 6
+    },
+    {
+      "game_id": "watergate",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 65
+    },
+    {
+      "game_id": "whitehall-mystery",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 27
+    },
+    {
+      "game_id": "wingspan",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 26
+    },
+    {
+      "game_id": "wyatt-earp",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 25
+    },
+    {
+      "game_id": "zombie-dice",
+      "status": "indexed",
+      "embedded": 0,
+      "cached": 3
+    }
+  ],
+  "counts": {
+    "game_meta": 110,
+    "rule_docs": 2541
+  },
+  "indexed_games": 110,
+  "failed_games": 0
+}

@@ -1,0 +1,356 @@
+{
+  "search_mode": "hybrid",
+  "chunking": [
+    {
+      "edition_id": "6-nimmt-official-ko-rulebook",
+      "title": "젝스님트 한국어판",
+      "pages": 2,
+      "chunks": {
+        "500/100": 6,
+        "1000/200": 3,
+        "1500/300": 2
+      },
+      "active_index_chunks": 3
+    },
+    {
+      "edition_id": "7-wonders-architects-additional-ko-20261021",
+      "title": "7 원더스 건축가들 한국어 규칙서",
+      "pages": 3,
+      "chunks": {
+        "500/100": 9,
+        "1000/200": 5,
+        "1500/300": 3
+      },
+      "active_index_chunks": 5
+    },
+    {
+      "edition_id": "catan-user-748610c946df",
+      "title": "카탄 한국어 규칙서",
+      "pages": 3,
+      "chunks": {
+        "500/100": 17,
+        "1000/200": 9,
+        "1500/300": 7
+      },
+      "active_index_chunks": 9
+    },
+    {
+      "edition_id": "coup-official-ko-rulebook",
+      "title": "플레이테 쿠: 기본판 및 종교 개혁 확장",
+      "pages": 1,
+      "chunks": {
+        "500/100": 7,
+        "1000/200": 4,
+        "1500/300": 3
+      },
+      "active_index_chunks": 4
+    }
+  ],
+  "top_k": [
+    {
+      "game_id": "coup",
+      "question": "암살 대상이 백작 부인을 주장했고 아무도 도전하지 않았어요. 암살에 낸 은화 3개는 돌려받나요?",
+      "answer_pages": [
+        1
+      ],
+      "by_k": {
+        "3": [
+          {
+            "number": 1,
+            "page": 1,
+            "chunk_id": "dd592fc52ba9fdb42328295820b5c164102d24dd40409e33bb2057c417367531"
+          },
+          {
+            "number": 2,
+            "page": 1,
+            "chunk_id": "1d092af3fb258ad9926dafac4924be4cbc7fb2fcd269a92fb48a2fa8bd7b646c"
+          },
+          {
+            "number": 3,
+            "page": 1,
+            "chunk_id": "aeb3dab235b1d394035cd46b85be106f57dd1acc9b0e5b68e552091548be512d"
+          }
+        ],
+        "5": [
+          {
+            "number": 1,
+            "page": 1,
+            "chunk_id": "dd592fc52ba9fdb42328295820b5c164102d24dd40409e33bb2057c417367531"
+          },
+          {
+            "number": 2,
+            "page": 1,
+            "chunk_id": "1d092af3fb258ad9926dafac4924be4cbc7fb2fcd269a92fb48a2fa8bd7b646c"
+          },
+          {
+            "number": 3,
+            "page": 1,
+            "chunk_id": "aeb3dab235b1d394035cd46b85be106f57dd1acc9b0e5b68e552091548be512d"
+          },
+          {
+            "number": 4,
+            "page": 1,
+            "chunk_id": "480cf981caee82162b7c43b746e236bfecad7dddc373ed5ddbdbe19903aaf438"
+          }
+        ],
+        "8": [
+          {
+            "number": 1,
+            "page": 1,
+            "chunk_id": "dd592fc52ba9fdb42328295820b5c164102d24dd40409e33bb2057c417367531"
+          },
+          {
+            "number": 2,
+            "page": 1,
+            "chunk_id": "1d092af3fb258ad9926dafac4924be4cbc7fb2fcd269a92fb48a2fa8bd7b646c"
+          },
+          {
+            "number": 3,
+            "page": 1,
+            "chunk_id": "aeb3dab235b1d394035cd46b85be106f57dd1acc9b0e5b68e552091548be512d"
+          },
+          {
+            "number": 4,
+            "page": 1,
+            "chunk_id": "480cf981caee82162b7c43b746e236bfecad7dddc373ed5ddbdbe19903aaf438"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "6-nimmt",
+      "question": "벌점으로 가져간 카드를 나중에 손에 든 카드처럼 다시 낼 수 있나요?",
+      "answer_pages": [
+        2
+      ],
+      "by_k": {
+        "3": [
+          {
+            "number": 1,
+            "page": 2,
+            "chunk_id": "9eb7b2e8f447e98512724534b796e727bab4a54b055bfe0530938e51ac926ddd"
+          },
+          {
+            "number": 2,
+            "page": 1,
+            "chunk_id": "815f1432fc5314c85fd066400811652cf82aac749e9d5cd6a58c95c7fe0a35f7"
+          },
+          {
+            "number": 3,
+            "page": 2,
+            "chunk_id": "d2ae9fbd219998712540a1ca5d631a8a2ce9ede03b2e6d3dced68a82726e9bf3"
+          }
+        ],
+        "5": [
+          {
+            "number": 1,
+            "page": 2,
+            "chunk_id": "9eb7b2e8f447e98512724534b796e727bab4a54b055bfe0530938e51ac926ddd"
+          },
+          {
+            "number": 2,
+            "page": 1,
+            "chunk_id": "815f1432fc5314c85fd066400811652cf82aac749e9d5cd6a58c95c7fe0a35f7"
+          },
+          {
+            "number": 3,
+            "page": 2,
+            "chunk_id": "d2ae9fbd219998712540a1ca5d631a8a2ce9ede03b2e6d3dced68a82726e9bf3"
+          }
+        ],
+        "8": [
+          {
+            "number": 1,
+            "page": 2,
+            "chunk_id": "9eb7b2e8f447e98512724534b796e727bab4a54b055bfe0530938e51ac926ddd"
+          },
+          {
+            "number": 2,
+            "page": 1,
+            "chunk_id": "815f1432fc5314c85fd066400811652cf82aac749e9d5cd6a58c95c7fe0a35f7"
+          },
+          {
+            "number": 3,
+            "page": 2,
+            "chunk_id": "d2ae9fbd219998712540a1ca5d631a8a2ce9ede03b2e6d3dced68a82726e9bf3"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "7-wonders-architects",
+      "question": "자원이 조금 부족하지만 금화로 채울 수 있어요. 금화를 아끼려고 건설을 다음 차례로 미뤄도 되나요?",
+      "answer_pages": [
+        2
+      ],
+      "by_k": {
+        "3": [
+          {
+            "number": 1,
+            "page": 2,
+            "chunk_id": "7fd4951bf8dbe4dda3bd35a717af3952efa6e32813ff4f321f33aa391dfd0ae1"
+          },
+          {
+            "number": 2,
+            "page": 3,
+            "chunk_id": "4078537ecd9d3e077f2287baf72431f80477177a059ab19c013903cb75e43a06"
+          },
+          {
+            "number": 3,
+            "page": 3,
+            "chunk_id": "09edb30e841f073f056f3711fc75edc5fe542321a0408047f567ce9093714aee"
+          }
+        ],
+        "5": [
+          {
+            "number": 1,
+            "page": 2,
+            "chunk_id": "7fd4951bf8dbe4dda3bd35a717af3952efa6e32813ff4f321f33aa391dfd0ae1"
+          },
+          {
+            "number": 2,
+            "page": 3,
+            "chunk_id": "4078537ecd9d3e077f2287baf72431f80477177a059ab19c013903cb75e43a06"
+          },
+          {
+            "number": 3,
+            "page": 3,
+            "chunk_id": "09edb30e841f073f056f3711fc75edc5fe542321a0408047f567ce9093714aee"
+          },
+          {
+            "number": 4,
+            "page": 1,
+            "chunk_id": "cc5aaac2df833e73fe2a5de6b98351c6bee46cea7efa40c0b00e2a146f587523"
+          },
+          {
+            "number": 5,
+            "page": 2,
+            "chunk_id": "79ade10324f75dddea4f2feb496f6f22fea16c76388708cae2aa046f0161c001"
+          }
+        ],
+        "8": [
+          {
+            "number": 1,
+            "page": 2,
+            "chunk_id": "7fd4951bf8dbe4dda3bd35a717af3952efa6e32813ff4f321f33aa391dfd0ae1"
+          },
+          {
+            "number": 2,
+            "page": 3,
+            "chunk_id": "4078537ecd9d3e077f2287baf72431f80477177a059ab19c013903cb75e43a06"
+          },
+          {
+            "number": 3,
+            "page": 3,
+            "chunk_id": "09edb30e841f073f056f3711fc75edc5fe542321a0408047f567ce9093714aee"
+          },
+          {
+            "number": 4,
+            "page": 1,
+            "chunk_id": "cc5aaac2df833e73fe2a5de6b98351c6bee46cea7efa40c0b00e2a146f587523"
+          },
+          {
+            "number": 5,
+            "page": 2,
+            "chunk_id": "79ade10324f75dddea4f2feb496f6f22fea16c76388708cae2aa046f0161c001"
+          }
+        ]
+      }
+    },
+    {
+      "game_id": "catan",
+      "question": "7이 나왔을 때 자원카드를 9장 가지고 있으면 몇 장을 버려야 하나요?",
+      "answer_pages": [
+        3
+      ],
+      "by_k": {
+        "3": [
+          {
+            "number": 1,
+            "page": 3,
+            "chunk_id": "e575fc868cc74d99341c0195f5d6db1423f6e7cf141d57275869a981bb43b371"
+          },
+          {
+            "number": 2,
+            "page": 3,
+            "chunk_id": "dc16e74f9e84f544205b67332854dfc009226eae6eee3a72861d71edd849fbe4"
+          },
+          {
+            "number": 3,
+            "page": 3,
+            "chunk_id": "b7b2be31fa2fa4cf11943c62fbc6d1ce88d3fc6ceb1435fbd16289ae64b9b9e1"
+          }
+        ],
+        "5": [
+          {
+            "number": 1,
+            "page": 3,
+            "chunk_id": "e575fc868cc74d99341c0195f5d6db1423f6e7cf141d57275869a981bb43b371"
+          },
+          {
+            "number": 2,
+            "page": 3,
+            "chunk_id": "dc16e74f9e84f544205b67332854dfc009226eae6eee3a72861d71edd849fbe4"
+          },
+          {
+            "number": 3,
+            "page": 3,
+            "chunk_id": "b7b2be31fa2fa4cf11943c62fbc6d1ce88d3fc6ceb1435fbd16289ae64b9b9e1"
+          },
+          {
+            "number": 4,
+            "page": 1,
+            "chunk_id": "4bf945991c7e72d96f2f9b1460c4ada32a1f36d16ee1934a1542ac01439eb198"
+          },
+          {
+            "number": 5,
+            "page": 2,
+            "chunk_id": "889c2381ffa3b096f514cf2df073cb2c967b11cee0fd34268e839785eba781e9"
+          }
+        ],
+        "8": [
+          {
+            "number": 1,
+            "page": 3,
+            "chunk_id": "e575fc868cc74d99341c0195f5d6db1423f6e7cf141d57275869a981bb43b371"
+          },
+          {
+            "number": 2,
+            "page": 3,
+            "chunk_id": "dc16e74f9e84f544205b67332854dfc009226eae6eee3a72861d71edd849fbe4"
+          },
+          {
+            "number": 3,
+            "page": 3,
+            "chunk_id": "b7b2be31fa2fa4cf11943c62fbc6d1ce88d3fc6ceb1435fbd16289ae64b9b9e1"
+          },
+          {
+            "number": 4,
+            "page": 1,
+            "chunk_id": "4bf945991c7e72d96f2f9b1460c4ada32a1f36d16ee1934a1542ac01439eb198"
+          },
+          {
+            "number": 5,
+            "page": 2,
+            "chunk_id": "889c2381ffa3b096f514cf2df073cb2c967b11cee0fd34268e839785eba781e9"
+          },
+          {
+            "number": 6,
+            "page": 1,
+            "chunk_id": "e0e1e31a389e75b8e498587b1f15f909035df95d079818596bdd2ff72067147f"
+          },
+          {
+            "number": 7,
+            "page": 1,
+            "chunk_id": "da2273457ce627421aeb183be53a2ea8f173efb1af3a4fb11319efe899894f62"
+          },
+          {
+            "number": 8,
+            "page": 3,
+            "chunk_id": "d04b413b12e9bd49d40ad0352fafa774bb505ba3f869a4e65f3368a36d7895f9"
+          }
+        ]
+      }
+    }
+  ]
+}
