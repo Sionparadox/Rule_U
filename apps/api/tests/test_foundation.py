@@ -50,7 +50,7 @@ def test_migration_roundtrip(configured):
     engine.dispose()
     command.upgrade(config, "head")
     engine = make_engine(settings)
-    assert len(inspect(engine).get_table_names()) == 13
+    assert len(inspect(engine).get_table_names()) == 15
     engine.dispose()
 
 

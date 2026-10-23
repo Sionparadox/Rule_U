@@ -186,7 +186,7 @@ export function GamePicker() {
               {semantic ? "자연어 조건" : "게임 이름"}
             </span>
             <input
-              className="w-full border-0 bg-transparent px-1 focus-visible:outline-0"
+              className="w-full border-0 bg-transparent px-1"
               name="q"
               autoComplete="off"
               enterKeyHint="search"
@@ -200,7 +200,8 @@ export function GamePicker() {
           </label>
           <button
             aria-label="게임 찾기"
-            className="btn-primary min-h-11 shrink-0 rounded-full px-5 [--depth:3px]"
+            // 아래 두께(3px)만큼 여백을 두어, 두께까지 포함한 버튼이 검색창 위아래 가운데에 오게 한다.
+            className="btn-primary mb-[3px] min-h-11 shrink-0 rounded-full px-5 [--depth:3px]"
             disabled={busy}
           >
             {busy ? <span className="spinner" aria-hidden /> : "검색"}

@@ -199,6 +199,34 @@ uv run python -m rule_u.cli index --catalog ../../../data/games --games dive --m
 구현 참고: [Next.js 설치](https://nextjs.org/docs/app/getting-started/installation), [SQLAlchemy SQLite](https://docs.sqlalchemy.org/en/20/dialects/sqlite.html), [FastAPI 앱 구조](https://fastapi.tiangolo.com/tutorial/bigger-applications/).
 # 현재 데이터·검색 상태 (2026-10-22)
 
+## 대화 검색어·상황 메모·답변 초안 (2026-10-23)
+
+업데이트 후 `apps/api`에서 `uv run alembic upgrade head`를 실행하고 API 서버를 재시작하세요(대화 상황 메모·요청 초안 열 추가).
+
+- **기본 검색이 `hybrid`로 바뀌었습니다.** 이전 방식은 `.env`에 `SEARCH_MODE=similarity`로 되돌릴 수 있습니다. 근거는 [후속 평가](reports/search-quality-followup.md)에 있습니다.
+- 대화 중 질문은 마지막 질문으로 검색합니다. "그럼 그 카드는?"처럼 앞을 가리키는 질문만 채팅 모델로 독립 질문으로 바꿔 검색합니다(`data/rewrite-cache`에 캐시). 사용한 검색어는 요청의 진단 정보(`diagnostic_detail.search_query`)에 남습니다.
+- **상황 메모:** 상황 판정의 **상황 메모**(카드·단계·행동)는 대화별로 저장되어 이후 모든 질문에 함께 전달됩니다. 채팅 상단에서 수정하거나 지울 수 있습니다. 메모는 규칙 근거로 인용되지 않습니다.
+- **답변 초안:** 모델이 쓰는 동안 "작성 중 · 근거 확인 전" 초안이 보이고, 검증을 통과한 답변으로 바뀝니다. 검증에서 유보되면 초안은 사라집니다. `CHAT_STREAM=false`로 끌 수 있습니다.
+- 채팅 API의 일시적 실패(시간 초과·연결 오류·5xx·429)는 1회 재시도합니다.
+- 평가 도구: `tools/evaluate_followup.py --live`(대화 검색어 비교), `tools/evaluate_stage5_answers.py --repeat N`(답변 안정성).
+
+## 답변 피드백·규칙 저장·대기 제어 (2026-10-23)
+
+업데이트 후 `apps/api`에서 `uv run alembic upgrade head`를 실행하고 API 서버를 재시작하세요(요청 진단·피드백·저장한 규칙 테이블 추가).
+
+- 빈 대화의 **질문 예시**를 누르면 입력창에 질문이 채워집니다. **상황 판정**에서는 **상황 정리**에 카드·단계·행동을 나눠 적을 수 있습니다.
+- 답변 아래 **도움됐어요 / 규칙이 달라요**로 평가하고 **규칙 저장**으로 북마크합니다. 저장한 규칙은 채팅 머리의 책갈피 버튼에서 봅니다. 쿠키(익명 세션)를 지우면 함께 사라집니다.
+- 답변을 기다리는 동안 경과 시간이 표시되고 다음 질문을 미리 적을 수 있습니다. BGG 추가 검색 중에는 **추가 검색 중단**으로 기다림을 끝낼 수 있습니다.
+- 잘못된 답변 신고 검토: `uv run python -m rule_u.feedback export --output ../../data/feedback-review.json`. 사용자 입력이 들어 있으므로 Git에서 제외되는 `data/`에 둡니다. 검토자가 정답 페이지를 확인한 질문만 `evals/stage5-grounding-questions.tsv`에 옮기고 `apps/api/tools/build_stage5_cases.py`로 평가 세트를 다시 만듭니다.
+- 답변 유보 원인은 `GET /api/v1/requests/{id}`의 `diagnostic`(예: `no_evidence`, `model_insufficient`, `citation_mismatch`, `bgg_skipped`)으로 확인합니다.
+- 목 데이터 모드(`corepack pnpm dev:mock`)에서도 동작합니다. 질문에 `BGG`를 넣으면 추가 검색 단계와 중단 버튼을 확인할 수 있습니다.
+
+## 5단계 검색 방식과 지원 게임
+
+- `.env`의 `SEARCH_MODE`로 규칙 검색 방식을 고릅니다. 기본은 `similarity`이고 `hybrid`(BM25+벡터 RRF), `mmr`(비교용)을 선택할 수 있습니다. 변경 후 API 서버를 재시작하세요.
+- 공식 FAQ·정오표(`type=faq|errata`)는 `config/document-relations.json`에 검증된 관계를 기록한 경우에만 검색에 포함됩니다. 형식: `{"<FAQ 문서 sha256>": {"type": "faq", "status": "verified", "edition_id": "...", "amends_document_id": "<규칙서 sha256>", "evidence": "..."}}`.
+- 지원 판본만 화면에서 선택할 수 있습니다. 현재 106게임·111판본이 지원됩니다(2026-10-23 hybrid 기준 재판정). 판정 기준·검색 비교·재현 명령은 [5단계 결과](reports/stage5-search-comparison.md)를 참고하세요. 지원 상태 재계산은 `python -m rule_u.stage5 audit ... --apply`로 합니다.
+
 ## 4단계 화면 사용
 
 답변의 출처 번호를 누르면 **왜 이렇게 답변했나요?** 모달에서 해당 규칙과 적용 이유를 확인할 수 있습니다. 원문 청크 대신 이해하기 쉬운 설명과 룰북 페이지를 표시합니다. 예전 답변의 설명은 처음 열 때 생성하므로 잠시 기다릴 수 있으며 이후에는 저장된 설명을 사용합니다. 이 기능을 반영하려면 기존 API 서버를 종료한 뒤 다시 실행하세요.

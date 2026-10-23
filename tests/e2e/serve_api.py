@@ -1,7 +1,7 @@
 """Isolated E2E database, never the developer's data/app.db."""
-import os
 import asyncio
 import json
+import os
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
@@ -29,12 +29,27 @@ class FixtureProvider:
         question = context["messages"][-1]["content"]
         if "실패 테스트" in question and sum("실패 테스트" in m["content"] for m in context["messages"] if m["role"] == "user") == 1:
             raise ProviderError("provider_call_failed")
+        if "BGG 대기" in question:
+            return json.dumps({"answer": "근거 부족", "verdict": "insufficient_evidence",
+                               "cited_ids": [], "clarification": ""})
         if "정보 부족" in question:
             return json.dumps({"answer": "정보 필요", "verdict": "needs_clarification",
                                "cited_ids": [], "clarification": "어떤 카드이며 누구의 턴인가요?"})
         return json.dumps({"answer": "자신의 턴이 끝난 뒤 사용할 수 있어요. [1]",
                            "verdict": "conditional", "cited_ids": [1], "clarification": "",
                            "explanations": [explanation]})
+
+
+    async def stream(self, messages):
+        # Streams slowly only for the streaming scenario so the browser can see the draft.
+        text = await self.generate(messages)
+        question = json.loads(messages[-1]["content"])["messages"][-1]["content"]
+        if "스트리밍" not in question:
+            yield text
+            return
+        for i in range(0, len(text), 30):
+            await asyncio.sleep(0.25)
+            yield text[i:i + 30]
 
 
 async def fixture_retrieve(settings, sessions, context):
@@ -50,6 +65,15 @@ async def fixture_retrieve(settings, sessions, context):
              "review_note": "브라우저 검증용 가상 자료"}]
 
 
+async def fixture_bgg(settings, sessions, context, provider):
+    # Without a token the real lookup reports not_configured; only this question waits
+    # long enough for the browser to press the stop button.
+    if "BGG 대기" not in context["messages"][-1]["content"]:
+        return [], "not_configured"
+    await asyncio.sleep(40)
+    return [], "no_results"
+
+
 async def fixture_rank(*args):
     return ["table-game", "second-game"]
 
@@ -62,7 +86,7 @@ with TemporaryDirectory(prefix="rule-u-e2e-") as folder:
     settings = Settings(_env_file=None)
     seed(settings)
     application = create_app(settings, provider=FixtureProvider(), retriever=fixture_retrieve,
-                             game_ranker=fixture_rank)
+                             game_ranker=fixture_rank, bgg_retriever=fixture_bgg)
     with application.state.sessions.begin() as db:
         for gid, name in [("table-game", "테이블 탐험"), ("second-game", "숲속 산책")]:
             db.add(Game(id=gid, name_ko=name, min_players=2, max_players=4, min_minutes=20,

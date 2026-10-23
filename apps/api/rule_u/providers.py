@@ -1,6 +1,8 @@
 """Independent chat and embedding ports; no provider errors/bodies reach the UI."""
 
+import asyncio
 import hashlib
+import json
 import math
 from typing import Protocol
 
@@ -47,22 +49,34 @@ class CompatibleHTTP:
         self.timeout = timeout
         self.transport = transport
 
-    async def post(self, path, payload):
-        try:
-            async with httpx.AsyncClient(
-                timeout=self.timeout,
-                transport=self.transport,
-                follow_redirects=False,
-            ) as client:
-                response = await client.post(
-                    self.base_url + path,
-                    headers={"Authorization": f"Bearer {self.key}"},
-                    json=payload,
-                )
-                response.raise_for_status()
-                return response.json()
-        except (httpx.HTTPError, ValueError):
-            raise ProviderError("provider_call_failed") from None
+    async def post(self, path, payload, attempts=2):
+        # One retry for transient failures only: latency on the gateway varies widely
+        # (the same request has taken 4s and >30s). Client errors are never retried.
+        for attempt in range(attempts):
+            try:
+                async with httpx.AsyncClient(
+                    timeout=self.timeout,
+                    transport=self.transport,
+                    follow_redirects=False,
+                ) as client:
+                    response = await client.post(
+                        self.base_url + path,
+                        headers={"Authorization": f"Bearer {self.key}"},
+                        json=payload,
+                    )
+                    response.raise_for_status()
+                    return response.json()
+            except (httpx.TimeoutException, httpx.TransportError) as exc:
+                transient = True
+                error = exc
+            except httpx.HTTPStatusError as exc:
+                transient = exc.response.status_code >= 500 or exc.response.status_code == 429
+                error = exc
+            except (httpx.HTTPError, ValueError):
+                raise ProviderError("provider_call_failed") from None
+            if not transient or attempt == attempts - 1:
+                raise ProviderError("provider_call_failed") from error
+            await asyncio.sleep(1)
 
 
 class CompatibleChat(CompatibleHTTP):
@@ -86,6 +100,36 @@ class CompatibleChat(CompatibleHTTP):
             return answer
         except (KeyError, IndexError, TypeError, ValueError):
             raise ProviderError("invalid_chat_response") from None
+
+
+    async def stream(self, messages):
+        """Yield text deltas from an OpenAI-compatible SSE stream. Any failure is a
+        ProviderError so the caller can fall back to a single non-streamed request."""
+        try:
+            async with httpx.AsyncClient(
+                timeout=self.timeout, transport=self.transport, follow_redirects=False
+            ) as client:
+                async with client.stream(
+                    "POST",
+                    self.base_url + "chat/completions",
+                    headers={"Authorization": f"Bearer {self.key}"},
+                    json={"model": self.model, "messages": messages, "stream": True},
+                ) as response:
+                    response.raise_for_status()
+                    if "text/event-stream" not in response.headers.get("content-type", ""):
+                        raise ValueError("not_a_stream")
+                    async for line in response.aiter_lines():
+                        if not line.startswith("data:"):
+                            continue
+                        data = line[5:].strip()
+                        if data == "[DONE]":
+                            return
+                        choice = (json.loads(data).get("choices") or [{}])[0]
+                        text = (choice.get("delta") or {}).get("content")
+                        if isinstance(text, str) and text:
+                            yield text
+        except (httpx.HTTPError, ValueError, KeyError, TypeError, AttributeError):
+            raise ProviderError("provider_stream_failed") from None
 
 
 class CompatibleEmbedding(CompatibleHTTP):

@@ -91,6 +91,19 @@ class ConversationCreated(BaseModel):
     conversation_id: str
 
 
+class FeedbackIn(BaseModel):
+    model_config = ConfigDict(str_strip_whitespace=True)
+    rating: Literal["helpful", "wrong"]
+    reason: Literal["rule_differs", "wrong_page", "missing_info", "other"] | None = None
+    note: str = Field(default="", max_length=500)
+
+
+class FeedbackOut(ORMModel):
+    rating: Literal["helpful", "wrong"]
+    reason: Literal["rule_differs", "wrong_page", "missing_info", "other"] | None = None
+    note: str = ""
+
+
 class MessageOut(ORMModel):
     id: str
     role: str
@@ -100,6 +113,45 @@ class MessageOut(ORMModel):
     cited_source_ids: list[str] = Field(default_factory=list)
     mode: str = "qa"
     citations: list[SourceOut] = Field(default_factory=list)
+    feedback: FeedbackOut | None = None
+    saved: bool = False
+
+
+class BookmarkIn(BaseModel):
+    saved: bool
+
+
+class BookmarkOut(BaseModel):
+    message_id: str
+    saved: bool
+
+
+class SavedRuleOut(BaseModel):
+    message_id: str
+    conversation_id: str
+    edition_id: str
+    question: str
+    answer: str
+    verdict: str | None
+    citations: list[SourceOut] = Field(default_factory=list)
+    saved_at: datetime
+
+
+class SavedRuleList(BaseModel):
+    items: list[SavedRuleOut]
+
+
+class SituationIn(BaseModel):
+    model_config = ConfigDict(str_strip_whitespace=True)
+    element: str = Field(default="", max_length=300)
+    phase: str = Field(default="", max_length=300)
+    action: str = Field(default="", max_length=300)
+
+
+class SituationOut(BaseModel):
+    element: str = ""
+    phase: str = ""
+    action: str = ""
 
 
 class ConversationOut(BaseModel):
@@ -108,6 +160,7 @@ class ConversationOut(BaseModel):
     edition_id: str
     expansion_ids: list[str]
     messages: list[MessageOut]
+    situation: SituationOut | None = None
     active_request_id: str | None = None
     latest_request_id: str | None = None
     latest_client_request_id: str | None = None
@@ -136,6 +189,11 @@ class RequestOut(RequestAccepted):
     stage: str
     error_code: str | None
     result: AnswerOut | None
+    skip_external: bool = False
+    # Text being written before validation; never shown as a final answer.
+    draft: str | None = None
+    # Internal reason code for refusals; the UI does not show it.
+    diagnostic: str | None = None
 
 
 class HealthOut(BaseModel):

@@ -155,6 +155,8 @@ class Conversation(Base):
     session_id: Mapped[str] = mapped_column(index=True)
     game_id: Mapped[str] = mapped_column(ForeignKey("games.id"))
     edition_id: Mapped[str]
+    # The user's current table state (cards, phase, intended action), kept for the whole chat.
+    situation: Mapped[dict | None] = mapped_column(JSON)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now)
 
 
@@ -236,5 +238,37 @@ class Request(Base):
     stage: Mapped[str] = mapped_column(default="queued")
     result_message_id: Mapped[str | None]
     error_code: Mapped[str | None]
+    # Internal only: why an answer was refused (retrieval, model, validation, BGG).
+    diagnostic: Mapped[dict | None] = mapped_column(JSON)
+    skip_external: Mapped[bool] = mapped_column(Boolean, default=False)
+    # Unvalidated text while the model is still writing; cleared when the request ends.
+    draft: Mapped[str | None] = mapped_column(Text)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now)
     updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now, onupdate=now)
+
+
+class AnswerFeedback(Base):
+    __tablename__ = "answer_feedback"
+    __table_args__ = (
+        CheckConstraint("rating IN ('helpful','wrong')"),
+        CheckConstraint(
+            "reason IS NULL OR reason IN ('rule_differs','wrong_page','missing_info','other')"
+        ),
+    )
+    id: Mapped[str] = mapped_column(primary_key=True, default=new_id)
+    message_id: Mapped[str] = mapped_column(ForeignKey("messages.id"), unique=True)
+    session_id: Mapped[str] = mapped_column(index=True)
+    rating: Mapped[str]
+    reason: Mapped[str | None]
+    note: Mapped[str] = mapped_column(Text, default="")
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now, onupdate=now)
+
+
+class SavedRule(Base):
+    __tablename__ = "saved_rules"
+    __table_args__ = (UniqueConstraint("session_id", "message_id"),)
+    id: Mapped[str] = mapped_column(primary_key=True, default=new_id)
+    session_id: Mapped[str] = mapped_column(index=True)
+    message_id: Mapped[str] = mapped_column(ForeignKey("messages.id"))
+    game_id: Mapped[str] = mapped_column(ForeignKey("games.id"))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now)

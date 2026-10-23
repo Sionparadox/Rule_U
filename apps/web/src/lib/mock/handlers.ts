@@ -15,6 +15,8 @@ const STAGE_TIME = 1200;
 const EXPLANATION_TIME = 1000;
 const STORAGE_KEY = "rule-u-mock-db";
 const STAGES = ["queued", "retrieve", "generate"];
+/** 질문에 "BGG"가 있으면 추가 검색 단계를 이 시간(ms)만큼 유지합니다. 중단 버튼 확인용. */
+const BGG_TIME = 30000;
 
 type Conversation = Omit<
   Schema["ConversationOut"],
@@ -29,12 +31,17 @@ type MockRequest = {
   mode: string;
   result_message_id: string | null;
   fail: boolean;
+  bgg?: boolean;
+  skip_external?: boolean;
 };
 type MockDb = {
   conversations: Record<string, Conversation>;
   /** 생성 순서대로 저장합니다. */
   requests: MockRequest[];
   citations: Record<string, Schema["SourceOut"]>;
+  feedback?: Record<string, Schema["FeedbackOut"]>;
+  /** message_id → game_id */
+  saved?: Record<string, { game_id: string; saved_at: string }>;
 };
 
 // 새로고침 후 대화 복원을 확인할 수 있도록 localStorage에 보관합니다.
@@ -102,13 +109,42 @@ function page(rows: MockGame[], pageNo = 1, pageSize = 12): Schema["GameList"] {
 // 경과 시간에 따라 단계를 진행하고 완료 시 답변을 기록합니다 (백엔드의 BackgroundTasks 대응).
 function settle(db: MockDb, row: MockRequest): Schema["RequestOut"] {
   const step = Math.floor((Date.now() - row.created) / STAGE_TIME);
-  const base = { request_id: row.id, error_code: null, result: null };
-  if (step < STAGES.length)
+  const base = {
+    request_id: row.id,
+    error_code: null,
+    result: null,
+    skip_external: !!row.skip_external,
+    diagnostic: null,
+    draft: null,
+  };
+  if (step < STAGES.length) {
+    const stage = STAGES[step];
+    // 생성 단계에서는 답변 초안을 시간에 비례해 조금씩 보여 줍니다(스트리밍 흉내).
+    const scenario =
+      scenarios.find((s) => s.keywords.some((k) => row.question.includes(k))) ??
+      fallbackScenario;
+    const progress =
+      (Date.now() - row.created - step * STAGE_TIME) / STAGE_TIME;
+    const draft =
+      stage === "generate" && !row.bgg && !row.fail
+        ? scenario.answer.slice(
+            0,
+            Math.max(1, Math.floor(scenario.answer.length * progress)),
+          )
+        : null;
     return {
       ...base,
       status: step ? "running" : "queued",
-      stage: STAGES[step],
+      stage,
+      draft,
     };
+  }
+  const external =
+    row.bgg &&
+    !row.result_message_id &&
+    !row.skip_external &&
+    Date.now() - row.created < STAGE_TIME * STAGES.length + BGG_TIME;
+  if (external) return { ...base, status: "running", stage: "bgg" };
   if (row.fail)
     return {
       ...base,
@@ -119,9 +155,19 @@ function settle(db: MockDb, row: MockRequest): Schema["RequestOut"] {
 
   const conversation = db.conversations[row.conversation_id];
   if (!row.result_message_id) {
-    const scenario =
+    const found =
       scenarios.find((s) => s.keywords.some((k) => row.question.includes(k))) ??
       fallbackScenario;
+    const scenario = row.bgg
+      ? {
+          ...found,
+          verdict: "insufficient_evidence",
+          citations: [],
+          answer: row.skip_external
+            ? "현재 확인된 근거만으로는 답변을 확인할 수 없습니다.\n\nBGG 추가 검색을 중단했어요. 확보된 규칙서 근거만으로는 답을 확인하지 못했어요."
+            : "현재 확인된 근거만으로는 답변을 확인할 수 없습니다.\n\nBGG의 최근 규칙 토론에서도 관련 근거를 찾지 못했어요.",
+        }
+      : found;
     const ids = scenario.citations.map((c) => {
       const id = crypto.randomUUID();
       db.citations[id] = { ...c, id };
@@ -135,6 +181,7 @@ function settle(db: MockDb, row: MockRequest): Schema["RequestOut"] {
       mode: row.mode,
       created_at: new Date().toISOString(),
       cited_source_ids: ids,
+      saved: false,
     };
     conversation.messages.push(message);
     row.result_message_id = message.id;
@@ -171,6 +218,8 @@ function conversationOut(db: MockDb, id: string): Schema["ConversationOut"] {
     messages: conversation.messages.map((m) => ({
       ...m,
       citations: (m.cited_source_ids ?? []).map((cid) => db.citations[cid]),
+      feedback: db.feedback?.[m.id] ?? null,
+      saved: !!db.saved?.[m.id],
     })),
     active_request_id:
       requests.find((_, i) => ["queued", "running"].includes(states[i].status))
@@ -201,6 +250,95 @@ async function route(
   }
   if (resource === "game-categories") {
     return [...new Set(games.flatMap((g) => g.categories ?? []))].sort();
+  }
+  if (resource === "games" && sub === "saved-rules") {
+    const items: Schema["SavedRuleOut"][] = [];
+    for (const [mid, value] of Object.entries(db.saved ?? {})) {
+      if (value.game_id !== id) continue;
+      const conversation = Object.values(db.conversations).find((c) =>
+        c.messages.some((m) => m.id === mid),
+      );
+      if (!conversation) continue;
+      const index = conversation.messages.findIndex((m) => m.id === mid);
+      const message = conversation.messages[index];
+      const question = conversation.messages
+        .slice(0, index)
+        .reverse()
+        .find((m) => m.role === "user");
+      items.push({
+        message_id: mid,
+        conversation_id: conversation.id,
+        edition_id: conversation.edition_id,
+        question: question?.content ?? "",
+        answer: message.content,
+        verdict: message.verdict,
+        saved_at: value.saved_at,
+        citations: (message.cited_source_ids ?? []).map(
+          (cid) => db.citations[cid],
+        ),
+      });
+    }
+    items.sort((a, b) => b.saved_at.localeCompare(a.saved_at));
+    return { items } satisfies Schema["SavedRuleList"];
+  }
+  if (resource === "messages" && (sub === "feedback" || sub === "bookmark")) {
+    const conversation =
+      Object.values(db.conversations).find((c) =>
+        c.messages.some((m) => m.id === id),
+      ) ?? fail("message_not_found");
+    const message = conversation.messages.find((m) => m.id === id)!;
+    if (message.role !== "assistant") fail("assistant_message_required", 422);
+    if (sub === "feedback") {
+      const input = body as Schema["FeedbackIn"];
+      const wrong = input.rating === "wrong";
+      const value: Schema["FeedbackOut"] = {
+        rating: input.rating,
+        reason: wrong ? (input.reason ?? null) : null,
+        note: wrong ? (input.note ?? "").trim() : "",
+      };
+      db.feedback = { ...db.feedback, [id]: value };
+      save(db);
+      return value;
+    }
+    const input = body as Schema["BookmarkIn"];
+    const saved = { ...db.saved };
+    if (input.saved)
+      saved[id] = saved[id] ?? {
+        game_id: conversation.game_id,
+        saved_at: new Date().toISOString(),
+      };
+    else delete saved[id];
+    db.saved = saved;
+    save(db);
+    return {
+      message_id: id,
+      saved: input.saved,
+    } satisfies Schema["BookmarkOut"];
+  }
+  if (resource === "conversations" && sub === "situation") {
+    const conversation = db.conversations[id] ?? fail("conversation_not_found");
+    const input = body as Schema["SituationIn"];
+    const value = {
+      element: (input.element ?? "").trim(),
+      phase: (input.phase ?? "").trim(),
+      action: (input.action ?? "").trim(),
+    };
+    conversation.situation = Object.values(value).some(Boolean) ? value : null;
+    save(db);
+    return (conversation.situation ?? {
+      element: "",
+      phase: "",
+      action: "",
+    }) satisfies Schema["SituationOut"];
+  }
+  if (resource === "requests" && sub === "skip-external") {
+    const row =
+      db.requests.find((r) => r.id === id) ?? fail("request_not_found");
+    if (!["queued", "running"].includes(settle(db, row).status))
+      fail("request_not_running", 409);
+    row.skip_external = true;
+    save(db);
+    return { request_id: row.id, status: "running" };
   }
   if (resource === "games" && id === "search") {
     // 자연어 검색은 목에서 이름 검색으로 대체합니다.
@@ -276,6 +414,7 @@ async function route(
       mode: input.mode,
       result_message_id: null,
       fail: input.message.includes("실패"),
+      bgg: input.message.includes("BGG"),
     };
     conversation.messages.push({
       id: crypto.randomUUID(),
@@ -285,6 +424,7 @@ async function route(
       mode: input.mode,
       created_at: new Date().toISOString(),
       cited_source_ids: [],
+      saved: false,
     });
     db.requests.push(row);
     save(db);

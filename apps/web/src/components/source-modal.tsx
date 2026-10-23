@@ -98,6 +98,11 @@ export function SourceModal({ source }: { source: Schema["SourceOut"] }) {
                   ? "공식 출처 확인됨"
                   : "공식 출처 확인이 필요한 자료"}
             </p>
+            {detail.extraction_method?.startsWith("assistant_visual") && (
+              <p className="mt-1 text-xs text-muted">
+                이미지로 된 페이지를 사람이 읽고 정리한 전사 자료예요.
+              </p>
+            )}
             <h3 className="font-game mt-1 text-xl">{detail.title}</h3>
             <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-sm text-muted">
               <span>{detail.edition}</span>
@@ -109,6 +114,29 @@ export function SourceModal({ source }: { source: Schema["SourceOut"] }) {
               </span>
             </div>
           </div>
+          {/* 원문 확인 수단은 설명을 기다리지 않고 바로 쓸 수 있게 먼저 둔다. */}
+          {(/^https?:\/\//i.test(detail.url) || detail.original_available) && (
+            <div className="mt-4 flex flex-wrap gap-3">
+              {/^https?:\/\//i.test(detail.url) && (
+                <a
+                  className="btn-soft"
+                  href={detail.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  출처 웹사이트
+                </a>
+              )}
+              {detail.original_available && (
+                <a
+                  className="btn-primary"
+                  href={`/api/v1/documents/${encodeURIComponent(detail.document_id)}/original`}
+                >
+                  원문 다운로드
+                </a>
+              )}
+            </div>
+          )}
           {busy ? (
             <div role="status" className="mt-6">
               <p className="mb-4 flex items-center gap-2 text-sm font-semibold text-blue">
@@ -170,28 +198,6 @@ export function SourceModal({ source }: { source: Schema["SourceOut"] }) {
                   : "룰북의 해당 부분을 이해하기 쉽게 풀어 쓴 설명이에요. 정확한 표현은 원문에서도 확인할 수 있어요."}
               </p>
             </motion.div>
-          )}
-          {(/^https?:\/\//i.test(detail.url) || detail.original_available) && (
-            <div className="mt-6 flex flex-wrap gap-3">
-              {/^https?:\/\//i.test(detail.url) && (
-                <a
-                  className="btn-soft"
-                  href={detail.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  출처 웹사이트
-                </a>
-              )}
-              {detail.original_available && (
-                <a
-                  className="btn-primary"
-                  href={`/api/v1/documents/${encodeURIComponent(detail.document_id)}/original`}
-                >
-                  원문 다운로드
-                </a>
-              )}
-            </div>
           )}
         </div>
       </DragSheet>
