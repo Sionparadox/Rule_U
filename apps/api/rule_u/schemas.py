@@ -91,6 +91,19 @@ class ConversationCreated(BaseModel):
     conversation_id: str
 
 
+class FeedbackIn(BaseModel):
+    model_config = ConfigDict(str_strip_whitespace=True)
+    rating: Literal["helpful", "wrong"]
+    reason: Literal["rule_differs", "wrong_page", "missing_info", "other"] | None = None
+    note: str = Field(default="", max_length=500)
+
+
+class FeedbackOut(ORMModel):
+    rating: Literal["helpful", "wrong"]
+    reason: Literal["rule_differs", "wrong_page", "missing_info", "other"] | None = None
+    note: str = ""
+
+
 class MessageOut(ORMModel):
     id: str
     role: str
@@ -100,6 +113,32 @@ class MessageOut(ORMModel):
     cited_source_ids: list[str] = Field(default_factory=list)
     mode: str = "qa"
     citations: list[SourceOut] = Field(default_factory=list)
+    feedback: FeedbackOut | None = None
+    saved: bool = False
+
+
+class BookmarkIn(BaseModel):
+    saved: bool
+
+
+class BookmarkOut(BaseModel):
+    message_id: str
+    saved: bool
+
+
+class SavedRuleOut(BaseModel):
+    message_id: str
+    conversation_id: str
+    edition_id: str
+    question: str
+    answer: str
+    verdict: str | None
+    citations: list[SourceOut] = Field(default_factory=list)
+    saved_at: datetime
+
+
+class SavedRuleList(BaseModel):
+    items: list[SavedRuleOut]
 
 
 class ConversationOut(BaseModel):
@@ -136,6 +175,9 @@ class RequestOut(RequestAccepted):
     stage: str
     error_code: str | None
     result: AnswerOut | None
+    skip_external: bool = False
+    # Internal reason code for refusals; the UI does not show it.
+    diagnostic: str | None = None
 
 
 class HealthOut(BaseModel):

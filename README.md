@@ -199,6 +199,17 @@ uv run python -m rule_u.cli index --catalog ../../../data/games --games dive --m
 구현 참고: [Next.js 설치](https://nextjs.org/docs/app/getting-started/installation), [SQLAlchemy SQLite](https://docs.sqlalchemy.org/en/20/dialects/sqlite.html), [FastAPI 앱 구조](https://fastapi.tiangolo.com/tutorial/bigger-applications/).
 # 현재 데이터·검색 상태 (2026-10-22)
 
+## 답변 피드백·규칙 저장·대기 제어 (2026-10-23)
+
+업데이트 후 `apps/api`에서 `uv run alembic upgrade head`를 실행하고 API 서버를 재시작하세요(요청 진단·피드백·저장한 규칙 테이블 추가).
+
+- 빈 대화의 **질문 예시**를 누르면 입력창에 질문이 채워집니다. **상황 판정**에서는 **상황 정리**에 카드·단계·행동을 나눠 적을 수 있습니다.
+- 답변 아래 **도움됐어요 / 규칙이 달라요**로 평가하고 **규칙 저장**으로 북마크합니다. 저장한 규칙은 채팅 머리의 책갈피 버튼에서 봅니다. 쿠키(익명 세션)를 지우면 함께 사라집니다.
+- 답변을 기다리는 동안 경과 시간이 표시되고 다음 질문을 미리 적을 수 있습니다. BGG 추가 검색 중에는 **추가 검색 중단**으로 기다림을 끝낼 수 있습니다.
+- 잘못된 답변 신고 검토: `uv run python -m rule_u.feedback export --output ../../data/feedback-review.json`. 사용자 입력이 들어 있으므로 Git에서 제외되는 `data/`에 둡니다. 검토자가 정답 페이지를 확인한 질문만 `evals/stage5-grounding-questions.tsv`에 옮기고 `apps/api/tools/build_stage5_cases.py`로 평가 세트를 다시 만듭니다.
+- 답변 유보 원인은 `GET /api/v1/requests/{id}`의 `diagnostic`(예: `no_evidence`, `model_insufficient`, `citation_mismatch`, `bgg_skipped`)으로 확인합니다.
+- 목 데이터 모드(`corepack pnpm dev:mock`)에서도 동작합니다. 질문에 `BGG`를 넣으면 추가 검색 단계와 중단 버튼을 확인할 수 있습니다.
+
 ## 5단계 검색 방식과 지원 게임
 
 - `.env`의 `SEARCH_MODE`로 규칙 검색 방식을 고릅니다. 기본은 `similarity`이고 `hybrid`(BM25+벡터 RRF), `mmr`(비교용)을 선택할 수 있습니다. 변경 후 API 서버를 재시작하세요.

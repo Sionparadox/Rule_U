@@ -396,6 +396,182 @@
         }
       }
     },
+    "/api/v1/requests/{rid}/skip-external": {
+      "post": {
+        "summary": "Skip External",
+        "operationId": "skip_external_api_v1_requests__rid__skip_external_post",
+        "parameters": [
+          {
+            "name": "rid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Rid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RequestAccepted"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/messages/{mid}/feedback": {
+      "post": {
+        "summary": "Give Feedback",
+        "operationId": "give_feedback_api_v1_messages__mid__feedback_post",
+        "parameters": [
+          {
+            "name": "mid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Mid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FeedbackIn"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FeedbackOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/messages/{mid}/bookmark": {
+      "post": {
+        "summary": "Bookmark",
+        "operationId": "bookmark_api_v1_messages__mid__bookmark_post",
+        "parameters": [
+          {
+            "name": "mid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Mid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookmarkIn"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookmarkOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/games/{game_id}/saved-rules": {
+      "get": {
+        "summary": "Saved Rules",
+        "operationId": "saved_rules_api_v1_games__game_id__saved_rules_get",
+        "parameters": [
+          {
+            "name": "game_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Game Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SavedRuleList"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/sources/{source_id}/explanation": {
       "post": {
         "summary": "Source Explanation",
@@ -550,6 +726,37 @@
           "verdict"
         ],
         "title": "AnswerOut"
+      },
+      "BookmarkIn": {
+        "properties": {
+          "saved": {
+            "type": "boolean",
+            "title": "Saved"
+          }
+        },
+        "type": "object",
+        "required": [
+          "saved"
+        ],
+        "title": "BookmarkIn"
+      },
+      "BookmarkOut": {
+        "properties": {
+          "message_id": {
+            "type": "string",
+            "title": "Message Id"
+          },
+          "saved": {
+            "type": "boolean",
+            "title": "Saved"
+          }
+        },
+        "type": "object",
+        "required": [
+          "message_id",
+          "saved"
+        ],
+        "title": "BookmarkOut"
       },
       "ConversationCreated": {
         "properties": {
@@ -719,6 +926,85 @@
           "supported"
         ],
         "title": "ExpansionOut"
+      },
+      "FeedbackIn": {
+        "properties": {
+          "rating": {
+            "type": "string",
+            "enum": [
+              "helpful",
+              "wrong"
+            ],
+            "title": "Rating"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "rule_differs",
+                  "wrong_page",
+                  "missing_info",
+                  "other"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          },
+          "note": {
+            "type": "string",
+            "maxLength": 500,
+            "title": "Note",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "required": [
+          "rating"
+        ],
+        "title": "FeedbackIn"
+      },
+      "FeedbackOut": {
+        "properties": {
+          "rating": {
+            "type": "string",
+            "enum": [
+              "helpful",
+              "wrong"
+            ],
+            "title": "Rating"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "rule_differs",
+                  "wrong_page",
+                  "missing_info",
+                  "other"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          },
+          "note": {
+            "type": "string",
+            "title": "Note",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "required": [
+          "rating"
+        ],
+        "title": "FeedbackOut"
       },
       "GameDetail": {
         "properties": {
@@ -1074,6 +1360,21 @@
             },
             "type": "array",
             "title": "Citations"
+          },
+          "feedback": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/FeedbackOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "saved": {
+            "type": "boolean",
+            "title": "Saved",
+            "default": false
           }
         },
         "type": "object",
@@ -1138,6 +1439,22 @@
                 "type": "null"
               }
             ]
+          },
+          "skip_external": {
+            "type": "boolean",
+            "title": "Skip External",
+            "default": false
+          },
+          "diagnostic": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Diagnostic"
           }
         },
         "type": "object",
@@ -1149,6 +1466,80 @@
           "result"
         ],
         "title": "RequestOut"
+      },
+      "SavedRuleList": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/SavedRuleOut"
+            },
+            "type": "array",
+            "title": "Items"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items"
+        ],
+        "title": "SavedRuleList"
+      },
+      "SavedRuleOut": {
+        "properties": {
+          "message_id": {
+            "type": "string",
+            "title": "Message Id"
+          },
+          "conversation_id": {
+            "type": "string",
+            "title": "Conversation Id"
+          },
+          "edition_id": {
+            "type": "string",
+            "title": "Edition Id"
+          },
+          "question": {
+            "type": "string",
+            "title": "Question"
+          },
+          "answer": {
+            "type": "string",
+            "title": "Answer"
+          },
+          "verdict": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Verdict"
+          },
+          "citations": {
+            "items": {
+              "$ref": "#/components/schemas/SourceOut"
+            },
+            "type": "array",
+            "title": "Citations"
+          },
+          "saved_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Saved At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "message_id",
+          "conversation_id",
+          "edition_id",
+          "question",
+          "answer",
+          "verdict",
+          "saved_at"
+        ],
+        "title": "SavedRuleOut"
       },
       "SourceExplanationOut": {
         "properties": {

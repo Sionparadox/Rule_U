@@ -157,6 +157,74 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/requests/{rid}/skip-external": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Skip External */
+        post: operations["skip_external_api_v1_requests__rid__skip_external_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/messages/{mid}/feedback": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Give Feedback */
+        post: operations["give_feedback_api_v1_messages__mid__feedback_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/messages/{mid}/bookmark": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Bookmark */
+        post: operations["bookmark_api_v1_messages__mid__bookmark_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/games/{game_id}/saved-rules": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Saved Rules */
+        get: operations["saved_rules_api_v1_games__game_id__saved_rules_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/sources/{source_id}/explanation": {
         parameters: {
             query?: never;
@@ -226,6 +294,18 @@ export interface components {
              */
             citation_notice: string;
         };
+        /** BookmarkIn */
+        BookmarkIn: {
+            /** Saved */
+            saved: boolean;
+        };
+        /** BookmarkOut */
+        BookmarkOut: {
+            /** Message Id */
+            message_id: string;
+            /** Saved */
+            saved: boolean;
+        };
         /** ConversationCreated */
         ConversationCreated: {
             /** Conversation Id */
@@ -280,6 +360,36 @@ export interface components {
             supported: boolean;
             /** Edition Ids */
             edition_ids?: string[];
+        };
+        /** FeedbackIn */
+        FeedbackIn: {
+            /**
+             * Rating
+             * @enum {string}
+             */
+            rating: "helpful" | "wrong";
+            /** Reason */
+            reason?: ("rule_differs" | "wrong_page" | "missing_info" | "other") | null;
+            /**
+             * Note
+             * @default
+             */
+            note: string;
+        };
+        /** FeedbackOut */
+        FeedbackOut: {
+            /**
+             * Rating
+             * @enum {string}
+             */
+            rating: "helpful" | "wrong";
+            /** Reason */
+            reason?: ("rule_differs" | "wrong_page" | "missing_info" | "other") | null;
+            /**
+             * Note
+             * @default
+             */
+            note: string;
         };
         /** GameDetail */
         GameDetail: {
@@ -456,6 +566,12 @@ export interface components {
             mode: string;
             /** Citations */
             citations?: components["schemas"]["SourceOut"][];
+            feedback?: components["schemas"]["FeedbackOut"] | null;
+            /**
+             * Saved
+             * @default false
+             */
+            saved: boolean;
         };
         /** RequestAccepted */
         RequestAccepted: {
@@ -475,6 +591,40 @@ export interface components {
             /** Error Code */
             error_code: string | null;
             result: components["schemas"]["AnswerOut"] | null;
+            /**
+             * Skip External
+             * @default false
+             */
+            skip_external: boolean;
+            /** Diagnostic */
+            diagnostic?: string | null;
+        };
+        /** SavedRuleList */
+        SavedRuleList: {
+            /** Items */
+            items: components["schemas"]["SavedRuleOut"][];
+        };
+        /** SavedRuleOut */
+        SavedRuleOut: {
+            /** Message Id */
+            message_id: string;
+            /** Conversation Id */
+            conversation_id: string;
+            /** Edition Id */
+            edition_id: string;
+            /** Question */
+            question: string;
+            /** Answer */
+            answer: string;
+            /** Verdict */
+            verdict: string | null;
+            /** Citations */
+            citations?: components["schemas"]["SourceOut"][];
+            /**
+             * Saved At
+             * Format: date-time
+             */
+            saved_at: string;
         };
         /** SourceExplanationOut */
         SourceExplanationOut: {
@@ -819,6 +969,138 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["RequestOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    skip_external_api_v1_requests__rid__skip_external_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                rid: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RequestAccepted"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    give_feedback_api_v1_messages__mid__feedback_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                mid: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["FeedbackIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FeedbackOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    bookmark_api_v1_messages__mid__bookmark_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                mid: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["BookmarkIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BookmarkOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    saved_rules_api_v1_games__game_id__saved_rules_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                game_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SavedRuleList"];
                 };
             };
             /** @description Validation Error */

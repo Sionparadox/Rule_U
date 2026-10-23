@@ -13,6 +13,7 @@ from rule_u.config import ROOT, Settings
 from rule_u.db import make_engine, make_sessions
 from rule_u.game_search import constraints, semantic_ids
 from rule_u.models import (
+    AnswerFeedback,
     Citation,
     Conversation,
     Document,
@@ -22,6 +23,7 @@ from rule_u.models import (
     Game,
     Message,
     Request,
+    SavedRule,
     conversation_expansions,
     expansion_editions,
 )
@@ -29,10 +31,14 @@ from rule_u.providers import ProviderError, chat_provider
 from rule_u.rag import answer_question, explain_source
 from rule_u.schemas import (
     AnswerOut,
+    BookmarkIn,
+    BookmarkOut,
     ConversationCreated,
     ConversationIn,
     ConversationOut,
     ExpansionOut,
+    FeedbackIn,
+    FeedbackOut,
     GameDetail,
     GameList,
     GameOut,
@@ -42,13 +48,16 @@ from rule_u.schemas import (
     MessageOut,
     RequestAccepted,
     RequestOut,
+    SavedRuleList,
+    SavedRuleOut,
     SourceOut,
 )
 
 COOKIE = "rule_u_session"
 
 
-def create_app(settings: Settings | None = None, provider=None, retriever=None, game_ranker=None):
+def create_app(settings: Settings | None = None, provider=None, retriever=None, game_ranker=None,
+               bgg_retriever=None):
     settings = settings or Settings()
     engine = make_engine(settings)
     sessions = make_sessions(engine)
@@ -218,6 +227,11 @@ def create_app(settings: Settings | None = None, provider=None, retriever=None, 
     @app.get("/api/v1/conversations/{cid}", response_model=ConversationOut)
     def get_conversation(cid: str, sid=Depends(session_id), db=Depends(get_db)):
         row = owned(db, cid, sid)
+        ids = select(Message.id).where(Message.conversation_id == cid)
+        feedback = {f.message_id: FeedbackOut.model_validate(f) for f in db.scalars(
+            select(AnswerFeedback).where(AnswerFeedback.message_id.in_(ids)))}
+        saved = set(db.scalars(select(SavedRule.message_id).where(
+            SavedRule.session_id == sid, SavedRule.message_id.in_(ids))))
         return ConversationOut(
             id=row.id,
             game_id=row.game_id,
@@ -236,8 +250,10 @@ def create_app(settings: Settings | None = None, provider=None, retriever=None, 
             latest_client_request_id=db.scalar(select(Request.client_request_id).where(Request.conversation_id == cid)
                 .order_by(Request.created_at.desc(), Request.id.desc()).limit(1)),
             messages=[
-                MessageOut.model_validate(m).model_copy(update={"citations": [SourceOut(**citation_out(c, db))
-                    for c in db.scalars(select(Citation).where(Citation.message_id == m.id))]})
+                MessageOut.model_validate(m).model_copy(update={
+                    "citations": [SourceOut(**citation_out(c, db))
+                                  for c in db.scalars(select(Citation).where(Citation.message_id == m.id))],
+                    "feedback": feedback.get(m.id), "saved": m.id in saved})
                 for m in db.scalars(
                     select(Message)
                     .where(Message.conversation_id == cid)
@@ -280,13 +296,18 @@ def create_app(settings: Settings | None = None, provider=None, retriever=None, 
                 with sessions.begin() as db:
                     db.get(Request, rid).stage = value
 
+            def skip_requested():
+                with sessions() as db:
+                    return bool(db.scalar(select(Request.skip_external).where(Request.id == rid)))
+
             if settings.chat_provider == "mock" and context["game"]["id"] == "demo-game" and retriever is None:
                 answer = {"answer": await asyncio.wait_for(
                     (provider or chat_provider(settings)).generate(messages), settings.api_timeout_seconds),
                     "verdict": "unavailable", "citations": []}
             else:
                 answer = await asyncio.wait_for(answer_question(
-                    settings, sessions, context, provider, retriever, stage),
+                    settings, sessions, context, provider, retriever, stage,
+                    bgg_retriever=bgg_retriever, should_skip=skip_requested),
                     settings.api_timeout_seconds * 2 + settings.bgg_timeout_seconds)
             with sessions.begin() as db:
                 row = db.get(Request, rid)
@@ -314,6 +335,9 @@ def create_app(settings: Settings | None = None, provider=None, retriever=None, 
                 message.cited_source_ids = citations
                 row.result_message_id = message.id
                 row.status, row.stage = "completed", "completed"
+                if answer.get("diagnostic"):
+                    row.diagnostic = {"code": answer["diagnostic"],
+                                      **answer.get("diagnostic_detail", {})}
         except Exception as exc:
             code = str(exc) if isinstance(exc, ProviderError) else "generation_failed"
             with sessions.begin() as db:
@@ -374,7 +398,77 @@ def create_app(settings: Settings | None = None, provider=None, retriever=None, 
                 citations=[citation_out(c, db) for c in db.scalars(select(Citation).where(
                     Citation.message_id == result.id))],
                 citation_notice="" if result.cited_source_ids else "이 답변에 인용된 근거가 없습니다.") if result else None,
+            skip_external=row.skip_external,
+            diagnostic=(row.diagnostic or {}).get("code"),
         )
+
+    @app.post("/api/v1/requests/{rid}/skip-external", response_model=RequestAccepted)
+    def skip_external(rid: str, sid=Depends(session_id), db=Depends(get_db)):
+        row = db.get(Request, rid)
+        if row is None:
+            raise HTTPException(404, "request_not_found")
+        owned(db, row.conversation_id, sid)
+        # Only an in-flight request can stop waiting; finished answers are never changed.
+        if row.status not in ("queued", "running"):
+            raise HTTPException(409, "request_not_running")
+        row.skip_external = True
+        db.commit()
+        return RequestAccepted(request_id=row.id, status=row.status)
+
+    def owned_answer(db, mid, sid):
+        message = db.get(Message, mid)
+        if message is None:
+            raise HTTPException(404, "message_not_found")
+        owned(db, message.conversation_id, sid)
+        if message.role != "assistant":
+            raise HTTPException(422, "assistant_message_required")
+        return message
+
+    @app.post("/api/v1/messages/{mid}/feedback", response_model=FeedbackOut)
+    def give_feedback(mid: str, body: FeedbackIn, sid=Depends(session_id), db=Depends(get_db)):
+        owned_answer(db, mid, sid)
+        row = db.scalar(select(AnswerFeedback).where(AnswerFeedback.message_id == mid))
+        if row is None:
+            row = AnswerFeedback(message_id=mid, session_id=sid)
+            db.add(row)
+        row.rating = body.rating
+        # A reason and note only describe a wrong answer.
+        row.reason = body.reason if body.rating == "wrong" else None
+        row.note = body.note if body.rating == "wrong" else ""
+        db.commit()
+        return FeedbackOut.model_validate(row)
+
+    @app.post("/api/v1/messages/{mid}/bookmark", response_model=BookmarkOut)
+    def bookmark(mid: str, body: BookmarkIn, sid=Depends(session_id), db=Depends(get_db)):
+        message = owned_answer(db, mid, sid)
+        row = db.scalar(select(SavedRule).where(SavedRule.session_id == sid,
+                                                SavedRule.message_id == mid))
+        if body.saved and row is None:
+            game_id = db.get(Conversation, message.conversation_id).game_id
+            db.add(SavedRule(session_id=sid, message_id=mid, game_id=game_id))
+        elif not body.saved and row is not None:
+            db.delete(row)
+        db.commit()
+        return BookmarkOut(message_id=mid, saved=body.saved)
+
+    @app.get("/api/v1/games/{game_id}/saved-rules", response_model=SavedRuleList)
+    def saved_rules(game_id: str, sid=Depends(session_id), db=Depends(get_db)):
+        items = []
+        for row in db.scalars(select(SavedRule).where(SavedRule.session_id == sid,
+                SavedRule.game_id == game_id).order_by(SavedRule.created_at.desc())):
+            message = db.get(Message, row.message_id)
+            conversation = owned(db, message.conversation_id, sid)
+            question = db.scalar(select(Message.content).where(
+                Message.conversation_id == message.conversation_id, Message.role == "user",
+                Message.created_at <= message.created_at).order_by(
+                    Message.created_at.desc(), Message.id.desc()).limit(1)) or ""
+            items.append(SavedRuleOut(
+                message_id=message.id, conversation_id=conversation.id,
+                edition_id=conversation.edition_id, question=question, answer=message.content,
+                verdict=message.verdict, saved_at=row.created_at,
+                citations=[SourceOut(**citation_out(c, db)) for c in db.scalars(
+                    select(Citation).where(Citation.message_id == message.id))]))
+        return SavedRuleList(items=items)
 
     def citation_out(c, db):
         doc = db.get(Document, c.document_id)

@@ -11,6 +11,16 @@ import { exitQuick, playful, quick, rise, settle } from "@/lib/motion";
 import { api, ApiError, errorText, type Schema } from "@/lib/api";
 import { useStore } from "@/lib/store";
 import { BrandMark, RollingDice } from "./marks";
+import {
+  AnswerActions,
+  composeSituation,
+  emptySituation,
+  QuestionStarters,
+  SavedRulesSheet,
+  SituationHelper,
+  SourceBadge,
+  type Situation,
+} from "./answer-tools";
 
 const stageLabel: Record<string, string> = {
   queued: "질문 접수됨",
@@ -136,9 +146,52 @@ export function Chat() {
     !s.sending
   );
   const draft = c ? (s.drafts[c.id] ?? "") : "";
+  const [situation, setSituation] = useState<Situation>(emptySituation);
+  const [situationOpen, setSituationOpen] = useState(false);
+  const [savedOpen, setSavedOpen] = useState(false);
+  const situationText = composeSituation(situation, "");
+  const ready = !!(draft.trim() || (s.mode === "ruling" && situationText));
+  function setDraft(value: string) {
+    if (c)
+      useStore.setState((state) => ({
+        drafts: { ...state.drafts, [c.id]: value },
+      }));
+  }
   async function submit(e: FormEvent) {
     e.preventDefault();
+    if (!c) return;
+    const ruling = s.mode === "ruling" && !!situationText;
+    // 상황 정리 칸의 값을 질문 앞에 붙여 한 번에 보낸다.
+    if (ruling) setDraft(composeSituation(situation, draft));
     await s.send();
+    if (ruling && !useStore.getState().error) {
+      setSituation(emptySituation);
+      setSituationOpen(false);
+    }
+  }
+  // 기다리는 동안 경과 시간을 보여 주고, BGG 추가 검색은 중단할 수 있게 한다.
+  const [elapsed, setElapsed] = useState(0);
+  const [skipping, setSkipping] = useState(false);
+  const [waiting, setWaiting] = useState(processing);
+  if (waiting !== processing) {
+    // 새 대기가 시작되거나 끝나면 경과 시간과 중단 상태를 처음으로 돌린다.
+    setWaiting(processing);
+    setElapsed(0);
+    setSkipping(false);
+  }
+  useEffect(() => {
+    if (!processing) return;
+    const timer = setInterval(() => setElapsed((v) => v + 1), 1000);
+    return () => clearInterval(timer);
+  }, [processing]);
+  async function skipExternal() {
+    if (!rid) return;
+    setSkipping(true);
+    try {
+      await api(`/requests/${rid}/skip-external`, {});
+    } catch {
+      setSkipping(false);
+    }
   }
   function showSource(source: Schema["SourceOut"]) {
     useStore.setState({ source, sourcesOpen: true });
@@ -196,6 +249,25 @@ export function Chat() {
               </p>
             )}
           </div>
+          {c && (
+            <button
+              className="icon-round"
+              aria-label="저장한 규칙"
+              onClick={() => setSavedOpen(true)}
+            >
+              <svg
+                aria-hidden
+                viewBox="0 0 20 20"
+                className="size-5"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.2"
+                strokeLinejoin="round"
+              >
+                <path d="M5.5 3.5h9v13l-4.5-3-4.5 3z" />
+              </svg>
+            </button>
+          )}
         </div>
         {c && (
           <div
@@ -248,6 +320,20 @@ export function Chat() {
                   : "준비 방법부터 예외 규칙까지, 선택한 판본의 근거와 함께 답해요."
                 : "게임과 판본을 고르면 질문을 시작할 수 있어요."}
             </p>
+            {c && (
+              <QuestionStarters
+                game={game?.name_ko ?? "이 게임"}
+                onPick={(text) => {
+                  useStore.setState({ mode: "qa" });
+                  setDraft(text);
+                  document
+                    .querySelector<HTMLTextAreaElement>(
+                      "textarea[name=question]",
+                    )
+                    ?.focus();
+                }}
+              />
+            )}
           </div>
         )}
         {c?.messages.map((m) =>
@@ -363,6 +449,7 @@ export function Chat() {
                         <span className="shrink-0 text-xs text-muted">
                           {pageText(source)}
                         </span>
+                        <SourceBadge source={source} />
                       </button>
                     </motion.div>
                   ))}
@@ -372,6 +459,20 @@ export function Chat() {
                   이 답변에 인용된 근거가 없습니다.
                 </p>
               )}
+              {m.verdict === "needs_clarification" && (
+                <div className="px-4 pb-3">
+                  <button
+                    className="btn-soft"
+                    onClick={() => {
+                      useStore.setState({ mode: "ruling" });
+                      setSituationOpen(true);
+                    }}
+                  >
+                    상황 정리해서 답하기
+                  </button>
+                </div>
+              )}
+              {m.verdict !== "unavailable" && <AnswerActions message={m} />}
             </motion.article>
           ),
         )}
@@ -407,6 +508,23 @@ export function Chat() {
                 <div className="skeleton-line w-4/5" />
                 <div className="skeleton-line w-2/5" />
               </div>
+              <p className="mt-3 text-xs text-muted" data-testid="elapsed">
+                {elapsed}초 지났어요
+                {elapsed >= 15
+                  ? " · 기다리는 동안 다음 질문을 적어 둘 수 있어요"
+                  : ""}
+              </p>
+              {s.request?.stage === "bgg" && (
+                <button
+                  className="btn-soft mt-3"
+                  disabled={skipping || s.request.skip_external}
+                  onClick={() => void skipExternal()}
+                >
+                  {skipping || s.request.skip_external
+                    ? "추가 검색을 멈추는 중…"
+                    : "추가 검색 중단"}
+                </button>
+              )}
             </motion.div>
           )}
         </AnimatePresence>
@@ -461,6 +579,14 @@ export function Chat() {
         onSubmit={submit}
         className="bg-surface p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:px-4"
       >
+        {c && s.mode === "ruling" && (
+          <SituationHelper
+            open={situationOpen}
+            value={situation}
+            onToggle={() => setSituationOpen((v) => !v)}
+            onChange={setSituation}
+          />
+        )}
         <div className="flex items-end gap-2">
           <label className="flex-1">
             <span className="sr-only">규칙 질문</span>
@@ -470,26 +596,23 @@ export function Chat() {
               autoComplete="off"
               className="w-full"
               value={draft}
-              disabled={!c || processing || unresolved}
+              disabled={!c || unresolved}
               maxLength={8000}
               placeholder={
-                s.mode === "ruling"
-                  ? "지금 상황과 하려는 행동을 알려주세요…"
-                  : "궁금한 규칙을 물어보세요…"
+                processing
+                  ? "답변을 기다리는 동안 다음 질문을 적어 두세요…"
+                  : s.mode === "ruling"
+                    ? "지금 상황과 하려는 행동을 알려주세요…"
+                    : "궁금한 규칙을 물어보세요…"
               }
-              onChange={(e) =>
-                c &&
-                useStore.setState({
-                  drafts: { ...s.drafts, [c.id]: e.target.value },
-                })
-              }
+              onChange={(e) => setDraft(e.target.value)}
             />
           </label>
           <button
             className="btn-primary mb-1 size-13 shrink-0 p-0"
             type="submit"
             aria-label="질문 보내기"
-            disabled={!c || processing || unresolved || !draft.trim()}
+            disabled={!c || processing || unresolved || !ready}
           >
             <svg
               aria-hidden
@@ -509,6 +632,13 @@ export function Chat() {
           선택한 판본 기준으로 답해요. 중요한 판정은 원문도 확인해 주세요.
         </p>
       </form>
+      {savedOpen && c && (
+        <SavedRulesSheet
+          gameId={c.game_id}
+          onClose={() => setSavedOpen(false)}
+          onSource={showSource}
+        />
+      )}
     </section>
   );
 }

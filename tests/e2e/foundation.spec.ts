@@ -75,7 +75,7 @@ test("provider failure retries with a new request; clarification and no evidence
   await send(page, "정보 부족");
   await expect(page.getByText("어떤 카드이며 누구의 턴인가요?", { exact: true })).toBeVisible();
   await send(page, "근거 없음");
-  await expect(page.getByText("현재 확인된 근거만으로는 답변을 확인할 수 없습니다.", { exact: true })).toBeVisible();
+  await expect(page.getByText(/^현재 확인된 근거만으로는 답변을 확인할 수 없습니다./)).toBeVisible();
 });
 
 test("filters, semantic search, empty result and keyboard", async ({ page }) => {

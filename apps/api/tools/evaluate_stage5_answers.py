@@ -36,6 +36,8 @@ async def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--live", action="store_true", required=True)
     parser.add_argument("--modes", nargs="+", default=["similarity", "hybrid"])
+    parser.add_argument("--output", default="stage5-answer-evaluation.json",
+                        help="file name under the data directory")
     parser.add_argument("--resume", action="store_true",
                         help="Continue a partial run after verifying its prefix")
     args = parser.parse_args()
@@ -45,7 +47,7 @@ async def main():
     settings.bgg_enabled = False
     cases = json.loads((ROOT / "evals/stage5-core-answer-cases.json").read_text(encoding="utf-8"))
     plan = [(mode, case) for mode in args.modes for case in cases]
-    output = settings.data_dir / "stage5-answer-evaluation.json"
+    output = settings.data_dir / args.output
     results = json.loads(output.read_text(encoding="utf-8")) if args.resume else []
     if [(r["mode"], r["case"]) for r in results] != plan[:len(results)]:
         raise ValueError("resume_cases_mismatch")

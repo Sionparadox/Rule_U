@@ -162,6 +162,19 @@
   .label {
     @apply flex flex-col gap-2 text-sm font-semibold text-ink;
   }
+  /* 작은 선택 버튼: 질문 예시, 피드백, 저장. 44px 터치 영역은 패딩으로 확보한다. */
+  .chip {
+    @apply inline-flex min-h-11 items-center gap-1.5 rounded-full border-[1.5px] border-edge bg-surface px-3.5 text-sm font-semibold text-ink;
+    transition: background-color 120ms ease;
+  }
+  .chip-on {
+    @apply border-blue bg-blue/10 text-blue-deep;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .chip:hover:not(:disabled) {
+      @apply bg-surface-soft;
+    }
+  }
   .pop {
     animation: pop-in 220ms var(--ease-out);
   }

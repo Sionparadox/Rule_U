@@ -1,5 +1,7 @@
 """Scoped evidence retrieval and validated generation. Documents are untrusted data."""
 
+import asyncio
+import contextlib
 import json
 import re
 from typing import Literal, TypedDict
@@ -91,34 +93,56 @@ JSON만 반환: {"answer":"답변", "verdict":"allowed|not_allowed|conditional|i
 규칙 사실을 단정하지 않는다.'''
 
 
-def unavailable():
+def unavailable(diagnostic="no_evidence"):
+    # diagnostic is internal: it separates retrieval, model refusal and validation rejection.
     return {"answer": "현재 확인된 근거만으로는 답변을 확인할 수 없습니다.",
-            "verdict": "insufficient_evidence", "citations": []}
+            "verdict": "insufficient_evidence", "citations": [], "diagnostic": diagnostic}
+
+
+def citation_problem(answer, evidence):
+    """Return a repairable citation violation, or "" when the citations are consistent."""
+    ids = answer.cited_ids
+    inline = [int(x) for x in re.findall(r"\[(\d+)\]", answer.answer)]
+    allowed = {e["number"] for e in evidence}
+    if len(ids) != len(set(ids)):
+        return "cited_ids에 같은 번호가 중복되었습니다."
+    if not set(ids).issubset(allowed) or not set(inline).issubset(allowed):
+        return f"제공된 근거 번호는 {sorted(allowed)}뿐입니다."
+    if answer.verdict == "needs_clarification":
+        return "needs_clarification에는 cited_ids와 본문 근거 번호를 쓰지 않습니다." if ids or inline else ""
+    if answer.verdict == "insufficient_evidence":
+        return ""
+    if not ids:
+        return "판정 답변에는 실제 사용한 근거 번호가 필요합니다."
+    if set(inline) != set(ids):
+        return f"본문의 근거 표시 {sorted(set(inline))}와 cited_ids {sorted(ids)}가 같아야 합니다."
+    return ""
 
 
 def validate_answer(answer, evidence):
     if answer is None:
-        return unavailable()
-    ids = answer.cited_ids
-    inline = [int(x) for x in re.findall(r"\[(\d+)\]", answer.answer)]
-    allowed = {e["number"]: e for e in evidence}
-    if len(ids) != len(set(ids)) or not set(ids).issubset(allowed) or set(inline) != set(ids):
-        return unavailable()
-    if answer.verdict in {"allowed", "not_allowed", "conditional"} and not ids:
-        return unavailable()
+        return unavailable("invalid_json")
+    problem = citation_problem(answer, evidence)
+    if problem:
+        missing = answer.verdict in {"allowed", "not_allowed", "conditional"} and not answer.cited_ids
+        return {**unavailable("missing_citation" if missing else "citation_mismatch"),
+                "problem": problem}
     if answer.verdict == "insufficient_evidence":
-        return unavailable()
+        return unavailable("model_insufficient")
     if answer.verdict == "needs_clarification":
-        if ids or not answer.clarification.strip():
-            return unavailable()
-        return {"answer": answer.clarification, "verdict": answer.verdict, "citations": []}
+        if not answer.clarification.strip():
+            return {**unavailable("citation_mismatch"), "problem": "clarification 질문이 비어 있습니다."}
+        return {"answer": answer.clarification, "verdict": answer.verdict, "citations": [],
+                "diagnostic": "model_clarification"}
+    ids = answer.cited_ids
+    allowed = {e["number"]: e for e in evidence}
     explanations = {}
     for value in answer.explanations:
         if value.source_number in ids:
             checked = verified_explanation(value, allowed[value.source_number])
             if checked:
                 explanations[value.source_number] = checked
-    return {"answer": answer.answer, "verdict": answer.verdict,
+    return {"answer": answer.answer, "verdict": answer.verdict, "diagnostic": "ok",
             "citations": [{**allowed[i], "explanation": explanations.get(i)} for i in ids]}
 
 
@@ -217,8 +241,22 @@ supplement_type=errata|faq 근거는 amends_document_id 규칙서를 수정·보
 '''
 
 
+async def bounded_lookup(lookup, should_skip, interval=0.5):
+    """Run the external lookup until done or until the user asks to stop waiting."""
+    task = asyncio.ensure_future(lookup)
+    while True:
+        done, _ = await asyncio.wait({task}, timeout=interval)
+        if done:
+            return task.result()
+        if should_skip and should_skip():
+            task.cancel()
+            with contextlib.suppress(asyncio.CancelledError):
+                await task
+            return [], "skipped"
+
+
 async def answer_question(settings, sessions, context, provider=None, retriever=None, on_stage=None,
-                          bgg_retriever=None):
+                          bgg_retriever=None, should_skip=None):
     async def retrieval(state):
         if on_stage:
             on_stage("retrieve")
@@ -229,20 +267,38 @@ async def answer_question(settings, sessions, context, provider=None, retriever=
         if on_stage:
             on_stage("generate")
         if not state["evidence"]:
-            return {"result": unavailable(), "needs_external": True}
-        generated = None
+            return {"result": unavailable("no_evidence"), "needs_external": True}
+        model = provider or chat_provider(settings)
+        messages = [
+            {"role": "system", "content": PROMPT},
+            {"role": "user", "content": json.dumps(
+                {**state["context"], "evidence": state["evidence"]}, ensure_ascii=False)},
+        ]
+        generated, raw, repaired = None, "", False
         for _ in range(2):
-            raw = await (provider or chat_provider(settings)).generate([
-                {"role": "system", "content": PROMPT},
-                {"role": "user", "content": json.dumps(
-                    {**state["context"], "evidence": state["evidence"]}, ensure_ascii=False)},
-            ])
+            raw = await model.generate(messages)
             try:
                 generated = GeneratedAnswer.model_validate_json(raw)
                 break
             except ValidationError:
                 continue
-        return {"result": validate_answer(generated, state["evidence"]),
+        result = validate_answer(generated, state["evidence"])
+        if result["diagnostic"] in {"citation_mismatch", "missing_citation"}:
+            # One repair round for citation format only. Refusals are never retried, so the
+            # model is not pushed into a ruling the evidence does not support.
+            repaired = True
+            raw = await model.generate([*messages, {"role": "assistant", "content": raw},
+                {"role": "user", "content": "응답 형식 오류: " + result["problem"]
+                 + " 같은 근거로 규칙을 지켜 JSON만 다시 반환하라. 근거가 부족하면 insufficient_evidence로 유보하라."}])
+            try:
+                generated = GeneratedAnswer.model_validate_json(raw)
+            except ValidationError:
+                generated = None
+            retry = validate_answer(generated, state["evidence"])
+            result = retry if retry["diagnostic"] != "invalid_json" else result
+        result.pop("problem", None)
+        result["diagnostic_detail"] = {"evidence": len(state["evidence"]), "repaired": repaired}
+        return {"result": result,
                 "needs_external": bool(generated and generated.verdict == "insufficient_evidence")}
 
     async def external(state):
@@ -252,17 +308,22 @@ async def answer_question(settings, sessions, context, provider=None, retriever=
             return {}
         if on_stage:
             on_stage("bgg")
-        extra, status = await (bgg_retriever or bgg_fallback)(
-            settings, sessions, state["context"], provider or chat_provider(settings))
+        extra, status = await bounded_lookup((bgg_retriever or bgg_fallback)(
+            settings, sessions, state["context"], provider or chat_provider(settings)), should_skip)
         if not extra:
             notices = {
+                "skipped": "BGG 추가 검색을 중단했어요. 확보된 규칙서 근거만으로는 답을 확인하지 못했어요.",
                 "not_configured": "BGG 추가 조회를 사용하려면 서버에 승인된 BGG API 토큰을 설정해 주세요.",
                 "unauthorized": "BGG 인증을 확인하지 못했어요. 서버의 API 토큰과 앱 승인 상태를 확인해 주세요.",
                 "game_unresolved": "BGG에서 동일한 게임을 확실하게 식별하지 못했어요.",
                 "no_results": "BGG의 최근 규칙 토론에서도 관련 근거를 찾지 못했어요.",
             }
             notice = notices.get(status, "BGG에 연결하지 못했어요. 잠시 후 질문을 다시 보내 주세요.")
-            return {"result": {**unavailable(), "answer": unavailable()["answer"] + "\n\n" + notice}}
+            base = state["result"]
+            return {"result": {**unavailable("bgg_" + status),
+                               "answer": unavailable()["answer"] + "\n\n" + notice,
+                               "diagnostic_detail": {**base.get("diagnostic_detail", {}),
+                                                     "before_bgg": base.get("diagnostic")}}}
         evidence = [*state["evidence"]]
         for item in extra:
             evidence.append({**item, "number": len(evidence) + 1})
