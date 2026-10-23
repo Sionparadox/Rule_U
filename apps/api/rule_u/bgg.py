@@ -17,6 +17,9 @@ from rule_u.discovery import normalize
 from rule_u.models import Document
 from rule_u.providers import ProviderError
 
+# Identify the app to BGG (its XML API terms ask callers to be identifiable and to throttle).
+USER_AGENT = "Rule_U/0.1 (+https://github.com/Sionparadox/Rule_U)"
+
 _gates = weakref.WeakKeyDictionary()
 
 
@@ -53,7 +56,7 @@ class BggClient:
             gate["next"] = time.monotonic() + 5
             async with httpx.AsyncClient(timeout=8, transport=self.transport) as client:
                 async with client.stream("GET", f"https://boardgamegeek.com/xmlapi2/{endpoint}",
-                                         params=params, headers={"Authorization": "Bearer " +
+                                         params=params, headers={"User-Agent": USER_AGENT, "Authorization": "Bearer " +
                                          self.settings.bgg_api_token.get_secret_value()}) as response:
                     if response.status_code != 200:
                         raise BggError("unauthorized" if response.status_code in {401, 403} else "unavailable")

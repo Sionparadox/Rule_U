@@ -136,6 +136,19 @@ uv run python -m rule_u.cli data-status
 
 입력 형식과 옵션, 이미지 PDF 복구 과정, 단계별 검증 결과는 [개발기록](docs/개발기록.md)과 [reports/](reports) 아래 보고서에 정리되어 있습니다.
 
+## 데이터 출처와 이용 조건
+
+| 데이터 | 출처 | 이용 조건 |
+| --- | --- | --- |
+| 게임 메타데이터 110건 (이름·인원·시간·연령·분류·설명) | [BoardGameGeek](https://boardgamegeek.com) 공개 페이지 스냅샷과 규칙서를 참고한 편집 요약. 게임별 JSON의 `metadata_sources`에 필드별 출처를 기록 | BGG 값은 사실 정보 위주로 사용하고, 각 값의 BGG 페이지 URL을 함께 보관 |
+| 한국어 규칙서 117건 (110게임) | 출처 유형: 사용자 제공 74건, 커뮤니티 번역 21건, 미확인 18건, 출판사 3건, 커뮤니티 업로드 1건. 그중 3건(6 nimmt!, 7 원더스 건축가들, 코드네임)은 출판사 배포 페이지와 파일 해시까지 확인한 공식 자료 | 공식 확인 3건도 **재배포 허가는 미확인**. 나머지 114건은 **이용 조건 미확인** |
+| 공식 FAQ·정오표 | [config/document-relations.json](config/document-relations.json)에 검증된 관계를 적은 자료만 사용 | 현재 등록 0건 |
+| BGG Rules 포럼 토론 (보조 근거) | BGG XML API2, 질문할 때 조회 | BGG 앱 승인 토큰 필요. 공식 룰북과 구분해 "커뮤니티 토론"으로 표시 |
+
+- 문서별 출처 URL, 출처 유형, 공식 확인 여부, 이용 조건, 수집일, SHA-256은 [reports/source-inventory.json](reports/source-inventory.json)에 있습니다.
+- 규칙서 원문은 저장소에 포함하지 않습니다(`data/`는 Git 제외). 화면은 원문 전체 대신 관련 규칙 요약과 페이지를 보여 주고, 원문 다운로드는 그 문서를 인용한 대화의 세션에만 허용합니다.
+- 공개 배포 전에는 규칙서별 이용 조건을 확인해, 허락되지 않은 문서는 색인에서 빼거나 출처 링크만 남겨야 합니다.
+
 ## 검증
 
 ```powershell
@@ -158,8 +171,12 @@ corepack pnpm test:e2e
 ### 운영 도구
 
 - 잘못된 답변 신고 내보내기: `uv run python -m rule_u.feedback export --output ../../data/feedback-review.json`
-- 답변 유보 원인: `GET /api/v1/requests/{id}`의 `diagnostic` (`no_evidence`, `model_insufficient`, `citation_mismatch`, `bgg_skipped` 등)
-- 평가 스크립트: [apps/api/tools](apps/api/tools) (검색어 재작성 비교, 답변 안정성 등)
+- 답변 유보 원인: `GET /api/v1/requests/{id}`의 `diagnostic` (`index_missing`, `no_evidence`, `model_insufficient`, `citation_mismatch`, `bgg_skipped` 등). 진단 정보에는 단계별 처리 시간(`retrieve_seconds`, `generate_seconds`, `bgg_seconds`)도 남습니다.
+- 평가 스크립트: [apps/api/tools](apps/api/tools)
+  - `evaluate_rag_comparison.py --live`: RAG 미사용·사용 답변 비교
+  - `measure_latency.py --live`: 첫 질문·반복 질문 처리 시간과 문서 수집 캐시
+  - `compare_settings.py`: 청크 크기·Top-k 변경 비교
+  - `evaluate_stage5_answers.py`, `evaluate_followup.py`: 답변 안정성, 후속 질문 검색어 비교
 
 ## 폴더 구조
 
@@ -180,6 +197,7 @@ Rule_U/
 
 ## 문서
 
-- [기능명세서](docs/기능명세서.md) · [개발계획](docs/개발계획.md) · [개발기록](docs/개발기록.md)
-- [디자인 원칙](apps/web/DESIGN.md)
-- 결과 보고서: [데이터 적재(2단계)](reports/stage2-completion.md) · [화면(4단계)](reports/stage4-progress.md) · [검색 방식 비교(5단계)](reports/stage5-search-comparison.md) · [검색 후속 평가](reports/search-quality-followup.md)
+- 요구사항: [기능명세서](docs/기능명세서.md) (요구사항 정의서) · [RAG 파이프라인 설계](docs/RAG설계문서.md)
+- 검증: [요구사항 대조표·테스트 결과표](docs/검증결과.md) · [셀프·상호 체크리스트](docs/체크리스트.md)
+- 진행: [개발계획](docs/개발계획.md) · [개발기록](docs/개발기록.md) · [디자인 원칙](apps/web/DESIGN.md)
+- 결과 보고서: [RAG 전후 비교](reports/rag-comparison.md) · [처리 시간·설정 비교](reports/latency-and-settings.md) · [검색 방식 비교(5단계)](reports/stage5-search-comparison.md) · [검색 후속 평가](reports/search-quality-followup.md) · [데이터 적재(2단계)](reports/stage2-completion.md) · [화면(4단계)](reports/stage4-progress.md)

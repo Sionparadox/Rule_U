@@ -1,0 +1,2152 @@
+{
+  "search_mode": "hybrid",
+  "chat_model": "gpt-6.1-sol",
+  "runs": [
+    {
+      "game_id": "coup",
+      "kind": "exception",
+      "run": "first",
+      "total_seconds": 10.881,
+      "retrieve_seconds": 0.648,
+      "generate_seconds": 10.226,
+      "verdict": "not_allowed"
+    },
+    {
+      "game_id": "coup",
+      "kind": "exception",
+      "run": "second",
+      "total_seconds": 9.001,
+      "retrieve_seconds": 0.028,
+      "generate_seconds": 8.968,
+      "verdict": "not_allowed"
+    },
+    {
+      "game_id": "coup",
+      "kind": "no_evidence",
+      "run": "first",
+      "total_seconds": 4.549,
+      "retrieve_seconds": 0.318,
+      "generate_seconds": 4.226,
+      "verdict": "insufficient_evidence"
+    },
+    {
+      "game_id": "coup",
+      "kind": "no_evidence",
+      "run": "second",
+      "total_seconds": 3.684,
+      "retrieve_seconds": 0.037,
+      "generate_seconds": 3.643,
+      "verdict": "insufficient_evidence"
+    },
+    {
+      "game_id": "6-nimmt",
+      "kind": "exception",
+      "run": "first",
+      "total_seconds": 4.956,
+      "retrieve_seconds": 0.28,
+      "generate_seconds": 4.671,
+      "verdict": "not_allowed"
+    },
+    {
+      "game_id": "6-nimmt",
+      "kind": "exception",
+      "run": "second",
+      "total_seconds": 4.943,
+      "retrieve_seconds": 0.065,
+      "generate_seconds": 4.864,
+      "verdict": "not_allowed"
+    },
+    {
+      "game_id": "6-nimmt",
+      "kind": "no_evidence",
+      "run": "first",
+      "total_seconds": 3.013,
+      "retrieve_seconds": 0.398,
+      "generate_seconds": 2.6,
+      "verdict": "insufficient_evidence"
+    },
+    {
+      "game_id": "6-nimmt",
+      "kind": "no_evidence",
+      "run": "second",
+      "total_seconds": 3.264,
+      "retrieve_seconds": 0.061,
+      "generate_seconds": 3.19,
+      "verdict": "insufficient_evidence"
+    },
+    {
+      "game_id": "7-wonders-architects",
+      "kind": "exception",
+      "run": "first",
+      "total_seconds": 11.139,
+      "retrieve_seconds": 0.332,
+      "generate_seconds": 10.795,
+      "verdict": "not_allowed"
+    },
+    {
+      "game_id": "7-wonders-architects",
+      "kind": "exception",
+      "run": "second",
+      "total_seconds": 9.019,
+      "retrieve_seconds": 0.067,
+      "generate_seconds": 8.941,
+      "verdict": "not_allowed"
+    },
+    {
+      "game_id": "7-wonders-architects",
+      "kind": "no_evidence",
+      "run": "first",
+      "total_seconds": 3.459,
+      "retrieve_seconds": 0.44,
+      "generate_seconds": 3.008,
+      "verdict": "insufficient_evidence"
+    },
+    {
+      "game_id": "7-wonders-architects",
+      "kind": "no_evidence",
+      "run": "second",
+      "total_seconds": 3.232,
+      "retrieve_seconds": 0.034,
+      "generate_seconds": 3.191,
+      "verdict": "insufficient_evidence"
+    },
+    {
+      "game_id": "catan",
+      "kind": "exception",
+      "run": "first",
+      "total_seconds": 8.668,
+      "retrieve_seconds": 0.518,
+      "generate_seconds": 8.138,
+      "verdict": "allowed"
+    },
+    {
+      "game_id": "catan",
+      "kind": "exception",
+      "run": "second",
+      "total_seconds": 8.281,
+      "retrieve_seconds": 0.038,
+      "generate_seconds": 8.236,
+      "verdict": "allowed"
+    },
+    {
+      "game_id": "catan",
+      "kind": "no_evidence",
+      "run": "first",
+      "total_seconds": 3.285,
+      "retrieve_seconds": 0.391,
+      "generate_seconds": 2.88,
+      "verdict": "insufficient_evidence"
+    },
+    {
+      "game_id": "catan",
+      "kind": "no_evidence",
+      "run": "second",
+      "total_seconds": 3.004,
+      "retrieve_seconds": 0.073,
+      "generate_seconds": 2.917,
+      "verdict": "insufficient_evidence"
+    }
+  ],
+  "summary": {
+    "first": {
+      "total_seconds": {
+        "n": 8,
+        "p50": 4.753,
+        "p95": 11.139,
+        "max": 11.139
+      },
+      "retrieve_seconds": {
+        "n": 8,
+        "p50": 0.395,
+        "p95": 0.648,
+        "max": 0.648
+      },
+      "generate_seconds": {
+        "n": 8,
+        "p50": 4.449,
+        "p95": 10.795,
+        "max": 10.795
+      }
+    },
+    "second": {
+      "total_seconds": {
+        "n": 8,
+        "p50": 4.313,
+        "p95": 9.019,
+        "max": 9.019
+      },
+      "retrieve_seconds": {
+        "n": 8,
+        "p50": 0.05,
+        "p95": 0.073,
+        "max": 0.073
+      },
+      "generate_seconds": {
+        "n": 8,
+        "p50": 4.253,
+        "p95": 8.968,
+        "max": 8.968
+      }
+    }
+  },
+  "discovery": {
+    "game_id": "catan",
+    "edition_id": "catan-user-748610c946df",
+    "question": "도둑을 옮길 때 자원카드를 빼앗는 규칙",
+    "runs": [
+      {
+        "run": "cold",
+        "seconds": 2.148,
+        "cache_hit": false,
+        "terms": [
+          "카탄",
+          "카탄 도둑 이동 자원카드 빼앗기",
+          "카탄 도둑 인접 정착지 도시 플레이어 선택",
+          "카탄 자원카드 무작위 1장 훔치기"
+        ],
+        "fallback_terms": false,
+        "selected": [
+          {
+            "id": "caf92cbc996d6454bf796ed447727267376a4b24f92e36d4c3221ee87544fca7",
+            "title": "카탄 한국어 규칙서",
+            "type": "rulebook",
+            "reason": "own_rulebook_required"
+          }
+        ],
+        "excluded": [
+          {
+            "id": "82fdd00d1e53d6a6871ff646e61554f672f43bbdba8b0f6c41118dcc25172720",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "ed8cd292d91aa0aca16a2fb10e43fce46dd94cd291e597dd01ac14c457ad1053",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "e770ffc96af0dca3ec754ba0867217f42907ac19159b758e0b86aaa5d57677f9",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "456e2c9552496baf6c30608fa23a3722edecbf9d8679d10d2f784253d354bf38",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "1931335dd34e94d8bcb609296c171974ecde3a97364c3b616df1bc6532423a3b",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "5a4c2d684997be028655e2551ffe7985a119bf3e59c8cb67687b7a03388bd511",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "78c823514331fcb583825132314848b6654e6e8491f87e319cc9ba9644986be0",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "dbc5bfd227fd3f4013b643034db49681f2551b235ddd54acb0f791a4b5e567bd",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "95a8fce7c0849afbc2c2753dc354b9bf97e405384f7e4d1dd4d4ffb142300fcd",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "8b42033eefc1840f01ff2a4e3186e3e087499372012a262892129e8e386d9906",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "aa343aba6bb20c81e75af6a5900d9218211c047a7f84b6d573392f6ba8cc3541",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "f4965d1ac6bd721bac3b9bcea56548303a9709a4f28d4702ea995dcce991c1f0",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "444647e0c028c5f50315853a0e35bfd4f4eff03fb6e9699917e9bb6a489e9281",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "6a80cadfba15f843871ed1921f65a64b3db65d1b62d362993801af3775a8f96c",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "7492ae4ad8671b3152cffc93080b06f0862f891b8a6ef0237aa8db02ad5629f2",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "bd14ec3908422608ed1309c2bb549ed1f25b1bdd9d1ce93096c700885a05cf3f",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "0bc432f2b9027cbc89457f3c54d8b8f2f177ead6ee538987a1e2bf90f7f59e66",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "925fd8072edfb68f25a59bc69243177908bc917ba784743a2fcce34a420efb1f",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "f245da77b458f7c78d6278b860e1184cab46d085e3be840986e76301b560f5a6",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "eb9ac61e0811cbf9458774adb2c9d2954077e58b3d7f5afda0ea07651c28f1d2",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "548c6752e2af52334395ee75e91bb4312cbc2143531efc25e9da5119d5bb1d65",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "1c8adb96d0a76626f7cbb74222d8939bd03e9265e7393365493f7c303044a721",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "e7b78ade1cba6a08bef385aa79c6c7be26d886e01eca05336e95f831770a9b0a",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "d89083e59001fe0c29118dd25d04e4557bab9f98dbe50a976804e88eeef51d45",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "8cf58e753efe38e54c986de3a9c5db21e57582aa4d981f70046c5a5a0d2e4cc7",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "f9b5187ecd299af95307a763abbeb5a6bcf056c2ffc034f07a9b5b6f5ea75b91",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "29ef1c8a6c170bedd044f8d44ba88dbd63926894f589a8e7b4c596c39bd9e0de",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "3c90bcde68e18ab4ec0b13a92feabb43c4e8596513bc3e11cdc3a7ebe5800fc4",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "abd2f8638482028b6736e3af0243ee92048eb47f66f882dc39d9b72dabe817fd",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "c804f0e40de9be52e2d5ef9293d25de91ddbef7cc31d13277240522d4ab79a77",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "1a1549bde1b4a17b5d63b40c234bea17e3096a15958dd0a41a5bce7387650f1d",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "9301fe6a2b71dc8aea3a635b65196ca8a03398dc03dab304d7915e229e7b9952",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "30408ec1947fb803c7adc4faa29017fb042693f2f42de6168159a16d58288684",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "4dd52abe9cae4cc6bb66a908e74ebed5eb698ce9e659e3e11df6359763dd6de5",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "a8af38c995a3b03b6e7d03218ac7e5059f1f73817d6ee9bd78326c92949d8de1",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "56054d4d2be169c947483cdab0917028cfb039bb848358903e5e2d676db3d7c2",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "9479df92e89f6936359b74f0c225a13356c015200af86f4f3bb6f3e9e9f6a7e1",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "dd6baf622e8e8307f2e9a3d0841d85ced03748d710f4d346bbe3ee9066e5a420",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "7a8b0f6550519bdf61f7630c93b8d382e84cd4783660177d0233b736902cf3f6",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "a39d50f3285b7da5bf60d4c9c8c32584550a1c55bd557cdea6ad71a0a5b84f55",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "6457cb83ba4ec4a7597b0460bcff1fbf6ebac5fee89454b337021b30cff3a9d8",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "577caac5bf16fc8d456d0116d7aa7bc4d8f90f62c0d12fb0d14b3378d7af0447",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "860c832552db27c59c8866e6e15811db2bca5438865833b9299bb3528394b2a1",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "ce08927e8e654687ad4e0c542c5232b40032457c2a1c1685037c42ce86b7a346",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "2c85850eefd3bf30d2f7f88f1239f5266737d4e725a43e5ec1f6dc4bcc84babd",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "e8721ccba380c051c09519d860830ad744c8a905d74ea5641ab7acd4830de8c5",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "8b686e5c4b52586bcd55934c75560824c5662561120707c0d6e9426f35d32b99",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "697e1c1da65a51d4827f3002f7d708a36f91af560237755431fbd170203b8afa",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "1f98f9a41d30404c6ef065caf8fdfb2c0287ca154919983cbb0731aee73fb3b9",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "b21f4cb7b7880a14166172b595b004c7625cdc1d127a4fc5a26f1dd4b96d5336",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "badad6c9bb408ef27823b13e4645116737cd58624398af20469e7af2c6982647",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "eeb8ee4fe21b22bc664e6dbcc2f429b22e9a71f055c074955c691b51ce3cdcd0",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "ed214d3d2d5113a447dc0b2a2e824f9a08d5be9dc88914ebb18025de6ec5a363",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "9588d7c4efd1ba83ceb8703ce61f12455a538c67e6f9355b3601d3f6815de170",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "2f9e1e5413a698d1363ee7ebcf76b6169c46fd474a56bd33a328714a1338cbe9",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "cfe5f424c0bf357a29c14509aa5efcdd34f218fcfb436b82f025b86d7c21179b",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "579987a9ce181654c2d496afdddb1f42d73b17d5fba6980ccae7531e78329697",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "26550d038ccdd1265555b678c4f385d72a948725853a3b5b53b58c58e1756425",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "171431cf7341e1af3acdca6b0021e45a536776a9249fe05ef598ac79366ef808",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "aa2842914755a7998bc13b6a0f17717f6d9fd6e746f421d65070cfd58cbd8f34",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "3470b7699f02e0ff22d953d10431ad3480728db70e72db0ba149443735313c68",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "dab0c9b276992a8561a3c727d18f4ffe3b3ca9c7ae503a020929898e403f04b9",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "71faadf4ddf01807516808b62c9fd2cb6e1f4186ac78b657713a011b626c9259",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "44548f4d8b49e76d0f60f431d54de776b0c4b6f728c46edbae7016fdee9d2041",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "311d68a3aecb75960c4642da3a5adaee21768861e5d84d1034ac81b5c2fe873e",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "cb58484b7a0ee9de910f134d8a34066848d7c563634aa315d58881dee574a6da",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "2569ed3f266ee03216bf1d3d27034e68118c06717b183373455b254d043dbc47",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "9fac929b4a562fa33468358f6193b081e69582c5d22cf81c5a683482efb4d5fb",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "83f2f445ebafff2a42daae582cd7412b37a03f2ef816e4cc3e0a4a5a08a50d66",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "f37f9e2590bc6c67e3d06f9f2a572a7f74ca199e41390a048196606e6ed236f8",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "165d4cc2e5b6504a8c52894b94d81bf18bd885586f214ad2684e5b616b38f987",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "a6d2955fc100289de61942224cd7b9372263b686170c48be43511a2f77e47488",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "e89b77648688c01fa2abee0c4fb867acdee9a16fd45edbcb5cc9c4744dca9b56",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "76f7f22c67fbac93aa0b9f7c08222f51521bb908ad03a624b42c653a49508e59",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "be565853ad93b70889cd7960ddf3c5bc2c0ae1f79703fc87be620ac38fe2c775",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "91bd71a2c9c010f82d936284ff60a226950b8c4bbe427e8eba56d56da8a13994",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "34dd009ae3db790943cdca898d678bc0bf40373b987e86e0004d84b60e41829b",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "c297bacae045d4aa309d10b8e0255082c2b3e7c31281e00ffac7e79114833db0",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "9cc329d4a5170fdae61541f3f83c83e5a9da05ae7c8d9bd99dd130a6826bf96c",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "17f095a4246ce2f2e6a2be39a925d10736565521c0d0e1234b03fe9fafebab52",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "b39a4235cb5d312d0b4f00a5db44f9824717feb698d4a3d601669eae0ffe194e",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "c7d36ba839d9f55143292e281cdf639c051effcc0a22c6434a3e775c7d9b2c81",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "23ec14aab956f84ac612b7e9ca232d02c7547661b6fdd5db105b8fb06bbebe72",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "20a5b270bc3c825d4545fbb28552f3120b5053826ad7f05afdaf0fdf5fcfa416",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "efb9d5aa21bebbedb823e683ef95a2eb81b225b3afe82960c31d2771183e5e29",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "fb0ff028ed5f1e05667983718fa49ce79f283562ffb4cac736316501a6e6b6b8",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "aa9bef99c2fa1363f787a8579ffb1b166a194f01d8b8b1fce6bcfcf3ccf7dcda",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "3cd56a1a9fd76d3c0aa5994bb57db9657d6eb92cefb5335f91d0d205ca8c1158",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "6a041cc59f5976d2f8d0d8870953dfe23de5cef98c387ba38d2acba676794680",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "a7cddc317fc5c9dc1aa6fe1447ec7fe3616b9065398bacaa7e2f5d4f04804df6",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "982639968164927db3070962ea58f682162ebd0274cce162332e032c1b103066",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "9e2d78e3e49bcf98d519deebcd49e7b19527e9654cac42298bc2d4acaae1430c",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "a3d0df88ef5af319a51f540ec21a1e33226ff4a37c2b59eeb094d6c5d59f8f1a",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "295f8582bed9403e0cca5943e9a2b2fbe5ad3cc5a3cf061c26fb714a40bf27af",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "140b3f98573740b979c5aefab0af791302169d1721d1111b720cd8e10816081f",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "72ca82f98e05d8c993a3e9df01a666234bc2c6be777ababfae7d3da5ae81781f",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "6bbb749a9c77d0759c1d0e253d86ee164bc46df860c9f30991571141460a92ec",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "3172123a33c631f699587c18b467aa8b5afdd2a1ae83eed6ada94b13e78d3cfb",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "d5cf65d9fec48794ab34432a003627f54e6793af20b7f226f792047344e5246b",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "9eea280014e6c88f3e51e04e22b747051251577bc774586569827f82d1beedf1",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "924e079a4040dec2aa348100fce42e1db3bd83a3e8975bec51fdc7d984638f72",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "2af53cb340fc79ab2097f1172bd776bc9989036acf997f76b2aa2cba571b5cc5",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "9b6cc8fa2a5dc9e746fb1ac6b86d87cb8c5789ba8640263cd45b5c7a9ae41a33",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "3ceabd1de0836054f01993707d67a5a76b33c5bac7770753dcfa995099ee68c8",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "ce4dcffdb404198862bed18cc92e5e7c06236bea2320e7340361ffc002936db5",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "42967af5bbe8736c65467b4ff44500502a32d997846fa2795fac3cfa7a0e51a2",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "086c6df0f618f2b8d7c5d46eb0c78f2730a2267326e60d9db1bee7cc63933c44",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "fe087142ced18168b125c375fccfeb27412d48375696e21450d8980d4b27d9db",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "edb4488025e0c0097dc3b6c9e9e8bf0a261f9d5e167ff5e27a9bb218e15772ba",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "ef6d2bbc08e7ed5cee1be4472a42e26a1934e6c05b132dfca9c8e7d4e387deaf",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "6c1cb90f75594191388fd732bb16bdb4f86840eb1931ed627f96773bf9621e27",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "1a3ce92643bfb2406500bdc381e480fa1c0517b179149e2ac08a930e6a2c5bea",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "0f45df5753dc9ef7919a645f73d3ef1a173abec1978a88fd254c43addc1f90c7",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "d2a2653ac253a8fc6380327c3f33ce92aa6d5e23d6ff1a38fa98f1db62d8116a",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "c1eb30fa4f04ae6d06da29dcb5f8b9ee932a25d655cf061cd3fb1cf6cc5562ab",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "c90b53e9da82efe7c8423c73ea41894dbf53b77d81a7752b5dfa4008931aab35",
+            "reason": "scope_mismatch"
+          }
+        ],
+        "status": "ready"
+      },
+      {
+        "run": "cached",
+        "seconds": 0.002,
+        "cache_hit": true,
+        "terms": [
+          "카탄",
+          "카탄 도둑 이동 자원카드 빼앗기",
+          "카탄 도둑 인접 정착지 도시 플레이어 선택",
+          "카탄 자원카드 무작위 1장 훔치기"
+        ],
+        "fallback_terms": false,
+        "selected": [
+          {
+            "id": "caf92cbc996d6454bf796ed447727267376a4b24f92e36d4c3221ee87544fca7",
+            "title": "카탄 한국어 규칙서",
+            "type": "rulebook",
+            "reason": "own_rulebook_required"
+          }
+        ],
+        "excluded": [
+          {
+            "id": "82fdd00d1e53d6a6871ff646e61554f672f43bbdba8b0f6c41118dcc25172720",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "ed8cd292d91aa0aca16a2fb10e43fce46dd94cd291e597dd01ac14c457ad1053",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "e770ffc96af0dca3ec754ba0867217f42907ac19159b758e0b86aaa5d57677f9",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "456e2c9552496baf6c30608fa23a3722edecbf9d8679d10d2f784253d354bf38",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "1931335dd34e94d8bcb609296c171974ecde3a97364c3b616df1bc6532423a3b",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "5a4c2d684997be028655e2551ffe7985a119bf3e59c8cb67687b7a03388bd511",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "78c823514331fcb583825132314848b6654e6e8491f87e319cc9ba9644986be0",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "dbc5bfd227fd3f4013b643034db49681f2551b235ddd54acb0f791a4b5e567bd",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "95a8fce7c0849afbc2c2753dc354b9bf97e405384f7e4d1dd4d4ffb142300fcd",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "8b42033eefc1840f01ff2a4e3186e3e087499372012a262892129e8e386d9906",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "aa343aba6bb20c81e75af6a5900d9218211c047a7f84b6d573392f6ba8cc3541",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "f4965d1ac6bd721bac3b9bcea56548303a9709a4f28d4702ea995dcce991c1f0",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "444647e0c028c5f50315853a0e35bfd4f4eff03fb6e9699917e9bb6a489e9281",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "6a80cadfba15f843871ed1921f65a64b3db65d1b62d362993801af3775a8f96c",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "7492ae4ad8671b3152cffc93080b06f0862f891b8a6ef0237aa8db02ad5629f2",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "bd14ec3908422608ed1309c2bb549ed1f25b1bdd9d1ce93096c700885a05cf3f",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "0bc432f2b9027cbc89457f3c54d8b8f2f177ead6ee538987a1e2bf90f7f59e66",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "925fd8072edfb68f25a59bc69243177908bc917ba784743a2fcce34a420efb1f",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "f245da77b458f7c78d6278b860e1184cab46d085e3be840986e76301b560f5a6",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "eb9ac61e0811cbf9458774adb2c9d2954077e58b3d7f5afda0ea07651c28f1d2",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "548c6752e2af52334395ee75e91bb4312cbc2143531efc25e9da5119d5bb1d65",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "1c8adb96d0a76626f7cbb74222d8939bd03e9265e7393365493f7c303044a721",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "e7b78ade1cba6a08bef385aa79c6c7be26d886e01eca05336e95f831770a9b0a",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "d89083e59001fe0c29118dd25d04e4557bab9f98dbe50a976804e88eeef51d45",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "8cf58e753efe38e54c986de3a9c5db21e57582aa4d981f70046c5a5a0d2e4cc7",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "f9b5187ecd299af95307a763abbeb5a6bcf056c2ffc034f07a9b5b6f5ea75b91",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "29ef1c8a6c170bedd044f8d44ba88dbd63926894f589a8e7b4c596c39bd9e0de",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "3c90bcde68e18ab4ec0b13a92feabb43c4e8596513bc3e11cdc3a7ebe5800fc4",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "abd2f8638482028b6736e3af0243ee92048eb47f66f882dc39d9b72dabe817fd",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "c804f0e40de9be52e2d5ef9293d25de91ddbef7cc31d13277240522d4ab79a77",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "1a1549bde1b4a17b5d63b40c234bea17e3096a15958dd0a41a5bce7387650f1d",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "9301fe6a2b71dc8aea3a635b65196ca8a03398dc03dab304d7915e229e7b9952",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "30408ec1947fb803c7adc4faa29017fb042693f2f42de6168159a16d58288684",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "4dd52abe9cae4cc6bb66a908e74ebed5eb698ce9e659e3e11df6359763dd6de5",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "a8af38c995a3b03b6e7d03218ac7e5059f1f73817d6ee9bd78326c92949d8de1",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "56054d4d2be169c947483cdab0917028cfb039bb848358903e5e2d676db3d7c2",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "9479df92e89f6936359b74f0c225a13356c015200af86f4f3bb6f3e9e9f6a7e1",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "dd6baf622e8e8307f2e9a3d0841d85ced03748d710f4d346bbe3ee9066e5a420",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "7a8b0f6550519bdf61f7630c93b8d382e84cd4783660177d0233b736902cf3f6",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "a39d50f3285b7da5bf60d4c9c8c32584550a1c55bd557cdea6ad71a0a5b84f55",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "6457cb83ba4ec4a7597b0460bcff1fbf6ebac5fee89454b337021b30cff3a9d8",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "577caac5bf16fc8d456d0116d7aa7bc4d8f90f62c0d12fb0d14b3378d7af0447",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "860c832552db27c59c8866e6e15811db2bca5438865833b9299bb3528394b2a1",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "ce08927e8e654687ad4e0c542c5232b40032457c2a1c1685037c42ce86b7a346",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "2c85850eefd3bf30d2f7f88f1239f5266737d4e725a43e5ec1f6dc4bcc84babd",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "e8721ccba380c051c09519d860830ad744c8a905d74ea5641ab7acd4830de8c5",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "8b686e5c4b52586bcd55934c75560824c5662561120707c0d6e9426f35d32b99",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "697e1c1da65a51d4827f3002f7d708a36f91af560237755431fbd170203b8afa",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "1f98f9a41d30404c6ef065caf8fdfb2c0287ca154919983cbb0731aee73fb3b9",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "b21f4cb7b7880a14166172b595b004c7625cdc1d127a4fc5a26f1dd4b96d5336",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "badad6c9bb408ef27823b13e4645116737cd58624398af20469e7af2c6982647",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "eeb8ee4fe21b22bc664e6dbcc2f429b22e9a71f055c074955c691b51ce3cdcd0",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "ed214d3d2d5113a447dc0b2a2e824f9a08d5be9dc88914ebb18025de6ec5a363",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "9588d7c4efd1ba83ceb8703ce61f12455a538c67e6f9355b3601d3f6815de170",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "2f9e1e5413a698d1363ee7ebcf76b6169c46fd474a56bd33a328714a1338cbe9",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "cfe5f424c0bf357a29c14509aa5efcdd34f218fcfb436b82f025b86d7c21179b",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "579987a9ce181654c2d496afdddb1f42d73b17d5fba6980ccae7531e78329697",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "26550d038ccdd1265555b678c4f385d72a948725853a3b5b53b58c58e1756425",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "171431cf7341e1af3acdca6b0021e45a536776a9249fe05ef598ac79366ef808",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "aa2842914755a7998bc13b6a0f17717f6d9fd6e746f421d65070cfd58cbd8f34",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "3470b7699f02e0ff22d953d10431ad3480728db70e72db0ba149443735313c68",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "dab0c9b276992a8561a3c727d18f4ffe3b3ca9c7ae503a020929898e403f04b9",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "71faadf4ddf01807516808b62c9fd2cb6e1f4186ac78b657713a011b626c9259",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "44548f4d8b49e76d0f60f431d54de776b0c4b6f728c46edbae7016fdee9d2041",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "311d68a3aecb75960c4642da3a5adaee21768861e5d84d1034ac81b5c2fe873e",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "cb58484b7a0ee9de910f134d8a34066848d7c563634aa315d58881dee574a6da",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "2569ed3f266ee03216bf1d3d27034e68118c06717b183373455b254d043dbc47",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "9fac929b4a562fa33468358f6193b081e69582c5d22cf81c5a683482efb4d5fb",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "83f2f445ebafff2a42daae582cd7412b37a03f2ef816e4cc3e0a4a5a08a50d66",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "f37f9e2590bc6c67e3d06f9f2a572a7f74ca199e41390a048196606e6ed236f8",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "165d4cc2e5b6504a8c52894b94d81bf18bd885586f214ad2684e5b616b38f987",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "a6d2955fc100289de61942224cd7b9372263b686170c48be43511a2f77e47488",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "e89b77648688c01fa2abee0c4fb867acdee9a16fd45edbcb5cc9c4744dca9b56",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "76f7f22c67fbac93aa0b9f7c08222f51521bb908ad03a624b42c653a49508e59",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "be565853ad93b70889cd7960ddf3c5bc2c0ae1f79703fc87be620ac38fe2c775",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "91bd71a2c9c010f82d936284ff60a226950b8c4bbe427e8eba56d56da8a13994",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "34dd009ae3db790943cdca898d678bc0bf40373b987e86e0004d84b60e41829b",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "c297bacae045d4aa309d10b8e0255082c2b3e7c31281e00ffac7e79114833db0",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "9cc329d4a5170fdae61541f3f83c83e5a9da05ae7c8d9bd99dd130a6826bf96c",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "17f095a4246ce2f2e6a2be39a925d10736565521c0d0e1234b03fe9fafebab52",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "b39a4235cb5d312d0b4f00a5db44f9824717feb698d4a3d601669eae0ffe194e",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "c7d36ba839d9f55143292e281cdf639c051effcc0a22c6434a3e775c7d9b2c81",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "23ec14aab956f84ac612b7e9ca232d02c7547661b6fdd5db105b8fb06bbebe72",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "20a5b270bc3c825d4545fbb28552f3120b5053826ad7f05afdaf0fdf5fcfa416",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "efb9d5aa21bebbedb823e683ef95a2eb81b225b3afe82960c31d2771183e5e29",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "fb0ff028ed5f1e05667983718fa49ce79f283562ffb4cac736316501a6e6b6b8",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "aa9bef99c2fa1363f787a8579ffb1b166a194f01d8b8b1fce6bcfcf3ccf7dcda",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "3cd56a1a9fd76d3c0aa5994bb57db9657d6eb92cefb5335f91d0d205ca8c1158",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "6a041cc59f5976d2f8d0d8870953dfe23de5cef98c387ba38d2acba676794680",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "a7cddc317fc5c9dc1aa6fe1447ec7fe3616b9065398bacaa7e2f5d4f04804df6",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "982639968164927db3070962ea58f682162ebd0274cce162332e032c1b103066",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "9e2d78e3e49bcf98d519deebcd49e7b19527e9654cac42298bc2d4acaae1430c",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "a3d0df88ef5af319a51f540ec21a1e33226ff4a37c2b59eeb094d6c5d59f8f1a",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "295f8582bed9403e0cca5943e9a2b2fbe5ad3cc5a3cf061c26fb714a40bf27af",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "140b3f98573740b979c5aefab0af791302169d1721d1111b720cd8e10816081f",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "72ca82f98e05d8c993a3e9df01a666234bc2c6be777ababfae7d3da5ae81781f",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "6bbb749a9c77d0759c1d0e253d86ee164bc46df860c9f30991571141460a92ec",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "3172123a33c631f699587c18b467aa8b5afdd2a1ae83eed6ada94b13e78d3cfb",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "d5cf65d9fec48794ab34432a003627f54e6793af20b7f226f792047344e5246b",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "9eea280014e6c88f3e51e04e22b747051251577bc774586569827f82d1beedf1",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "924e079a4040dec2aa348100fce42e1db3bd83a3e8975bec51fdc7d984638f72",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "2af53cb340fc79ab2097f1172bd776bc9989036acf997f76b2aa2cba571b5cc5",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "9b6cc8fa2a5dc9e746fb1ac6b86d87cb8c5789ba8640263cd45b5c7a9ae41a33",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "3ceabd1de0836054f01993707d67a5a76b33c5bac7770753dcfa995099ee68c8",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "ce4dcffdb404198862bed18cc92e5e7c06236bea2320e7340361ffc002936db5",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "42967af5bbe8736c65467b4ff44500502a32d997846fa2795fac3cfa7a0e51a2",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "086c6df0f618f2b8d7c5d46eb0c78f2730a2267326e60d9db1bee7cc63933c44",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "fe087142ced18168b125c375fccfeb27412d48375696e21450d8980d4b27d9db",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "edb4488025e0c0097dc3b6c9e9e8bf0a261f9d5e167ff5e27a9bb218e15772ba",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "ef6d2bbc08e7ed5cee1be4472a42e26a1934e6c05b132dfca9c8e7d4e387deaf",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "6c1cb90f75594191388fd732bb16bdb4f86840eb1931ed627f96773bf9621e27",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "1a3ce92643bfb2406500bdc381e480fa1c0517b179149e2ac08a930e6a2c5bea",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "0f45df5753dc9ef7919a645f73d3ef1a173abec1978a88fd254c43addc1f90c7",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "d2a2653ac253a8fc6380327c3f33ce92aa6d5e23d6ff1a38fa98f1db62d8116a",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "c1eb30fa4f04ae6d06da29dcb5f8b9ee932a25d655cf061cd3fb1cf6cc5562ab",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "c90b53e9da82efe7c8423c73ea41894dbf53b77d81a7752b5dfa4008931aab35",
+            "reason": "scope_mismatch"
+          }
+        ],
+        "status": "ready"
+      }
+    ]
+  },
+  "discovery_with_selection": {
+    "game_id": "6-nimmt",
+    "edition_id": "6-nimmt-official-ko-rulebook",
+    "question": "벌점으로 가져간 카드를 다시 낼 수 있나요",
+    "runs": [
+      {
+        "run": "cold",
+        "seconds": 3.83,
+        "cache_hit": false,
+        "terms": [
+          "6 nimmt!",
+          "6 nimmt! 벌점으로 가져간 카드 재사용 가능 여부",
+          "6 nimmt! 획득한 벌점 카드와 손패 구분"
+        ],
+        "fallback_terms": false,
+        "selected": [
+          {
+            "id": "ed8cd292d91aa0aca16a2fb10e43fce46dd94cd291e597dd01ac14c457ad1053",
+            "title": "젝스님트 한국어판",
+            "type": "rulebook",
+            "reason": "own_rulebook_required"
+          }
+        ],
+        "excluded": [
+          {
+            "id": "82fdd00d1e53d6a6871ff646e61554f672f43bbdba8b0f6c41118dcc25172720",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "e770ffc96af0dca3ec754ba0867217f42907ac19159b758e0b86aaa5d57677f9",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "456e2c9552496baf6c30608fa23a3722edecbf9d8679d10d2f784253d354bf38",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "1931335dd34e94d8bcb609296c171974ecde3a97364c3b616df1bc6532423a3b",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "5a4c2d684997be028655e2551ffe7985a119bf3e59c8cb67687b7a03388bd511",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "78c823514331fcb583825132314848b6654e6e8491f87e319cc9ba9644986be0",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "dbc5bfd227fd3f4013b643034db49681f2551b235ddd54acb0f791a4b5e567bd",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "95a8fce7c0849afbc2c2753dc354b9bf97e405384f7e4d1dd4d4ffb142300fcd",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "8b42033eefc1840f01ff2a4e3186e3e087499372012a262892129e8e386d9906",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "aa343aba6bb20c81e75af6a5900d9218211c047a7f84b6d573392f6ba8cc3541",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "f4965d1ac6bd721bac3b9bcea56548303a9709a4f28d4702ea995dcce991c1f0",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "444647e0c028c5f50315853a0e35bfd4f4eff03fb6e9699917e9bb6a489e9281",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "6a80cadfba15f843871ed1921f65a64b3db65d1b62d362993801af3775a8f96c",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "7492ae4ad8671b3152cffc93080b06f0862f891b8a6ef0237aa8db02ad5629f2",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "bd14ec3908422608ed1309c2bb549ed1f25b1bdd9d1ce93096c700885a05cf3f",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "0bc432f2b9027cbc89457f3c54d8b8f2f177ead6ee538987a1e2bf90f7f59e66",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "925fd8072edfb68f25a59bc69243177908bc917ba784743a2fcce34a420efb1f",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "f245da77b458f7c78d6278b860e1184cab46d085e3be840986e76301b560f5a6",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "eb9ac61e0811cbf9458774adb2c9d2954077e58b3d7f5afda0ea07651c28f1d2",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "548c6752e2af52334395ee75e91bb4312cbc2143531efc25e9da5119d5bb1d65",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "1c8adb96d0a76626f7cbb74222d8939bd03e9265e7393365493f7c303044a721",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "e7b78ade1cba6a08bef385aa79c6c7be26d886e01eca05336e95f831770a9b0a",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "d89083e59001fe0c29118dd25d04e4557bab9f98dbe50a976804e88eeef51d45",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "8cf58e753efe38e54c986de3a9c5db21e57582aa4d981f70046c5a5a0d2e4cc7",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "caf92cbc996d6454bf796ed447727267376a4b24f92e36d4c3221ee87544fca7",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "f9b5187ecd299af95307a763abbeb5a6bcf056c2ffc034f07a9b5b6f5ea75b91",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "29ef1c8a6c170bedd044f8d44ba88dbd63926894f589a8e7b4c596c39bd9e0de",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "3c90bcde68e18ab4ec0b13a92feabb43c4e8596513bc3e11cdc3a7ebe5800fc4",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "abd2f8638482028b6736e3af0243ee92048eb47f66f882dc39d9b72dabe817fd",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "c804f0e40de9be52e2d5ef9293d25de91ddbef7cc31d13277240522d4ab79a77",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "1a1549bde1b4a17b5d63b40c234bea17e3096a15958dd0a41a5bce7387650f1d",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "9301fe6a2b71dc8aea3a635b65196ca8a03398dc03dab304d7915e229e7b9952",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "30408ec1947fb803c7adc4faa29017fb042693f2f42de6168159a16d58288684",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "4dd52abe9cae4cc6bb66a908e74ebed5eb698ce9e659e3e11df6359763dd6de5",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "a8af38c995a3b03b6e7d03218ac7e5059f1f73817d6ee9bd78326c92949d8de1",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "56054d4d2be169c947483cdab0917028cfb039bb848358903e5e2d676db3d7c2",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "9479df92e89f6936359b74f0c225a13356c015200af86f4f3bb6f3e9e9f6a7e1",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "dd6baf622e8e8307f2e9a3d0841d85ced03748d710f4d346bbe3ee9066e5a420",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "7a8b0f6550519bdf61f7630c93b8d382e84cd4783660177d0233b736902cf3f6",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "a39d50f3285b7da5bf60d4c9c8c32584550a1c55bd557cdea6ad71a0a5b84f55",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "6457cb83ba4ec4a7597b0460bcff1fbf6ebac5fee89454b337021b30cff3a9d8",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "577caac5bf16fc8d456d0116d7aa7bc4d8f90f62c0d12fb0d14b3378d7af0447",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "860c832552db27c59c8866e6e15811db2bca5438865833b9299bb3528394b2a1",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "ce08927e8e654687ad4e0c542c5232b40032457c2a1c1685037c42ce86b7a346",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "2c85850eefd3bf30d2f7f88f1239f5266737d4e725a43e5ec1f6dc4bcc84babd",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "e8721ccba380c051c09519d860830ad744c8a905d74ea5641ab7acd4830de8c5",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "8b686e5c4b52586bcd55934c75560824c5662561120707c0d6e9426f35d32b99",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "697e1c1da65a51d4827f3002f7d708a36f91af560237755431fbd170203b8afa",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "1f98f9a41d30404c6ef065caf8fdfb2c0287ca154919983cbb0731aee73fb3b9",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "b21f4cb7b7880a14166172b595b004c7625cdc1d127a4fc5a26f1dd4b96d5336",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "badad6c9bb408ef27823b13e4645116737cd58624398af20469e7af2c6982647",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "eeb8ee4fe21b22bc664e6dbcc2f429b22e9a71f055c074955c691b51ce3cdcd0",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "ed214d3d2d5113a447dc0b2a2e824f9a08d5be9dc88914ebb18025de6ec5a363",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "9588d7c4efd1ba83ceb8703ce61f12455a538c67e6f9355b3601d3f6815de170",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "2f9e1e5413a698d1363ee7ebcf76b6169c46fd474a56bd33a328714a1338cbe9",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "cfe5f424c0bf357a29c14509aa5efcdd34f218fcfb436b82f025b86d7c21179b",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "579987a9ce181654c2d496afdddb1f42d73b17d5fba6980ccae7531e78329697",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "26550d038ccdd1265555b678c4f385d72a948725853a3b5b53b58c58e1756425",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "171431cf7341e1af3acdca6b0021e45a536776a9249fe05ef598ac79366ef808",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "aa2842914755a7998bc13b6a0f17717f6d9fd6e746f421d65070cfd58cbd8f34",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "3470b7699f02e0ff22d953d10431ad3480728db70e72db0ba149443735313c68",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "dab0c9b276992a8561a3c727d18f4ffe3b3ca9c7ae503a020929898e403f04b9",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "71faadf4ddf01807516808b62c9fd2cb6e1f4186ac78b657713a011b626c9259",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "44548f4d8b49e76d0f60f431d54de776b0c4b6f728c46edbae7016fdee9d2041",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "311d68a3aecb75960c4642da3a5adaee21768861e5d84d1034ac81b5c2fe873e",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "cb58484b7a0ee9de910f134d8a34066848d7c563634aa315d58881dee574a6da",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "2569ed3f266ee03216bf1d3d27034e68118c06717b183373455b254d043dbc47",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "9fac929b4a562fa33468358f6193b081e69582c5d22cf81c5a683482efb4d5fb",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "83f2f445ebafff2a42daae582cd7412b37a03f2ef816e4cc3e0a4a5a08a50d66",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "f37f9e2590bc6c67e3d06f9f2a572a7f74ca199e41390a048196606e6ed236f8",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "165d4cc2e5b6504a8c52894b94d81bf18bd885586f214ad2684e5b616b38f987",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "a6d2955fc100289de61942224cd7b9372263b686170c48be43511a2f77e47488",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "e89b77648688c01fa2abee0c4fb867acdee9a16fd45edbcb5cc9c4744dca9b56",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "76f7f22c67fbac93aa0b9f7c08222f51521bb908ad03a624b42c653a49508e59",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "be565853ad93b70889cd7960ddf3c5bc2c0ae1f79703fc87be620ac38fe2c775",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "91bd71a2c9c010f82d936284ff60a226950b8c4bbe427e8eba56d56da8a13994",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "34dd009ae3db790943cdca898d678bc0bf40373b987e86e0004d84b60e41829b",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "c297bacae045d4aa309d10b8e0255082c2b3e7c31281e00ffac7e79114833db0",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "9cc329d4a5170fdae61541f3f83c83e5a9da05ae7c8d9bd99dd130a6826bf96c",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "17f095a4246ce2f2e6a2be39a925d10736565521c0d0e1234b03fe9fafebab52",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "b39a4235cb5d312d0b4f00a5db44f9824717feb698d4a3d601669eae0ffe194e",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "c7d36ba839d9f55143292e281cdf639c051effcc0a22c6434a3e775c7d9b2c81",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "23ec14aab956f84ac612b7e9ca232d02c7547661b6fdd5db105b8fb06bbebe72",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "20a5b270bc3c825d4545fbb28552f3120b5053826ad7f05afdaf0fdf5fcfa416",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "efb9d5aa21bebbedb823e683ef95a2eb81b225b3afe82960c31d2771183e5e29",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "fb0ff028ed5f1e05667983718fa49ce79f283562ffb4cac736316501a6e6b6b8",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "aa9bef99c2fa1363f787a8579ffb1b166a194f01d8b8b1fce6bcfcf3ccf7dcda",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "3cd56a1a9fd76d3c0aa5994bb57db9657d6eb92cefb5335f91d0d205ca8c1158",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "6a041cc59f5976d2f8d0d8870953dfe23de5cef98c387ba38d2acba676794680",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "a7cddc317fc5c9dc1aa6fe1447ec7fe3616b9065398bacaa7e2f5d4f04804df6",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "982639968164927db3070962ea58f682162ebd0274cce162332e032c1b103066",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "9e2d78e3e49bcf98d519deebcd49e7b19527e9654cac42298bc2d4acaae1430c",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "a3d0df88ef5af319a51f540ec21a1e33226ff4a37c2b59eeb094d6c5d59f8f1a",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "295f8582bed9403e0cca5943e9a2b2fbe5ad3cc5a3cf061c26fb714a40bf27af",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "140b3f98573740b979c5aefab0af791302169d1721d1111b720cd8e10816081f",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "72ca82f98e05d8c993a3e9df01a666234bc2c6be777ababfae7d3da5ae81781f",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "6bbb749a9c77d0759c1d0e253d86ee164bc46df860c9f30991571141460a92ec",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "3172123a33c631f699587c18b467aa8b5afdd2a1ae83eed6ada94b13e78d3cfb",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "d5cf65d9fec48794ab34432a003627f54e6793af20b7f226f792047344e5246b",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "9eea280014e6c88f3e51e04e22b747051251577bc774586569827f82d1beedf1",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "924e079a4040dec2aa348100fce42e1db3bd83a3e8975bec51fdc7d984638f72",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "2af53cb340fc79ab2097f1172bd776bc9989036acf997f76b2aa2cba571b5cc5",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "9b6cc8fa2a5dc9e746fb1ac6b86d87cb8c5789ba8640263cd45b5c7a9ae41a33",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "3ceabd1de0836054f01993707d67a5a76b33c5bac7770753dcfa995099ee68c8",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "ce4dcffdb404198862bed18cc92e5e7c06236bea2320e7340361ffc002936db5",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "42967af5bbe8736c65467b4ff44500502a32d997846fa2795fac3cfa7a0e51a2",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "086c6df0f618f2b8d7c5d46eb0c78f2730a2267326e60d9db1bee7cc63933c44",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "fe087142ced18168b125c375fccfeb27412d48375696e21450d8980d4b27d9db",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "edb4488025e0c0097dc3b6c9e9e8bf0a261f9d5e167ff5e27a9bb218e15772ba",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "ef6d2bbc08e7ed5cee1be4472a42e26a1934e6c05b132dfca9c8e7d4e387deaf",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "6c1cb90f75594191388fd732bb16bdb4f86840eb1931ed627f96773bf9621e27",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "1a3ce92643bfb2406500bdc381e480fa1c0517b179149e2ac08a930e6a2c5bea",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "0f45df5753dc9ef7919a645f73d3ef1a173abec1978a88fd254c43addc1f90c7",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "d2a2653ac253a8fc6380327c3f33ce92aa6d5e23d6ff1a38fa98f1db62d8116a",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "c1eb30fa4f04ae6d06da29dcb5f8b9ee932a25d655cf061cd3fb1cf6cc5562ab",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "c90b53e9da82efe7c8423c73ea41894dbf53b77d81a7752b5dfa4008931aab35",
+            "reason": "scope_mismatch"
+          }
+        ],
+        "status": "ready"
+      },
+      {
+        "run": "cached",
+        "seconds": 0.01,
+        "cache_hit": true,
+        "terms": [
+          "6 nimmt!",
+          "6 nimmt! 벌점으로 가져간 카드 재사용 가능 여부",
+          "6 nimmt! 획득한 벌점 카드와 손패 구분"
+        ],
+        "fallback_terms": false,
+        "selected": [
+          {
+            "id": "ed8cd292d91aa0aca16a2fb10e43fce46dd94cd291e597dd01ac14c457ad1053",
+            "title": "젝스님트 한국어판",
+            "type": "rulebook",
+            "reason": "own_rulebook_required"
+          }
+        ],
+        "excluded": [
+          {
+            "id": "82fdd00d1e53d6a6871ff646e61554f672f43bbdba8b0f6c41118dcc25172720",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "e770ffc96af0dca3ec754ba0867217f42907ac19159b758e0b86aaa5d57677f9",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "456e2c9552496baf6c30608fa23a3722edecbf9d8679d10d2f784253d354bf38",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "1931335dd34e94d8bcb609296c171974ecde3a97364c3b616df1bc6532423a3b",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "5a4c2d684997be028655e2551ffe7985a119bf3e59c8cb67687b7a03388bd511",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "78c823514331fcb583825132314848b6654e6e8491f87e319cc9ba9644986be0",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "dbc5bfd227fd3f4013b643034db49681f2551b235ddd54acb0f791a4b5e567bd",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "95a8fce7c0849afbc2c2753dc354b9bf97e405384f7e4d1dd4d4ffb142300fcd",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "8b42033eefc1840f01ff2a4e3186e3e087499372012a262892129e8e386d9906",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "aa343aba6bb20c81e75af6a5900d9218211c047a7f84b6d573392f6ba8cc3541",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "f4965d1ac6bd721bac3b9bcea56548303a9709a4f28d4702ea995dcce991c1f0",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "444647e0c028c5f50315853a0e35bfd4f4eff03fb6e9699917e9bb6a489e9281",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "6a80cadfba15f843871ed1921f65a64b3db65d1b62d362993801af3775a8f96c",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "7492ae4ad8671b3152cffc93080b06f0862f891b8a6ef0237aa8db02ad5629f2",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "bd14ec3908422608ed1309c2bb549ed1f25b1bdd9d1ce93096c700885a05cf3f",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "0bc432f2b9027cbc89457f3c54d8b8f2f177ead6ee538987a1e2bf90f7f59e66",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "925fd8072edfb68f25a59bc69243177908bc917ba784743a2fcce34a420efb1f",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "f245da77b458f7c78d6278b860e1184cab46d085e3be840986e76301b560f5a6",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "eb9ac61e0811cbf9458774adb2c9d2954077e58b3d7f5afda0ea07651c28f1d2",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "548c6752e2af52334395ee75e91bb4312cbc2143531efc25e9da5119d5bb1d65",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "1c8adb96d0a76626f7cbb74222d8939bd03e9265e7393365493f7c303044a721",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "e7b78ade1cba6a08bef385aa79c6c7be26d886e01eca05336e95f831770a9b0a",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "d89083e59001fe0c29118dd25d04e4557bab9f98dbe50a976804e88eeef51d45",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "8cf58e753efe38e54c986de3a9c5db21e57582aa4d981f70046c5a5a0d2e4cc7",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "caf92cbc996d6454bf796ed447727267376a4b24f92e36d4c3221ee87544fca7",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "f9b5187ecd299af95307a763abbeb5a6bcf056c2ffc034f07a9b5b6f5ea75b91",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "29ef1c8a6c170bedd044f8d44ba88dbd63926894f589a8e7b4c596c39bd9e0de",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "3c90bcde68e18ab4ec0b13a92feabb43c4e8596513bc3e11cdc3a7ebe5800fc4",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "abd2f8638482028b6736e3af0243ee92048eb47f66f882dc39d9b72dabe817fd",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "c804f0e40de9be52e2d5ef9293d25de91ddbef7cc31d13277240522d4ab79a77",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "1a1549bde1b4a17b5d63b40c234bea17e3096a15958dd0a41a5bce7387650f1d",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "9301fe6a2b71dc8aea3a635b65196ca8a03398dc03dab304d7915e229e7b9952",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "30408ec1947fb803c7adc4faa29017fb042693f2f42de6168159a16d58288684",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "4dd52abe9cae4cc6bb66a908e74ebed5eb698ce9e659e3e11df6359763dd6de5",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "a8af38c995a3b03b6e7d03218ac7e5059f1f73817d6ee9bd78326c92949d8de1",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "56054d4d2be169c947483cdab0917028cfb039bb848358903e5e2d676db3d7c2",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "9479df92e89f6936359b74f0c225a13356c015200af86f4f3bb6f3e9e9f6a7e1",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "dd6baf622e8e8307f2e9a3d0841d85ced03748d710f4d346bbe3ee9066e5a420",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "7a8b0f6550519bdf61f7630c93b8d382e84cd4783660177d0233b736902cf3f6",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "a39d50f3285b7da5bf60d4c9c8c32584550a1c55bd557cdea6ad71a0a5b84f55",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "6457cb83ba4ec4a7597b0460bcff1fbf6ebac5fee89454b337021b30cff3a9d8",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "577caac5bf16fc8d456d0116d7aa7bc4d8f90f62c0d12fb0d14b3378d7af0447",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "860c832552db27c59c8866e6e15811db2bca5438865833b9299bb3528394b2a1",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "ce08927e8e654687ad4e0c542c5232b40032457c2a1c1685037c42ce86b7a346",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "2c85850eefd3bf30d2f7f88f1239f5266737d4e725a43e5ec1f6dc4bcc84babd",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "e8721ccba380c051c09519d860830ad744c8a905d74ea5641ab7acd4830de8c5",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "8b686e5c4b52586bcd55934c75560824c5662561120707c0d6e9426f35d32b99",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "697e1c1da65a51d4827f3002f7d708a36f91af560237755431fbd170203b8afa",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "1f98f9a41d30404c6ef065caf8fdfb2c0287ca154919983cbb0731aee73fb3b9",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "b21f4cb7b7880a14166172b595b004c7625cdc1d127a4fc5a26f1dd4b96d5336",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "badad6c9bb408ef27823b13e4645116737cd58624398af20469e7af2c6982647",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "eeb8ee4fe21b22bc664e6dbcc2f429b22e9a71f055c074955c691b51ce3cdcd0",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "ed214d3d2d5113a447dc0b2a2e824f9a08d5be9dc88914ebb18025de6ec5a363",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "9588d7c4efd1ba83ceb8703ce61f12455a538c67e6f9355b3601d3f6815de170",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "2f9e1e5413a698d1363ee7ebcf76b6169c46fd474a56bd33a328714a1338cbe9",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "cfe5f424c0bf357a29c14509aa5efcdd34f218fcfb436b82f025b86d7c21179b",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "579987a9ce181654c2d496afdddb1f42d73b17d5fba6980ccae7531e78329697",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "26550d038ccdd1265555b678c4f385d72a948725853a3b5b53b58c58e1756425",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "171431cf7341e1af3acdca6b0021e45a536776a9249fe05ef598ac79366ef808",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "aa2842914755a7998bc13b6a0f17717f6d9fd6e746f421d65070cfd58cbd8f34",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "3470b7699f02e0ff22d953d10431ad3480728db70e72db0ba149443735313c68",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "dab0c9b276992a8561a3c727d18f4ffe3b3ca9c7ae503a020929898e403f04b9",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "71faadf4ddf01807516808b62c9fd2cb6e1f4186ac78b657713a011b626c9259",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "44548f4d8b49e76d0f60f431d54de776b0c4b6f728c46edbae7016fdee9d2041",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "311d68a3aecb75960c4642da3a5adaee21768861e5d84d1034ac81b5c2fe873e",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "cb58484b7a0ee9de910f134d8a34066848d7c563634aa315d58881dee574a6da",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "2569ed3f266ee03216bf1d3d27034e68118c06717b183373455b254d043dbc47",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "9fac929b4a562fa33468358f6193b081e69582c5d22cf81c5a683482efb4d5fb",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "83f2f445ebafff2a42daae582cd7412b37a03f2ef816e4cc3e0a4a5a08a50d66",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "f37f9e2590bc6c67e3d06f9f2a572a7f74ca199e41390a048196606e6ed236f8",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "165d4cc2e5b6504a8c52894b94d81bf18bd885586f214ad2684e5b616b38f987",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "a6d2955fc100289de61942224cd7b9372263b686170c48be43511a2f77e47488",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "e89b77648688c01fa2abee0c4fb867acdee9a16fd45edbcb5cc9c4744dca9b56",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "76f7f22c67fbac93aa0b9f7c08222f51521bb908ad03a624b42c653a49508e59",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "be565853ad93b70889cd7960ddf3c5bc2c0ae1f79703fc87be620ac38fe2c775",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "91bd71a2c9c010f82d936284ff60a226950b8c4bbe427e8eba56d56da8a13994",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "34dd009ae3db790943cdca898d678bc0bf40373b987e86e0004d84b60e41829b",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "c297bacae045d4aa309d10b8e0255082c2b3e7c31281e00ffac7e79114833db0",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "9cc329d4a5170fdae61541f3f83c83e5a9da05ae7c8d9bd99dd130a6826bf96c",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "17f095a4246ce2f2e6a2be39a925d10736565521c0d0e1234b03fe9fafebab52",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "b39a4235cb5d312d0b4f00a5db44f9824717feb698d4a3d601669eae0ffe194e",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "c7d36ba839d9f55143292e281cdf639c051effcc0a22c6434a3e775c7d9b2c81",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "23ec14aab956f84ac612b7e9ca232d02c7547661b6fdd5db105b8fb06bbebe72",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "20a5b270bc3c825d4545fbb28552f3120b5053826ad7f05afdaf0fdf5fcfa416",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "efb9d5aa21bebbedb823e683ef95a2eb81b225b3afe82960c31d2771183e5e29",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "fb0ff028ed5f1e05667983718fa49ce79f283562ffb4cac736316501a6e6b6b8",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "aa9bef99c2fa1363f787a8579ffb1b166a194f01d8b8b1fce6bcfcf3ccf7dcda",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "3cd56a1a9fd76d3c0aa5994bb57db9657d6eb92cefb5335f91d0d205ca8c1158",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "6a041cc59f5976d2f8d0d8870953dfe23de5cef98c387ba38d2acba676794680",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "a7cddc317fc5c9dc1aa6fe1447ec7fe3616b9065398bacaa7e2f5d4f04804df6",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "982639968164927db3070962ea58f682162ebd0274cce162332e032c1b103066",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "9e2d78e3e49bcf98d519deebcd49e7b19527e9654cac42298bc2d4acaae1430c",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "a3d0df88ef5af319a51f540ec21a1e33226ff4a37c2b59eeb094d6c5d59f8f1a",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "295f8582bed9403e0cca5943e9a2b2fbe5ad3cc5a3cf061c26fb714a40bf27af",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "140b3f98573740b979c5aefab0af791302169d1721d1111b720cd8e10816081f",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "72ca82f98e05d8c993a3e9df01a666234bc2c6be777ababfae7d3da5ae81781f",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "6bbb749a9c77d0759c1d0e253d86ee164bc46df860c9f30991571141460a92ec",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "3172123a33c631f699587c18b467aa8b5afdd2a1ae83eed6ada94b13e78d3cfb",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "d5cf65d9fec48794ab34432a003627f54e6793af20b7f226f792047344e5246b",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "9eea280014e6c88f3e51e04e22b747051251577bc774586569827f82d1beedf1",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "924e079a4040dec2aa348100fce42e1db3bd83a3e8975bec51fdc7d984638f72",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "2af53cb340fc79ab2097f1172bd776bc9989036acf997f76b2aa2cba571b5cc5",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "9b6cc8fa2a5dc9e746fb1ac6b86d87cb8c5789ba8640263cd45b5c7a9ae41a33",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "3ceabd1de0836054f01993707d67a5a76b33c5bac7770753dcfa995099ee68c8",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "ce4dcffdb404198862bed18cc92e5e7c06236bea2320e7340361ffc002936db5",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "42967af5bbe8736c65467b4ff44500502a32d997846fa2795fac3cfa7a0e51a2",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "086c6df0f618f2b8d7c5d46eb0c78f2730a2267326e60d9db1bee7cc63933c44",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "fe087142ced18168b125c375fccfeb27412d48375696e21450d8980d4b27d9db",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "edb4488025e0c0097dc3b6c9e9e8bf0a261f9d5e167ff5e27a9bb218e15772ba",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "ef6d2bbc08e7ed5cee1be4472a42e26a1934e6c05b132dfca9c8e7d4e387deaf",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "6c1cb90f75594191388fd732bb16bdb4f86840eb1931ed627f96773bf9621e27",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "1a3ce92643bfb2406500bdc381e480fa1c0517b179149e2ac08a930e6a2c5bea",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "0f45df5753dc9ef7919a645f73d3ef1a173abec1978a88fd254c43addc1f90c7",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "d2a2653ac253a8fc6380327c3f33ce92aa6d5e23d6ff1a38fa98f1db62d8116a",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "c1eb30fa4f04ae6d06da29dcb5f8b9ee932a25d655cf061cd3fb1cf6cc5562ab",
+            "reason": "scope_mismatch"
+          },
+          {
+            "id": "c90b53e9da82efe7c8423c73ea41894dbf53b77d81a7752b5dfa4008931aab35",
+            "reason": "scope_mismatch"
+          }
+        ],
+        "status": "ready"
+      }
+    ]
+  }
+}
