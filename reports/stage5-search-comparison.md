@@ -17,7 +17,7 @@
 | 키워드 검색 | 범위 안 청크 전체에 BM25(k1=1.2, b=0.75)를 적용한다. 한국어 형태소 분석기 대신 어절과 음절 2-gram을 함께 토큰으로 사용한다. |
 | 하이브리드 | 벡터 상위 20개와 BM25 상위 20개를 RRF(k=60)로 병합한다. |
 | MMR | 벡터 상위 20개 후보에서 λ=0.5로 관련성과 중복을 조정해 5개를 고른다. |
-| 설정 | `SEARCH_MODE=similarity|hybrid|mmr`, 기본 `similarity`. 서버 재시작 후 적용된다. |
+| 설정 | `SEARCH_MODE=similarity|hybrid|mmr`. 이 보고서 시점의 기본값은 `similarity`였고, 이후 [후속 평가](search-quality-followup.md)를 거쳐 `hybrid`로 바뀌었다. 서버 재시작 후 적용된다. |
 | FAQ·정오표 | `type=faq|errata` 문서는 `config/document-relations.json`에 `status=verified`, 같은 `edition_id`, 같은 범위의 규칙서를 가리키는 `amends_document_id`가 모두 있을 때만 검색에 포함된다. 포함된 근거에는 수정 관계가 표시되며, 프롬프트는 같은 항목이면 정오표·FAQ를 우선하고 수정 사실을 밝히도록 지시한다. |
 | 지원 점검 | `python -m rule_u.stage5 audit`이 판본별로 문서 확보·추출 성공·텍스트 판독 가능·판본 연결·색인 청크 수 일치·근거 확인 질문 통과를 모두 확인한다. 하나라도 실패하면 미지원이다. |
 

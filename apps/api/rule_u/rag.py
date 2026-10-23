@@ -4,6 +4,7 @@ import asyncio
 import contextlib
 import json
 import re
+import time
 from typing import Literal, TypedDict
 
 from langgraph.graph import END, START, StateGraph
@@ -148,6 +149,27 @@ JSON만 반환: {"answer":"답변", "verdict":"allowed|not_allowed|conditional|i
 실제 사용한 근거 번호만 cited_ids에 쓰고 답변에도 [1] 형식으로 표시한다.
 판정 가능한 답에는 반드시 근거가 있어야 한다. 유보와 되묻기에는 cited_ids를 비우고
 규칙 사실을 단정하지 않는다.'''
+
+
+def seconds_since(started):
+    return round(time.perf_counter() - started, 3)
+
+
+def index_missing():
+    return {**unavailable("index_missing"),
+            "answer": "이 판본의 규칙 색인이 아직 없어 답변할 수 없습니다. "
+                      "규칙 문서 색인을 마친 뒤 다시 질문해 주세요."}
+
+
+def rules_indexed(settings, context):
+    """Whether any rule chunk exists for this edition, to tell "no index" apart from "no match"."""
+    try:
+        rules = vector_collections(settings)[1]["rule_docs"]
+        found = rules.get(where={"$and": [{"game_id": context["game"]["id"]},
+                                          {"edition_id": context["edition"]["id"]}]}, limit=1)
+        return bool(found["ids"])
+    except Exception:
+        return True  # an unreadable index surfaces through the search itself, not as "missing"
 
 
 def unavailable(diagnostic="no_evidence"):
@@ -369,19 +391,25 @@ async def answer_question(settings, sessions, context, provider=None, retriever=
     async def retrieval(state):
         if on_stage:
             on_stage("retrieve")
+        started = time.perf_counter()
         query, detail = await search_query(settings, state["context"],
                                            lambda: provider or chat_provider(settings))
         evidence = await (retriever or retrieve)(
             settings, sessions, {**state["context"], "search_query": query})
+        detail = {**detail, "retrieve_seconds": seconds_since(started)}
+        if not evidence and retriever is None and not rules_indexed(settings, state["context"]):
+            detail["index_missing"] = True
         return {"evidence": evidence, "query_detail": detail}
 
-    async def generation(state):
+    async def generate_once(state):
         if on_stage:
             on_stage("generate")
         if not state["evidence"]:
-            return {"result": {**unavailable("no_evidence"),
+            missing = state.get("query_detail", {}).get("index_missing")
+            return {"result": {**(index_missing() if missing else unavailable("no_evidence")),
                                "diagnostic_detail": {"evidence": 0, **state.get("query_detail", {})}},
                     "needs_external": True}
+        started = time.perf_counter()
         model = provider or chat_provider(settings)
         messages = [
             {"role": "system", "content": PROMPT},
@@ -421,7 +449,8 @@ async def answer_question(settings, sessions, context, provider=None, retriever=
             result = retry if retry["diagnostic"] != "invalid_json" else result
         result.pop("problem", None)
         result["diagnostic_detail"] = {"evidence": len(state["evidence"]), "repaired": repaired,
-                                       **state.get("query_detail", {})}
+                                       **state.get("query_detail", {}),
+                                       "generate_seconds": seconds_since(started)}
         return {"result": result,
                 "needs_external": bool(generated and generated.verdict == "insufficient_evidence")}
 
@@ -432,6 +461,7 @@ async def answer_question(settings, sessions, context, provider=None, retriever=
             return {}
         if on_stage:
             on_stage("bgg")
+        started = time.perf_counter()
         extra, status = await bounded_lookup((bgg_retriever or bgg_fallback)(
             settings, sessions, state["context"], provider or chat_provider(settings)), should_skip)
         if not extra:
@@ -445,14 +475,18 @@ async def answer_question(settings, sessions, context, provider=None, retriever=
             notice = notices.get(status, "BGG에 연결하지 못했어요. 잠시 후 질문을 다시 보내 주세요.")
             base = state["result"]
             return {"result": {**unavailable("bgg_" + status),
-                               "answer": unavailable()["answer"] + "\n\n" + notice,
+                               "answer": base["answer"] + "\n\n" + notice,
                                "diagnostic_detail": {**base.get("diagnostic_detail", {}),
-                                                     "before_bgg": base.get("diagnostic")}}}
+                                                     "before_bgg": base.get("diagnostic"),
+                                                     "bgg_seconds": seconds_since(started)}}}
         evidence = [*state["evidence"]]
         for item in extra:
             evidence.append({**item, "number": len(evidence) + 1})
+        lookup_seconds = seconds_since(started)
         # One fallback and one new generation; never recurse into another lookup.
-        result = (await generation({**state, "evidence": evidence}))["result"]
+        result = (await generate_once({**state, "evidence": evidence}))["result"]
+        result["diagnostic_detail"] = {**result.get("diagnostic_detail", {}),
+                                       "bgg_seconds": lookup_seconds}
         if any(e.get("source_type") == "bgg_community" for e in result["citations"]):
             result["answer"] = "BGG 커뮤니티 토론을 참고한 답변이며, 공식 룰북의 확정 판정은 아닙니다.\n\n" + result["answer"]
             result["verdict"] = "conditional"
@@ -460,12 +494,17 @@ async def answer_question(settings, sessions, context, provider=None, retriever=
             result["answer"] += "\n\nBGG 토론도 확인했지만, 선택한 판본과 상황에 적용할 근거가 충분하지 않아요."
         return {"result": result}
 
+    async def generation(state):
+        # The BGG fallback belongs to generation (local answer, then at most one external
+        # lookup and regeneration), so the graph keeps the two-node retrieve -> generate shape.
+        produced = await generate_once(state)
+        fallback = await external({**state, **produced})
+        return {"result": fallback.get("result", produced["result"])}
+
     graph = StateGraph(State)
     graph.add_node("retrieve", retrieval)
     graph.add_node("generate", generation)
-    graph.add_node("bgg", external)
     graph.add_edge(START, "retrieve")
     graph.add_edge("retrieve", "generate")
-    graph.add_edge("generate", "bgg")
-    graph.add_edge("bgg", END)
+    graph.add_edge("generate", END)
     return (await graph.compile().ainvoke({"context": context}))["result"]

@@ -42,6 +42,7 @@ def test_xml_resolution_caching_and_community_provenance(configured, monkeypatch
     def handler(request):
         assert request.url.host == "boardgamegeek.com"
         assert request.headers["Authorization"] == "Bearer test-token"
+        assert request.headers["User-Agent"].startswith("Rule_U/")
         endpoint = request.url.path.rsplit("/", 1)[-1]
         calls.append(endpoint)
         if endpoint == "search":
