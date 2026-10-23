@@ -382,28 +382,43 @@ export function QuestionStarters({
 }
 
 export type Situation = { element: string; phase: string; action: string };
-export const emptySituation: Situation = { element: "", phase: "", action: "" };
+const SITUATION_KEYS = ["element", "phase", "action"] as const;
 
-/** 상황 판정에 필요한 세 가지를 나눠 받아 하나의 질문으로 합친다. */
-export function composeSituation(value: Situation, draft: string) {
-  const lines = [
-    value.element.trim() && `관련 카드·요소: ${value.element.trim()}`,
-    value.phase.trim() && `현재 단계: ${value.phase.trim()}`,
-    value.action.trim() && `하려는 행동: ${value.action.trim()}`,
-  ].filter(Boolean);
-  return [lines.join("\n"), draft.trim()].filter(Boolean).join("\n");
+/** 서버의 상황 메모(없으면 null)를 입력 칸 값으로 바꾼다. */
+export function situationOf(
+  value: Partial<Situation> | null | undefined,
+): Situation {
+  return {
+    element: value?.element ?? "",
+    phase: value?.phase ?? "",
+    action: value?.action ?? "",
+  };
 }
+export const isEmptySituation = (value: Partial<Situation> | null) =>
+  SITUATION_KEYS.every((key) => !(value?.[key] ?? "").trim());
+export const sameSituation = (a: Situation, b: Situation) =>
+  SITUATION_KEYS.every((key) => a[key].trim() === b[key].trim());
+export const situationSummary = (value: Situation) =>
+  SITUATION_KEYS.map((key) => value[key].trim())
+    .filter(Boolean)
+    .join(" · ");
 
 export function SituationHelper({
   open,
   value,
+  dirty,
+  error,
   onToggle,
   onChange,
+  onSave,
 }: {
   open: boolean;
   value: Situation;
+  dirty: boolean;
+  error: string;
   onToggle: () => void;
   onChange: (value: Situation) => void;
+  onSave: () => void;
 }) {
   const fields = [
     ["element", "관련 카드·요소", "예: 암살자, 백작 부인"],
@@ -420,7 +435,7 @@ export function SituationHelper({
         aria-controls="situation-fields"
         onClick={onToggle}
       >
-        상황 정리 {filled ? `${filled}/3` : ""}
+        상황 메모 {filled ? `${filled}/3` : ""}
         <svg
           aria-hidden
           viewBox="0 0 16 16"
@@ -434,19 +449,44 @@ export function SituationHelper({
         </svg>
       </button>
       {open && (
-        <div id="situation-fields" className="mt-2 grid gap-2 sm:grid-cols-3">
-          {fields.map(([key, label, placeholder]) => (
-            <label key={key} className="text-xs font-semibold text-muted">
-              {label}
-              <input
-                className="mt-1 w-full"
-                maxLength={300}
-                placeholder={placeholder}
-                value={value[key]}
-                onChange={(e) => onChange({ ...value, [key]: e.target.value })}
-              />
-            </label>
-          ))}
+        <div id="situation-fields" className="mt-2">
+          <div className="grid gap-2 sm:grid-cols-3">
+            {fields.map(([key, label, placeholder]) => (
+              <label key={key} className="text-xs font-semibold text-muted">
+                {label}
+                <input
+                  className="mt-1 w-full"
+                  maxLength={300}
+                  placeholder={placeholder}
+                  value={value[key]}
+                  onChange={(e) =>
+                    onChange({ ...value, [key]: e.target.value })
+                  }
+                />
+              </label>
+            ))}
+          </div>
+          <div className="mt-2 flex flex-wrap items-center gap-2">
+            <button
+              type="button"
+              className="chip"
+              disabled={!dirty}
+              onClick={onSave}
+            >
+              {dirty ? "메모 저장" : "저장됨"}
+            </button>
+            <p className="text-xs text-muted">
+              저장한 메모는 이 대화의 다음 질문에도 계속 적용돼요.
+            </p>
+          </div>
+          {error && (
+            <p
+              role="alert"
+              className="mt-1 text-xs font-semibold text-red-deep"
+            >
+              {error}
+            </p>
+          )}
         </div>
       )}
     </div>

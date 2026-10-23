@@ -176,7 +176,8 @@ def main():
             parser.error("--catalog required")
         evaluation = (json.loads(args.evaluation.read_text(encoding="utf-8")) if args.evaluation
                       else asyncio.run(evaluate_modes(settings, cases)))
-        result = audit(settings, load_catalog(args.catalog), cases, evaluation, apply=args.apply)
+        result = audit(settings, load_catalog(args.catalog), cases, evaluation,
+                       mode=settings.search_mode, apply=args.apply)
     save_json(args.output, result)
     print(json.dumps({"output": str(args.output), "command": args.command}))
 

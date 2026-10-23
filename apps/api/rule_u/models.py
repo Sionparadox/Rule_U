@@ -155,6 +155,8 @@ class Conversation(Base):
     session_id: Mapped[str] = mapped_column(index=True)
     game_id: Mapped[str] = mapped_column(ForeignKey("games.id"))
     edition_id: Mapped[str]
+    # The user's current table state (cards, phase, intended action), kept for the whole chat.
+    situation: Mapped[dict | None] = mapped_column(JSON)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now)
 
 
@@ -239,6 +241,8 @@ class Request(Base):
     # Internal only: why an answer was refused (retrieval, model, validation, BGG).
     diagnostic: Mapped[dict | None] = mapped_column(JSON)
     skip_external: Mapped[bool] = mapped_column(Boolean, default=False)
+    # Unvalidated text while the model is still writing; cleared when the request ends.
+    draft: Mapped[str | None] = mapped_column(Text)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now)
     updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now, onupdate=now)
 

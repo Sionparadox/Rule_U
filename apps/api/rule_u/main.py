@@ -50,10 +50,24 @@ from rule_u.schemas import (
     RequestOut,
     SavedRuleList,
     SavedRuleOut,
+    SituationIn,
+    SituationOut,
     SourceOut,
 )
 
 COOKIE = "rule_u_session"
+REVIEW_PATH = ROOT / "config/source-reviews.json"
+_reviews = {"mtime": None, "verified": frozenset()}
+
+
+def verified_hashes(path=REVIEW_PATH):
+    """Content hashes of officially verified sources; re-read only when the file changes."""
+    mtime = path.stat().st_mtime_ns if path.exists() else None
+    if _reviews["mtime"] != mtime or _reviews.get("path") != path:
+        reviews = json.loads(path.read_text(encoding="utf-8")) if mtime is not None else {}
+        _reviews.update(mtime=mtime, path=path, verified=frozenset(
+            r.get("sha256") for r in reviews.values() if r.get("status") == "official_verified"))
+    return _reviews["verified"]
 
 
 def create_app(settings: Settings | None = None, provider=None, retriever=None, game_ranker=None,
@@ -120,9 +134,7 @@ def create_app(settings: Settings | None = None, provider=None, retriever=None, 
             Edition.game_id == row.id, Edition.supported.is_(True)).limit(1)))
         docs = list(db.scalars(select(Document).join(DocumentScope).where(
             DocumentScope.game_id == row.id)).unique())
-        review_path = ROOT / "config/source-reviews.json"
-        reviews = json.loads(review_path.read_text(encoding="utf-8")) if review_path.exists() else {}
-        verified = {r.get("sha256") for r in reviews.values() if r.get("status") == "official_verified"}
+        verified = verified_hashes()
         status = "official_verified" if docs and all(d.content_hash in verified for d in docs) else "unverified"
         return GameOut.model_validate(row).model_copy(update={
             "rules_supported": supported, "source_review": status})
@@ -249,6 +261,7 @@ def create_app(settings: Settings | None = None, provider=None, retriever=None, 
                 .order_by(Request.created_at.desc(), Request.id.desc()).limit(1)),
             latest_client_request_id=db.scalar(select(Request.client_request_id).where(Request.conversation_id == cid)
                 .order_by(Request.created_at.desc(), Request.id.desc()).limit(1)),
+            situation=SituationOut(**row.situation) if row.situation else None,
             messages=[
                 MessageOut.model_validate(m).model_copy(update={
                     "citations": [SourceOut(**citation_out(c, db))
@@ -288,6 +301,7 @@ def create_app(settings: Settings | None = None, provider=None, retriever=None, 
                     "expansion_ids": list(db.scalars(select(conversation_expansions.c.expansion_id)
                         .where(conversation_expansions.c.conversation_id == conversation.id))),
                     "messages": messages[-12:],
+                    "situation": conversation.situation or {},
                     "mode": db.scalar(select(Message.mode).where(Message.conversation_id == conversation.id,
                         Message.role == "user").order_by(Message.created_at.desc(), Message.id.desc()).limit(1)),
                 }
@@ -295,6 +309,12 @@ def create_app(settings: Settings | None = None, provider=None, retriever=None, 
             def stage(value):
                 with sessions.begin() as db:
                     db.get(Request, rid).stage = value
+
+            def draft(text):
+                with sessions.begin() as db:
+                    row = db.get(Request, rid)
+                    if row.status == "running":
+                        row.draft = text
 
             def skip_requested():
                 with sessions() as db:
@@ -307,7 +327,8 @@ def create_app(settings: Settings | None = None, provider=None, retriever=None, 
             else:
                 answer = await asyncio.wait_for(answer_question(
                     settings, sessions, context, provider, retriever, stage,
-                    bgg_retriever=bgg_retriever, should_skip=skip_requested),
+                    bgg_retriever=bgg_retriever, should_skip=skip_requested,
+                    on_draft=draft),
                     settings.api_timeout_seconds * 2 + settings.bgg_timeout_seconds)
             with sessions.begin() as db:
                 row = db.get(Request, rid)
@@ -334,7 +355,7 @@ def create_app(settings: Settings | None = None, provider=None, retriever=None, 
                     citations.append(citation.id)
                 message.cited_source_ids = citations
                 row.result_message_id = message.id
-                row.status, row.stage = "completed", "completed"
+                row.status, row.stage, row.draft = "completed", "completed", None
                 if answer.get("diagnostic"):
                     row.diagnostic = {"code": answer["diagnostic"],
                                       **answer.get("diagnostic_detail", {})}
@@ -343,6 +364,7 @@ def create_app(settings: Settings | None = None, provider=None, retriever=None, 
             with sessions.begin() as db:
                 row = db.get(Request, rid)
                 row.status, row.stage, row.error_code = "failed", "failed", code
+                row.draft = None
 
     @app.post(
         "/api/v1/conversations/{cid}/messages", status_code=202, response_model=RequestAccepted
@@ -399,6 +421,7 @@ def create_app(settings: Settings | None = None, provider=None, retriever=None, 
                     Citation.message_id == result.id))],
                 citation_notice="" if result.cited_source_ids else "이 답변에 인용된 근거가 없습니다.") if result else None,
             skip_external=row.skip_external,
+            draft=row.draft if row.status == "running" else None,
             diagnostic=(row.diagnostic or {}).get("code"),
         )
 
@@ -414,6 +437,15 @@ def create_app(settings: Settings | None = None, provider=None, retriever=None, 
         row.skip_external = True
         db.commit()
         return RequestAccepted(request_id=row.id, status=row.status)
+
+    @app.post("/api/v1/conversations/{cid}/situation", response_model=SituationOut)
+    def save_situation(cid: str, body: SituationIn, sid=Depends(session_id), db=Depends(get_db)):
+        row = owned(db, cid, sid)
+        value = body.model_dump()
+        # All-empty means "clear"; the memo is never stored as empty strings.
+        row.situation = value if any(value.values()) else None
+        db.commit()
+        return SituationOut(**(row.situation or {}))
 
     def owned_answer(db, mid, sid):
         message = db.get(Message, mid)
@@ -472,10 +504,7 @@ def create_app(settings: Settings | None = None, provider=None, retriever=None, 
 
     def citation_out(c, db):
         doc = db.get(Document, c.document_id)
-        review_path = ROOT / "config/source-reviews.json"
-        reviews = json.loads(review_path.read_text(encoding="utf-8")) if review_path.exists() else {}
-        verified = bool(doc and any(r.get("status") == "official_verified" and
-                                   r.get("sha256") == doc.content_hash for r in reviews.values()))
+        verified = bool(doc and doc.content_hash in verified_hashes())
         return {"id": c.id, "document_id": c.document_id, "title": c.title_snapshot,
                 "edition": c.edition_snapshot, "url": c.source_url_snapshot,
                 "page_start": c.page_start, "page_end": c.page_end, "excerpt": c.excerpt,

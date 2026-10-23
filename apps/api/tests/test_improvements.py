@@ -70,7 +70,8 @@ def test_model_refusal_is_not_retried(configured):
     provider = Sequence(reply(verdict="insufficient_evidence", ids=(), answer="모름"))
     result = run(settings, provider)
     assert provider.calls == 1 and result["diagnostic"] == "model_insufficient"
-    assert result["diagnostic_detail"] == {"evidence": 1, "repaired": False}
+    detail = result["diagnostic_detail"]
+    assert detail["evidence"] == 1 and detail["repaired"] is False
 
 
 def test_bgg_lookup_can_be_skipped(configured):
@@ -191,3 +192,61 @@ def test_feedback_export_is_review_only(configured):
     assert item["cited"] == [{"document_id": "doc", "page_start": 2}]
     assert "pages" not in item  # expected pages are decided by a reviewer
     app.state.engine.dispose()
+
+
+def test_chat_retries_transient_failures_once(monkeypatch):
+    import httpx
+    import pytest
+
+    from rule_u.config import Settings
+    from rule_u.providers import CompatibleChat, ProviderError
+
+    async def no_wait(_):
+        return None
+
+    monkeypatch.setattr("rule_u.providers.asyncio.sleep", no_wait)
+    settings = Settings(_env_file=None, chat_provider="compatible", chat_api_key="key",
+                        chat_model="model")
+    ok = {"choices": [{"message": {"content": "OK"}}]}
+
+    def run(responses):
+        calls = []
+
+        def handler(request):
+            calls.append(1)
+            value = responses[len(calls) - 1]
+            if isinstance(value, Exception):
+                raise value
+            return httpx.Response(value, json=ok if value == 200 else {"error": "x"})
+
+        chat = CompatibleChat(settings, transport=httpx.MockTransport(handler))
+        try:
+            return asyncio.run(chat.generate([{"role": "user", "content": "hi"}])), len(calls)
+        except ProviderError as exc:
+            return exc, len(calls)
+
+    assert run([httpx.ReadTimeout("slow"), 200]) == ("OK", 2)
+    assert run([503, 200]) == ("OK", 2)
+    error, calls = run([400, 200])
+    assert isinstance(error, ProviderError) and calls == 1  # client errors are not retried
+    error, calls = run([httpx.ReadTimeout("slow"), httpx.ReadTimeout("slow")])
+    assert isinstance(error, ProviderError) and calls == 2
+    with pytest.raises(ProviderError):
+        CompatibleChat(Settings(_env_file=None, chat_provider="compatible"))
+
+
+def test_verified_hashes_reload_only_when_file_changes(tmp_path):
+    import os
+
+    from rule_u.main import verified_hashes
+
+    path = tmp_path / "reviews.json"
+    assert verified_hashes(path) == frozenset()
+    path.write_text(json.dumps({"a": {"sha256": "h1", "status": "official_verified"},
+                                "b": {"sha256": "h2", "status": "unverified"}}), encoding="utf-8")
+    assert verified_hashes(path) == {"h1"}
+    path.write_text(json.dumps({"a": {"sha256": "h3", "status": "official_verified"}}),
+                    encoding="utf-8")
+    stat = path.stat()
+    os.utime(path, ns=(stat.st_atime_ns, stat.st_mtime_ns + 10_000_000))
+    assert verified_hashes(path) == {"h3"}

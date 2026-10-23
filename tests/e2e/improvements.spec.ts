@@ -68,31 +68,57 @@ test("question starters, source badge, feedback and saved rules", async ({
   expect(errors).toEqual([]);
 });
 
-test("situation helper composes a ruling question and clarification opens it", async ({
+test("situation memo persists across questions and reloads", async ({
   page,
 }) => {
   await choose(page);
   await page.getByRole("button", { name: "상황 판정", exact: true }).click();
-  await page.getByRole("button", { name: /상황 정리/ }).click();
+  await page.getByRole("button", { name: /상황 메모/ }).click();
   await page.getByLabel("관련 카드·요소").fill("암살자");
   await page.getByLabel("현재 단계").fill("상대 차례");
   await page.getByLabel("하려는 행동").fill("저지하기");
-  // 입력창이 비어 있어도 상황 정리만으로 보낼 수 있다.
+  // 질문 없이 상황 메모만으로도 보낼 수 있고, 메모는 질문 문장에 섞이지 않는다.
   await expect(sendButton(page)).toBeEnabled();
   await sendButton(page).click();
   await expect(
-    page.getByText(
-      /관련 카드·요소: 암살자\s+현재 단계: 상대 차례\s+하려는 행동: 저지하기/,
-    ),
+    page.getByText("이 상황을 판정해 주세요.", { exact: true }),
   ).toBeVisible();
+  const memo = page.getByRole("status", { name: "적용 중인 상황 메모" });
+  await expect(memo).toContainText("암살자 · 상대 차례 · 저지하기");
   await expect(page.getByLabel("관련 카드·요소")).toHaveCount(0);
   await expect(
     page.getByRole("button", { name: "출처 1 자세히" }),
   ).toBeVisible();
+
+  await page.reload();
+  await page.getByRole("button", { name: /이전 대화 이어하기/ }).click();
+  await expect(memo).toContainText("암살자");
   await question(page).fill("정보 부족");
   await sendButton(page).click();
   await page.getByRole("button", { name: "상황 정리해서 답하기" }).click();
-  await expect(page.getByLabel("관련 카드·요소")).toBeVisible();
+  await expect(page.getByLabel("관련 카드·요소")).toHaveValue("암살자");
+  await page.getByRole("button", { name: "상황 메모 지우기" }).click();
+  await expect(memo).toHaveCount(0);
+  await expect(page.getByLabel("관련 카드·요소")).toHaveValue("");
+});
+
+test("answer draft streams before the validated answer replaces it", async ({
+  page,
+}, info) => {
+  await choose(page);
+  await question(page).fill("스트리밍: 턴이 끝났어요");
+  await sendButton(page).click();
+  const draft = page.getByTestId("answer-draft");
+  await expect(draft).toContainText("작성 중 · 근거 확인 전");
+  await expect(draft).toContainText("자신의");
+  await page.screenshot({
+    path: info.outputPath("answer-draft.png"),
+    fullPage: true,
+  });
+  await expect(page.getByRole("button", { name: "근거 1 보기" })).toBeVisible({
+    timeout: 15000,
+  });
+  await expect(draft).toHaveCount(0);
 });
 
 test("waiting shows elapsed time, accepts a draft and stops the BGG lookup", async ({

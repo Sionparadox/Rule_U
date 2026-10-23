@@ -13,11 +13,13 @@ import { useStore } from "@/lib/store";
 import { BrandMark, RollingDice } from "./marks";
 import {
   AnswerActions,
-  composeSituation,
-  emptySituation,
+  isEmptySituation,
   QuestionStarters,
+  sameSituation,
   SavedRulesSheet,
   SituationHelper,
+  situationOf,
+  situationSummary,
   SourceBadge,
   type Situation,
 } from "./answer-tools";
@@ -121,7 +123,9 @@ export function Chat() {
         setPollError("");
         if (["completed", "failed"].includes(request.status))
           await useStore.getState().refresh(conversationId);
-        else timer = setTimeout(poll, 1000);
+        // 답변을 쓰는 동안에는 초안이 자연스럽게 이어지도록 더 자주 확인한다.
+        else
+          timer = setTimeout(poll, request.stage === "generate" ? 500 : 1000);
       } catch (e) {
         if (!controller.signal.aborted) setPollError(errorText(e));
       }
@@ -146,28 +150,58 @@ export function Chat() {
     !s.sending
   );
   const draft = c ? (s.drafts[c.id] ?? "") : "";
-  const [situation, setSituation] = useState<Situation>(emptySituation);
+  // 상황 메모는 대화별로 서버에 저장되어 이후 모든 질문에 함께 쓰인다.
+  const saved = situationOf(c?.situation);
+  const [situation, setSituation] = useState<Situation>(saved);
+  const [situationFor, setSituationFor] = useState(c?.id);
+  if (situationFor !== c?.id) {
+    setSituationFor(c?.id);
+    setSituation(saved);
+  }
   const [situationOpen, setSituationOpen] = useState(false);
   const [savedOpen, setSavedOpen] = useState(false);
-  const situationText = composeSituation(situation, "");
-  const ready = !!(draft.trim() || (s.mode === "ruling" && situationText));
+  const [situationError, setSituationError] = useState("");
+  const dirty = !sameSituation(situation, saved);
+  const hasMemo = !isEmptySituation(saved);
+  const ready = !!(
+    draft.trim() ||
+    (s.mode === "ruling" && !isEmptySituation(situation))
+  );
   function setDraft(value: string) {
     if (c)
       useStore.setState((state) => ({
         drafts: { ...state.drafts, [c.id]: value },
       }));
   }
+  async function saveSituation(value: Situation) {
+    if (!c) return false;
+    setSituationError("");
+    try {
+      const stored = await api<Schema["SituationOut"]>(
+        `/conversations/${c.id}/situation`,
+        value,
+      );
+      const next = isEmptySituation(stored) ? null : stored;
+      useStore.setState((state) =>
+        state.conversation?.id === c.id
+          ? { conversation: { ...state.conversation, situation: next } }
+          : {},
+      );
+      setSituation(situationOf(next));
+      return true;
+    } catch (e) {
+      setSituationError(errorText(e));
+      return false;
+    }
+  }
   async function submit(e: FormEvent) {
     e.preventDefault();
     if (!c) return;
-    const ruling = s.mode === "ruling" && !!situationText;
-    // 상황 정리 칸의 값을 질문 앞에 붙여 한 번에 보낸다.
-    if (ruling) setDraft(composeSituation(situation, draft));
+    if (dirty && !(await saveSituation(situation))) return;
+    // 상황 메모만 적고 질문을 비워 두면 기본 판정 요청을 보낸다.
+    if (!draft.trim()) setDraft("이 상황을 판정해 주세요.");
     await s.send();
-    if (ruling && !useStore.getState().error) {
-      setSituation(emptySituation);
-      setSituationOpen(false);
-    }
+    if (!useStore.getState().error) setSituationOpen(false);
   }
   // 기다리는 동안 경과 시간을 보여 주고, BGG 추가 검색은 중단할 수 있게 한다.
   const [elapsed, setElapsed] = useState(0);
@@ -269,6 +303,36 @@ export function Chat() {
             </button>
           )}
         </div>
+        {c && hasMemo && (
+          <div
+            className="mt-3 flex items-center gap-2 rounded-2xl bg-yellow/25 py-1 pr-1 pl-3 text-sm"
+            role="status"
+            aria-label="적용 중인 상황 메모"
+          >
+            <span className="shrink-0 text-xs font-semibold">상황 메모</span>
+            <span className="min-w-0 flex-1 truncate">
+              {situationSummary(saved)}
+            </span>
+            <button
+              className="chip shrink-0 bg-transparent"
+              onClick={() => {
+                useStore.setState({ mode: "ruling" });
+                setSituationOpen(true);
+              }}
+            >
+              수정
+            </button>
+            <button
+              className="chip shrink-0 bg-transparent"
+              aria-label="상황 메모 지우기"
+              onClick={() =>
+                void saveSituation({ element: "", phase: "", action: "" })
+              }
+            >
+              지우기
+            </button>
+          </div>
+        )}
         {c && (
           <div
             className="mt-3 grid grid-cols-2 gap-1 rounded-2xl bg-surface-soft p-1"
@@ -503,11 +567,23 @@ export function Chat() {
                   </motion.span>
                 </AnimatePresence>
               </div>
-              <div aria-hidden className="space-y-2.5">
-                <div className="skeleton-line w-full" />
-                <div className="skeleton-line w-4/5" />
-                <div className="skeleton-line w-2/5" />
-              </div>
+              {s.request?.draft ? (
+                // 검증 전 초안: 판정·출처 없이 흐리게 보여 주고, 완료되면 확정 답변으로 바뀐다.
+                <div data-testid="answer-draft">
+                  <p className="mb-1 text-xs font-semibold text-muted">
+                    작성 중 · 근거 확인 전
+                  </p>
+                  <p className="text-[15px] leading-7 break-words whitespace-pre-wrap text-muted">
+                    {s.request.draft}
+                  </p>
+                </div>
+              ) : (
+                <div aria-hidden className="space-y-2.5">
+                  <div className="skeleton-line w-full" />
+                  <div className="skeleton-line w-4/5" />
+                  <div className="skeleton-line w-2/5" />
+                </div>
+              )}
               <p className="mt-3 text-xs text-muted" data-testid="elapsed">
                 {elapsed}초 지났어요
                 {elapsed >= 15
@@ -583,8 +659,11 @@ export function Chat() {
           <SituationHelper
             open={situationOpen}
             value={situation}
+            dirty={dirty}
+            error={situationError}
             onToggle={() => setSituationOpen((v) => !v)}
             onChange={setSituation}
+            onSave={() => void saveSituation(situation)}
           />
         )}
         <div className="flex items-end gap-2">

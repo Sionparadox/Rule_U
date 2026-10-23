@@ -174,6 +174,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/conversations/{cid}/situation": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Save Situation */
+        post: operations["save_situation_api_v1_conversations__cid__situation_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/messages/{mid}/feedback": {
         parameters: {
             query?: never;
@@ -332,6 +349,7 @@ export interface components {
             expansion_ids: string[];
             /** Messages */
             messages: components["schemas"]["MessageOut"][];
+            situation?: components["schemas"]["SituationOut"] | null;
             /** Active Request Id */
             active_request_id?: string | null;
             /** Latest Request Id */
@@ -596,6 +614,8 @@ export interface components {
              * @default false
              */
             skip_external: boolean;
+            /** Draft */
+            draft?: string | null;
             /** Diagnostic */
             diagnostic?: string | null;
         };
@@ -625,6 +645,42 @@ export interface components {
              * Format: date-time
              */
             saved_at: string;
+        };
+        /** SituationIn */
+        SituationIn: {
+            /**
+             * Element
+             * @default
+             */
+            element: string;
+            /**
+             * Phase
+             * @default
+             */
+            phase: string;
+            /**
+             * Action
+             * @default
+             */
+            action: string;
+        };
+        /** SituationOut */
+        SituationOut: {
+            /**
+             * Element
+             * @default
+             */
+            element: string;
+            /**
+             * Phase
+             * @default
+             */
+            phase: string;
+            /**
+             * Action
+             * @default
+             */
+            action: string;
         };
         /** SourceExplanationOut */
         SourceExplanationOut: {
@@ -1000,6 +1056,41 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["RequestAccepted"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    save_situation_api_v1_conversations__cid__situation_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                cid: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SituationIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SituationOut"];
                 };
             };
             /** @description Validation Error */

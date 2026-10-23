@@ -1,7 +1,7 @@
 """Isolated E2E database, never the developer's data/app.db."""
-import os
 import asyncio
 import json
+import os
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
@@ -38,6 +38,18 @@ class FixtureProvider:
         return json.dumps({"answer": "자신의 턴이 끝난 뒤 사용할 수 있어요. [1]",
                            "verdict": "conditional", "cited_ids": [1], "clarification": "",
                            "explanations": [explanation]})
+
+
+    async def stream(self, messages):
+        # Streams slowly only for the streaming scenario so the browser can see the draft.
+        text = await self.generate(messages)
+        question = json.loads(messages[-1]["content"])["messages"][-1]["content"]
+        if "스트리밍" not in question:
+            yield text
+            return
+        for i in range(0, len(text), 30):
+            await asyncio.sleep(0.25)
+            yield text[i:i + 30]
 
 
 async def fixture_retrieve(settings, sessions, context):

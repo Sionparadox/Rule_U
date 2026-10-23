@@ -38,6 +38,8 @@ async def main():
     parser.add_argument("--modes", nargs="+", default=["similarity", "hybrid"])
     parser.add_argument("--output", default="stage5-answer-evaluation.json",
                         help="file name under the data directory")
+    parser.add_argument("--repeat", type=int, default=1,
+                        help="ask each question this many times to measure answer stability")
     parser.add_argument("--resume", action="store_true",
                         help="Continue a partial run after verifying its prefix")
     args = parser.parse_args()
@@ -46,15 +48,16 @@ async def main():
         raise ValueError("live_providers_required")
     settings.bgg_enabled = False
     cases = json.loads((ROOT / "evals/stage5-core-answer-cases.json").read_text(encoding="utf-8"))
-    plan = [(mode, case) for mode in args.modes for case in cases]
+    plan = [(mode, case, run) for run in range(1, args.repeat + 1)
+            for mode in args.modes for case in cases]
     output = settings.data_dir / args.output
     results = json.loads(output.read_text(encoding="utf-8")) if args.resume else []
-    if [(r["mode"], r["case"]) for r in results] != plan[:len(results)]:
+    if [(r["mode"], r["case"], r.get("run", 1)) for r in results] != plan[:len(results)]:
         raise ValueError("resume_cases_mismatch")
     engine = make_engine(settings)
     sessions = make_sessions(engine)
     try:
-        for mode, case in plan[len(results):]:
+        for mode, case, run in plan[len(results):]:
             settings.search_mode = mode
             with sessions() as db:
                 game, edition = db.get(Game, case["game_id"]), db.get(Edition, case["edition_id"])
@@ -65,7 +68,7 @@ async def main():
             provider = Recording(chat_provider(settings))
             result = await asyncio.wait_for(
                 answer_question(settings, sessions, context, provider), 120)
-            results.append({"mode": mode, "case": case, "passed": judged(case, result),
+            results.append({"mode": mode, "case": case, "run": run, "passed": judged(case, result),
                             "result": result, "raw_outputs": provider.raw})
             save_json(output, results)
             print(json.dumps({"n": len(results), "mode": mode, "kind": case["kind"],

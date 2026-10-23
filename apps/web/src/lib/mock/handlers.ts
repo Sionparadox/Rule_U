@@ -115,13 +115,30 @@ function settle(db: MockDb, row: MockRequest): Schema["RequestOut"] {
     result: null,
     skip_external: !!row.skip_external,
     diagnostic: null,
+    draft: null,
   };
-  if (step < STAGES.length)
+  if (step < STAGES.length) {
+    const stage = STAGES[step];
+    // 생성 단계에서는 답변 초안을 시간에 비례해 조금씩 보여 줍니다(스트리밍 흉내).
+    const scenario =
+      scenarios.find((s) => s.keywords.some((k) => row.question.includes(k))) ??
+      fallbackScenario;
+    const progress =
+      (Date.now() - row.created - step * STAGE_TIME) / STAGE_TIME;
+    const draft =
+      stage === "generate" && !row.bgg && !row.fail
+        ? scenario.answer.slice(
+            0,
+            Math.max(1, Math.floor(scenario.answer.length * progress)),
+          )
+        : null;
     return {
       ...base,
       status: step ? "running" : "queued",
-      stage: STAGES[step],
+      stage,
+      draft,
     };
+  }
   const external =
     row.bgg &&
     !row.result_message_id &&
@@ -297,6 +314,22 @@ async function route(
       message_id: id,
       saved: input.saved,
     } satisfies Schema["BookmarkOut"];
+  }
+  if (resource === "conversations" && sub === "situation") {
+    const conversation = db.conversations[id] ?? fail("conversation_not_found");
+    const input = body as Schema["SituationIn"];
+    const value = {
+      element: (input.element ?? "").trim(),
+      phase: (input.phase ?? "").trim(),
+      action: (input.action ?? "").trim(),
+    };
+    conversation.situation = Object.values(value).some(Boolean) ? value : null;
+    save(db);
+    return (conversation.situation ?? {
+      element: "",
+      phase: "",
+      action: "",
+    }) satisfies Schema["SituationOut"];
   }
   if (resource === "requests" && sub === "skip-external") {
     const row =

@@ -141,12 +141,26 @@ class SavedRuleList(BaseModel):
     items: list[SavedRuleOut]
 
 
+class SituationIn(BaseModel):
+    model_config = ConfigDict(str_strip_whitespace=True)
+    element: str = Field(default="", max_length=300)
+    phase: str = Field(default="", max_length=300)
+    action: str = Field(default="", max_length=300)
+
+
+class SituationOut(BaseModel):
+    element: str = ""
+    phase: str = ""
+    action: str = ""
+
+
 class ConversationOut(BaseModel):
     id: str
     game_id: str
     edition_id: str
     expansion_ids: list[str]
     messages: list[MessageOut]
+    situation: SituationOut | None = None
     active_request_id: str | None = None
     latest_request_id: str | None = None
     latest_client_request_id: str | None = None
@@ -176,6 +190,8 @@ class RequestOut(RequestAccepted):
     error_code: str | None
     result: AnswerOut | None
     skip_external: bool = False
+    # Text being written before validation; never shown as a final answer.
+    draft: str | None = None
     # Internal reason code for refusals; the UI does not show it.
     diagnostic: str | None = None
 

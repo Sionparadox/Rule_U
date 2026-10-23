@@ -435,6 +435,55 @@
         }
       }
     },
+    "/api/v1/conversations/{cid}/situation": {
+      "post": {
+        "summary": "Save Situation",
+        "operationId": "save_situation_api_v1_conversations__cid__situation_post",
+        "parameters": [
+          {
+            "name": "cid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Cid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SituationIn"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SituationOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/messages/{mid}/feedback": {
       "post": {
         "summary": "Give Feedback",
@@ -824,6 +873,16 @@
             },
             "type": "array",
             "title": "Messages"
+          },
+          "situation": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SituationOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "active_request_id": {
             "anyOf": [
@@ -1445,6 +1504,17 @@
             "title": "Skip External",
             "default": false
           },
+          "draft": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Draft"
+          },
           "diagnostic": {
             "anyOf": [
               {
@@ -1540,6 +1610,51 @@
           "saved_at"
         ],
         "title": "SavedRuleOut"
+      },
+      "SituationIn": {
+        "properties": {
+          "element": {
+            "type": "string",
+            "maxLength": 300,
+            "title": "Element",
+            "default": ""
+          },
+          "phase": {
+            "type": "string",
+            "maxLength": 300,
+            "title": "Phase",
+            "default": ""
+          },
+          "action": {
+            "type": "string",
+            "maxLength": 300,
+            "title": "Action",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "title": "SituationIn"
+      },
+      "SituationOut": {
+        "properties": {
+          "element": {
+            "type": "string",
+            "title": "Element",
+            "default": ""
+          },
+          "phase": {
+            "type": "string",
+            "title": "Phase",
+            "default": ""
+          },
+          "action": {
+            "type": "string",
+            "title": "Action",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "title": "SituationOut"
       },
       "SourceExplanationOut": {
         "properties": {

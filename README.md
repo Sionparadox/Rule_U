@@ -199,6 +199,17 @@ uv run python -m rule_u.cli index --catalog ../../../data/games --games dive --m
 구현 참고: [Next.js 설치](https://nextjs.org/docs/app/getting-started/installation), [SQLAlchemy SQLite](https://docs.sqlalchemy.org/en/20/dialects/sqlite.html), [FastAPI 앱 구조](https://fastapi.tiangolo.com/tutorial/bigger-applications/).
 # 현재 데이터·검색 상태 (2026-10-22)
 
+## 대화 검색어·상황 메모·답변 초안 (2026-10-23)
+
+업데이트 후 `apps/api`에서 `uv run alembic upgrade head`를 실행하고 API 서버를 재시작하세요(대화 상황 메모·요청 초안 열 추가).
+
+- **기본 검색이 `hybrid`로 바뀌었습니다.** 이전 방식은 `.env`에 `SEARCH_MODE=similarity`로 되돌릴 수 있습니다. 근거는 [후속 평가](reports/search-quality-followup.md)에 있습니다.
+- 대화 중 질문은 마지막 질문으로 검색합니다. "그럼 그 카드는?"처럼 앞을 가리키는 질문만 채팅 모델로 독립 질문으로 바꿔 검색합니다(`data/rewrite-cache`에 캐시). 사용한 검색어는 요청의 진단 정보(`diagnostic_detail.search_query`)에 남습니다.
+- **상황 메모:** 상황 판정의 **상황 메모**(카드·단계·행동)는 대화별로 저장되어 이후 모든 질문에 함께 전달됩니다. 채팅 상단에서 수정하거나 지울 수 있습니다. 메모는 규칙 근거로 인용되지 않습니다.
+- **답변 초안:** 모델이 쓰는 동안 "작성 중 · 근거 확인 전" 초안이 보이고, 검증을 통과한 답변으로 바뀝니다. 검증에서 유보되면 초안은 사라집니다. `CHAT_STREAM=false`로 끌 수 있습니다.
+- 채팅 API의 일시적 실패(시간 초과·연결 오류·5xx·429)는 1회 재시도합니다.
+- 평가 도구: `tools/evaluate_followup.py --live`(대화 검색어 비교), `tools/evaluate_stage5_answers.py --repeat N`(답변 안정성).
+
 ## 답변 피드백·규칙 저장·대기 제어 (2026-10-23)
 
 업데이트 후 `apps/api`에서 `uv run alembic upgrade head`를 실행하고 API 서버를 재시작하세요(요청 진단·피드백·저장한 규칙 테이블 추가).
@@ -214,7 +225,7 @@ uv run python -m rule_u.cli index --catalog ../../../data/games --games dive --m
 
 - `.env`의 `SEARCH_MODE`로 규칙 검색 방식을 고릅니다. 기본은 `similarity`이고 `hybrid`(BM25+벡터 RRF), `mmr`(비교용)을 선택할 수 있습니다. 변경 후 API 서버를 재시작하세요.
 - 공식 FAQ·정오표(`type=faq|errata`)는 `config/document-relations.json`에 검증된 관계를 기록한 경우에만 검색에 포함됩니다. 형식: `{"<FAQ 문서 sha256>": {"type": "faq", "status": "verified", "edition_id": "...", "amends_document_id": "<규칙서 sha256>", "evidence": "..."}}`.
-- 지원 판본만 화면에서 선택할 수 있습니다. 현재 102게임·107판본이 지원됩니다. 판정 기준·검색 비교·재현 명령은 [5단계 결과](reports/stage5-search-comparison.md)를 참고하세요. 지원 상태 재계산은 `python -m rule_u.stage5 audit ... --apply`로 합니다.
+- 지원 판본만 화면에서 선택할 수 있습니다. 현재 106게임·111판본이 지원됩니다(2026-10-23 hybrid 기준 재판정). 판정 기준·검색 비교·재현 명령은 [5단계 결과](reports/stage5-search-comparison.md)를 참고하세요. 지원 상태 재계산은 `python -m rule_u.stage5 audit ... --apply`로 합니다.
 
 ## 4단계 화면 사용
 

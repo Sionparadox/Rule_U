@@ -27,13 +27,16 @@ class Settings(BaseSettings):
     embedding_dimensions: int = Field(default=8, ge=1)
     api_timeout_seconds: float = Field(default=30, gt=0, le=120)
     bgg_enabled: bool = True
+    # Stream answer drafts to the UI while the model writes (falls back automatically).
+    chat_stream: bool = True
     bgg_api_token: SecretStr = SecretStr("")
     bgg_timeout_seconds: float = Field(default=45, ge=5, le=90)
     chunk_size: int = Field(default=1000, gt=0)
     chunk_overlap: int = Field(default=200, ge=0)
     external_top_k: int = Field(default=5, gt=0)
     candidate_k: int = Field(default=20, gt=0)
-    search_mode: Literal["similarity", "hybrid", "mmr"] = "similarity"
+    # hybrid since 2026-10-23: passed the pre-fixed independent-question criterion.
+    search_mode: Literal["similarity", "hybrid", "mmr"] = "hybrid"
     # FAQ/errata enter retrieval only through a verified relation recorded here.
     document_relations_path: Path = ROOT / "config" / "document-relations.json"
 

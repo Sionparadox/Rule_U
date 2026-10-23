@@ -1,0 +1,287 @@
+[
+  {
+    "game_id": "catan",
+    "edition_id": "catan-user-748610c946df",
+    "document_id": "748610c946df74e86db7d5538afabd551579296b13456c644c5e528747e6df56",
+    "question": "도시를 지으려면 어떤 자원이 필요한가요?",
+    "pages": [
+      3
+    ],
+    "origin": "independent"
+  },
+  {
+    "game_id": "catan",
+    "edition_id": "catan-user-748610c946df",
+    "document_id": "748610c946df74e86db7d5538afabd551579296b13456c644c5e528747e6df56",
+    "question": "최장 교역로 카드는 도로가 몇 개 이어져야 받을 수 있나요?",
+    "pages": [
+      2
+    ],
+    "origin": "independent"
+  },
+  {
+    "game_id": "codenames",
+    "edition_id": "codenames-official-ko-rulebook",
+    "document_id": "cef94b2076aa24705c3b1b56d6b430b2a4fbbf377fb85fdaf9d752eb4e31c56a",
+    "question": "추리하다가 상대 팀 단어를 고르면 어떻게 되나요?",
+    "pages": [
+      5
+    ],
+    "origin": "independent"
+  },
+  {
+    "game_id": "codenames",
+    "edition_id": "codenames-official-ko-rulebook",
+    "document_id": "cef94b2076aa24705c3b1b56d6b430b2a4fbbf377fb85fdaf9d752eb4e31c56a",
+    "question": "팀장은 힌트로 여러 단어를 말해도 되나요?",
+    "pages": [
+      6
+    ],
+    "origin": "independent"
+  },
+  {
+    "game_id": "azul",
+    "edition_id": "azul-boardlife-3993",
+    "document_id": "3e28591776be7254c62b4b12e36923932fae21935ce02d66efe6b152b6363710",
+    "question": "가운데에서 처음 타일을 가져가면 어떤 불이익이 있나요?",
+    "pages": [
+      3,
+      5
+    ],
+    "origin": "independent"
+  },
+  {
+    "game_id": "carcassonne",
+    "edition_id": "carcassonne-additional-ko-20261021",
+    "document_id": "01df0c22ab936fd1fb4b67604fa5501b9be9d2169bf0d07358526b3a63cedb04",
+    "question": "다른 사람의 추종자가 이미 있는 성에 내 추종자를 놓을 수 있나요?",
+    "pages": [
+      2
+    ],
+    "origin": "independent"
+  },
+  {
+    "game_id": "dominion",
+    "edition_id": "dominion-user-7ffb9798e40d",
+    "document_id": "7ffb9798e40deb1e066f94140c1954ca84bbe930b7d9faa8e4fc7946eafcc856",
+    "question": "게임은 언제 끝나나요?",
+    "pages": [
+      6
+    ],
+    "origin": "independent"
+  },
+  {
+    "game_id": "dominion",
+    "edition_id": "dominion-user-7ffb9798e40d",
+    "document_id": "7ffb9798e40deb1e066f94140c1954ca84bbe930b7d9faa8e4fc7946eafcc856",
+    "question": "차례가 끝날 때 손에 남은 카드는 어떻게 하나요?",
+    "pages": [
+      4,
+      5
+    ],
+    "origin": "independent"
+  },
+  {
+    "game_id": "pandemic",
+    "edition_id": "pandemic-boardlife-668",
+    "document_id": "88678d2352044688c77942c7cdf639b86b6fa9e54f1013b13ccf840f612cf6d6",
+    "question": "한 도시에 질병 큐브가 4개째 놓여야 하면 어떻게 되나요?",
+    "pages": [
+      6
+    ],
+    "origin": "independent"
+  },
+  {
+    "game_id": "pandemic",
+    "edition_id": "pandemic-boardlife-668",
+    "document_id": "88678d2352044688c77942c7cdf639b86b6fa9e54f1013b13ccf840f612cf6d6",
+    "question": "치료제를 만들려면 같은 색 도시 카드가 몇 장 필요한가요?",
+    "pages": [
+      4
+    ],
+    "origin": "independent"
+  },
+  {
+    "game_id": "wingspan",
+    "edition_id": "wingspan-user-f1b33a73c290",
+    "document_id": "f1b33a73c29043f7936fb832a31bf2f962858b0f4a8cca0d21eaae1d4712347f",
+    "question": "새 카드에 올릴 수 있는 알의 개수에 제한이 있나요?",
+    "pages": [
+      8
+    ],
+    "origin": "independent"
+  },
+  {
+    "game_id": "kingdomino",
+    "edition_id": "kingdomino-user-ko-rulebook",
+    "document_id": "b6bf4763dfb965eb5e5a921d3e82b41694a99f71c2c68dfe72c3b421f1119d91",
+    "question": "왕국을 5x5 크기보다 크게 만들 수 있나요?",
+    "pages": [
+      2
+    ],
+    "origin": "independent"
+  },
+  {
+    "game_id": "citadels",
+    "edition_id": "citadels-user-ac1c806d37c7",
+    "document_id": "ac1c806d37c75da47f3c85588264978ce257de7c861a3c6cff22dc5e011c5d57",
+    "question": "암살자에게 지목된 캐릭터는 어떻게 되나요?",
+    "pages": [
+      10
+    ],
+    "origin": "independent"
+  },
+  {
+    "game_id": "citadels",
+    "edition_id": "citadels-user-ac1c806d37c7",
+    "document_id": "ac1c806d37c75da47f3c85588264978ce257de7c861a3c6cff22dc5e011c5d57",
+    "question": "건물을 몇 개 지으면 게임이 끝나나요?",
+    "pages": [
+      1
+    ],
+    "origin": "independent"
+  },
+  {
+    "game_id": "hive",
+    "edition_id": "hive-official-ko-rulebook",
+    "document_id": "30bcd19f5462108184d12a106c635f990cfbfa5b60aed995ddccbe7c5432dcb6",
+    "question": "말을 옮겨서 벌집을 두 덩어리로 나눠도 되나요?",
+    "pages": [
+      9
+    ],
+    "origin": "independent"
+  },
+  {
+    "game_id": "santorini",
+    "edition_id": "santorini-user-1562c33b60d8",
+    "document_id": "1562c33b60d8dac3a2934a4bd39672f067d3f49116d2ff3dc2b14501248544a2",
+    "question": "한 번 이동할 때 몇 층까지 올라갈 수 있나요?",
+    "pages": [
+      2
+    ],
+    "origin": "independent"
+  },
+  {
+    "game_id": "exploding-kittens",
+    "edition_id": "exploding-kittens-official-ko-rulebook",
+    "document_id": "dd9e09a672da714333c425b4789b40c71694fee0becce871847198e2df43ff6a",
+    "question": "폭발하는 고양이를 뽑았는데 해체 카드가 없으면 어떻게 되나요?",
+    "pages": [
+      1,
+      2
+    ],
+    "origin": "independent"
+  },
+  {
+    "game_id": "the-mind",
+    "edition_id": "the-mind-official-ko-rulebook",
+    "document_id": "00490bb82246c83d8a1ebf8a7d6c35d4991e14ae3727fc2582a9db4048bef980",
+    "question": "수리검을 쓰면 무슨 일이 일어나나요?",
+    "pages": [
+      2
+    ],
+    "origin": "independent"
+  },
+  {
+    "game_id": "rummikub",
+    "edition_id": "rummikub-official-ko-rulebook",
+    "document_id": "55a33646840ed3d699a5056df837d89f9ea4e87bb0586c47ea22c9e86d7cb3a9",
+    "question": "처음 테이블에 타일을 내려놓을 때 숫자 합이 얼마 이상이어야 하나요?",
+    "pages": [
+      1
+    ],
+    "origin": "independent"
+  },
+  {
+    "game_id": "no-thanks",
+    "edition_id": "no-thanks-user-d339f5fbbeef",
+    "document_id": "d339f5fbbeefc773e61398cc42f911d7ede918417334f19044d8ecab77b8fe7f",
+    "question": "칩이 하나도 없으면 카드를 거절할 수 있나요?",
+    "pages": [
+      2
+    ],
+    "origin": "independent"
+  },
+  {
+    "game_id": "6-nimmt",
+    "edition_id": "6-nimmt-official-ko-rulebook",
+    "document_id": "5ebc3aedcb42dba1d504bea6b782fa5de436d83a88142212f09a427bf1f54c5e",
+    "question": "벌점이 몇 점을 넘으면 게임이 끝나나요?",
+    "pages": [
+      2
+    ],
+    "origin": "independent"
+  },
+  {
+    "game_id": "coup",
+    "edition_id": "coup-official-ko-rulebook",
+    "document_id": "a173e336a07034d3c35d2d81423665c328cb5194dc85ddbb53a41effc20c8351",
+    "question": "대사의 교환 행동은 어떻게 하나요?",
+    "pages": [
+      1
+    ],
+    "origin": "independent"
+  },
+  {
+    "game_id": "bohnanza",
+    "edition_id": "bohnanza-retailer-ko-rulebook",
+    "document_id": "2c72965aa91ce047cc7787959b8f8d1501042aa5749bcde75e51b8a0fd2f67bf",
+    "question": "콩밭이 모두 차 있는데 새 콩을 심어야 하면 어떻게 하나요?",
+    "pages": [
+      1
+    ],
+    "origin": "independent"
+  },
+  {
+    "game_id": "cascadia",
+    "edition_id": "cascadia-boardlife-7608",
+    "document_id": "82b6d5c06295dff808271b98a41dde11602819cf9aa4cecd8b018b2fbb56313d",
+    "question": "자연 토큰은 어디에 쓰나요?",
+    "pages": [
+      6
+    ],
+    "origin": "independent"
+  },
+  {
+    "game_id": "agricola",
+    "edition_id": "agricola-user-f005e1d2391a",
+    "document_id": "f005e1d2391abeb047e1977b279c96689130f478a42185ebc2a5cd5a8824906b",
+    "question": "수확 때 가족을 먹일 음식이 부족하면 어떻게 되나요?",
+    "pages": [
+      9
+    ],
+    "origin": "independent"
+  },
+  {
+    "game_id": "scythe",
+    "edition_id": "scythe-user-90381687d016",
+    "document_id": "90381687d016c7439346ba56898e6f14cfe8a082da14334e015659df1b5902e6",
+    "question": "별은 몇 개를 놓으면 게임이 끝나나요?",
+    "pages": [
+      2,
+      10,
+      20
+    ],
+    "origin": "independent"
+  },
+  {
+    "game_id": "sushi-go-party",
+    "edition_id": "sushi-go-party-boardlife-2371",
+    "document_id": "dcb2f179f2c8e597d4c023175811e45a1efe332d6feaf643f1a545b5d97e08d2",
+    "question": "디저트 카드 점수는 언제 계산하나요?",
+    "pages": [
+      4
+    ],
+    "origin": "independent"
+  },
+  {
+    "game_id": "7-wonders-duel",
+    "edition_id": "7-wonders-duel-additional-ko-20261021",
+    "document_id": "064d76e5e1fa358bc1009825f8b8d58fb8427541388c7d18c3f59e7ef34f07cd",
+    "question": "과학 승리를 하려면 무엇을 모아야 하나요?",
+    "pages": [
+      12
+    ],
+    "origin": "independent"
+  }
+]
